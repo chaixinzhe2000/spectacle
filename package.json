@@ -1,0 +1,29 @@
+{
+  "name": "hypertext-interfaces",
+  "version": "1.2.93",
+  "description": "Interfaces for Nodes for the CS1951V course.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc",
+    "prepublish": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CS1951V-Hypertext-Seminar/node-interfaces.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CS1951V-Hypertext-Seminar/document-interfaces/issues"
+  },
+  "homepage": "https://github.com/CS1951V-Hypertext-Seminar/document-interfaces#readme",
+  "dependencies": {
+    "ts-jest": "^26.4.0",
+    "tsc": "^1.8.10"
+  },
+  "devDependencies": {
+    "typescript": "^4.0.2"
+  },
+  "author": "David Promisel",
+  "license": "ISC",
+  "types": "dist/index.d.ts"
+}
