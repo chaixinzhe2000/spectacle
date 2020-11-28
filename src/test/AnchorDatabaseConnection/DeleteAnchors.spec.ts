@@ -1,0 +1,64 @@
+import DatabaseConnection from '../../dbConfig';
+
+describe('Delete Anchors', () => {  
+  beforeEach(async done => {
+    const response = await DatabaseConnection.clearAnchorCollection()
+    expect(response.success).toBeTruthy()
+
+    const createResponse = await DatabaseConnection.initAnchors([
+      {
+        nodeId: 'node.a',
+        anchorId: 'anchor.a',
+        label: 'a'
+      },
+      {
+        nodeId: 'node.b',
+        anchorId: 'anchor.b',
+        label: 'b'
+      },
+      {
+        nodeId: 'node.b',
+        anchorId: 'anchor.f',
+        label: 'f'
+      }
+    ])
+    expect(createResponse.success).toBeTruthy()
+    done()
+  })
+
+  afterAll(async done => {
+    const response = await DatabaseConnection.clearAnchorCollection()
+    expect(response.success).toBeTruthy()
+    done()
+  })
+
+  test("deletes non-existent anchors", async done => {
+    const response = await DatabaseConnection.deleteAnchors(['anchor.c', 'anchor.d'])
+    expect(response.success).toBeTruthy()
+    done()
+  })
+
+  test("deletes 2 existent anchors", async done => {
+    const response = await DatabaseConnection.deleteAnchors(['anchor.a', 'anchor.b'])
+    expect(response.success).toBeTruthy()
+    done()
+  })
+
+  test("deletes 1 existent anchor", async done => {
+    const response = await DatabaseConnection.deleteAnchors(['anchor.f'])
+    expect(response.success).toBeTruthy()
+    done()
+  })
+
+  test("deletes 1 existent anchors even if other anchors don't exist", async done => {
+    const response = await DatabaseConnection.deleteAnchors(['anchor.a', 'anchor.c'])
+    expect(response.success).toBeTruthy()
+    done()
+  })
+
+  test("fails on null", async (done) => {
+    const response = await DatabaseConnection.deleteAnchors(null);
+    expect(response.success).toBeFalsy();
+    done();
+  });
+})
