@@ -1,6 +1,6 @@
 {
   "name": "apposition-interfaces",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Interfaces for Nodes for the CS1951V course. From the Apposition Group.",
   "main": "dist/index.js",
   "scripts": {
