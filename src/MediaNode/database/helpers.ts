@@ -1,25 +1,31 @@
-import {
-  failureServiceResponse,
-  IServiceResponse,
-  successfulServiceResponse,
-  IImmutableGridNode,
-} from "apposition-interfaces";
+import { failureServiceResponse, IServiceResponse, successfulServiceResponse, IImmutableGridNode, IMediaNode } from "apposition-interfaces";
 
-export interface IMongoNode {
-  _id: string; // replaces nodeId
+// TODO: completed by Chai
+export interface IMongoIMediaNode {
+	_id: string; // replaces nodeId
+	mediaUrl: string
+	createdAt?: Date
 }
 
-export function getMongoNode(
-  // replace with node type
-  node: unknown
-): IServiceResponse<IMongoNode> {
-  //TODO
-  return failureServiceResponse("Not yet implemented.")
+export function getMongoNode(node: IMediaNode): IServiceResponse<IMongoIMediaNode> {
+	try {
+		let mongonode: IMongoIMediaNode = {
+			_id: node.nodeId.toLocaleLowerCase(),
+			mediaUrl: node.mediaUrl,
+			createdAt: new Date()
+		}
+		return successfulServiceResponse(mongonode)
+	} catch {
+		return failureServiceResponse("Failed to parse INode into IMongoNode, verify that the INode passed in is valid.")
+	}
 }
 
-export function getNode(
-  mongoNode: IMongoNode
-): IServiceResponse<IImmutableGridNode> {
-  //TODO
-  return failureServiceResponse("Not yet implemented.")
+export function tryGetNode(mongoNode: IMongoIMediaNode): IServiceResponse<IMediaNode> {
+    if (mongoNode.mediaUrl !== undefined && typeof mongoNode.mediaUrl === 'string') {
+		return successfulServiceResponse({
+            nodeId: mongoNode._id,
+            mediaUrl: mongoNode.mediaUrl
+        })
+	}
+    return failureServiceResponse('Invalid node')
 }
