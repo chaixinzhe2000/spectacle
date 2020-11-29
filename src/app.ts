@@ -6,12 +6,13 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import express, { NextFunction, Request, Response } from "express";
 import helmet from "helmet";
-import { nodeRouter } from "./MediaNode/router";
+import { mediaRouter } from "./MediaNode/router";
+// TODO: change anchorRouter
 import { anchorRouter } from "./MediaAnchor/router";
 
 
 // TODO
-export const serviceName = ''
+export const serviceName = 'media'
 
 /**
  *  App Configuration
@@ -24,20 +25,20 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(`/${serviceName}`, nodeRouter);
+app.use(`/${serviceName}`, mediaRouter);
 app.use(`/${serviceName}-anchor`, anchorRouter);
 
 app.get("/", (req: Request, res: Response, next: NextFunction) => {
-  res.send("API Home");
+	res.send("Media Node Gateway API Home");
 });
 
 /**
  * Server Activation
  */
 if (process.env.NODE_ENV !== "test") {
-  app.listen(process.env.PORT || 8081, () =>
-    console.log("Server Running on :8081")
-  );
+	app.listen(process.env.PORT || 8081, () =>
+		console.log("Server Running on :8081")
+	);
 }
 
 export default app;

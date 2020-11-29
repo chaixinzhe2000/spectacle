@@ -22,7 +22,6 @@ const MongoDatabaseConnection: ITestMediaNodeDatabaseConnection = {
   },
 
   async initNodes(nodes: IMediaNode[]): Promise<IServiceResponse<{}>> {
-	// TODO: haven't completed yet
     const mongoNodes: IMongoIMediaNode[] = []
 
     nodes.forEach(node => {
