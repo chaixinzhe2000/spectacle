@@ -1,7 +1,7 @@
 {
-  "name": "hypertext-interfaces",
-  "version": "1.2.93",
-  "description": "Interfaces for Nodes for the CS1951V course.",
+  "name": "apposition-interfaces",
+  "version": "1.0.0",
+  "description": "Interfaces for Nodes for the CS1951V course. From the Apposition Group.",
   "main": "dist/index.js",
   "scripts": {
     "test": "jest",
