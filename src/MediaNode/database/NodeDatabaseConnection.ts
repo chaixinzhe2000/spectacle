@@ -8,7 +8,7 @@ export default interface IMediaNodeDatabaseConnection {
 	deleteNodes(nodeIds: string[]): Promise<IServiceResponse<{}>>;
 }
 
-export interface ITestNodeDatabaseConnection extends IMediaNodeDatabaseConnection {
+export interface ITestMediaNodeDatabaseConnection extends IMediaNodeDatabaseConnection {
 	clearNodeCollection(): Promise<IServiceResponse<{}>>
 	initNodes(nodes: IMediaNode[]): Promise<IServiceResponse<{}>>
 }
