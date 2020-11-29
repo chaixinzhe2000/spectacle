@@ -5,7 +5,7 @@
 import express, { Request, Response } from "express";
 import {
   IServiceResponse,
-} from "hypertext-interfaces";
+} from "apposition-interfaces";
 import DatabaseConnection from "./dbConfig";
 import NodeGateway from "./gateway/NodeGateway";
 const bodyJsonParser = require("body-parser").json();

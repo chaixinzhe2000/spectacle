@@ -4,7 +4,7 @@ import {
   IServiceResponse,
   successfulServiceResponse,
   failureServiceResponse,
-} from "hypertext-interfaces";
+} from "apposition-interfaces";
 import { getMongoNode, IMongoNode, getNode } from "../helpers";
 import { getNodeCollection } from "./getCollection";
 

@@ -6,7 +6,7 @@ import express, { Request, Response } from "express";
 import DatabaseConnection from "./dbConfig";
 import {
   IServiceResponse
-} from "hypertext-interfaces";
+} from "apposition-interfaces";
 import AnchorGateway from "./gateway/AnchorGateway";
 const bodyJsonParser = require("body-parser").json();
 

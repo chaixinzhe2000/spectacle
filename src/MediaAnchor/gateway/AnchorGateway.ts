@@ -3,7 +3,7 @@ import {
   IServiceResponse,
   failureServiceResponse,
   getServiceResponse
-} from "hypertext-interfaces";
+} from "apposition-interfaces";
 
 // TODO: This class should implement an anchor gateway interface
 export default class ImmutableGridAnchorGateway {

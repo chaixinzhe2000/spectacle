@@ -16,4 +16,4 @@ export async function getCollection(connection: typeof MongoDbConnection): Promi
         console.log(e)
         return e;
     }
-  }
+}

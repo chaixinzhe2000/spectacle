@@ -6,8 +6,8 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import express, { NextFunction, Request, Response } from "express";
 import helmet from "helmet";
-import { nodeRouter } from "./Node/router";
-import { anchorRouter } from "./Anchor/router";
+import { nodeRouter } from "./MediaNode/router";
+import { anchorRouter } from "./MediaAnchor/router";
 
 
 // TODO

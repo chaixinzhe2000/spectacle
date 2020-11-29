@@ -1,8 +1,8 @@
 import INodeDatabaseConnection, { ITestNodeDatabaseConnection } from "../NodeDatabaseConnection";
 import { Collection } from 'mongodb';
-import { IServiceResponse, successfulServiceResponse, failureServiceResponse, getServiceResponse } from "hypertext-interfaces"
+import { IServiceResponse, successfulServiceResponse, failureServiceResponse, getServiceResponse } from "apposition-interfaces"
 import { getMongoNode, IMongoNode, getNode } from "../helpers";
-import { IMongoAnchor } from "../../../Anchor/database/helpers";
+import { IMongoAnchor } from "../../../MediaAnchor/database/helpers";
 
 
 // TODO

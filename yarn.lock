@@ -859,6 +859,14 @@ anymatch@^3.0.3, anymatch@~3.1.1:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
+apposition-interfaces@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/apposition-interfaces/-/apposition-interfaces-1.0.2.tgz#42a4503fe19f77e81bf7272f18f75b65a8c0b046"
+  integrity sha512-Z0fjU9NQhOXO7v/mj0gYEOAuB0rVMtuKsMFW9a5ru1uujXR5R/8+aGUlbo9YFfbCPIzfAFPq4P7kp+6z5sRX/g==
+  dependencies:
+    ts-jest "^26.4.0"
+    tsc "^1.8.10"
+
 arg@^4.1.0:
   version "4.1.3"
   resolved "https://registry.yarnpkg.com/arg/-/arg-4.1.3.tgz#269fc7ad5b8e42cb63c896d5666017261c144089"
@@ -2370,14 +2378,6 @@ human-signals@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-1.1.1.tgz#c5b1cd14f50aeae09ab6c59fe63ba3395fe4dfa3"
   integrity sha512-SEQu7vl8KjNL2eoGBLF3+wAjpsNfA9XMlXAYj/3EdaNfAlxKthD1xjEQfGOUhllCGGJVNY34bRr6lPINhNjyZw==
-
-hypertext-interfaces@^1.2.5:
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/hypertext-interfaces/-/hypertext-interfaces-1.2.5.tgz#b76402403bd83256a1bb7f93f353988970486ce5"
-  integrity sha512-4APhWGF97NLki1KxSyBpaCeWd4xDQi/PIQ47oa3rOdoOrbCQTE7NCGHfflDStx7xsmHLNgR6glnbbDWr8U905g==
-  dependencies:
-    ts-jest "^26.4.0"
-    tsc "^1.8.10"
 
 iconv-lite@0.4.24:
   version "0.4.24"

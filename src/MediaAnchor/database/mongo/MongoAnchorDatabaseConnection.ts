@@ -6,7 +6,7 @@ import {
   failureServiceResponse,
   getServiceResponse,
   IImmutableGridAnchor,
-} from "hypertext-interfaces";
+} from "apposition-interfaces";
 import {
   getMongoAnchor,
   IMongoAnchor,

@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb'
 
 // add mongo password and default db, replace with your own connection string
-const uri = ""
+const uri = "mongodb+srv://xchai1:87581155Ab!!@cluster0.6ui0o.mongodb.net/Assignment?authSource=admin&replicaSet=atlas-6yv2c5-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true"
 
 const MongoDbConnection = function () {
 

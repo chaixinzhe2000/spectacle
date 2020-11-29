@@ -3,7 +3,7 @@ import {
   IImmutableGridAnchor,
   IServiceResponse,
   successfulServiceResponse,
-} from "hypertext-interfaces";
+} from "apposition-interfaces";
 
 export interface IMongoAnchor {
   _id: string; // replaces anchorId

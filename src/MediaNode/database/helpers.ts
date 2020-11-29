@@ -3,7 +3,7 @@ import {
   IServiceResponse,
   successfulServiceResponse,
   IImmutableGridNode,
-} from "hypertext-interfaces";
+} from "apposition-interfaces";
 
 export interface IMongoNode {
   _id: string; // replaces nodeId

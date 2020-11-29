@@ -1,5 +1,5 @@
 import { ITestIAnchorDatabaseConnection } from "../IAnchorDatabaseConnection";
-import { IServiceResponse, successfulServiceResponse, failureServiceResponse, getServiceResponse, IImmutableGridAnchor } from "hypertext-interfaces"
+import { IServiceResponse, successfulServiceResponse, failureServiceResponse, getServiceResponse, IImmutableGridAnchor } from "apposition-interfaces"
 import { getMongoAnchor, IMongoAnchor, tryGetAnchor } from "../helpers";
 
 

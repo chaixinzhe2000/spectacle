@@ -1,4 +1,4 @@
-import { IServiceResponse } from "hypertext-interfaces"
+import { IServiceResponse } from "apposition-interfaces"
 
 
 // TODO
