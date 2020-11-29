@@ -1,4 +1,4 @@
-import IMediaNodeDatabaseConnection from "../database/NodeDatabaseConnection";
+import IMediaNodeDatabaseConnection from "../database/MediaNodeDatabaseConnection";
 import {
 	IServiceResponse,
 	failureServiceResponse,

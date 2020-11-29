@@ -1,4 +1,4 @@
-import { ITestMediaNodeDatabaseConnection } from './database/NodeDatabaseConnection';
+import { ITestMediaNodeDatabaseConnection } from './database/MediaNodeDatabaseConnection';
 import MockDatabaseConnection from './database/mock/MockNodeDatabaseConnection';
 import MongoDatabaseConnection from './database/mongo/MongoNodeDatabaseConnection';
 

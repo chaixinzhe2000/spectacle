@@ -1,4 +1,4 @@
-import { ITestMediaNodeDatabaseConnection } from "../NodeDatabaseConnection";
+import { ITestMediaNodeDatabaseConnection } from "../MediaNodeDatabaseConnection";
 import MongoDbConnection from "../../../mongodbConnection";
 import {
   IServiceResponse,

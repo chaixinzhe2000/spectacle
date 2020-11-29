@@ -1,4 +1,4 @@
-import INodeDatabaseConnection, { ITestMediaNodeDatabaseConnection } from "../NodeDatabaseConnection";
+import INodeDatabaseConnection, { ITestMediaNodeDatabaseConnection } from "../MediaNodeDatabaseConnection";
 import { Collection } from 'mongodb';
 import { IServiceResponse, successfulServiceResponse, failureServiceResponse, getServiceResponse, IMediaNode } from "apposition-interfaces"
 import { getMongoNode, IMongoIMediaNode, tryGetNode } from "../helpers";

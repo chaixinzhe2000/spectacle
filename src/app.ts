@@ -10,8 +10,6 @@ import { mediaRouter } from "./MediaNode/router";
 // TODO: change anchorRouter
 import { anchorRouter } from "./MediaAnchor/router";
 
-
-// TODO
 export const serviceName = 'media'
 
 /**
