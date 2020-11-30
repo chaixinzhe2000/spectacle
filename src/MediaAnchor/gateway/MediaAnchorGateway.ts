@@ -6,7 +6,7 @@ import {
 	IMediaAnchor
 } from "apposition-interfaces";
 
-// TODO: This class should implement an anchor gateway interface
+// TODO: completed by Chai
 export default class MediaAnchorGateway implements IMediaAnchorGateway {
 	
 	dbConnection: IMediaAnchorDatabaseConnection
@@ -33,11 +33,11 @@ export default class MediaAnchorGateway implements IMediaAnchorGateway {
 	 * Returns a failure service response if:
 	 *  - the id does not exist in the database
 	 */
-	async getAnchor(anchorId: string): Promise<IServiceResponse<IImmutableTextAnchor>> {
+	async getAnchor(anchorId: string): Promise<IServiceResponse<IMediaAnchor>> {
 		return await this.dbConnection.findAnchor(anchorId)
 	}
 
-	async getAnchors(anchorIds: string[]): Promise<IServiceResponse<{ [anchorId: string]: IImmutableTextAnchor }>> {
+	async getAnchors(anchorIds: string[]): Promise<IServiceResponse<{ [anchorId: string]: IMediaAnchor }>> {
 		return await this.dbConnection.findAnchors(anchorIds)
 	}
 
