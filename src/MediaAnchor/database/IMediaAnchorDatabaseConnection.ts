@@ -9,7 +9,7 @@ export default interface IMediaAnchorDatabaseConnection {
 	deleteAnchors(anchorIds: string[]): Promise<IServiceResponse<{}>>;
 }
 
-export interface ITestIAnchorDatabaseConnection extends IMediaAnchorDatabaseConnection {
+export interface ITestMediaAnchorDatabaseConnection extends IMediaAnchorDatabaseConnection {
   clearAnchorCollection(): Promise<IServiceResponse<{}>>
   initAnchors(anchors: IMediaAnchor[]): Promise<IServiceResponse<{}>>
 }

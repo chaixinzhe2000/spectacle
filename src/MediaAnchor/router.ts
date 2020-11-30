@@ -7,7 +7,7 @@ import DatabaseConnection from "./dbConfig";
 import {
   IServiceResponse
 } from "apposition-interfaces";
-import AnchorGateway from "./gateway/AnchorGateway";
+import AnchorGateway from "./gateway/MediaAnchorGateway";
 const bodyJsonParser = require("body-parser").json();
 
 /**

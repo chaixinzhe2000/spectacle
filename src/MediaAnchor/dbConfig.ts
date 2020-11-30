@@ -1,4 +1,4 @@
-import { ITestIAnchorDatabaseConnection } from "./database/IAnchorDatabaseConnection";
+import { ITestIAnchorDatabaseConnection } from "./database/IMediaAnchorDatabaseConnection";
 import MockMongoDatabaseConnection from "./database/mock/MockAnchorDatabaseConnection";
 import MongoDatabaseConnection from "./database/mongo/MongoAnchorDatabaseConnection";
 

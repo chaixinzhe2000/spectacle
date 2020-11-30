@@ -1,12 +1,12 @@
-import { ITestIAnchorDatabaseConnection } from "../IAnchorDatabaseConnection";
-import { IServiceResponse, successfulServiceResponse, failureServiceResponse, getServiceResponse, IImmutableGridAnchor } from "apposition-interfaces"
-import { getMongoAnchor, IMongoAnchor, tryGetAnchor } from "../helpers";
+import { ITestMediaAnchorDatabaseConnection } from "../IMediaAnchorDatabaseConnection";
+import { IServiceResponse, successfulServiceResponse, failureServiceResponse, getServiceResponse, IImmutableGridAnchor, IMediaAnchor } from "apposition-interfaces"
+import { getMongoAnchor, IMongoIMediaAnchor, tryGetAnchor } from "../helpers";
 
 
-// TODO
+// TODO: completed by Chai
 export default class MockMediaAnchorDatabaseConnection implements ITestMediaAnchorDatabaseConnection {
 
-	_anchors: {[anchorId: string]: IMongoIImmutableTextAnchor}
+	_anchors: {[anchorId: string]: IMongoIMediaAnchor}
 
 	constructor() {
 	  this._anchors = {}
@@ -23,7 +23,7 @@ export default class MockMediaAnchorDatabaseConnection implements ITestMediaAnch
 	  return successfulServiceResponse({})
 	}
   
-	async initAnchors(anchors: IImmutableTextAnchor[]): Promise<IServiceResponse<{}>> {
+	async initAnchors(anchors: IMediaAnchor[]): Promise<IServiceResponse<{}>> {
 	  anchors.forEach(anchor => {
 		const mongoAnchorResp = getMongoAnchor(anchor)
 		if (!mongoAnchorResp.success) {
@@ -34,7 +34,7 @@ export default class MockMediaAnchorDatabaseConnection implements ITestMediaAnch
 	  return successfulServiceResponse({})
 	}
   
-	async insertAnchor(anchor: IImmutableTextAnchor): Promise<IServiceResponse<IImmutableTextAnchor>> {
+	async insertAnchor(anchor: IMediaAnchor): Promise<IServiceResponse<IMediaAnchor>> {
   
 	  const mongoAnchorResp = getMongoAnchor(anchor)
 	  if (!mongoAnchorResp.success) {
@@ -45,7 +45,7 @@ export default class MockMediaAnchorDatabaseConnection implements ITestMediaAnch
 	  return successfulServiceResponse(anchor)
 	}
   
-	async findAnchor(anchorId: string): Promise<IServiceResponse<IImmutableTextAnchor>> {
+	async findAnchor(anchorId: string): Promise<IServiceResponse<IMediaAnchor>> {
   
 	  const anchor = this._anchors[anchorId]
   
@@ -58,9 +58,9 @@ export default class MockMediaAnchorDatabaseConnection implements ITestMediaAnch
   
 	}
   
-	async findAnchors(anchorIds: string[]): Promise<IServiceResponse<{[anchorId: string]: IImmutableTextAnchor}>> {
+	async findAnchors(anchorIds: string[]): Promise<IServiceResponse<{[anchorId: string]: IMediaAnchor}>> {
   
-	  let anchors: {[anchorId: string]: IImmutableTextAnchor} = {}
+	  let anchors: {[anchorId: string]: IMediaAnchor} = {}
   
 	  anchorIds.forEach(aid => {
 		if (this._anchors[aid]) {
