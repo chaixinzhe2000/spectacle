@@ -1,4 +1,4 @@
-import { failureServiceResponse, IServiceResponse, successfulServiceResponse, IImmutableGridNode, IMediaNode } from "apposition-interfaces";
+import { failureServiceResponse, IServiceResponse, successfulServiceResponse, IMediaNode } from "apposition-interfaces";
 
 // TODO: completed by Chai
 export interface IMongoIMediaNode {

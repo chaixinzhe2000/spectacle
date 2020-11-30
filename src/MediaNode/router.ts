@@ -9,7 +9,6 @@ import {
   IServiceResponse,
 } from "apposition-interfaces";
 import DatabaseConnection from "./dbConfig";
-import NodeGateway from "./gateway/NodeGateway";
 import MediaNodeGateway from "./gateway/NodeGateway";
 const bodyJsonParser = require("body-parser").json();
 

@@ -17,11 +17,13 @@ export default class MediaAnchorGateway implements IMediaAnchorGateway {
 
 	async createAnchor(anchor: IMediaAnchor): Promise<IServiceResponse<IMediaAnchor>> {
 		try {
-			if (anchor.mediaTimeStamp !== null && anchor.mediaTimeStamp) {
+			if (anchor.mediaTimeStamp !== null && typeof anchor.mediaTimeStamp === 'number' ) {
 				return await this.dbConnection.insertAnchor(anchor)
+			} else {
+				return failureServiceResponse("mediaTimeStamp field is missing")
 			}
 		} catch {
-			return failureServiceResponse("Failed to parse IImmutableTextAnchor.")
+			return failureServiceResponse("Failed to parse IMediaAnchor.")
 		}
 	}
 
