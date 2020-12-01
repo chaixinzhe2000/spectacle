@@ -1,4 +1,4 @@
-import { IAnchorGateway } from 'hypertext-interfaces';
+import { IAnchorGateway } from 'spectacle-interfaces';
 import DatabaseConnection from '../../dbConfig';
 import AnchorGateway from '../../gateway/AnchorGateway';
 

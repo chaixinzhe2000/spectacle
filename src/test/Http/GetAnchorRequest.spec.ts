@@ -1,4 +1,4 @@
-import { IServiceResponse, IAnchor } from 'hypertext-interfaces'
+import { IServiceResponse, IAnchor } from 'spectacle-interfaces'
 import request from 'supertest'
 import app from '../../app'
 import DatabaseConnection from '../../dbConfig';

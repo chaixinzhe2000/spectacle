@@ -1,5 +1,5 @@
 import { ITestAnchorDatabaseConnection } from "../IAnchorDatabaseConnection";
-import { IServiceResponse, successfulServiceResponse, failureServiceResponse, getServiceResponse, IAnchor } from "hypertext-interfaces"
+import { IServiceResponse, successfulServiceResponse, failureServiceResponse, getServiceResponse, IAnchor } from "spectacle-interfaces"
 import { getMongoAnchor, IMongoAnchor, tryGetAnchor } from "../helpers";
 
 class MockMongoDatabaseConnection implements ITestAnchorDatabaseConnection {

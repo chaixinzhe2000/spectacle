@@ -1,18 +1,21 @@
-import { failureServiceResponse, IServiceResponse, successfulServiceResponse, IAnchor } from "hypertext-interfaces"
+import { failureServiceResponse, IServiceResponse, successfulServiceResponse, IAnchor, NodeType, isNodeType } from "spectacle-interfaces"
 
+// TODO: completed by Chai
 export interface IMongoAnchor {
     _id: string // replaces nodeId
-    nodeId: string,
-    label: string
-    createdAt?: Date
+	nodeId: string,
+	type: NodeType,
+	annotation: string,
+    createdAt: Date
 }
   
 export function getMongoAnchor(anchor: IAnchor): IServiceResponse<IMongoAnchor> {
     try {
         let mongonode: IMongoAnchor = {
             _id: anchor.anchorId.toLocaleLowerCase(),
-            nodeId: anchor.nodeId,
-            label: anchor.label,
+			nodeId: anchor.nodeId,
+			type: anchor.type,
+			annotation: anchor.content,
             createdAt: new Date()
         }
 
@@ -28,13 +31,20 @@ export function getMongoAnchor(anchor: IAnchor): IServiceResponse<IMongoAnchor> 
 
 export function tryGetAnchor(mongoAnchor: IMongoAnchor): IServiceResponse<IAnchor> {
     if (mongoAnchor.nodeId !== undefined && typeof mongoAnchor.nodeId === 'string' && mongoAnchor.nodeId !== ''
-    && mongoAnchor._id !== undefined && typeof mongoAnchor._id === 'string' && mongoAnchor._id !== ''
-    && mongoAnchor.label !== undefined && typeof mongoAnchor.label === 'string')
-        return successfulServiceResponse({
-            nodeId: mongoAnchor.nodeId,
-            anchorId: mongoAnchor._id,
-            label: mongoAnchor.label
-        })
+	&& mongoAnchor._id !== undefined && typeof mongoAnchor._id === 'string' && mongoAnchor._id !== ''
+	&& mongoAnchor.type !== undefined && isNodeType(mongoAnchor.type) === true
+	&& mongoAnchor.annotation !== undefined && typeof mongoAnchor.annotation === 'string' && mongoAnchor.annotation !== ''
+    && mongoAnchor.createdAt !== undefined && mongoAnchor.createdAt instanceof Date) {
+		let anchor: IAnchor = {
+			nodeId: mongoAnchor.nodeId,
+			anchorId: mongoAnchor._id,
+			type: mongoAnchor.type,
+			content: mongoAnchor.annotation,
+			createAt: mongoAnchor.createdAt
+		}
+		return successfulServiceResponse(anchor)
+	}
+        
 
     return failureServiceResponse('Invalid node')
 }

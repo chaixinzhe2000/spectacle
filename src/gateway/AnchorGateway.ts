@@ -1,5 +1,5 @@
 import IAnchorDatabaseConnection from "../database/IAnchorDatabaseConnection"
-import { IServiceResponse, IAnchor, IAnchorGateway  } from "hypertext-interfaces"
+import { IServiceResponse, IAnchor, IAnchorGateway  } from "spectacle-interfaces"
 
 export default class AnchorGateway implements IAnchorGateway {
 

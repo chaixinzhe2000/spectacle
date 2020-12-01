@@ -4,7 +4,7 @@
 
 import express, { Request, Response } from "express";
 import AnchorGateway from './gateway/AnchorGateway';
-import { IServiceResponse, IAnchor, IAnchorGateway } from 'hypertext-interfaces'
+import { IServiceResponse, IAnchor, IAnchorGateway } from 'spectacle-interfaces'
 import DatabaseConnection from "./dbConfig";
 const bodyJsonParser = require('body-parser').json()
 

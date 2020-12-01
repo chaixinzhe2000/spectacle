@@ -1,4 +1,4 @@
-import { IAnchor } from 'hypertext-interfaces';
+import { IAnchor } from 'spectacle-interfaces';
 import DatabaseConnection from '../../dbConfig';
 
 const testAnchor: IAnchor = {

@@ -1,4 +1,4 @@
-import { IServiceResponse, IAnchor } from "hypertext-interfaces"
+import { IServiceResponse, IAnchor } from "spectacle-interfaces"
 
 export default interface IAnchorDatabaseConnection {
 
