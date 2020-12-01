@@ -1,26 +1,26 @@
 import {
   IServiceResponse,
   isServiceResponse,
-  IImmutableTextNode,
-} from "apposition-interfaces";
+  IMediaNode,
+} from "spectacle-interfaces";
 import request from "supertest";
 import app from "../../../app";
 import DatabaseConnection from "../../dbConfig";
 
-const service = "/immutable-text";
+const service = "/media";
 
-const testNode: IImmutableTextNode = {
+const testNode: IMediaNode = {
   nodeId: 'a',
-  text: 'Test String 1.'
+  mediaUrl: "https://www.youtube.com/watch?v=kQqdf484iyc"
 }
-const testNode2: IImmutableTextNode = {
+const testNode2: IMediaNode = {
   nodeId: 'b',
-  text: 'Test'
+  mediaUrl: "https://www.youtube.com/watch?v=kQqdf484iyc"
 }
 
-const testNode3: IImmutableTextNode = {
+const testNode3: IMediaNode = {
   nodeId: 'c',
-  text: 'Test'
+  mediaUrl: "https://www.youtube.com/watch?v=kQqdf484iyc"
 }
 
 

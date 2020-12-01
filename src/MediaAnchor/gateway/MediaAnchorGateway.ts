@@ -4,7 +4,7 @@ import {
 	failureServiceResponse,
 	IMediaAnchorGateway,
 	IMediaAnchor
-} from "apposition-interfaces";
+} from "spectacle-interfaces";
 
 // TODO: completed by Chai
 export default class MediaAnchorGateway implements IMediaAnchorGateway {

@@ -8,7 +8,7 @@ import {
 	IMediaAnchor,
 	IMediaAnchorGateway,
   IServiceResponse
-} from "apposition-interfaces";
+} from "spectacle-interfaces";
 import MediaAnchorGateway from "./gateway/MediaAnchorGateway";
 const bodyJsonParser = require("body-parser").json();
 
@@ -18,7 +18,7 @@ const bodyJsonParser = require("body-parser").json();
 
 export const anchorRouter = express.Router();
 
-const ImmutableAnchorService : IMediaAnchorGateway = new MediaAnchorGateway(DatabaseConnection)
+const MediaAnchorService : IMediaAnchorGateway = new MediaAnchorGateway(DatabaseConnection)
 
 /**
  * Controller Definitions
@@ -27,7 +27,7 @@ const ImmutableAnchorService : IMediaAnchorGateway = new MediaAnchorGateway(Data
 // Get Anchor
 anchorRouter.get("/:anchorId", async (req: Request, res: Response) => {
   try {
-    const response: IServiceResponse<IMediaAnchor> = await ImmutableAnchorService.getAnchor(req.params.anchorId);
+    const response: IServiceResponse<IMediaAnchor> = await MediaAnchorService.getAnchor(req.params.anchorId);
     res.status(200).send(response);
   } catch (e) {
     res.status(400).send(e.message);
@@ -39,7 +39,7 @@ anchorRouter.get("/list/:anchorIdList", async (req: Request, res: Response) => {
   try {
     const response: IServiceResponse<{
       [anchorId: string]: IMediaAnchor;
-    }> = await ImmutableAnchorService.getAnchors(
+    }> = await MediaAnchorService.getAnchors(
       req.params.anchorIdList.split(",")
     );
     res.status(200).send(response);
@@ -52,7 +52,7 @@ anchorRouter.get("/list/:anchorIdList", async (req: Request, res: Response) => {
 anchorRouter.post("", bodyJsonParser, async (req: Request, res: Response) => {
   try {
     let anchor: IMediaAnchor = req.body.data
-    let response = await ImmutableAnchorService.createAnchor(anchor)
+    let response = await MediaAnchorService.createAnchor(anchor)
     res.status(200).send(response);
   } catch (e) {
     res.status(400).send(e.message);
@@ -63,7 +63,7 @@ anchorRouter.post("", bodyJsonParser, async (req: Request, res: Response) => {
 // Delete Anchor
 anchorRouter.delete("/:anchorId", async (req: Request, res: Response) => {
   try {
-    const response: IServiceResponse<{}> = await ImmutableAnchorService.deleteAnchor(req.params.anchorId);
+    const response: IServiceResponse<{}> = await MediaAnchorService.deleteAnchor(req.params.anchorId);
     res.status(200).send(response);
   } catch (e) {
     res.status(400).send(e.message);
@@ -73,7 +73,7 @@ anchorRouter.delete("/:anchorId", async (req: Request, res: Response) => {
 // Delete Anchors
 anchorRouter.delete("/list/:anchorIds", async (req: Request, res: Response) => {
   try {
-    const response: IServiceResponse<{}> = await ImmutableAnchorService.deleteAnchors(req.params.anchorIds.split(','));
+    const response: IServiceResponse<{}> = await MediaAnchorService.deleteAnchors(req.params.anchorIds.split(','));
     res.status(200).send(response);
   } catch (e) {
     res.status(400).send(e.message);

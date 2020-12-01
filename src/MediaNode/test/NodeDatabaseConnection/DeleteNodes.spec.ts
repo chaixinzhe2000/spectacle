@@ -8,15 +8,15 @@ describe("Delete Nodes", () => {
     const createResponse = await DatabaseConnection.initNodes([
       {
         nodeId: 'a',
-        text: 'Test String 1.'
+        mediaUrl: "https://www.youtube.com/watch?v=kQqdf484iyc"
       },
       {
         nodeId: 'b',
-        text: 'Test'
+        mediaUrl: "https://www.youtube.com/watch?v=kQqdf484iyc"
       },
       {
         nodeId: 'c',
-        text: 'Test'
+        mediaUrl: "https://www.youtube.com/watch?v=kQqdf484iyc"
       }
     ]);
     expect(createResponse.success).toBeTruthy();

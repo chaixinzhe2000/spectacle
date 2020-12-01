@@ -6,7 +6,7 @@ import {
   failureServiceResponse,
   IMediaNode,
   getServiceResponse,
-} from "apposition-interfaces";
+} from "spectacle-interfaces";
 import { getMongoNode, IMongoIMediaNode, tryGetNode } from "../helpers";
 import { getNodeCollection } from "./getCollection";
 

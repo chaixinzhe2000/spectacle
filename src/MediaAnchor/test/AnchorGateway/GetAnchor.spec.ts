@@ -1,5 +1,5 @@
 import MediaAnchorGateway from '../../gateway/MediaAnchorGateway';
-import { IMediaAnchorGateway, newFilePath } from "apposition-interfaces"
+import { IMediaAnchorGateway, newFilePath } from "spectacle-interfaces"
 import AnchorDatabaseConnection from '../../dbConfig';
 
 describe('Unit Test: Get Anchor', () => {
@@ -14,7 +14,7 @@ describe('Unit Test: Get Anchor', () => {
     anchorId: 'b',
     mediaTimeStamp: 20
   }
-  
+
   beforeAll(async done => {
     const response = await AnchorDatabaseConnection.clearAnchorCollection()
     expect(response.success).toBeTruthy()

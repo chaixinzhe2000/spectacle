@@ -1,6 +1,6 @@
 import INodeDatabaseConnection, { ITestMediaNodeDatabaseConnection } from "../MediaNodeDatabaseConnection";
 import { Collection } from 'mongodb';
-import { IServiceResponse, successfulServiceResponse, failureServiceResponse, getServiceResponse, IMediaNode } from "apposition-interfaces"
+import { IServiceResponse, successfulServiceResponse, failureServiceResponse, getServiceResponse, IMediaNode } from "spectacle-interfaces"
 import { getMongoNode, IMongoIMediaNode, tryGetNode } from "../helpers";
 import { getMongoAnchor } from "../../../MediaAnchor/database/helpers";
 

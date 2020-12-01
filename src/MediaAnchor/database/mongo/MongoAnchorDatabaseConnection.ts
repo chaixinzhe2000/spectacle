@@ -6,7 +6,7 @@ import {
 	failureServiceResponse,
 	getServiceResponse,
 	IMediaAnchor
-} from "apposition-interfaces";
+} from "spectacle-interfaces";
 import {
 	getMongoAnchor,
 	IMongoIMediaAnchor,

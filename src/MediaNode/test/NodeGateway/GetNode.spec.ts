@@ -1,8 +1,8 @@
-import ImmutableTextNodeGateway from '../../gateway/ImmutableTextNodeGateway';
+import MediaNodeGateway from '../../gateway/NodeGateway';
 import DatabaseConnection from '../../dbConfig';
 
 describe('Unit Test: Get Node', () => {
-  const nodeGateway = new ImmutableTextNodeGateway(DatabaseConnection)
+  const nodeGateway = new MediaNodeGateway(DatabaseConnection)
 
   beforeAll(async done => {
     const response = await DatabaseConnection.clearNodeCollection()
@@ -11,11 +11,11 @@ describe('Unit Test: Get Node', () => {
     const createResponse = await DatabaseConnection.initNodes([
       {
         nodeId: 'a',
-        text: 'Test String 1.'
+        mediaUrl: "https://www.youtube.com/watch?v=kQqdf484iyc"
       },
       {
         nodeId: 'b',
-        text: 'Test'
+        mediaUrl: "https://www.youtube.com/watch?v=kQqdf484iyc"
       }
     ])
     expect(createResponse.success).toBeTruthy()
@@ -32,7 +32,7 @@ describe('Unit Test: Get Node', () => {
     const getResponse = await nodeGateway.getNode('a')
     expect(getResponse.success).toBeTruthy()
     expect(getResponse.payload.nodeId).toBe('a')
-    expect(getResponse.payload.text).toBe('Test String 1.')
+    expect(getResponse.payload.mediaUrl).toBe("https://www.youtube.com/watch?v=kQqdf484iyc")
     done()
   })
 
@@ -40,7 +40,7 @@ describe('Unit Test: Get Node', () => {
     const getResponse = await nodeGateway.getNode('b')
     expect(getResponse.success).toBeTruthy()
     expect(getResponse.payload.nodeId).toBe('b')
-    expect(getResponse.payload.text).toBe('Test')
+    expect(getResponse.payload.mediaUrl).toBe("https://www.youtube.com/watch?v=kQqdf484iyc")
     done()
   })
 })

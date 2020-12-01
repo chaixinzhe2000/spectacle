@@ -7,7 +7,7 @@ import {
 	IMediaNode,
 	IMediaNodeGateway,
   IServiceResponse,
-} from "apposition-interfaces";
+} from "spectacle-interfaces";
 import DatabaseConnection from "./dbConfig";
 import MediaNodeGateway from "./gateway/NodeGateway";
 const bodyJsonParser = require("body-parser").json();

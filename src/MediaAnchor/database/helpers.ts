@@ -3,7 +3,7 @@ import {
 	IMediaAnchor,
 	IServiceResponse,
 	successfulServiceResponse,
-} from "apposition-interfaces";
+} from "spectacle-interfaces";
 
 // TODO: completed by Chai
 export interface IMongoIMediaAnchor {

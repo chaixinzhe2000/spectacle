@@ -6,7 +6,7 @@ import {
 	IMediaNode,
 	IMediaAnchor,
 	IMediaNodeGateway,
-} from "apposition-interfaces";
+} from "spectacle-interfaces";
 
 
 // TODO: completed by Chai

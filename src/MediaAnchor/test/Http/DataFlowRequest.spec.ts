@@ -1,4 +1,4 @@
-import { IServiceResponse } from 'apposition-interfaces'
+import { IServiceResponse } from 'spectacle-interfaces'
 import request from 'supertest'
 import app from '../../../app'
 

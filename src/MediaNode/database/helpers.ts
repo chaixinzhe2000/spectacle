@@ -1,4 +1,4 @@
-import { failureServiceResponse, IServiceResponse, successfulServiceResponse, IMediaNode } from "apposition-interfaces";
+import { failureServiceResponse, IServiceResponse, successfulServiceResponse, IMediaNode } from "spectacle-interfaces";
 
 // TODO: completed by Chai
 export interface IMongoIMediaNode {

@@ -14,11 +14,11 @@ describe('Init Testing Tree', () => {
     const createResponse = await docDbConnection.initNodes([
       {
         nodeId: 'a',
-        text: 'Test String 1.'
+        mediaUrl: "https://www.youtube.com/watch?v=kQqdf484iyc"
       },
       {
         nodeId: 'b',
-        text: 'Test String 2'
+        mediaUrl: "https://www.youtube.com/watch?v=kQqdf484iyc"
       }
     ])
     expect(createResponse.success).toBeTruthy()

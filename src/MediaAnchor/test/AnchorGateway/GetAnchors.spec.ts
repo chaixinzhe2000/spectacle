@@ -1,4 +1,4 @@
-import { IMediaAnchorGateway, IMediaAnchor } from "apposition-interfaces";
+import { IMediaAnchorGateway, IMediaAnchor } from "spectacle-interfaces";
 import MediaAnchorGateway from '../../gateway/MediaAnchorGateway';
 import AnchorDatabaseConnection from "../../dbConfig";
 

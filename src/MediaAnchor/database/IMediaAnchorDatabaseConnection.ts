@@ -1,4 +1,4 @@
-import { IMediaAnchor, IServiceResponse } from "apposition-interfaces"
+import { IMediaAnchor, IServiceResponse } from "spectacle-interfaces"
 
 // TODO: completed by Chai
 export default interface IMediaAnchorDatabaseConnection {

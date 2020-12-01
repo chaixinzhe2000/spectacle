@@ -1,5 +1,5 @@
 import { ITestMediaAnchorDatabaseConnection } from "../IMediaAnchorDatabaseConnection";
-import { IServiceResponse, successfulServiceResponse, failureServiceResponse, getServiceResponse, IMediaAnchor } from "apposition-interfaces"
+import { IServiceResponse, successfulServiceResponse, failureServiceResponse, getServiceResponse, IMediaAnchor } from "spectacle-interfaces"
 import { getMongoAnchor, IMongoIMediaAnchor, tryGetAnchor } from "../helpers";
 
 

@@ -1,4 +1,4 @@
-import { IServiceResponse, IMediaAnchor } from 'apposition-interfaces'
+import { IServiceResponse, IMediaAnchor } from 'spectacle-interfaces'
 import request from 'supertest'
 import app from '../../../app'
 import DatabaseConnection from '../../dbConfig'

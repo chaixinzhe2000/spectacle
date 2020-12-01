@@ -14,7 +14,7 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/apposition-interfaces/-/apposition-interfaces-1.2.5.tgz: Request failed "404 Not Found"
+  Error: https://registry.yarnpkg.com/spectacle-interfaces/-/spectacle-interfaces-1.2.5.tgz: Request failed "404 Not Found"
       at ResponseError.ExtendableBuiltin (/usr/share/yarn/lib/cli.js:696:66)
       at new ResponseError (/usr/share/yarn/lib/cli.js:802:124)
       at Request.<anonymous> (/usr/share/yarn/lib/cli.js:67058:16)
@@ -69,13 +69,13 @@ npm manifest:
       "@types/node-fetch": "^2.5.4",
       "@types/supertest": "^2.0.10",
       "@types/uniqid": "^5.2.0",
-      "apposition-interfaces": "^1.0.0",
+      "spectacle-interfaces": "^1.0.0",
       "body-parser": "^1.19.0",
       "cors": "^2.8.5",
       "cross-env": "^7.0.2",
       "express": "^4.17.1",
       "helmet": "^3.21.2",
-      "apposition-interfaces": "^1.2.5",
+      "spectacle-interfaces": "^1.2.5",
       "jest": "^26.1.0",
       "mongo-mock": "^4.0.0",
       "mongodb": "^3.5.9",
@@ -957,9 +957,9 @@ Lockfile:
       normalize-path "^3.0.0"
       picomatch "^2.0.4"
   
-  apposition-interfaces@^1.0.0:
+  spectacle-interfaces@^1.0.0:
     version "1.0.0"
-    resolved "https://registry.yarnpkg.com/apposition-interfaces/-/apposition-interfaces-1.0.0.tgz#111ff6a89f6ec9899bf3d4d94c480bbd2f6924ad"
+    resolved "https://registry.yarnpkg.com/spectacle-interfaces/-/spectacle-interfaces-1.0.0.tgz#111ff6a89f6ec9899bf3d4d94c480bbd2f6924ad"
     integrity sha512-vwBVBM2sLjf/x8gcFrNcZjg7PWQkyWnG7NJWP/0GgT8/4oR8bdSRAmzVteqjRpcmYK+ad/RJl6AATaNRfdXE9g==
     dependencies:
       ts-jest "^26.4.0"
@@ -2477,9 +2477,9 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-1.1.1.tgz#c5b1cd14f50aeae09ab6c59fe63ba3395fe4dfa3"
     integrity sha512-SEQu7vl8KjNL2eoGBLF3+wAjpsNfA9XMlXAYj/3EdaNfAlxKthD1xjEQfGOUhllCGGJVNY34bRr6lPINhNjyZw==
   
-  apposition-interfaces@^1.2.5:
+  spectacle-interfaces@^1.2.5:
     version "1.2.5"
-    resolved "https://registry.yarnpkg.com/apposition-interfaces/-/apposition-interfaces-1.2.5.tgz#b76402403bd83256a1bb7f93f353988970486ce5"
+    resolved "https://registry.yarnpkg.com/spectacle-interfaces/-/spectacle-interfaces-1.2.5.tgz#b76402403bd83256a1bb7f93f353988970486ce5"
     integrity sha512-4APhWGF97NLki1KxSyBpaCeWd4xDQi/PIQ47oa3rOdoOrbCQTE7NCGHfflDStx7xsmHLNgR6glnbbDWr8U905g==
     dependencies:
       ts-jest "^26.4.0"

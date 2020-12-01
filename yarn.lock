@@ -877,9 +877,9 @@ anymatch@^3.0.3, anymatch@~3.1.1:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
-apposition-interfaces@^1.0.2:
+spectacle-interfaces@^1.0.2:
   version "1.0.2"
-  resolved "https://registry.yarnpkg.com/apposition-interfaces/-/apposition-interfaces-1.0.2.tgz#42a4503fe19f77e81bf7272f18f75b65a8c0b046"
+  resolved "https://registry.yarnpkg.com/spectacle-interfaces/-/spectacle-interfaces-1.0.2.tgz#42a4503fe19f77e81bf7272f18f75b65a8c0b046"
   integrity sha512-Z0fjU9NQhOXO7v/mj0gYEOAuB0rVMtuKsMFW9a5ru1uujXR5R/8+aGUlbo9YFfbCPIzfAFPq4P7kp+6z5sRX/g==
   dependencies:
     ts-jest "^26.4.0"
@@ -4569,6 +4569,14 @@ spdx-license-ids@^3.0.0:
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-3.0.6.tgz#c80757383c28abf7296744998cbc106ae8b854ce"
   integrity sha512-+orQK83kyMva3WyPf59k1+Y525csj5JejicWut55zeTWANuN17qSiSLUXWtzHeNWORSvT7GLDJ/E/XiIWoXBTw==
+
+spectacle-interfaces@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/spectacle-interfaces/-/spectacle-interfaces-1.0.3.tgz#fab212cabe4a373d919bb745311863bb28e6bde2"
+  integrity sha512-eiDXCgspE4rcQ3UMTHVhRRukY0n11XWswMvbYK6p5HwrLVPd6WHZUx/xmnPis98Q3Dwm7g9ohhlXE1DXTuW1gg==
+  dependencies:
+    ts-jest "^26.4.0"
+    tsc "^1.8.10"
 
 split-string@^3.0.1, split-string@^3.0.2:
   version "3.1.0"

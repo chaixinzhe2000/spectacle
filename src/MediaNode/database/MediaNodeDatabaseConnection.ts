@@ -1,4 +1,4 @@
-import { IServiceResponse, IMediaNode } from "apposition-interfaces"
+import { IServiceResponse, IMediaNode } from "spectacle-interfaces"
 
 export default interface IMediaNodeDatabaseConnection {
 	insertNode(node: IMediaNode): Promise<IServiceResponse<IMediaNode>>;

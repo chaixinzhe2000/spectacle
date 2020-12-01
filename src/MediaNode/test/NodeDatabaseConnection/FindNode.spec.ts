@@ -9,11 +9,11 @@ describe('Find Node', () => {
     const createResponse = await DatabaseConnection.initNodes([
       {
         nodeId: 'a',
-        text: 'Test String 1.'
+        mediaUrl: "https://www.youtube.com/watch?v=kQqdf484iyc"
       },
       {
         nodeId: 'b',
-        text: 'Test'
+        mediaUrl: "https://www.youtube.com/watch?v=kQqdf484iyc"
       }
     ])
     expect(createResponse.success).toBeTruthy()
@@ -21,7 +21,7 @@ describe('Find Node', () => {
     const response = await DatabaseConnection.findNode('b')
     expect(response.success).toBeTruthy()
     expect(response.payload.nodeId).toBe('b')
-    expect(response.payload.text).toBe('Test')
+    expect(response.payload.mediaUrl).toBe("https://www.youtube.com/watch?v=kQqdf484iyc")
     done()
   })
 

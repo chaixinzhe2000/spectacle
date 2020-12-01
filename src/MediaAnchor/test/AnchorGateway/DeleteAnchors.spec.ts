@@ -1,6 +1,6 @@
 import MediaAnchorGateway from '../../gateway/MediaAnchorGateway';
 import AnchorDatabaseConnection from '../../dbConfig';
-import { IMediaAnchorGateway } from 'apposition-interfaces';
+import { IMediaAnchorGateway } from 'spectacle-interfaces';
 
 describe('Unit Test: Get Anchor', () => {
   const anchorGateway: IMediaAnchorGateway = new MediaAnchorGateway(AnchorDatabaseConnection)

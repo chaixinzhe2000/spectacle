@@ -1,4 +1,4 @@
-import { IServiceResponse, IMediaAnchor, IImmutableTextAnchor } from 'apposition-interfaces'
+import { IServiceResponse, IMediaAnchor } from 'spectacle-interfaces'
 import request from 'supertest'
 import app from '../../../app'
 import DatabaseConnection from '../../dbConfig'
@@ -74,7 +74,7 @@ describe('Unit Test: Get Anchor Request', () => {
 			.expect(200)
 			.expect("Content-Type", /json/);
 		expect(isServiceResponse(getResponse.body)).toBeTruthy();
-		const sr: IServiceResponse<{ [anchorId: string]: IImmutableTextAnchor }> =
+		const sr: IServiceResponse<{ [anchorId: string]: IMediaAnchor }> =
 			getResponse.body;
 		expect(sr.success).toBeTruthy();
 		expect(sr.payload).toBeDefined();

@@ -1,4 +1,4 @@
-import { IMediaAnchor } from 'apposition-interfaces';
+import { IMediaAnchor } from 'spectacle-interfaces';
 import AnchorDatabaseConnection from '../../dbConfig';
 
 
