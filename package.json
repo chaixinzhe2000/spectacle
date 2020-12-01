@@ -1,7 +1,7 @@
 {
-  "name": "apposition-interfaces",
-  "version": "1.0.1",
-  "description": "Interfaces for Nodes for the CS1951V course. From the Apposition Group.",
+  "name": "spectacle-interfaces",
+  "version": "1.0.3",
+  "description": "Interfaces for Nodes for the CS1951V course. From the Spectacle Group.",
   "main": "dist/index.js",
   "scripts": {
     "test": "jest",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CS1951V-Hypertext-Seminar/node-interfaces.git"
+    "url": "git+https://github.com/CS1951V-Hypertext-Seminar/hypertext-interfaces-online-learning-hub"
   },
   "bugs": {
     "url": "https://github.com/CS1951V-Hypertext-Seminar/document-interfaces/issues"
@@ -23,7 +23,7 @@
   "devDependencies": {
     "typescript": "^4.0.2"
   },
-  "author": "David Promisel",
+  "author": "David Promisel, Xinzhe Chai",
   "license": "ISC",
   "types": "dist/index.d.ts"
 }

@@ -6,8 +6,8 @@ export interface IMediaNode {
 }
 
 export interface IMediaNodeGateway {
-    createNode(node: IMediaNodeGateway): Promise<IServiceResponse<IMediaNodeGateway>>;
-    getNode(nodeId: string): Promise<IServiceResponse<IMediaNodeGateway>>;
+    createNode(node: IMediaNode): Promise<IServiceResponse<IMediaNode>>;
+    getNode(nodeId: string): Promise<IServiceResponse<IMediaNode>>;
     deleteNode(nodeId: string): Promise<IServiceResponse<{}>>;
     deleteNodes(nodeIds: string[]): Promise<IServiceResponse<{}>>;
 }
@@ -18,9 +18,9 @@ export interface IMediaAnchor {
 }
 
 export interface IMediaAnchorGateway {
-    createAnchor(anchor: IMediaAnchorGateway): Promise<IServiceResponse<IMediaAnchorGateway>>;
-    getAnchor(anchorId: string): Promise<IServiceResponse<IMediaAnchorGateway>>;
-    getAnchors(anchorIds: string[]): Promise<IServiceResponse<{[anchorId: string]: IMediaAnchorGateway}>>;
+    createAnchor(anchor: IMediaAnchor): Promise<IServiceResponse<IMediaAnchor>>;
+    getAnchor(anchorId: string): Promise<IServiceResponse<IMediaAnchor>>;
+    getAnchors(anchorIds: string[]): Promise<IServiceResponse<{[anchorId: string]: IMediaAnchor}>>;
 	// TODO: addtional feature - updateMediaTimeStamp
 	deleteAnchor(anchorId: string): Promise<IServiceResponse<{}>>;
     deleteAnchors(anchorIds: string[]): Promise<IServiceResponse<{}>>;
