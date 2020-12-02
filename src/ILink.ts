@@ -2,10 +2,10 @@ import IServiceResponse from "./IServiceResponse";
 
 export interface ILink {
 	linkId: string;
-	srcAnchorId?: string;
+	srcNodeId?: string;
 	destAnchorId?: string;
-	srcNodeId: string;
-	destNodeId: string;
+	destNodeId?: string;
+	srcAnchorId?: string;
 }
 
 export interface ILinkGateway {
