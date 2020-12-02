@@ -2,153 +2,178 @@ import { ITestAnchorDatabaseConnection } from "../IAnchorDatabaseConnection";
 import { IServiceResponse, successfulServiceResponse, failureServiceResponse, getServiceResponse, IAnchor } from "spectacle-interfaces"
 import { getMongoAnchor, IMongoAnchor, tryGetAnchor } from "../helpers";
 
+// TODO: completed by Chai
 class MockMongoDatabaseConnection implements ITestAnchorDatabaseConnection {
 
-  _anchors: {[anchorId: string]: IMongoAnchor}
+	_anchors: { [anchorId: string]: IMongoAnchor }
 
-  constructor() {
-    this._anchors = {}
-    this.clearAnchorCollection = this.clearAnchorCollection.bind(this);
-    this.initAnchors = this.initAnchors.bind(this);
-    this.insertAnchor = this.insertAnchor.bind(this);
-    this.findAnchor = this.findAnchor.bind(this);
-    this.findAnchors = this.findAnchors.bind(this);
-    this.findAnchorsByNode = this.findAnchorsByNode.bind(this);
-    this.deleteAnchor = this.deleteAnchor.bind(this);
-    this.deleteAnchors = this.deleteAnchors.bind(this);
-    this.deleteAnchorsByNode = this.deleteAnchorsByNode.bind(this);
-  }
+	constructor() {
+		this._anchors = {}
+		this.clearAnchorCollection = this.clearAnchorCollection.bind(this);
+		this.initAnchors = this.initAnchors.bind(this);
+		this.insertAnchor = this.insertAnchor.bind(this);
+		this.findAnchor = this.findAnchor.bind(this);
+		this.findAnchors = this.findAnchors.bind(this);
+		this.findAnchorsByNode = this.findAnchorsByNode.bind(this);
+		this.deleteAnchor = this.deleteAnchor.bind(this);
+		this.deleteAnchors = this.deleteAnchors.bind(this);
+		this.deleteAnchorsByNode = this.deleteAnchorsByNode.bind(this);
+		this.updateAnchorCreatedTime = this.updateAnchorCreatedTime.bind(this);
+		this.updateAnchorContent = this.updateAnchorContent.bind(this);
+	}
 
-  async clearAnchorCollection(): Promise<IServiceResponse<{}>> {
-    this._anchors = {}
-    return successfulServiceResponse({})
-  }
+	async updateAnchorCreatedTime(anchorId: string): Promise<IServiceResponse<IAnchor>> {
+		const mongoAnchor = this._anchors[anchorId]
+		if (mongoAnchor) {
+			const tryCreateAnchorResp = tryGetAnchor(mongoAnchor)
+			if (tryCreateAnchorResp.success = true) {
+				let anchor = tryCreateAnchorResp.payload
+				anchor.createdAt = new Date()
+				return successfulServiceResponse(anchor)
+			}
+			return failureServiceResponse("Failed to convert to IAnchor")
+		}
+		return failureServiceResponse("Failed to find anchor");
+	}
 
-  async initAnchors(anchors: IAnchor[]): Promise<IServiceResponse<{}>> {
-    anchors.forEach(anchor => {
-      const mongoAnchorResp = getMongoAnchor(anchor)
-      if (!mongoAnchorResp.success) {
-        return failureServiceResponse(mongoAnchorResp.message)
-      }
-      this._anchors[anchor.anchorId] = mongoAnchorResp.payload
-    })
-    return successfulServiceResponse({})
-  }
+	async updateAnchorContent(anchorId: string, content: string): Promise<IServiceResponse<IAnchor>> {
+		const mongoAnchor = this._anchors[anchorId]
+		if (mongoAnchor) {
+			const tryCreateAnchorResp = tryGetAnchor(mongoAnchor)
+			if (tryCreateAnchorResp.success = true) {
+				let anchor = tryCreateAnchorResp.payload
+				anchor.content = content
+				return successfulServiceResponse(anchor)
+			}
+			return failureServiceResponse("Failed to convert to IAnchor")
+		}
+		return failureServiceResponse("Failed to find anchor");
+	}
 
-  async insertAnchor(anchor: IAnchor): Promise<IServiceResponse<IAnchor>> {
+	async clearAnchorCollection(): Promise<IServiceResponse<{}>> {
+		this._anchors = {}
+		return successfulServiceResponse({})
+	}
 
-    const mongoAnchorResp = getMongoAnchor(anchor)
-    if (!mongoAnchorResp.success) {
-      return failureServiceResponse(mongoAnchorResp.message)
-    } if (this._anchors[anchor.anchorId])
-      return failureServiceResponse("Anchor already exists")
-    this._anchors[anchor.anchorId] = mongoAnchorResp.payload
-    return successfulServiceResponse(anchor)
-  }
+	async initAnchors(anchors: IAnchor[]): Promise<IServiceResponse<{}>> {
+		anchors.forEach(anchor => {
+			const mongoAnchorResp = getMongoAnchor(anchor)
+			if (!mongoAnchorResp.success) {
+				return failureServiceResponse(mongoAnchorResp.message)
+			}
+			this._anchors[anchor.anchorId] = mongoAnchorResp.payload
+		})
+		return successfulServiceResponse({})
+	}
 
-  async findAnchor(anchorId: string): Promise<IServiceResponse<IAnchor>> {
+	async insertAnchor(anchor: IAnchor): Promise<IServiceResponse<IAnchor>> {
+		const mongoAnchorResp = getMongoAnchor(anchor)
+		if (!mongoAnchorResp.success) {
+			return failureServiceResponse(mongoAnchorResp.message)
+		} if (this._anchors[anchor.anchorId])
+			return failureServiceResponse("Anchor already exists")
+		this._anchors[anchor.anchorId] = mongoAnchorResp.payload
+		return successfulServiceResponse(anchor)
+	}
 
-    const anchor = this._anchors[anchorId]
+	async findAnchor(anchorId: string): Promise<IServiceResponse<IAnchor>> {
+		const anchor = this._anchors[anchorId]
+		if (anchor) {
+			const tryCreateAnchorResp = tryGetAnchor(anchor)
+			return getServiceResponse(tryCreateAnchorResp, "Failed to find anchor\n")
+		}
+		return failureServiceResponse("Failed to find anchors")
+	}
 
-    if (anchor) {
-      const tryCreateAnchorResp = tryGetAnchor(anchor)
-      return getServiceResponse(tryCreateAnchorResp, "Failed to find anchor\n")
-    }
+	async findAnchors(anchorIds: string[]): Promise<IServiceResponse<{ [anchorId: string]: IAnchor }>> {
+		if (anchorIds === null)
+			return failureServiceResponse("input is null")
+		const anchors: { [anchorId: string]: IAnchor } = {}
 
-    return failureServiceResponse("Failed to find anchors")
+		async function findAndAdd(anchorId: string, findAnchor: Function) {
+			const findResponse = await findAnchor(anchorId)
+			if (findResponse.success)
+				anchors[findResponse.payload.anchorId] = findResponse.payload
+		}
 
-  }
+		await Promise.all(anchorIds.map(anchorId => {
+			return findAndAdd(anchorId, this.findAnchor)
+		}));
 
-  async findAnchors(anchorIds: string[]): Promise<IServiceResponse<{ [anchorId: string] : IAnchor }>> {
-    if (anchorIds === null) 
-      return failureServiceResponse("input is null")
-    const anchors: { [anchorId: string] : IAnchor } = {}
+		if (Object.keys(anchors).length === 0) {
+			return failureServiceResponse("Failed to find any anchors.")
+		}
 
-    async function findAndAdd(anchorId: string, findAnchor: Function) {
-      const findResponse = await findAnchor(anchorId)
-      if (findResponse.success)
-        anchors[findResponse.payload.anchorId] = findResponse.payload
-    }
+		return successfulServiceResponse(anchors)
+	}
 
-    await Promise.all(anchorIds.map(anchorId => {
-      return findAndAdd(anchorId, this.findAnchor)
-    }));
+	async findAnchorsByNode(nodeId: string): Promise<IServiceResponse<{ [anchorId: string]: IAnchor }>> {
+		if (nodeId === null)
+			return failureServiceResponse("input is null")
+		const anchors: { [anchorId: string]: IAnchor } = {}
 
-    if (Object.keys(anchors).length === 0) {
-      return failureServiceResponse("Failed to find any anchors.")
-    }
+		Object.values(this._anchors).forEach(anc => {
+			if (anc.nodeId === nodeId) {
+				const anchorResp = tryGetAnchor(anc)
+				if (anchorResp.success) {
+					anchors[anchorResp.payload.anchorId] = anchorResp.payload
+				}
+			}
+		});
 
-    return successfulServiceResponse(anchors)
-  }
+		if (Object.keys(anchors).length > 0)
+			return successfulServiceResponse(anchors)
+		else
+			return failureServiceResponse("Couldn't find any anchors with nodeId: " + nodeId)
+	}
 
-  async findAnchorsByNode(nodeId: string): Promise<IServiceResponse<{ [anchorId: string] : IAnchor }>> {
-    if (nodeId === null) 
-      return failureServiceResponse("input is null")
-    const anchors: { [anchorId: string] : IAnchor } = {}
-    
-    Object.values(this._anchors).forEach(anc => {
-      if (anc.nodeId === nodeId) {
-        const anchorResp = tryGetAnchor(anc)
-        if (anchorResp.success) {
-          anchors[anchorResp.payload.anchorId] = anchorResp.payload
-        }
-      }
-    });
+	async deleteAnchor(anchorId: string): Promise<IServiceResponse<{}>> {
+		if (anchorId === null)
+			return failureServiceResponse("input is null")
+		delete this._anchors[anchorId]
+		return successfulServiceResponse({})
+	}
 
-    if (Object.keys(anchors).length > 0)
-      return successfulServiceResponse(anchors)
-    else
-      return failureServiceResponse("Couldn't find any anchors with nodeId: " + nodeId)
-  }
+	async deleteAnchors(anchorIds: string[]): Promise<IServiceResponse<{}>> {
+		if (anchorIds === null)
+			return failureServiceResponse("input is null")
+		let count = 0
 
-  async deleteAnchor(anchorId: string): Promise<IServiceResponse<{}>> {
-    if (anchorId === null) 
-      return failureServiceResponse("input is null")
-    delete this._anchors[anchorId]
-    return successfulServiceResponse({})
-  }
-  
-  async deleteAnchors(anchorIds: string[]): Promise<IServiceResponse<{}>> {
-    if (anchorIds === null) 
-      return failureServiceResponse("input is null")
-    let count = 0
+		anchorIds.forEach(aid => {
+			if (this._anchors[aid]) {
+				delete this._anchors[aid]
+				count++
+			}
+		})
 
-    anchorIds.forEach(aid => {
-      if (this._anchors[aid]) {
-        delete this._anchors[aid]
-        count++
-      }
-    })
+		return successfulServiceResponse(count)
+	}
 
-    return successfulServiceResponse(count)
-  }
+	async deleteAnchorsByNode(nodeId: string): Promise<IServiceResponse<{}>> {
+		if (nodeId === null)
+			return failureServiceResponse("input is null")
+		let count = 0
+		const anchorsToDelete: IAnchor[] = []
 
-  async deleteAnchorsByNode(nodeId: string): Promise<IServiceResponse<{}>> {
-    if (nodeId === null) 
-      return failureServiceResponse("input is null")
-    let count = 0
-    const anchorsToDelete: IAnchor[] = []
+		Object.values(this._anchors).forEach(anc => {
+			if (anc.nodeId === nodeId) {
+				const anchorResp = tryGetAnchor(anc)
+				if (anchorResp.success) {
+					anchorsToDelete.push(anchorResp.payload)
+				}
+			}
+		});
 
-    Object.values(this._anchors).forEach(anc => {
-      if (anc.nodeId === nodeId) {
-        const anchorResp = tryGetAnchor(anc)
-        if (anchorResp.success) {
-          anchorsToDelete.push(anchorResp.payload)
-        }
-      }
-    });
+		anchorsToDelete.forEach(anch => {
+			if (this._anchors[anch.anchorId]) {
+				delete this._anchors[anch.anchorId]
+				count++
+			}
+		})
 
-    anchorsToDelete.forEach(anch => {
-      if (this._anchors[anch.anchorId]) {
-        delete this._anchors[anch.anchorId]
-        count++
-      }
-    })
+		return successfulServiceResponse({})
 
-   
-    return successfulServiceResponse({})
-    
-  }
+	}
 }
 
 export default MockMongoDatabaseConnection

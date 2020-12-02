@@ -40,11 +40,9 @@ export function tryGetAnchor(mongoAnchor: IMongoAnchor): IServiceResponse<IAncho
 			anchorId: mongoAnchor._id,
 			type: mongoAnchor.type,
 			content: mongoAnchor.annotation,
-			createAt: mongoAnchor.createdAt
+			createdAt: mongoAnchor.createdAt
 		}
 		return successfulServiceResponse(anchor)
 	}
-        
-
     return failureServiceResponse('Invalid node')
 }
