@@ -13,12 +13,16 @@ describe('Unit Test: Delete anchor', () => {
       {
         anchorId: 'a',
         nodeId: 'node.a',
-        label: 'label'
+        content: "I like this a lot!",
+		type: "media",
+		createdAt: new Date()
       },
       {
         anchorId: 'b',
         nodeId: 'node.a',
-        label: 'label'
+        content: "I like this a lot!",
+		type: "media",
+		createdAt: new Date()
       }
     ])
     expect(createResponse.success).toBeTruthy()

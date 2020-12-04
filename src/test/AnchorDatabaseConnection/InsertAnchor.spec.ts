@@ -4,7 +4,9 @@ import DatabaseConnection from '../../dbConfig';
 const testAnchor: IAnchor = {
     anchorId: "test.anchor",
     nodeId: "test.node",
-    label: 'label'
+    content: "I like this a lot!",
+	type: "media",
+	createdAt: new Date()
 }
 
 describe('Insert Anchor', () => {
@@ -33,7 +35,9 @@ describe('Insert Anchor', () => {
     let invalid2: IAnchor = {
         anchorId: "",
         nodeId: "",
-        label: 'label'
+        content: "I like this a lot!",
+		type: "media",
+		createdAt: new Date()
     }
     const response2 = await DatabaseConnection.insertAnchor(invalid2)
     expect(response2.success).toBeFalsy()
@@ -41,7 +45,9 @@ describe('Insert Anchor', () => {
     let invalid3: IAnchor = {
         anchorId: null,
         nodeId: "",
-        label: 'label'
+        content: "I like this a lot!",
+		type: "media",
+		createdAt: new Date()
     }
     const response3 = await DatabaseConnection.insertAnchor(invalid3)
     expect(response3.success).toBeFalsy()
@@ -49,10 +55,52 @@ describe('Insert Anchor', () => {
     let invalid4: IAnchor = {
         anchorId: "anchor",
         nodeId: null,
-        label: 'fdasf' 
+        content: "I like this a lot!",
+		type: "media",
+		createdAt: new Date()
     }
     const response4 = await DatabaseConnection.insertAnchor(invalid4)
-    expect(response4.success).toBeFalsy()
+	expect(response4.success).toBeFalsy()
+	
+	let invalid5: IAnchor = {
+        anchorId: "anchor",
+        nodeId: "hello",
+        content: null,
+		type: "media",
+		createdAt: new Date()
+    }
+    const response5 = await DatabaseConnection.insertAnchor(invalid5)
+	expect(response5.success).toBeFalsy()
+	
+	let invalid6: IAnchor = {
+        anchorId: "anchor",
+        nodeId: "hello",
+        content: "null",
+		type: null,
+		createdAt: new Date()
+    }
+    const response6 = await DatabaseConnection.insertAnchor(invalid6)
+	expect(response6.success).toBeFalsy()
+	
+	let invalid7: IAnchor = {
+        anchorId: "anchor",
+        nodeId: "hello",
+        content: "",
+		type: "media",
+		createdAt: new Date()
+    }
+    const response7 = await DatabaseConnection.insertAnchor(invalid7)
+	expect(response7.success).toBeFalsy()
+	
+	let valid: IAnchor = {
+        anchorId: "anchor",
+        nodeId: "hello",
+        content: "null",
+		type: "media",
+		createdAt: new Date()
+    }
+    const response8 = await DatabaseConnection.insertAnchor(valid)
+    expect(response8.success).toBeTruthy()
     done()
     })
 

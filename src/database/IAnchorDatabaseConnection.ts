@@ -9,7 +9,6 @@ export default interface IAnchorDatabaseConnection {
   deleteAnchor(nodeId: string): Promise<IServiceResponse<{}>>;
   deleteAnchors(nodeIds: string[]): Promise<IServiceResponse<{}>>;
   deleteAnchorsByNode(nodeId: string): Promise<IServiceResponse<{}>>;
-  updateAnchorCreatedTime(anchorId: string): Promise<IServiceResponse<IAnchor>>;
   updateAnchorContent(anchorId: string, content: string): Promise<IServiceResponse<IAnchor>>;
 }
 

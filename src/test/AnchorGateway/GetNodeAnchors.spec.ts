@@ -13,22 +13,30 @@ describe('Unit Test: Get Node Anchors', () => {
       {
         anchorId: 'a',
         nodeId: 'node.a',
-        label: 'label.a'
+        content: "I like this a lot1!",
+		type: "media",
+		createdAt: new Date()
       },
       {
         anchorId: 'b',
         nodeId: 'node.b',
-        label: 'label.b'
+        content: "I like this a lot2!",
+		type: "media",
+		createdAt: new Date()
       },
       {
         anchorId: 'c',
         nodeId: 'node.b',
-        label: 'label.c'
+        content: "I like this a lot3!",
+		type: "media",
+		createdAt: new Date()
       },
       {
         anchorId: 'd',
         nodeId: 'node.b',
-        label: 'label.d'
+        content: "I like this a lot4!",
+		type: "media",
+		createdAt: new Date()
       }
     ])
     expect(createResponse.success).toBeTruthy()
@@ -54,13 +62,13 @@ describe('Unit Test: Get Node Anchors', () => {
     expect(Object.keys(anchors).length).toBe(3)
     expect(anchors['b'].anchorId).toBe('b')
     expect(anchors['b'].nodeId).toBe('node.b')
-    expect(anchors['b'].label).toBe('label.b')
+    expect(anchors['b'].content).toBe("I like this a lot2!")
     expect(anchors['c'].anchorId).toBe('c')
     expect(anchors['c'].nodeId).toBe('node.b')
-    expect(anchors['c'].label).toBe('label.c')
+    expect(anchors['c'].content).toBe("I like this a lot3!")
     expect(anchors['d'].anchorId).toBe('d')
     expect(anchors['d'].nodeId).toBe('node.b')
-    expect(anchors['d'].label).toBe('label.d')
+    expect(anchors['d'].content).toBe("I like this a lot4!")
     done()
   })
 

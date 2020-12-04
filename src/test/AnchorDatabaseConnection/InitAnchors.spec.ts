@@ -12,12 +12,16 @@ describe('Init Anchors', () => {
       {
         nodeId: 'node.a',
         anchorId: 'anchor.a',
-        label: 'label'
+        content: "I like this a lot!",
+		type: "media",
+		createdAt: new Date()
       },
       {
         nodeId: 'node.b',
         anchorId: 'anchor.b',
-        label: 'label'
+        content: "I like this a lot!",
+		type: "media",
+		createdAt: new Date()
       }
     ])
     expect(createResponse.success).toBeTruthy()

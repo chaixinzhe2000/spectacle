@@ -1,22 +1,13 @@
 import DatabaseConnection from '../../dbConfig';
 
-describe('Find Anchors', () => {
+describe('Update Anchor Contents', () => {
 	afterAll(async done => {
 		const response = await DatabaseConnection.clearAnchorCollection()
 		expect(response.success).toBeTruthy()
 		done()
 	})
 
-	test("fails to find anchor in empty collection", async done => {
-		const dresponse = await DatabaseConnection.clearAnchorCollection()
-		expect(dresponse.success).toBeTruthy()
-
-		const response = await DatabaseConnection.findAnchors(['id3'])
-		expect(response.success).toBeFalsy()
-		done()
-	})
-
-	test("finds two anchors", async done => {
+	test("finds two anchors and change their contents respectively", async done => {
 		const dresponse = await DatabaseConnection.clearAnchorCollection()
 		expect(dresponse.success).toBeTruthy()
 
@@ -57,8 +48,27 @@ describe('Find Anchors', () => {
 		const anchors2 = response.payload
 		expect(anchors2['anchor.a'].anchorId).toBe('anchor.a')
 		expect(anchors2['anchor.a'].nodeId).toBe('node.a')
-		expect(anchors['anchor.a'].content).toBe("I like this a lot!")
-		expect(anchors['anchor.a'].type).toBe("media")
+		expect(anchors2['anchor.a'].content).toBe("I like this a lot!")
+		expect(anchors2['anchor.a'].type).toBe("media")
+
+		const response3 = await DatabaseConnection.updateAnchorContent('anchor.a', "replaced content 1")
+		expect(response3.success).toBeTruthy()
+		expect(Object.keys(response3.payload).length).toBe(5)
+		const anchors3 = response3.payload
+		expect(anchors3.anchorId).toBe('anchor.a')
+		expect(anchors3.nodeId).toBe('node.a')
+		
+		expect(anchors3.content).toBe("replaced content 1")
+		expect(anchors3.type).toBe("media")
+
+		const response4 = await DatabaseConnection.findAnchors(['anchor.a'])
+		expect(response4.success).toBeTruthy()
+		expect(Object.keys(response4.payload).length).toBe(1)
+		const anchors4 = response4.payload
+		expect(anchors4['anchor.a'].anchorId).toBe('anchor.a')
+		expect(anchors4['anchor.a'].nodeId).toBe('node.a')
+		expect(anchors4['anchor.a'].content).toBe("replaced content 1")
+		expect(anchors4['anchor.a'].type).toBe("media")
 		done()
 	})
 

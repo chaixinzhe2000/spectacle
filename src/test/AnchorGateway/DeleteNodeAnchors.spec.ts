@@ -13,22 +13,30 @@ describe('Unit Test: Delete Anchors by Node', () => {
       {
         anchorId: 'a',
         nodeId: 'node.a',
-        label: 'label'
+        content: "I like this a lot!",
+		type: "media",
+		createdAt: new Date()
       },
       {
         anchorId: 'b',
         nodeId: 'node.b',
-        label: 'label'
+        content: "I like this a lot!",
+		type: "media",
+		createdAt: new Date()
       },
       {
         anchorId: 'c',
         nodeId: 'node.b',
-        label: 'label'
+        content: "I like this a lot!",
+		type: "media",
+		createdAt: new Date()
       },
       {
         anchorId: 'd',
         nodeId: 'node.b',
-        label: 'label'
+        content: "I like this a lot!",
+		type: "media",
+		createdAt: new Date()
       }
     ])
     expect(createResponse.success).toBeTruthy()

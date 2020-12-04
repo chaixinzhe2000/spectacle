@@ -17,8 +17,7 @@ export function getMongoAnchor(anchor: IAnchor): IServiceResponse<IMongoAnchor> 
 			type: anchor.type,
 			annotation: anchor.content,
             createdAt: new Date()
-        }
-
+		}
         if (tryGetAnchor(mongonode).success)
             return successfulServiceResponse(mongonode)
         else
@@ -34,7 +33,7 @@ export function tryGetAnchor(mongoAnchor: IMongoAnchor): IServiceResponse<IAncho
 	&& mongoAnchor._id !== undefined && typeof mongoAnchor._id === 'string' && mongoAnchor._id !== ''
 	&& mongoAnchor.type !== undefined && isNodeType(mongoAnchor.type) === true
 	&& mongoAnchor.annotation !== undefined && typeof mongoAnchor.annotation === 'string' && mongoAnchor.annotation !== ''
-    && mongoAnchor.createdAt !== undefined && mongoAnchor.createdAt instanceof Date) {
+    && mongoAnchor.createdAt !== undefined && mongoAnchor.createdAt !== null && mongoAnchor.createdAt instanceof Date) {
 		let anchor: IAnchor = {
 			nodeId: mongoAnchor.nodeId,
 			anchorId: mongoAnchor._id,

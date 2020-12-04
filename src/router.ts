@@ -72,19 +72,9 @@ anchorRouter.delete("/node/:nodeId", async (req: Request, res: Response) => {
 });
 
 // Update Anchor Content
-anchorRouter.put("/:anchorId", async (req: Request, res: Response) => {
+anchorRouter.put("/:anchorId/content/", async (req: Request, res: Response) => {
 	try {
-		const response: IServiceResponse<{}> = await AnchorService.updateAnchorContent(req.params.anchorId, req.params.content);
-		res.status(200).send(response);
-	} catch (e) {
-		res.status(400).send(e.message);
-	}
-});
-
-// Update Anchor TimeStamp
-anchorRouter.put("/:anchorId", async (req: Request, res: Response) => {
-	try {
-		const response: IServiceResponse<{}> = await AnchorService.updateCreatedTimeStamp(req.params.anchorId);
+		const response: IServiceResponse<{}> = await AnchorService.updateAnchorContent(req.params.anchorId, req.body['content']);
 		res.status(200).send(response);
 	} catch (e) {
 		res.status(400).send(e.message);

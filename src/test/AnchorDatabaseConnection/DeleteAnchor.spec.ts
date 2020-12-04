@@ -9,12 +9,16 @@ describe('Delete Anchor', () => {
       {
         nodeId: 'node.a',
         anchorId: 'anchor.a',
-        label: 'a'
+		content: "I like this a lot!",
+		type: "media",
+		createdAt: new Date()
       },
       {
         nodeId: 'node.b',
         anchorId: 'anchor.b',
-        label: 'b'
+		content: "I don't like this at all!",
+		type: "immutable-text",
+		createdAt: new Date()
       }
     ])
     expect(createResponse.success).toBeTruthy()

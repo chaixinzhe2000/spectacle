@@ -24,17 +24,23 @@ describe('Find Anchors by Node', () => {
       {
         nodeId: 'node.a',
         anchorId: 'anchor.a',
-        label: 'label.a'
+		content: "I like this a lot!",
+		type: "media",
+		createdAt: new Date()
       },
       {
         nodeId: 'node.b',
         anchorId: 'anchor.b',
-        label: 'label.b'
+		content: "I like this a lot 1!",
+		type: "media",
+		createdAt: new Date()
       },
       {
         nodeId: 'node.b',
         anchorId: 'anchor.c',
-        label: 'label.c'
+		content: "I like this a lot 2!",
+		type: "media",
+		createdAt: new Date()
       }
     ])
     expect(createResponse.success).toBeTruthy()
@@ -45,7 +51,7 @@ describe('Find Anchors by Node', () => {
     expect(Object.keys(anchors).length).toBe(1)
     expect(anchors['anchor.a'].anchorId).toBe('anchor.a')
     expect(anchors['anchor.a'].nodeId).toBe('node.a')
-    expect(anchors['anchor.a'].label).toBe('label.a')
+    expect(anchors['anchor.a'].content).toBe("I like this a lot!")
 
     const response2 = await DatabaseConnection.findAnchorsByNode('node.b')
     expect(response2.success).toBeTruthy()
@@ -53,10 +59,10 @@ describe('Find Anchors by Node', () => {
     const anchors2 = response2.payload
     expect(anchors2['anchor.b'].anchorId).toBe('anchor.b')
     expect(anchors2['anchor.b'].nodeId).toBe('node.b')
-    expect(anchors2['anchor.b'].label).toBe('label.b')
+    expect(anchors2['anchor.b'].content).toBe("I like this a lot 1!")
     expect(anchors2['anchor.c'].anchorId).toBe('anchor.c')
     expect(anchors2['anchor.c'].nodeId).toBe('node.b')
-    expect(anchors2['anchor.c'].label).toBe('label.c')
+    expect(anchors2['anchor.c'].content).toBe('I like this a lot 2!')
 
     const response3 = await DatabaseConnection.findAnchorsByNode('node.c')
     expect(response3.success).toBeFalsy()

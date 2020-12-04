@@ -12,10 +12,6 @@ export default class AnchorGateway implements IAnchorGateway {
 	async updateAnchorContent(anchorId: string, content: string): Promise<IServiceResponse<IAnchor>> {
 		return await this.dbConnection.updateAnchorContent(anchorId, content)
 	}
-	
-	async updateCreatedTimeStamp(anchorId: string): Promise<IServiceResponse<IAnchor>> {
-		return await this.dbConnection.updateAnchorCreatedTime(anchorId)
-	}
 
 	async createAnchor(anchor: IAnchor): Promise<IServiceResponse<IAnchor>> {
 		return await this.dbConnection.insertAnchor(anchor)

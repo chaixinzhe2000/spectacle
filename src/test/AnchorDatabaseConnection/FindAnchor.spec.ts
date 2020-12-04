@@ -15,12 +15,16 @@ describe('Find Anchor', () => {
       {
         nodeId: 'node.a',
         anchorId: 'anchor.a',
-        label: 'label.a'
+        content: "I like this a lot!",
+		type: "media",
+		createdAt: new Date()
       },
       {
         nodeId: 'node.b',
         anchorId: 'anchor.b',
-        label: 'label'
+        content: "I don't like this at all!",
+		type: "node",
+		createdAt: new Date()
       }
     ])
     expect(createResponse.success).toBeTruthy()
@@ -29,7 +33,15 @@ describe('Find Anchor', () => {
     expect(response.success).toBeTruthy()
     expect(response.payload.anchorId).toBe('anchor.a')
     expect(response.payload.nodeId).toBe('node.a')
-    expect(response.payload.label).toBe('label.a')
+	expect(response.payload.content).toBe("I like this a lot!")
+	expect(response.payload.type).toBe("media")
+
+	const response_b = await DatabaseConnection.findAnchor('anchor.b')
+    expect(response_b.success).toBeTruthy()
+    expect(response_b.payload.anchorId).toBe('anchor.b')
+    expect(response_b.payload.nodeId).toBe('node.b')
+	expect(response_b.payload.content).toBe("I don't like this at all!")
+	expect(response_b.payload.type).toBe("node")
     done()
   })
 
