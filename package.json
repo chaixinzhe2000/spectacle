@@ -1,6 +1,6 @@
 {
   "name": "spectacle-interfaces",
-  "version": "1.0.6",
+  "version": "1.0.9",
   "description": "Interfaces for Nodes for the CS1951V course. From the Spectacle Group.",
   "main": "dist/index.js",
   "scripts": {

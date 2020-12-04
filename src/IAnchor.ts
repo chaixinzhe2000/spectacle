@@ -14,7 +14,6 @@ export interface IAnchorGateway {
     getAnchor(anchorId: string): Promise<IServiceResponse<IAnchor>>;
 	getNodeAnchors(nodeId: string): Promise<IServiceResponse<{[anchorId: string]: IAnchor}>>;
 	updateAnchorContent(anchorId: string, content: string): Promise<IServiceResponse<IAnchor>>;
-	updateCreatedTimeStamp(anchorId: string): Promise<IServiceResponse<IAnchor>>;
     deleteAnchor(anchorId: string): Promise<IServiceResponse<{}>>;
     deleteNodeAnchors(nodeId: string): Promise<IServiceResponse<{}>>;
 }

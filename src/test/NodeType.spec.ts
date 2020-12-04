@@ -6,7 +6,6 @@ describe('NodeTpe', () => {
     expect(isNodeType('node')).toBeTruthy()
     expect(isNodeType('immutable-text')).toBeTruthy()
     expect(isNodeType('none')).toBeFalsy()
-
     done()
   })
 })
