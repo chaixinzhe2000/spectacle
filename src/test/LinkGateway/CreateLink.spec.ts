@@ -42,7 +42,6 @@ describe("Unit Test: Create Link", () => {
     const createResponse = await linkGateway.createLink(validlink);
     expect(createResponse.success).toBeTruthy();
     const dbFindResponse = await linkDbConnection.findLink("l1");
-    console.log(dbFindResponse)
     expect(dbFindResponse.success).toBeTruthy();
     expect(dbFindResponse.payload.linkId).toBe("l1");
     expect(dbFindResponse.payload.srcAnchorId).toBe("a1");

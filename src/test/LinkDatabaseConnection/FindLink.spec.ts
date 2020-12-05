@@ -10,14 +10,10 @@ describe("Find Link", () => {
       {
         linkId: "l1",
         srcAnchorId: "a1",
-        destAnchorId: "a2",
-        srcNodeId: "n1",
         destNodeId: "n2",
       },
       {
         linkId: "l2",
-        srcAnchorId: "a2",
-        destAnchorId: "a1",
         srcNodeId: "n2",
         destNodeId: "n1",
       },
@@ -28,8 +24,8 @@ describe("Find Link", () => {
     expect(response.success).toBeTruthy();
     expect(response.payload.linkId).toBe("l1");
     expect(response.payload.srcAnchorId).toBe("a1");
-    expect(response.payload.destAnchorId).toBe("a2");
-    expect(response.payload.srcNodeId).toBe("n1");
+    expect(response.payload.destAnchorId).toBe(null);
+    expect(response.payload.srcNodeId).toBe(null);
     expect(response.payload.destNodeId).toBe("n2");
     done();
   });

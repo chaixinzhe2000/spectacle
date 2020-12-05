@@ -77,9 +77,9 @@ describe("Link Router Flow Tests", () => {
     expect(Object.keys(sr.payload).length).toBe(1);
 
     const getResponse2 = await request(app)
-      .get(`${service}/node/destnodex.test`)
+      .get(`${service}/node/srcnodex.test`)
       .expect(200)
-      .expect("Content-Type", /json/);
+	  .expect("Content-Type", /json/);
     expect(isServiceResponse(getResponse2.body)).toBeTruthy();
     const sr2: IServiceResponse<{ [linkId: string]: ILink }> =
       getResponse2.body;

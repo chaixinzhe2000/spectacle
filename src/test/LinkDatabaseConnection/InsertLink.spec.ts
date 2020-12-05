@@ -20,8 +20,6 @@ describe("Insert Link", () => {
       linkId: "l1",
       srcAnchorId: "a1",
       invalidField: "a2",
-      srcNodeId: "n1",
-      destNodeId: "n2",
     };
     const response = await linkDbConnection.insertLink(invalidLink);
     expect(response.success).toBeFalsy();
@@ -29,9 +27,7 @@ describe("Insert Link", () => {
     let invalidLink2: any = {
       linkId: "",
       srcAnchorId: "a1",
-      destAnchorId: "a2",
       srcNodeId: "",
-      destNodeId: "n2",
     };
     const response2 = await linkDbConnection.insertLink(invalidLink2);
     expect(response2.success).toBeFalsy();
@@ -39,9 +35,7 @@ describe("Insert Link", () => {
     let invalidLink3: any = {
       linkId: "l1",
       srcAnchorId: undefined,
-      destAnchorId: "a2",
       srcNodeId: "",
-      destNodeId: "n2",
     };
     const response3 = await linkDbConnection.insertLink(invalidLink3);
     expect(response3.success).toBeFalsy();
@@ -52,8 +46,6 @@ describe("Insert Link", () => {
     let validLink: any = {
       linkId: "l1",
       srcAnchorId: "a1",
-      destAnchorId: "a2",
-      srcNodeId: "n1",
       destNodeId: "n2",
     };
     const insertResponse = await linkDbConnection.insertLink(validLink);
@@ -61,10 +53,8 @@ describe("Insert Link", () => {
 
     let validLink2: any = {
       linkId: "l2",
-      srcAnchorId: "a1",
       destAnchorId: "a2",
       srcNodeId: "n1",
-      destNodeId: "n2",
     };
     const insertResponse2 = await linkDbConnection.insertLink(validLink2);
     expect(insertResponse2.success).toBeTruthy();
@@ -75,8 +65,6 @@ describe("Insert Link", () => {
     let validLink: any = {
       linkId: "l1",
       srcAnchorId: "a2",
-      destAnchorId: "a1",
-      srcNodeId: "n2",
       destNodeId: "n1",
     };
     const insertResponse = await linkDbConnection.insertLink(validLink);

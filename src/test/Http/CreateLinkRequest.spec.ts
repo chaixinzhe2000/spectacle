@@ -48,8 +48,8 @@ describe("Unit Test: Create Link Request", () => {
 		expect(getResponse2.success).toBeTruthy();
 		expect(getResponse2.payload.linkId).toBe(testLink.linkId);
 		expect(getResponse2.payload.srcAnchorId).toBe(testLink.srcAnchorId);
-		expect(getResponse2.payload.destAnchorId).toBe(undefined);
-		expect(getResponse2.payload.destNodeId).toBe(undefined);
+		expect(getResponse2.payload.destAnchorId).toBe(null);
+		expect(getResponse2.payload.destNodeId).toBe(null);
 		expect(getResponse2.payload.srcNodeId).toBe(testLink.srcNodeId);
 
 		const createResponse2 = await request(app)

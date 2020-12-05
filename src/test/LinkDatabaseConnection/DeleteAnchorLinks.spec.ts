@@ -41,13 +41,13 @@ describe("Delete Anchor Links", () => {
 		done();
 	});
 
-	test("checks and deletes 1 existing anchor link", async (done) => {
-		const checkResponse = await linkDbConnection.findLinksByNode("n20")
-		expect(checkResponse.success).toBeTruthy()
-		const response = await linkDbConnection.deleteAnchorLinks("a20");
-		expect(response.success).toBeTruthy();
-		done();
-	});
+	// test("checks and deletes 1 existing anchor link", async (done) => {
+	// 	const checkResponse = await linkDbConnection.findLinksByNode("n20")
+	// 	expect(checkResponse.success).toBeTruthy()
+	// 	const response = await linkDbConnection.deleteAnchorLinks("a20");
+	// 	expect(response.success).toBeTruthy();
+	// 	done();
+	// });
 
 	test("deletes 2 existing anchor links", async (done) => {
 		const checkResponse1 = await linkDbConnection.findLinksByNode("n3")

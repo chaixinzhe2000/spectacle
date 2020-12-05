@@ -1,230 +1,229 @@
 import {
-  ITestLinkDatabaseConnection,
+	ITestLinkDatabaseConnection,
 } from "../ILinkDatabaseConnection";
 import MongoDbConnection from "./mongodbConnection";
 import {
-  IServiceResponse,
-  successfulServiceResponse,
-  failureServiceResponse,
-  getServiceResponse,
-  ILink,
+	IServiceResponse,
+	successfulServiceResponse,
+	failureServiceResponse,
+	getServiceResponse,
+	ILink,
 } from "spectacle-interfaces";
 import { getMongoLink, IMongoLink, tryGetLink } from "../helpers";
 import { getLinkCollection } from "./getCollection";
 import { link } from "fs";
 
 const MongoDatabaseConnection: ITestLinkDatabaseConnection = {
-  async clearLinkCollection(): Promise<IServiceResponse<{}>> {
-    const collection = await getLinkCollection(MongoDbConnection);
-    const response = await collection.deleteMany({});
-    if (response.result.ok) {
-      return successfulServiceResponse({});
-    }
+	async clearLinkCollection(): Promise<IServiceResponse<{}>> {
+		const collection = await getLinkCollection(MongoDbConnection);
+		const response = await collection.deleteMany({});
+		if (response.result.ok) {
+			return successfulServiceResponse({});
+		}
 
-    return failureServiceResponse("Failed to clear link collection.");
-  },
+		return failureServiceResponse("Failed to clear link collection.");
+	},
 
-  async initLinks(links: ILink[]): Promise<IServiceResponse<{}>> {
-    const mongoLinks: IMongoLink[] = [];
+	async initLinks(links: ILink[]): Promise<IServiceResponse<{}>> {
+		const mongoLinks: IMongoLink[] = [];
 
-    links.forEach((link) => {
-      const mongoLinkResp = getMongoLink(link);
-      if (!mongoLinkResp.success) {
-        return failureServiceResponse(mongoLinkResp.message);
-      }
-      mongoLinks.push(mongoLinkResp.payload);
-    });
+		links.forEach((link) => {
+			const mongoLinkResp = getMongoLink(link);
+			if (!mongoLinkResp.success) {
+				return failureServiceResponse(mongoLinkResp.message);
+			}
+			mongoLinks.push(mongoLinkResp.payload);
+		});
 
-    try {
-	  const collection = await getLinkCollection(MongoDbConnection);
-      const insertResponse = await collection.insertMany(mongoLinks);
-      if (insertResponse.result.ok) {
-        return successfulServiceResponse({});
-      }
-    } catch (e) {
-      return failureServiceResponse(`Failed to create new links.`);
-    }
-  },
+		try {
+			const collection = await getLinkCollection(MongoDbConnection);
+			const insertResponse = await collection.insertMany(mongoLinks);
+			if (insertResponse.result.ok) {
+				return successfulServiceResponse({});
+			}
+		} catch (e) {
+			return failureServiceResponse(`Failed to create new links.`);
+		}
+	},
 
-  async insertLink(link: ILink): Promise<IServiceResponse<ILink>> {
-    
-    const mongoLinkResp = getMongoLink(link);
-    if (!mongoLinkResp.success) {
-      return failureServiceResponse(mongoLinkResp.message);
-    }
-    const mongoLink = mongoLinkResp.payload;
+	async insertLink(link: ILink): Promise<IServiceResponse<ILink>> {
 
-    try {
-      const collection = await getLinkCollection(MongoDbConnection);
-      const insertResponse = await collection.insertOne(mongoLink);
-      if (insertResponse.result.ok) {
-        return successfulServiceResponse(link);
-      }
-    } catch (e) {
-      return failureServiceResponse(
-        `Failed to create new link, it's possible that a link with linkId: ${link.linkId} already exists.`
-      );
-    }
-  },
+		const mongoLinkResp = getMongoLink(link);
+		if (!mongoLinkResp.success) {
+			return failureServiceResponse(mongoLinkResp.message);
+		}
+		const mongoLink = mongoLinkResp.payload;
 
-  async findLink(linkId: string): Promise<IServiceResponse<ILink>> {
-    if (linkId === null)
-      return failureServiceResponse('linkId is null')
-    const collection = await getLinkCollection(MongoDbConnection);
-    const findResponse = await collection.findOne({ _id: linkId });
+		try {
+			const collection = await getLinkCollection(MongoDbConnection);
+			const insertResponse = await collection.insertOne(mongoLink);
+			if (insertResponse.result.ok) {
+				return successfulServiceResponse(link);
+			}
+		} catch (e) {
+			return failureServiceResponse(
+				`Failed to create new link, it's possible that a link with linkId: ${link.linkId} already exists.`
+			);
+		}
+	},
 
-    if (findResponse && findResponse._id === linkId) {
-      const tryCreateLinkResp = tryGetLink(findResponse);
-      return getServiceResponse(tryCreateLinkResp, "Failed to find link\n");
-    }
+	async findLink(linkId: string): Promise<IServiceResponse<ILink>> {
+		if (linkId === null)
+			return failureServiceResponse('linkId is null')
+		const collection = await getLinkCollection(MongoDbConnection);
+		const findResponse = await collection.findOne({ _id: linkId });
 
-    return failureServiceResponse("Failed to find links");
-  },
+		if (findResponse && findResponse._id === linkId) {
+			const tryCreateLinkResp = tryGetLink(findResponse);
+			return getServiceResponse(tryCreateLinkResp, "Failed to find link\n");
+		}
 
-  async findLinks(
-    linkIds: string[]
-  ): Promise<IServiceResponse<{ [linkId: string]: ILink }>> {
-    if (linkIds === null)
-      return failureServiceResponse('linkIds is null')
-    const collection = await getLinkCollection(MongoDbConnection);
-    const myquery = { _id: { $in: linkIds } };
-    const findResponse = await collection.find(myquery);
+		return failureServiceResponse("Failed to find links");
+	},
 
-    const links: { [linkId: string]: ILink } = {};
-    await findResponse.forEach((mongolink) => {
-      const linkResponse = tryGetLink(mongolink);
-      if (linkResponse.success)
-        links[linkResponse.payload.linkId] = linkResponse.payload;
-    });
+	async findLinks(
+		linkIds: string[]
+	): Promise<IServiceResponse<{ [linkId: string]: ILink }>> {
+		if (linkIds === null)
+			return failureServiceResponse('linkIds is null')
+		const collection = await getLinkCollection(MongoDbConnection);
+		const myquery = { _id: { $in: linkIds } };
+		const findResponse = await collection.find(myquery);
 
-    if (Object.keys(links).length === 0) {
-      return failureServiceResponse("Failed to find any links at that path.");
-    }
+		const links: { [linkId: string]: ILink } = {};
+		await findResponse.forEach((mongolink) => {
+			const linkResponse = tryGetLink(mongolink);
+			if (linkResponse.success)
+				links[linkResponse.payload.linkId] = linkResponse.payload;
+		});
 
-    return successfulServiceResponse(links);
-  },
+		if (Object.keys(links).length === 0) {
+			return failureServiceResponse("Failed to find any links at that path.");
+		}
 
-  async findLinksByNode(
-    nodeId: string
-  ): Promise<IServiceResponse<{ [linkId: string]: ILink }>> {
-	const collection = await getLinkCollection(MongoDbConnection);
-    const myquery = {
-      $or: [
-        { srcNodeId: { $in: [nodeId] } },
-        { destNodeId: { $in: [nodeId] } },
-      ],
-    };
-	const findResponse = await collection.find(myquery);
-	console.log(findResponse)
-    const links: { [linkId: string]: ILink } = {};
-    await findResponse.forEach((mongolink) => {
-		console.log(mongolink)
-	  const linkResponse = tryGetLink(mongolink);
-      if (linkResponse.success)
-        links[linkResponse.payload.linkId] = linkResponse.payload;
-    });
+		return successfulServiceResponse(links);
+	},
 
-    if (Object.keys(links).length === 0) {
-      return failureServiceResponse("Failed to find any links for that node.");
-    }
+	async findLinksByNode(nodeId: string): Promise<IServiceResponse<{ [linkId: string]: ILink }>> {
+		if (nodeId === '' || nodeId == null) {
+			return failureServiceResponse("nodeId is reserved")
+		}
+		const collection = await getLinkCollection(MongoDbConnection);
+		const myquery = {
+			$or: [
+				{ srcNodeId: { $in: [nodeId] } },
+				{ destNodeId: { $in: [nodeId] } },
+			],
+		};
+		const findResponse = await collection.find(myquery);
+		const links: { [linkId: string]: ILink } = {};
+		await findResponse.forEach((mongolink) => {
+			const linkResponse = tryGetLink(mongolink);
+			if (linkResponse.success)
+				links[linkResponse.payload.linkId] = linkResponse.payload;
+		});
 
-    return successfulServiceResponse(links);
-  },
-  async findLinksByAnchor(
-    anchorId: string
-  ): Promise<IServiceResponse<{ [linkId: string]: ILink }>> {
-    
-    const collection = await getLinkCollection(MongoDbConnection);
-    const myquery = {
-      $or: [
-        { srcAnchorId: { $in: [anchorId] } },
-        { destAnchorId: { $in: [anchorId] } },
-      ],
-    };
-    const findResponse = await collection.find(myquery);
+		if (Object.keys(links).length === 0) {
+			return failureServiceResponse("Failed to find any links for that node.");
+		}
 
-    const links: { [linkId: string]: ILink } = {};
-    await findResponse.forEach((mongolink) => {
-      const linkResponse = tryGetLink(mongolink);
-      if (linkResponse.success)
-        links[linkResponse.payload.linkId] = linkResponse.payload;
-    });
+		return successfulServiceResponse(links);
+	},
+	async findLinksByAnchor(anchorId: string): Promise<IServiceResponse<{ [linkId: string]: ILink }>> {
+		if (anchorId === '' || anchorId == null) {
+			return failureServiceResponse("anchorId is reserved")
+		}
+		const collection = await getLinkCollection(MongoDbConnection);
+		const myquery = {
+			$or: [
+				{ srcAnchorId: { $in: [anchorId] } },
+				{ destAnchorId: { $in: [anchorId] } },
+			],
+		};
+		const findResponse = await collection.find(myquery);
 
-    if (Object.keys(links).length === 0) {
-      return failureServiceResponse(
-        "Failed to find any links for that anchor."
-      );
-    }
+		const links: { [linkId: string]: ILink } = {};
+		await findResponse.forEach((mongolink) => {
+			const linkResponse = tryGetLink(mongolink);
+			if (linkResponse.success)
+				links[linkResponse.payload.linkId] = linkResponse.payload;
+		});
 
-    return successfulServiceResponse(links);
-  },
+		if (Object.keys(links).length === 0) {
+			return failureServiceResponse(
+				"Failed to find any links for that anchor."
+			);
+		}
 
-  async deleteLink(linkId: string): Promise<IServiceResponse<{}>> {
-    if (linkId === null)
-      return failureServiceResponse('linkIds is null')
-    const collection = await getLinkCollection(MongoDbConnection);
-    const deleteResponse = await collection.deleteOne({ _id: linkId });
-    if (deleteResponse.result.ok) {
-      return successfulServiceResponse({});
-    }
+		return successfulServiceResponse(links);
+	},
 
-    return failureServiceResponse("Failed to delete");
-  },
+	async deleteLink(linkId: string): Promise<IServiceResponse<{}>> {
+		if (linkId === null)
+			return failureServiceResponse('linkIds is null')
+		const collection = await getLinkCollection(MongoDbConnection);
+		const deleteResponse = await collection.deleteOne({ _id: linkId });
+		if (deleteResponse.result.ok) {
+			return successfulServiceResponse({});
+		}
 
-  async deleteLinks(linkIds: string[]): Promise<IServiceResponse<{}>> {
-    if (linkIds === null)
-      return failureServiceResponse('linkIds is null')
-    const collection = await getLinkCollection(MongoDbConnection);
+		return failureServiceResponse("Failed to delete");
+	},
 
-    const myquery = { _id: { $in: linkIds } };
-    const deleteResponse = await collection.deleteMany(myquery);
+	async deleteLinks(linkIds: string[]): Promise<IServiceResponse<{}>> {
+		if (linkIds === null)
+			return failureServiceResponse('linkIds is null')
+		const collection = await getLinkCollection(MongoDbConnection);
 
-    if (deleteResponse.result.ok) {
-      return successfulServiceResponse({});
-    }
+		const myquery = { _id: { $in: linkIds } };
+		const deleteResponse = await collection.deleteMany(myquery);
 
-    return failureServiceResponse("Failed to delete links");
-  },
+		if (deleteResponse.result.ok) {
+			return successfulServiceResponse({});
+		}
 
-  async deleteNodeLinks(nodeId: string): Promise<IServiceResponse<{}>> {
-    if (nodeId === null)
-      return failureServiceResponse('nodeId is null')
-    const collection = await getLinkCollection(MongoDbConnection);
+		return failureServiceResponse("Failed to delete links");
+	},
 
-    const myquery = {
-      $or: [
-        { srcNodeId: { $in: [nodeId] } },
-        { destNodeId: { $in: [nodeId] } },
-      ],
-    };
-    const deleteResponse = await collection.deleteMany(myquery);
+	async deleteNodeLinks(nodeId: string): Promise<IServiceResponse<{}>> {
+		if (nodeId === null)
+			return failureServiceResponse('nodeId is null')
+		const collection = await getLinkCollection(MongoDbConnection);
 
-    if (deleteResponse.result.ok) {
-      return successfulServiceResponse({});
-    }
+		const myquery = {
+			$or: [
+				{ srcNodeId: { $in: [nodeId] } },
+				{ destNodeId: { $in: [nodeId] } },
+			],
+		};
+		const deleteResponse = await collection.deleteMany(myquery);
 
-    return failureServiceResponse("Failed to delete links");
-  },
+		if (deleteResponse.result.ok) {
+			return successfulServiceResponse({});
+		}
 
-  async deleteAnchorLinks(anchorId: string): Promise<IServiceResponse<{}>> {
-    if (anchorId === null)
-      return failureServiceResponse('AnchorId is null')
-    const collection = await getLinkCollection(MongoDbConnection);
+		return failureServiceResponse("Failed to delete links");
+	},
 
-    const myquery = {
-      $or: [
-        { srcAnchorId: { $in: [anchorId] } },
-        { destAnchorId: { $in: [anchorId] } },
-      ],
-    };
-    const deleteResponse = await collection.deleteMany(myquery);
+	async deleteAnchorLinks(anchorId: string): Promise<IServiceResponse<{}>> {
+		if (anchorId === null)
+			return failureServiceResponse('AnchorId is null')
+		const collection = await getLinkCollection(MongoDbConnection);
 
-    if (deleteResponse.result.ok) {
-      return successfulServiceResponse({});
-    }
+		const myquery = {
+			$or: [
+				{ srcAnchorId: { $in: [anchorId] } },
+				{ destAnchorId: { $in: [anchorId] } },
+			],
+		};
+		const deleteResponse = await collection.deleteMany(myquery);
 
-    return failureServiceResponse("Failed to delete links");
-  },
+		if (deleteResponse.result.ok) {
+			return successfulServiceResponse({});
+		}
+
+		return failureServiceResponse("Failed to delete links");
+	},
 };
 
 export default MongoDatabaseConnection;

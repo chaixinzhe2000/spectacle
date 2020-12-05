@@ -11,17 +11,13 @@ describe("Delete Node Links", () => {
     const createResponse = await linkDbConnection.initLinks([
       {
         linkId: "l1",
-        srcAnchorId: "a1",
-        destAnchorId: "a2",
         srcNodeId: "n1",
         destNodeId: "n2",
       },
       {
         linkId: "l2",
-        srcAnchorId: "a2",
-        destAnchorId: "a1",
         srcNodeId: "n2",
-        destNodeId: "n3",
+        destAnchorId: "a1",
       },
     ]);
     expect(createResponse.success).toBeTruthy();
