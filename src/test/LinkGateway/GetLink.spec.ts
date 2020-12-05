@@ -15,13 +15,9 @@ describe("Unit Test: Get Link", () => {
         linkId: "l1",
         srcAnchorId: "a1",
         destAnchorId: "a2",
-        srcNodeId: "n1",
-        destNodeId: "n2",
       },
       {
         linkId: "l2",
-        srcAnchorId: "a2",
-        destAnchorId: "a1",
         srcNodeId: "n2",
         destNodeId: "n1",
       },
@@ -48,8 +44,8 @@ describe("Unit Test: Get Link", () => {
     expect(getResponse.payload.linkId).toBe("l1");
     expect(getResponse.payload.srcAnchorId).toBe("a1");
     expect(getResponse.payload.destAnchorId).toBe("a2");
-    expect(getResponse.payload.srcNodeId).toBe("n1");
-    expect(getResponse.payload.destNodeId).toBe("n2");
+    expect(getResponse.payload.srcNodeId).toBe(null);
+    expect(getResponse.payload.destNodeId).toBe(null);
     done();
   });
 
@@ -57,8 +53,8 @@ describe("Unit Test: Get Link", () => {
     const getResponse = await linkGateway.getLink("l2");
     expect(getResponse.success).toBeTruthy();
     expect(getResponse.payload.linkId).toBe("l2");
-    expect(getResponse.payload.srcAnchorId).toBe("a2");
-    expect(getResponse.payload.destAnchorId).toBe("a1");
+    expect(getResponse.payload.srcAnchorId).toBe(null);
+    expect(getResponse.payload.destAnchorId).toBe(null);
     expect(getResponse.payload.srcNodeId).toBe("n2");
     expect(getResponse.payload.destNodeId).toBe("n1");
     done();

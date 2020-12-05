@@ -14,16 +14,12 @@ describe("Unit Test: Delete Anchor Links", () => {
       {
         linkId: "l1",
         srcAnchorId: "a1",
-        destAnchorId: "a2",
-        srcNodeId: "n1",
-        destNodeId: "n2",
+        destAnchorId: "a2"
       },
       {
         linkId: "l2",
         srcAnchorId: "a2",
-        destAnchorId: "a3",
-        srcNodeId: "n2",
-        destNodeId: "n3",
+        destAnchorId: "a3"
       },
     ]);
     expect(createResponse.success).toBeTruthy();
