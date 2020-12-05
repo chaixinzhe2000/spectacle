@@ -1,6 +1,8 @@
 .TrialMegaContainer{
 	display: grid;
-	grid-template-columns: 0.5fr 1fr 1fr;
+	grid-template-columns: 0.5fr 0.8fr 0.5fr;
+	column-gap: 2rem;
+	margin: 2rem;
 }
 
 .wrapper {
