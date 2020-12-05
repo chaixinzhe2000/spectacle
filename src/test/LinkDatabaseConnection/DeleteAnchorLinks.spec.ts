@@ -25,6 +25,7 @@ describe("Delete Anchor Links", () => {
 			// 	srcNodeId: "n10",
 			// }
 		]);
+		console.log(createResponse)
 		expect(createResponse.success).toBeTruthy();
 		done();
 	});

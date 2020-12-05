@@ -35,12 +35,14 @@ const MongoDatabaseConnection: ITestLinkDatabaseConnection = {
     });
 
     try {
-      const collection = await getLinkCollection(MongoDbConnection);
+	  const collection = await getLinkCollection(MongoDbConnection);
+	  console.log(mongoLinks)
       const insertResponse = await collection.insertMany(mongoLinks);
       if (insertResponse.result.ok) {
         return successfulServiceResponse({});
       }
     } catch (e) {
+		console.log(e)
       return failureServiceResponse(`Failed to create new links.`);
     }
   },
