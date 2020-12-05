@@ -3,6 +3,10 @@
 	grid-template-columns: 0.5fr 1fr 1fr;
 }
 
+.wrapper {
+	text-align: center;
+}
+
 .comment {
 	width: 100%;
 	height: max-content;

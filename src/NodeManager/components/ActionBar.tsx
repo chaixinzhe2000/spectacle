@@ -39,7 +39,7 @@ export default function ActionBar(props: ActionBarProps) {
       return (
         <Navbar>
           <NavbarGroup align={Alignment.LEFT}>
-                      <NavbarHeading onClick={() => navigate('/')}> CS1951V </NavbarHeading>
+                      <NavbarHeading onClick={() => navigate('/')}> Spectacle Hypertext </NavbarHeading>
                       <NavbarDivider />
                       {props.loading ? <Spinner size={20} /> : null }
                   </NavbarGroup>
