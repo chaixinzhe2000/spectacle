@@ -36,7 +36,7 @@ export function getMongoLink(link: ILink): IServiceResponse<IMongoLink> {
 	try {
         if (!isLink(link)){
             return failureServiceResponse(
-                "Input to getMongoLink is not valid."
+                "Likely to have wrong number of fields in ILink."
             );
         }
 		let mongolink: IMongoLink = {

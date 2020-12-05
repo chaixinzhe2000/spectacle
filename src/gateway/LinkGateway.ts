@@ -23,7 +23,7 @@ export default class LinkGateway implements ILinkGateway {
    */
   async createLink(link: ILink): Promise<IServiceResponse<ILink>> {
     try {
-      if (link.destAnchorId === link.srcAnchorId)
+      if (link.destAnchorId === link.srcAnchorId && (link.destAnchorId !== null && link.destAnchorId !== undefined))
         return failureServiceResponse(
           "Source Anchor Id and Dest Anchor Id cannot be the same"
         );
