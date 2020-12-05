@@ -19,11 +19,11 @@ function isLink(link: any): boolean {
 		let fieldCount: number = 0
 		if (link.srcAnchorId !== undefined && typeof link.srcAnchorId === "string" && link.srcAnchorId.length > 0)
 			fieldCount++
-		if (link.destAnchorId !== undefined && typeof link.srcAnchorId === "string" && link.srcAnchorId.length > 0)
+		if (link.destAnchorId !== undefined && typeof link.destAnchorId === "string" && link.destAnchorId.length > 0)
 			fieldCount++
-		if (link.srcNodeId !== undefined && typeof link.srcAnchorId === "string" && link.srcAnchorId.length > 0)
+		if (link.srcNodeId !== undefined && typeof link.srcNodeId === "string" && link.srcNodeId.length > 0)
 			fieldCount++
-		if (link.destNodeId !== undefined && typeof link.srcAnchorId === "string" && link.srcAnchorId.length > 0)
+		if (link.destNodeId !== undefined && typeof link.destNodeId === "string" && link.destNodeId.length > 0)
 			fieldCount++
 		if (fieldCount === 2)
 			return true
@@ -43,6 +43,7 @@ export function getMongoLink(link: ILink): IServiceResponse<IMongoLink> {
 			createdAt: new Date(),
 		};
 		if (tryGetLink(mongolink).success && isLink(link)) {
+			console.log('mother fucker')
 			return successfulServiceResponse(mongolink);
 		}
 		return failureServiceResponse(
