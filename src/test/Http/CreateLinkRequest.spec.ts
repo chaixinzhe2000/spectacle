@@ -45,7 +45,6 @@ describe("Unit Test: Create Link Request", () => {
 		expect(sr.payload.srcNodeId).toBe(testLink.srcNodeId);
 		expect(sr.payload.destNodeId).toBe(undefined);
 		const getResponse2 = await DatabaseConnection.findLink(testLink.linkId);
-		console.log(getResponse2)
 		expect(getResponse2.success).toBeTruthy();
 		expect(getResponse2.payload.linkId).toBe(testLink.linkId);
 		expect(getResponse2.payload.srcAnchorId).toBe(testLink.srcAnchorId);
