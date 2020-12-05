@@ -7,7 +7,7 @@ import {
   IServiceResponse,
   ILink,
   ILinkGateway,
-} from "hypertext-interfaces";
+} from "spectacle-interfaces";
 import LinkGateway from "./gateway/LinkGateway";
 import DatabaseConnection from "./dbConfig";
 const bodyJsonParser = require("body-parser").json();

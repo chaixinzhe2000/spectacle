@@ -1,4 +1,4 @@
-import { IServiceResponse, ILink } from "hypertext-interfaces";
+import { IServiceResponse, ILink } from "spectacle-interfaces";
 import request from "supertest";
 import app from "../../app";
 import DatabaseConnection from "../../dbConfig";
@@ -18,9 +18,7 @@ const service = "/link";
 const testLink: ILink = {
   linkId: "linkx.test",
   srcAnchorId: "srcanchorx.test",
-  destAnchorId: "destanchorx.test",
   srcNodeId: "srcnodex.test",
-  destNodeId: "destnodex.test",
 };
 
 describe("Link Router Flow Tests", () => {

@@ -1,4 +1,4 @@
-import { IServiceResponse, ILink } from "hypertext-interfaces";
+import { IServiceResponse, ILink } from "spectacle-interfaces";
 
 export default interface ILinkDatabaseConnection {
   insertLink(link: ILink): Promise<IServiceResponse<ILink>>;

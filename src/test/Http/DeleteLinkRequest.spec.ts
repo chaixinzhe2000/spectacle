@@ -1,4 +1,4 @@
-import { IServiceResponse, ILink } from "hypertext-interfaces";
+import { IServiceResponse, ILink } from "spectacle-interfaces";
 import request from "supertest";
 import app from "../../app";
 import DatabaseConnection from "../../dbConfig";

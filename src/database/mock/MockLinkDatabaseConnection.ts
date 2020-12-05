@@ -5,7 +5,7 @@ import {
   failureServiceResponse,
   getServiceResponse,
   ILink,
-} from "hypertext-interfaces";
+} from "spectacle-interfaces";
 import { IMongoLink, getMongoLink, tryGetLink } from "../helpers";
 
 class MockMongoDatabaseConnection implements ITestLinkDatabaseConnection {

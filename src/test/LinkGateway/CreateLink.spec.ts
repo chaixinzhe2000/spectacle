@@ -1,4 +1,4 @@
-import { ILink, ILinkGateway } from "hypertext-interfaces";
+import { ILink, ILinkGateway } from "spectacle-interfaces";
 import DatabaseConnection from "../../dbConfig";
 import LinkGateway from "../../gateway/LinkGateway";
 

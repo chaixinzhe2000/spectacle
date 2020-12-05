@@ -8,7 +8,7 @@ import {
   failureServiceResponse,
   getServiceResponse,
   ILink,
-} from "hypertext-interfaces";
+} from "spectacle-interfaces";
 import { getMongoLink, IMongoLink, tryGetLink } from "../helpers";
 import { getLinkCollection } from "./getCollection";
 
@@ -114,7 +114,6 @@ const MongoDatabaseConnection: ITestLinkDatabaseConnection = {
       ],
     };
     const findResponse = await collection.find(myquery);
-
     const links: { [linkId: string]: ILink } = {};
     await findResponse.forEach((mongolink) => {
       const linkResponse = tryGetLink(mongolink);

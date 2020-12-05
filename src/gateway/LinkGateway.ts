@@ -4,7 +4,7 @@ import {
   failureServiceResponse,
   ILink,
   ILinkGateway,
-} from "hypertext-interfaces";
+} from "spectacle-interfaces";
 
 export default class LinkGateway implements ILinkGateway {
   dbConnection: ILinkDatabaseConnection;
