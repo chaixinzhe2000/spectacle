@@ -1,6 +1,8 @@
 .TrialMegaContainer{
 	display: grid;
-	grid-template-columns: 0.5fr 1fr 1fr;
+	grid-template-columns: 0.5fr 0.8fr 0.5fr;
+	column-gap: 2rem;
+	margin: 2rem;
 }
 
 .wrapper {
@@ -18,7 +20,7 @@
 }
 
 .comment-title {
-	font-size: 3rem;
+	font-size: 2rem;
 	font-style: bold;
 	margin-top: 10px;
 	margin-bottom: 30px;
