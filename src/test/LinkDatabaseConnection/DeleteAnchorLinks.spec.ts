@@ -46,8 +46,6 @@ describe("Delete Anchor Links", () => {
 		expect(checkResponse.success).toBeTruthy()
 		const response = await linkDbConnection.deleteAnchorLinks("a20");
 		expect(response.success).toBeTruthy();
-		// const checkResponse2 = await linkDbConnection.findLinksByNode("n20")
-		// expect(checkResponse2.success).toBeFalsy()
 		done();
 	});
 
