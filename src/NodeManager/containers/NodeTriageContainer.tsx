@@ -45,7 +45,7 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
                                     node={node} 
                                     anchorId={previewAnchor ? previewAnchor.anchorId : selectedAnchor ? selectedAnchor.anchorId : anchorId} 
                                     anchorIds={anchorIds} />
-                break
+				break
             default:
                 return  <div> Hmmm, don't recognize node type {node.nodeType}... </div>
         }
