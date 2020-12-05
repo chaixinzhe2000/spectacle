@@ -12,7 +12,7 @@ export default class ReactPlayerWrapper extends React.Component {
 				<div className="wrapper">
 					<ReactPlayer url='https://www.youtube.com/watch?v=6KP7tu3JLSM' />
 				</div>
-				<div className="comment-title" style={{ marginTop: "2rem"}}>Related Nodes</div>
+				<div className="comment-title" style={{ marginTop: "3rem"}}>Related Nodes</div>
 				<div className="comment">Media Node: Andy's Lecture on Hypertext System</div>
 				<div className="comment">Essay Submission: Which hypertext system should I use?</div>
 				<div className="comment">PDF: new PDF</div>
