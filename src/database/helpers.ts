@@ -42,8 +42,7 @@ export function getMongoLink(link: ILink): IServiceResponse<IMongoLink> {
 			destNodeId: link.destNodeId,
 			createdAt: new Date(),
 		};
-		if (tryGetLink(mongolink).success && isLink(link)) {
-			console.log('mother fucker')
+		if (tryGetLink(mongolink).success) {
 			return successfulServiceResponse(mongolink);
 		}
 		return failureServiceResponse(

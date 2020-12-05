@@ -11,6 +11,7 @@ import {
 } from "spectacle-interfaces";
 import { getMongoLink, IMongoLink, tryGetLink } from "../helpers";
 import { getLinkCollection } from "./getCollection";
+import { link } from "fs";
 
 const MongoDatabaseConnection: ITestLinkDatabaseConnection = {
   async clearLinkCollection(): Promise<IServiceResponse<{}>> {
@@ -36,13 +37,11 @@ const MongoDatabaseConnection: ITestLinkDatabaseConnection = {
 
     try {
 	  const collection = await getLinkCollection(MongoDbConnection);
-	  console.log(mongoLinks)
       const insertResponse = await collection.insertMany(mongoLinks);
       if (insertResponse.result.ok) {
         return successfulServiceResponse({});
       }
     } catch (e) {
-		console.log(e)
       return failureServiceResponse(`Failed to create new links.`);
     }
   },
@@ -108,17 +107,19 @@ const MongoDatabaseConnection: ITestLinkDatabaseConnection = {
   async findLinksByNode(
     nodeId: string
   ): Promise<IServiceResponse<{ [linkId: string]: ILink }>> {
-    const collection = await getLinkCollection(MongoDbConnection);
+	const collection = await getLinkCollection(MongoDbConnection);
     const myquery = {
       $or: [
         { srcNodeId: { $in: [nodeId] } },
         { destNodeId: { $in: [nodeId] } },
       ],
     };
-    const findResponse = await collection.find(myquery);
+	const findResponse = await collection.find(myquery);
+	console.log(findResponse)
     const links: { [linkId: string]: ILink } = {};
     await findResponse.forEach((mongolink) => {
-      const linkResponse = tryGetLink(mongolink);
+		console.log(mongolink)
+	  const linkResponse = tryGetLink(mongolink);
       if (linkResponse.success)
         links[linkResponse.payload.linkId] = linkResponse.payload;
     });
