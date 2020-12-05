@@ -34,7 +34,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "helmet": "^3.21.2",
-    "spectacle-interfaces": "^1.1.0",
+    "spectacle-interfaces": "^1.1.2",
     "jest": "^26.1.0",
     "mongo-mock": "^4.0.0",
     "mongodb": "^3.5.9",
