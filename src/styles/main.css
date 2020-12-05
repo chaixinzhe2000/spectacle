@@ -3,18 +3,18 @@
 	grid-template-columns: 0.5fr 0.8fr 0.5fr;
 	column-gap: 2rem;
 	margin: 2rem;
+	padding: 1rem;
 }
 
 .wrapper {
 	display: flex;
 }
 
-.comment {
+.comment { 
 	width: 100%;
 	height: max-content;
-	border: 1px solid rgb(201, 240, 199);
 	background-color: #D1E7E5;
-	border-radius: 5px;
+	border-radius: 2px;
 	margin-bottom: 15px;
 	padding: 5px 10px;
 }
