@@ -11,7 +11,6 @@ import { getMongoNode, IMongoIMediaNode, tryGetNode } from "../helpers";
 import { getNodeCollection } from "./getCollection";
 
 // TODO: completed by Chai
-
 function isValidHttpUrl(urlString: string) {
 	let url;
 	try {
