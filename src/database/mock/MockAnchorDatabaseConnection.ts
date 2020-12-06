@@ -36,23 +36,52 @@ class MockMongoDatabaseConnection implements ITestAnchorDatabaseConnection {
 		return failureServiceResponse("Failed to find anchor");
 	}
 
-	async updateAnchorContent(anchorId: string, content: string): Promise<IServiceResponse<IAnchor>> {
-		const mongoAnchor = this._anchors[anchorId]
-		if (mongoAnchor) {
-			const tryCreateAnchorResp = tryGetAnchor(mongoAnchor)
-			if (tryCreateAnchorResp.success = true) {
-				let anchor = tryCreateAnchorResp.payload
-				anchor.content = content
-				return successfulServiceResponse(anchor)
-			}
-			return failureServiceResponse("Failed to convert to IAnchor")
-		}
-		return failureServiceResponse("Failed to find anchor");
-	}
-
 	async clearAnchorCollection(): Promise<IServiceResponse<{}>> {
 		this._anchors = {}
 		return successfulServiceResponse({})
+	}
+
+    async updateLastAnnotation(anchorId: string, content: string, author: string): Promise<IServiceResponse<IAnchor>> {
+        if (author == null || author === ""){
+            author = "Anonymous"
+        }
+        // content can be null because if content is null we assume deletion of last annotation
+        if (typeof anchorId !== "string" || (typeof content !== "string" && content != null) || (typeof author !== "string" && author != null)){
+            return failureServiceResponse("updateLastAnnotation argument has wrong type")
+        }
+        const anchor = this._anchors[anchorId];
+        const tryCreateAnchorResp = tryGetAnchor(anchor)
+        if (tryCreateAnchorResp.success === true) {
+            let anchor: IAnchor = tryCreateAnchorResp.payload
+            anchor.contentList.pop()
+            anchor.authorList.pop()
+            if (content !== "" && content !== null){
+                anchor.contentList.push(content)
+                anchor.authorList.push(author)
+            }
+            // convert to mongoAnchor and push it back
+            const mongoAnchorResp = getMongoAnchor(anchor)
+            if (!mongoAnchorResp.success) {
+                return failureServiceResponse(mongoAnchorResp.message)
+            }
+            const mongoAnchor = mongoAnchorResp.payload
+            try {
+                // first delete, then add it back to the collection
+                await collection.deleteOne({ _id: anchorId })
+                const insertResponse = await collection.insertOne(mongoAnchor)
+                // check that authorlist and content list are same length
+                if (insertResponse.result.ok && (anchor.authorList.length === anchor.contentList.length)) {
+                    return successfulServiceResponse(anchor)
+                } else {
+                    return failureServiceResponse("Failed due to disagreement in authorList and contentList length")
+                }
+            } catch (e) {
+                return failureServiceResponse(`Failed to create new anchor, it's possible that a anchor with anchorId: ${anchor.anchorId} already exists.`)
+            }
+			}
+			return failureServiceResponse("Found anchor, but failed to create IAnchor object")
+		}
+		return failureServiceResponse("Failed to find anchors")
 	}
 
 	async initAnchors(anchors: IAnchor[]): Promise<IServiceResponse<{}>> {
@@ -173,7 +202,53 @@ class MockMongoDatabaseConnection implements ITestAnchorDatabaseConnection {
 
 		return successfulServiceResponse({})
 
-	}
+    }
+    
+    async addNewAnnotation(anchorId: string, content: string, author: string): Promise<IServiceResponse<IAnchor>> {
+        if (anchorId == null || anchorId === ""){
+            return failureServiceResponse("anchorId is null or empty")
+        }
+        if (author == null || author === ""){
+            return failureServiceResponse("author is null or empty")
+        }
+        if (content == null || content === ""){
+            return failureServiceResponse("content is null or empty")
+        }
+        if (typeof anchorId !== "string" || typeof content !== "string" || typeof author !== "string"){
+            return failureServiceResponse("addNewAnnotation argument has wrong type")
+        }
+        const collection = await getCollection(MongoDbConnection);
+		const findResponse = await collection.findOne({ _id: anchorId })
+		if (findResponse && findResponse._id === anchorId) {
+			const tryCreateAnchorResp = tryGetAnchor(findResponse)
+			if (tryCreateAnchorResp.success === true) {
+				let anchor: IAnchor = tryCreateAnchorResp.payload
+                anchor.contentList.push(content)
+                anchor.authorList.push(author)
+				// convert to mongoAnchor and push it back
+				const mongoAnchorResp = getMongoAnchor(anchor)
+				if (!mongoAnchorResp.success) {
+					return failureServiceResponse(mongoAnchorResp.message)
+				}
+				const mongoAnchor = mongoAnchorResp.payload
+				try {
+					// first delete, then add it back to the collection
+					await collection.deleteOne({ _id: anchorId })
+                    const insertResponse = await collection.insertOne(mongoAnchor)
+                    // check that authorlist and content list are same length
+					if (insertResponse.result.ok && (anchor.authorList.length === anchor.contentList.length)) {
+						return successfulServiceResponse(anchor)
+                    } else {
+                        return failureServiceResponse("Failed due to disagreement in authorList and contentList length")
+                    }
+				} catch (e) {
+					return failureServiceResponse(`Failed to create new anchor, it's possible that a anchor with anchorId: ${anchor.anchorId} already exists.`)
+				}
+			}
+			return failureServiceResponse("Found anchor, but failed to create IAnchor object")
+		}
+		return failureServiceResponse("Failed to find anchors")
+    }
 }
 
 export default MockMongoDatabaseConnection

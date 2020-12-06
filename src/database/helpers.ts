@@ -6,8 +6,8 @@ export interface IMongoAnchor {
     _id: string // replaces nodeId
 	nodeId: string,
 	type: NodeType,
-	annotation: string[],
-	author: string[],
+	annotationList: string[],
+	authorList: string[],
     createdAt: Date
 }
   
@@ -17,8 +17,8 @@ export function getMongoAnchor(anchor: IAnchor): IServiceResponse<IMongoAnchor> 
             _id: anchor.anchorId.toLocaleLowerCase(),
 			nodeId: anchor.nodeId,
 			type: anchor.type,
-			annotation: anchor.content,
-			author: anchor.author,
+			annotationList: anchor.contentList,
+			authorList: anchor.authorList,
             createdAt: new Date()
 		}
         if (tryGetAnchor(mongonode).success)
@@ -47,15 +47,15 @@ export function tryGetAnchor(mongoAnchor: IMongoAnchor): IServiceResponse<IAncho
     if (mongoAnchor.nodeId !== undefined && typeof mongoAnchor.nodeId === 'string' && mongoAnchor.nodeId !== ''
 	&& mongoAnchor._id !== undefined && typeof mongoAnchor._id === 'string' && mongoAnchor._id !== ''
 	&& mongoAnchor.type !== undefined && isNodeType(mongoAnchor.type) === true
-	&& validateField(mongoAnchor.annotation) && validateField(mongoAnchor.author)
-	&& mongoAnchor.author.length === mongoAnchor.annotation.length
+	&& validateField(mongoAnchor.annotationList) && validateField(mongoAnchor.authorList)
+	&& mongoAnchor.authorList.length === mongoAnchor.annotationList.length
     && mongoAnchor.createdAt !== undefined && mongoAnchor.createdAt !== null && mongoAnchor.createdAt instanceof Date) {
 		let anchor: IAnchor = {
 			nodeId: mongoAnchor.nodeId,
 			anchorId: mongoAnchor._id,
 			type: mongoAnchor.type,
-			content: mongoAnchor.annotation,
-			author: mongoAnchor.author,
+			contentList: mongoAnchor.annotationList,
+			authorList: mongoAnchor.authorList,
 			createdAt: mongoAnchor.createdAt
 		}
 		return successfulServiceResponse(anchor)
