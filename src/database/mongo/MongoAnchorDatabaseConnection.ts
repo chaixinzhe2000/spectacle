@@ -29,13 +29,14 @@ const MongoDatabaseConnection: ITestAnchorDatabaseConnection = {
 		if (findResponse && findResponse._id === anchorId) {
 			const tryCreateAnchorResp = tryGetAnchor(findResponse)
 			if (tryCreateAnchorResp.success === true) {
-				let anchor: IAnchor = tryCreateAnchorResp.payload
+                let anchor: IAnchor = tryCreateAnchorResp.payload
+                if (content == "" && content == null){
+                    return failureServiceResponse("Content is null or empty")
+                }
                 anchor.contentList.pop()
                 anchor.authorList.pop()
-                if (content !== "" && content !== null){
-                    anchor.contentList.push(content)
-                    anchor.authorList.push(author)
-                }
+                anchor.contentList.push(content)
+                anchor.authorList.push(author)
 				// convert to mongoAnchor and push it back
 				const mongoAnchorResp = getMongoAnchor(anchor)
 				if (!mongoAnchorResp.success) {
@@ -208,7 +209,7 @@ const MongoDatabaseConnection: ITestAnchorDatabaseConnection = {
             return failureServiceResponse("anchorId is null or empty")
         }
         if (author == null || author === ""){
-            return failureServiceResponse("author is null or empty")
+            author = "Anonymous"
         }
         if (content == null || content === ""){
             return failureServiceResponse("content is null or empty")
