@@ -1,4 +1,4 @@
-.TrialMegaContainer{
+.MegaContainer{
 	display: grid;
 	grid-template-columns: 0.5fr 0.8fr 0.5fr;
 	column-gap: 2rem;

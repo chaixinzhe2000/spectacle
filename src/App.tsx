@@ -20,13 +20,9 @@ function App() {
         />
         <Routes>
           <Route element={<Navigate to="nodes" />} />
-          <Route path="/nodes" element={<div className="TrialMegaContainer">
-                                        <div><NodeManagerContainer setLoading={setLoading} /></div>
-                                        <div><ReactPlayerWrapper /></div>
-										<div><NodeComments /></div>
-                                        </div>}/>
-          <Route path="/nodes/:nodeId" element={<NodeManagerContainer setLoading={setLoading} />}/>
-          <Route path="/nodes/:nodeId/anchor/:anchorId" element={<NodeManagerContainer setLoading={setLoading} />}/>
+          <Route path="/nodes" element={<NodeManagerContainer setLoading={setLoading} />}/>
+          {/* <Route path="/nodes/:nodeId" element={<NodeManagerContainer setLoading={setLoading} />}/>
+          <Route path="/nodes/:nodeId/anchor/:anchorId" element={<NodeManagerContainer setLoading={setLoading} />}/> */}
         </Routes>
       </BrowserRouter>
 
