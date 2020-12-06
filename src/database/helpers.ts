@@ -32,16 +32,20 @@ export function getMongoAnchor(anchor: IAnchor): IServiceResponse<IMongoAnchor> 
 }
 
 function validateField(array: string[]): boolean {
-	if (array == undefined || array == null || !(array.length > 0)) {
+	try {
+		if (array == undefined || array == null || !(array.length > 0)) {
+			return false
+		}
+		let validFlag = true
+		array.forEach((listItem) => {
+			if (listItem == undefined || typeof listItem != 'string' || listItem == '') {
+				validFlag = false
+			}
+		})
+		return validFlag
+	} catch {
 		return false
 	}
-	let validFlag = true
-	array.forEach((listItem) => {
-		if (listItem == undefined || typeof listItem != 'string' || listItem == '') {
-			validFlag = false
-		}
-	})
-	return validFlag
 }
 
 export function tryGetAnchor(mongoAnchor: IMongoAnchor): IServiceResponse<IAnchor> {

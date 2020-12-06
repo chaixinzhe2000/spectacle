@@ -88,9 +88,15 @@ describe('Update Anchor Contents', () => {
 		done();
 	})
 
-	test("fails on incomplete data", async (done) => {
+	test("fails on incomplete annotation", async (done) => {
 		const response = await DatabaseConnection.updateLastAnnotation("anchor.a", "", "hello");
 		expect(response.success).toBeFalsy();
+		done();
+	})
+
+	test("succeeds on incomplete author (anonymous)", async (done) => {
+		const response = await DatabaseConnection.updateLastAnnotation("anchor.a", "dfdsfsdfsfd", "");
+		expect(response.success).toBeTruthy();
 		done();
 	})
 })
