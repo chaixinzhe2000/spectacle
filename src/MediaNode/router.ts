@@ -33,7 +33,7 @@ mediaRouter.get("/:nodeId", async (req: Request, res: Response) => {
   }
 });
 
-// // Create Node
+// Create Node
 mediaRouter.post("", bodyJsonParser, async (req: Request, res: Response) => {
   try {
     let node: IMediaNode = req.body.data
@@ -43,7 +43,6 @@ mediaRouter.post("", bodyJsonParser, async (req: Request, res: Response) => {
     res.status(400).send(e.message);
   }
 });
-
 
 // Delete Node
 mediaRouter.delete("/:nodeId", async (req: Request, res: Response) => {
@@ -66,3 +65,14 @@ mediaRouter.delete("/list/:nodeIdList", async (req: Request, res: Response) => {
     res.status(400).send(e.message);
   }
 });
+
+// Create Node
+mediaRouter.put("", bodyJsonParser, async (req: Request, res: Response) => {
+	try {
+	  let node: IMediaNode = req.body.mediaUrl
+	  let response = await MediaNodeService.update(node)
+	  res.status(200).send(response);
+	} catch (e) {
+	  res.status(400).send(e.message);
+	}
+  });
