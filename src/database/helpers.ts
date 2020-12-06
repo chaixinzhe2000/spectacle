@@ -32,6 +32,7 @@ function isLink(link: ILink): boolean {
 		return false
 	}
 }
+
 export function getMongoLink(link: ILink): IServiceResponse<IMongoLink> {
 	try {
         if (!isLink(link)){
