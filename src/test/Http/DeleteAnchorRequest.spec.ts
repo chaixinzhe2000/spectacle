@@ -9,7 +9,8 @@ const service = '/anchor'
 const testAnchor: IAnchor = {
 	anchorId: "anchorx.test",
 	nodeId: "nodex.test",
-	content: "Testing here!",
+	contentList: ["I like this a lot1!"],
+	authorList: ["Xinzhe Chai"],
 	type: "immutable-text",
 	createdAt: new Date()
 }
@@ -17,7 +18,8 @@ const testAnchor: IAnchor = {
 const testAnchor2: IAnchor = {
 	anchorId: "anchorx.1",
 	nodeId: "nodex.test",
-	content: "I like this a lot1!",
+	contentList: ["I like this a lot2!"],
+	authorList: ["Jinoo Hong"],
 	type: "media",
 	createdAt: new Date()
 }
@@ -25,7 +27,8 @@ const testAnchor2: IAnchor = {
 const testAnchor3: IAnchor = {
 	anchorId: "anchorx.2",
 	nodeId: "nodex.1",
-	content: "I like this a lot2!",
+	contentList: ["I like this a lot3!"],
+	authorList: ["Kira Kelly Clarke"],
 	type: "node",
 	createdAt: new Date()
 }
@@ -75,11 +78,14 @@ describe('Unit Test: Delete Anchor Request', () => {
 		expect(getResponse1.success).toBeTruthy()
 		const anchors = getResponse1.payload
 		expect(Object.keys(anchors).length).toBe(3)
-		expect(anchors[testAnchor.anchorId].content).toBe("Testing here!")
+		expect(anchors[testAnchor.anchorId].contentList).toEqual(testAnchor.contentList)
+		expect(anchors[testAnchor.anchorId].authorList).toEqual(testAnchor.authorList)
 		expect(anchors[testAnchor.anchorId].type).toBe("immutable-text")
-		expect(anchors[testAnchor2.anchorId].content).toBe("I like this a lot1!")
+		expect(anchors[testAnchor2.anchorId].contentList).toEqual(testAnchor2.contentList)
+		expect(anchors[testAnchor2.anchorId].authorList).toEqual(testAnchor2.authorList)
 		expect(anchors[testAnchor2.anchorId].type).toBe("media")
-		expect(anchors[testAnchor3.anchorId].content).toBe("I like this a lot2!")
+		expect(anchors[testAnchor3.anchorId].contentList).toEqual(testAnchor3.contentList)
+		expect(anchors[testAnchor3.anchorId].authorList).toEqual(testAnchor3.authorList)
 		expect(anchors[testAnchor3.anchorId].type).toBe("node")
 
 		const deleteResponse = await request(app).delete(`${service}/node/${testAnchor.nodeId}`).expect(200).expect('Content-Type', /json/)
@@ -91,7 +97,7 @@ describe('Unit Test: Delete Anchor Request', () => {
 		expect(getResponse2.success).toBeTruthy()
 		const anchors2 = getResponse2.payload
 		expect(Object.keys(anchors2).length).toBe(1)
-		expect(anchors2[testAnchor3.anchorId].content).toBe("I like this a lot2!")
+		expect(anchors2[testAnchor3.anchorId].contentList).toEqual(testAnchor3.contentList)
 		expect(anchors2[testAnchor3.anchorId].type).toBe("node")
 
 		const clearResponse2 = await DatabaseConnection.clearAnchorCollection()

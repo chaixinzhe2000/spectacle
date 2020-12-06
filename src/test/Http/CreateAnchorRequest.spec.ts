@@ -9,7 +9,8 @@ const service = '/anchor'
 const testAnchor: IAnchor = {
 	anchorId: "anchorx.test",
 	nodeId: "nodex.test",
-	content: "I like this a lot1!",
+	contentList: ["I like this a lot1!"],
+	authorList: ["Xinzhe Chai"],
 	type: "media",
 	createdAt: new Date()
 }
@@ -35,12 +36,14 @@ describe('Unit Test: Create Anchor Request', () => {
 		expect(sr.success).toBeTruthy()
 		expect(sr.payload.anchorId).toBe(testAnchor.anchorId)
 		expect(sr.payload.nodeId).toBe(testAnchor.nodeId)
-		expect(sr.payload.content).toBe(testAnchor.content)
+		expect(sr.payload.contentList).toEqual(testAnchor.contentList)
+		expect(sr.payload.authorList).toEqual(testAnchor.authorList)
 
 		const getResponse2 = await DatabaseConnection.findAnchor(testAnchor.anchorId)
 		expect(getResponse2.success).toBeTruthy()
 		expect(getResponse2.payload.anchorId).toBe(testAnchor.anchorId)
-		expect(getResponse2.payload.content).toBe(testAnchor.content)
+		expect(getResponse2.payload.contentList).toEqual(testAnchor.contentList)
+		expect(getResponse2.payload.authorList).toEqual(testAnchor.authorList)
 
 		const createResponse2 = await request(app).post(service).send({ data: testAnchor }).expect(200).expect('Content-Type', /json/)
 		expect(isServiceResponse(createResponse2.body)).toBeTruthy()

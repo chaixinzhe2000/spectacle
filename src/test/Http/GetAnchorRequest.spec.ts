@@ -9,7 +9,8 @@ const service = '/anchor'
 const testAnchor: IAnchor = {
 	anchorId: "anchorx.test",
 	nodeId: "nodex.test",
-	content: "I like this a lot1!",
+	contentList: ["I like this a lot1!"],
+	authorList: ["Xinzhe Chai"],
 	type: "node",
 	createdAt: new Date()
 }
@@ -17,7 +18,8 @@ const testAnchor: IAnchor = {
 const testAnchor2: IAnchor = {
 	anchorId: "anchorx.1",
 	nodeId: "nodex.test",
-	content: "I like this a lot2!",
+	contentList: ["I like this a lot2!"],
+	authorList: ["Xinzhe Chai"],
 	type: "media",
 	createdAt: new Date()
 }
@@ -25,7 +27,8 @@ const testAnchor2: IAnchor = {
 const testAnchor3: IAnchor = {
 	anchorId: "anchorx.2",
 	nodeId: "nodex.1",
-	content: "I like this a lot1!",
+	contentList: ["I like this a lot3!"],
+	authorList: ["Xinzhe Chai"],
 	type: "media",
 	createdAt: new Date()
 }
@@ -81,9 +84,9 @@ describe('Unit Test: Get Anchor Request', () => {
 		expect(sr.success).toBeTruthy()
 		expect(sr.payload).toBeDefined()
 		expect(Object.keys(sr.payload).length).toBe(2)
-		expect(sr.payload[testAnchor.anchorId].content).toBe("I like this a lot1!")
+		expect(sr.payload[testAnchor.anchorId].contentList).toEqual(testAnchor.contentList)
 		expect(sr.payload[testAnchor.anchorId].type).toBe("node")
-		expect(sr.payload[testAnchor2.anchorId].content).toBe("I like this a lot2!")
+		expect(sr.payload[testAnchor2.anchorId].contentList).toEqual(testAnchor2.contentList)
 		expect(sr.payload[testAnchor2.anchorId].type).toBe("media")
 
 		const deleteResponse = await DatabaseConnection.deleteAnchorsByNode(testAnchor.nodeId)

@@ -71,11 +71,24 @@ anchorRouter.delete("/node/:nodeId", async (req: Request, res: Response) => {
 	}
 });
 
-// Update Anchor Content
-anchorRouter.put("/:anchorId/createnew/", async (req: Request, res: Response) => {
+// Add new Annotation
+anchorRouter.put("/:anchorId/createnew/", bodyJsonParser, async (req: Request, res: Response) => {
 	try {
-		let newAnnotation: string = req.body.data[]
-		const response: IServiceResponse<{}> = await AnchorService.addNewAnnotation(req.params.anchorId, req.body['content']);
+		let newAnnotation: string = req.body.annotation
+		let newAuthor: string = req.body.author
+		const response: IServiceResponse<{}> = await AnchorService.addNewAnnotation(req.params.anchorId, newAnnotation, newAuthor);
+		res.status(200).send(response);
+	} catch (e) {
+		res.status(400).send(e.message);
+	}
+});
+
+// Update last Annotation
+anchorRouter.put("/:anchorId/update/", bodyJsonParser, async (req: Request, res: Response) => {
+	try {
+		let newAnnotation: string = req.body.annotation
+		let newAuthor: string = req.body.author
+		const response: IServiceResponse<{}> = await AnchorService.updateLastAnnotation(req.params.anchorId, newAnnotation, newAuthor);
 		res.status(200).send(response);
 	} catch (e) {
 		res.status(400).send(e.message);
