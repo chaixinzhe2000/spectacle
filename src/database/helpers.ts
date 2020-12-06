@@ -1,3 +1,4 @@
+import { response } from "express"
 import { failureServiceResponse, IServiceResponse, successfulServiceResponse, IAnchor, NodeType, isNodeType } from "spectacle-interfaces"
 
 // TODO: completed by Chai
@@ -5,7 +6,8 @@ export interface IMongoAnchor {
     _id: string // replaces nodeId
 	nodeId: string,
 	type: NodeType,
-	annotation: string,
+	annotation: string[],
+	author: string[],
     createdAt: Date
 }
   
@@ -16,6 +18,7 @@ export function getMongoAnchor(anchor: IAnchor): IServiceResponse<IMongoAnchor> 
 			nodeId: anchor.nodeId,
 			type: anchor.type,
 			annotation: anchor.content,
+			author: anchor.author,
             createdAt: new Date()
 		}
         if (tryGetAnchor(mongonode).success)
@@ -28,17 +31,31 @@ export function getMongoAnchor(anchor: IAnchor): IServiceResponse<IMongoAnchor> 
     }
 }
 
+function validateField(array: any[]): boolean {
+	if (!(array.length > 0)) {
+		return false
+	}
+	array.forEach((listItem) => {
+		if (listItem == undefined || typeof listItem === 'string' || listItem == "") {
+			return false
+		}
+	})
+	return true
+}
+
 export function tryGetAnchor(mongoAnchor: IMongoAnchor): IServiceResponse<IAnchor> {
     if (mongoAnchor.nodeId !== undefined && typeof mongoAnchor.nodeId === 'string' && mongoAnchor.nodeId !== ''
 	&& mongoAnchor._id !== undefined && typeof mongoAnchor._id === 'string' && mongoAnchor._id !== ''
 	&& mongoAnchor.type !== undefined && isNodeType(mongoAnchor.type) === true
-	&& mongoAnchor.annotation !== undefined && typeof mongoAnchor.annotation === 'string' && mongoAnchor.annotation !== ''
+	&& validateField(mongoAnchor.annotation) && validateField(mongoAnchor.author)
+	&& mongoAnchor.author.length === mongoAnchor.annotation.length
     && mongoAnchor.createdAt !== undefined && mongoAnchor.createdAt !== null && mongoAnchor.createdAt instanceof Date) {
 		let anchor: IAnchor = {
 			nodeId: mongoAnchor.nodeId,
 			anchorId: mongoAnchor._id,
 			type: mongoAnchor.type,
 			content: mongoAnchor.annotation,
+			author: mongoAnchor.author,
 			createdAt: mongoAnchor.createdAt
 		}
 		return successfulServiceResponse(anchor)

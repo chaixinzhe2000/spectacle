@@ -15,37 +15,6 @@ const MongoDatabaseConnection: ITestAnchorDatabaseConnection = {
 		return failureServiceResponse("Failed to clear anchor collection.")
 	},
 
-	// async updateAnchorCreatedTime(anchorId: string): Promise<IServiceResponse<IAnchor>> {
-	// 	const collection = await getCollection(MongoDbConnection);
-	// 	const findResponse = await collection.findOne({ _id: anchorId })
-
-	// 	if (findResponse && findResponse._id === anchorId) {
-	// 		const tryCreateAnchorResp = tryGetAnchor(findResponse)
-	// 		if (tryCreateAnchorResp.success === true) {
-	// 			let anchor: IAnchor = tryCreateAnchorResp.payload
-	// 			anchor.createdAt = new Date()
-	// 			// convert to mongoAnchor and push it back
-	// 			const mongoAnchorResp = getMongoAnchor(anchor)
-	// 			if (!mongoAnchorResp.success) {
-	// 				return failureServiceResponse(mongoAnchorResp.message)
-	// 			}
-	// 			const mongoAnchor = mongoAnchorResp.payload
-	// 			try {
-	// 				// first delete, then add it back to the collection
-	// 				await collection.deleteOne({ _id: anchorId })
-	// 				const insertResponse = await collection.insertOne(mongoAnchor)
-	// 				if (insertResponse.result.ok) {
-	// 					return successfulServiceResponse(anchor)
-	// 				}
-	// 			} catch (e) {
-	// 				return failureServiceResponse(`Failed to create new anchor, it's possible that a anchor with anchorId: ${anchor.anchorId} already exists.`)
-	// 			}
-	// 		}
-	// 		return failureServiceResponse("Found anchor, but failed to create IAnchor object")
-	// 	}
-	// 	return failureServiceResponse("Failed to find anchors")
-	// },
-
 	async updateAnchorContent(anchorId: string, content: string): Promise<IServiceResponse<IAnchor>> {
 		const collection = await getCollection(MongoDbConnection);
 		const findResponse = await collection.findOne({ _id: anchorId })

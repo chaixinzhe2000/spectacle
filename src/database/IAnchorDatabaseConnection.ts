@@ -9,7 +9,8 @@ export default interface IAnchorDatabaseConnection {
   deleteAnchor(nodeId: string): Promise<IServiceResponse<{}>>;
   deleteAnchors(nodeIds: string[]): Promise<IServiceResponse<{}>>;
   deleteAnchorsByNode(nodeId: string): Promise<IServiceResponse<{}>>;
-  updateAnchorContent(anchorId: string, content: string): Promise<IServiceResponse<IAnchor>>;
+  updateLastAnnotation(anchorId: string, content: string, author: string): Promise<IServiceResponse<IAnchor>>;
+  addNewAnnotation(anchorId: string, content: string, author: string): Promise<IServiceResponse<IAnchor>>;
 }
 
 export interface ITestAnchorDatabaseConnection extends IAnchorDatabaseConnection {
