@@ -31,5 +31,10 @@ describe('Unit Test: updateMediaUrl', () => {
     done()
   })
 
+  test("fails to update with url with invalid format", async done => {
+    const updateResponse = await nodeGateway.updateNode('a', 'youtube.com/watch?v=RvhpncC5jZ8&ab_channel=LexFridman')
+    expect(updateResponse.success).toBeFalsy()
+    done()
+  })
 
 })
