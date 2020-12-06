@@ -9,21 +9,24 @@ describe('Delete Node Anchors', () => {
       {
         nodeId: 'node.a',
         anchorId: 'anchor.a',
-        content: "I like this a lot!",
+        contentList: ["I like this a lot!", "great job"],
+		authorList: ["Xinzhe Chai", "Jinoo"],
 		type: "media",
 		createdAt: new Date()
       },
       {
         nodeId: 'node.b',
         anchorId: 'anchor.b',
-        content: "I like this a lot!",
+        contentList: ["I like this a lot!", "great job"],
+		authorList: ["Xinzhe Chai", "Jinoo"],
 		type: "media",
 		createdAt: new Date()
       },
       {
         nodeId: 'node.b',
         anchorId: 'anchor.f',
-        content: "I like this a lot!",
+        contentList: ["I like this a lot!", "great job"],
+		authorList: ["Xinzhe Chai", "Jinoo"],
 		type: "media",
 		createdAt: new Date()
       }

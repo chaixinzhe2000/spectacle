@@ -11,7 +11,7 @@ export interface IMongoAnchor {
     createdAt: Date
 }
   
-export function getMongoAnchor(anchor: IAnchor): IServiceResponse<IMongoAnchor> {
+export function getMongoAnchor(anchor: IAnchor): IServiceResponse<IMongoAnchor> {	
     try {
         let mongonode: IMongoAnchor = {
             _id: anchor.anchorId.toLocaleLowerCase(),
@@ -31,16 +31,17 @@ export function getMongoAnchor(anchor: IAnchor): IServiceResponse<IMongoAnchor> 
     }
 }
 
-function validateField(array: any[]): boolean {
-	if (!(array.length > 0)) {
+function validateField(array: string[]): boolean {
+	if (array == undefined || array == null || !(array.length > 0)) {
 		return false
 	}
+	let validFlag = true
 	array.forEach((listItem) => {
-		if (listItem == undefined || typeof listItem === 'string' || listItem == "") {
-			return false
+		if (listItem == undefined || typeof listItem != 'string' || listItem == '') {
+			validFlag = false
 		}
 	})
-	return true
+	return validFlag
 }
 
 export function tryGetAnchor(mongoAnchor: IMongoAnchor): IServiceResponse<IAnchor> {

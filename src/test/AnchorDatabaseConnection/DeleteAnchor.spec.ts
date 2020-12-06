@@ -9,14 +9,16 @@ describe('Delete Anchor', () => {
       {
         nodeId: 'node.a',
         anchorId: 'anchor.a',
-		content: "I like this a lot!",
+		contentList: ["I like this a lot!", "great job"],
+		authorList: ["Xinzhe Chai", "Jinoo"],
 		type: "media",
 		createdAt: new Date()
       },
       {
         nodeId: 'node.b',
         anchorId: 'anchor.b',
-		content: "I don't like this at all!",
+		contentList: ["I like this a lot!", "great job"],
+		authorList: ["Xinzhe Chai", "Jinoo"],
 		type: "immutable-text",
 		createdAt: new Date()
       }

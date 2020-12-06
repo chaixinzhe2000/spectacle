@@ -15,14 +15,16 @@ describe('Find Anchor', () => {
       {
         nodeId: 'node.a',
         anchorId: 'anchor.a',
-        content: "I like this a lot!",
+        contentList: ["I like this a lot!", "great job"],
+		authorList: ["Xinzhe Chai", "Jinoo"],
 		type: "media",
 		createdAt: new Date()
       },
       {
         nodeId: 'node.b',
         anchorId: 'anchor.b',
-        content: "I don't like this at all!",
+        contentList: ["I don't like this", "what is this"],
+		authorList: ["Xinzhe Chai", "Jinoo"],
 		type: "node",
 		createdAt: new Date()
       }
@@ -33,14 +35,16 @@ describe('Find Anchor', () => {
     expect(response.success).toBeTruthy()
     expect(response.payload.anchorId).toBe('anchor.a')
     expect(response.payload.nodeId).toBe('node.a')
-	expect(response.payload.content).toBe("I like this a lot!")
+	expect(response.payload.contentList).toEqual(["I like this a lot!", "great job"])
+	expect(response.payload.authorList).toEqual(["Xinzhe Chai", "Jinoo"])
 	expect(response.payload.type).toBe("media")
 
 	const response_b = await DatabaseConnection.findAnchor('anchor.b')
     expect(response_b.success).toBeTruthy()
     expect(response_b.payload.anchorId).toBe('anchor.b')
     expect(response_b.payload.nodeId).toBe('node.b')
-	expect(response_b.payload.content).toBe("I don't like this at all!")
+	expect(response_b.payload.contentList).toEqual(["I don't like this", "what is this"])
+	expect(response.payload.authorList).toEqual(["Xinzhe Chai", "Jinoo"])
 	expect(response_b.payload.type).toBe("node")
     done()
   })
