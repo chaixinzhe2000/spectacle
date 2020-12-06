@@ -1,4 +1,4 @@
-import { INode,  createNode, newFilePath } from "hypertext-interfaces"
+import { INode,  createNode, newFilePath } from "spectacle-interfaces"
 
 export default function initTestingTree(tree: { id: string, filePath: string[] }[]): INode[] {
   tree = tree.sort((a, b) => a.filePath.length - b.filePath.length)

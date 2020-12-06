@@ -1,4 +1,4 @@
-import { INode, IFilePath, IServiceResponse } from "hypertext-interfaces"
+import { INode, IFilePath, IServiceResponse } from "spectacle-interfaces"
 
 export default interface INodeDatabaseConnection {
 

@@ -1,6 +1,6 @@
 import NodeGateway from '../../gateway/NodeGateway';
 import MockMongoDatabaseConnection from '../../database/mongo/mock/MockMongoNodeDatabaseConnection';
-import { INodeGateway, newFilePath } from "hypertext-interfaces"
+import { INodeGateway, newFilePath } from "spectacle-interfaces"
 import initTestingTree from '../NodeDatabaseConnection/Mock/initTestingTree';
 
 const dbConnection = new MockMongoDatabaseConnection()

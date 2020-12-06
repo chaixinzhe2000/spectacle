@@ -1,4 +1,4 @@
-import { failureServiceResponse, INode, IFilePath, IServiceResponse, isFilePath, newFilePath, successfulServiceResponse, NodeType } from "hypertext-interfaces"
+import { failureServiceResponse, INode, IFilePath, IServiceResponse, isFilePath, newFilePath, successfulServiceResponse, NodeType } from "spectacle-interfaces"
 
 export interface IMongoNode {
     _id: string // replaces nodeId

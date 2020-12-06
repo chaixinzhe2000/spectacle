@@ -5,7 +5,7 @@
 import express, { Request, Response } from "express";
 import NodeGateway from './gateway/NodeGateway';
 import MongoDatabaseConnection from './database/mongo/MongoNodeDatabaseConnection'
-import { INode, IServiceResponse, tryCreateNode, newFilePath, isStringArray, INodeGateway, IFilePath, isFilePath } from 'hypertext-interfaces'
+import { INode, IServiceResponse, tryCreateNode, newFilePath, isStringArray, INodeGateway, IFilePath, isFilePath } from 'spectacle-interfaces'
 const bodyJsonParser = require('body-parser').json()
 
 

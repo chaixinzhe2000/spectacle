@@ -1,7 +1,7 @@
 import INodeDatabaseConnection from "../../INodeDatabaseConnection";
 import { Collection } from 'mongodb';
 import MongoDbConnection from './mockMongodbConnection'
-import { INode, IServiceResponse, tryCreateNode, IFilePath, successfulServiceResponse, failureServiceResponse, getServiceResponse } from "hypertext-interfaces"
+import { INode, IServiceResponse, tryCreateNode, IFilePath, successfulServiceResponse, failureServiceResponse, getServiceResponse } from "spectacle-interfaces"
 import { getNode, getMongoNode, IMongoNode } from "../../helpers";
 import { factory } from "typescript";
 

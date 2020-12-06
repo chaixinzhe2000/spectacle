@@ -1,6 +1,6 @@
 import NodeGateway from '../../../gateway/NodeGateway';
 import MongoDatabaseConnection from '../../../database/mongo/MongoNodeDatabaseConnection';
-import { INodeGateway, newFilePath, createNode } from "hypertext-interfaces"
+import { INodeGateway, newFilePath, createNode } from "spectacle-interfaces"
 
 jest.setTimeout(30000);
 

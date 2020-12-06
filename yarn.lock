@@ -2319,14 +2319,6 @@ human-signals@^1.1.1:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-1.1.1.tgz#c5b1cd14f50aeae09ab6c59fe63ba3395fe4dfa3"
   integrity sha512-SEQu7vl8KjNL2eoGBLF3+wAjpsNfA9XMlXAYj/3EdaNfAlxKthD1xjEQfGOUhllCGGJVNY34bRr6lPINhNjyZw==
 
-hypertext-interfaces@^1.2.93:
-  version "1.2.93"
-  resolved "https://registry.yarnpkg.com/hypertext-interfaces/-/hypertext-interfaces-1.2.93.tgz#02548abf1cc6e0b165768decfe6c67f7034ab2d7"
-  integrity sha512-nsFMmuPDcJHoxKRf5xcHpRHF3yVqLVun+tXU2YhzB0wdlq9baZ6YeOZCNEi3Ku3SG1zMI4qzCBGFKRPaSL1z2w==
-  dependencies:
-    ts-jest "^26.4.0"
-    tsc "^1.8.10"
-
 iconv-lite@0.4.24:
   version "0.4.24"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.24.tgz#2022b4b25fbddc21d2f524974a474aafe733908b"
@@ -4435,6 +4427,14 @@ spdx-license-ids@^3.0.0:
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-3.0.6.tgz#c80757383c28abf7296744998cbc106ae8b854ce"
   integrity sha512-+orQK83kyMva3WyPf59k1+Y525csj5JejicWut55zeTWANuN17qSiSLUXWtzHeNWORSvT7GLDJ/E/XiIWoXBTw==
+
+spectacle-interfaces@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/spectacle-interfaces/-/spectacle-interfaces-1.1.4.tgz#3a89e7c056edaf6ab5ae5608794b3d4fa113ac6e"
+  integrity sha512-5+q7mOXeEqy8ZgSrqgQR4u9kF/PpW7NAUXGoz9fVcSkEuKYafif02MVxbJgxQOzVFWAgM4w5os9p+I4QBm10VA==
+  dependencies:
+    ts-jest "^26.4.0"
+    tsc "^1.8.10"
 
 split-string@^3.0.1, split-string@^3.0.2:
   version "3.1.0"

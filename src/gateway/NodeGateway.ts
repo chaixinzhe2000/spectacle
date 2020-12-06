@@ -1,5 +1,5 @@
 import INodeDatabaseConnection from "../database/INodeDatabaseConnection"
-import { INodeGateway, INode, IServiceResponse, IFilePath, newFilePath, failureServiceResponse, tryCreateNode, isFilePath, successfulServiceResponse } from "hypertext-interfaces"
+import { INodeGateway, INode, IServiceResponse, IFilePath, newFilePath, failureServiceResponse, tryCreateNode, isFilePath, successfulServiceResponse } from "spectacle-interfaces"
 
 export default class NodeGateway implements INodeGateway {
 

@@ -1,7 +1,7 @@
 import INodeDatabaseConnection from "../INodeDatabaseConnection";
 import { Collection } from 'mongodb';
 import MongoDbConnection from './mongodbConnection'
-import { INode, IFilePath, tryCreateNode, getServiceResponse, successfulServiceResponse, failureServiceResponse, IServiceResponse } from "hypertext-interfaces"
+import { INode, IFilePath, tryCreateNode, getServiceResponse, successfulServiceResponse, failureServiceResponse, IServiceResponse } from "spectacle-interfaces"
 import { getNode, getMongoNode, IMongoNode } from "../helpers";
 
 export async function getNodeCollection(): Promise<Collection> {

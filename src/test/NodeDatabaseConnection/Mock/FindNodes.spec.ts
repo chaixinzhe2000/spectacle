@@ -1,5 +1,5 @@
 import MockMongoDatabaseConnection from '../../../database/mongo/mock/MockMongoNodeDatabaseConnection';
-import { newFilePath } from 'hypertext-interfaces';
+import { newFilePath } from 'spectacle-interfaces';
 import initTestingTree from './initTestingTree';
 
 describe('Find Nodes', () => {

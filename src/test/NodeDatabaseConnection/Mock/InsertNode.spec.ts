@@ -1,5 +1,5 @@
 import MockMongoDatabaseConnection from '../../../database/mongo/mock/MockMongoNodeDatabaseConnection';
-import { createNode, INode, newFilePath } from 'hypertext-interfaces';
+import { createNode, INode, newFilePath } from 'spectacle-interfaces';
 
 describe('Unit Test: Create Node', () => {
   const docDbConnection = new MockMongoDatabaseConnection()

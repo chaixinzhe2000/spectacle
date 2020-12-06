@@ -1,4 +1,4 @@
-import { createNode, newFilePath } from 'hypertext-interfaces';
+import { createNode, newFilePath } from 'spectacle-interfaces';
 import MockMongoDatabaseConnection from '../../database/mongo/mock/MockMongoNodeDatabaseConnection';
 import MongoNodeDatabaseConnection from '../../database/mongo/MongoNodeDatabaseConnection';
 import uniqid from 'uniqid'
