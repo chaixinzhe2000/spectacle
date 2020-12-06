@@ -9,22 +9,19 @@ export default class AnchorGateway implements IAnchorGateway {
 	constructor(anchorDbConnection: IAnchorDatabaseConnection) {
 		this.dbConnection = anchorDbConnection
 	}
-	async updateAnchorContent(anchorId: string, content: string): Promise<IServiceResponse<IAnchor>> {
-		return await this.dbConnection.updateAnchorContent(anchorId, content)
+
+	async updateLastAnnotation(anchorId: string, annotation: string, author: string): Promise<IServiceResponse<IAnchor>> {
+		return await this.dbConnection.updateLastAnnotation(anchorId, annotation, author)
+	}
+
+	async addNewAnnotation(anchorId: string, annotation: string, author: string): Promise<IServiceResponse<IAnchor>> {
+		return await this.dbConnection.addNewAnnotation(anchorId, annotation, author)
 	}
 
 	async createAnchor(anchor: IAnchor): Promise<IServiceResponse<IAnchor>> {
 		return await this.dbConnection.insertAnchor(anchor)
 	}
 
-	/**
-	 * Gets a Anchor (and it's children) from the database by anchor id.
-	 * 
-	 * @param anchorId - id of anchor to retrieve
-	 * 
-	 * Returns a failure service response if:
-	 *  - the id does not exist in the database
-	 */
 	async getAnchor(anchorId: string): Promise<IServiceResponse<IAnchor>> {
 		return await this.dbConnection.findAnchor(anchorId)
 	}
@@ -33,33 +30,10 @@ export default class AnchorGateway implements IAnchorGateway {
 		return await this.dbConnection.findAnchorsByNode(nodeId)
 	}
 
-	/**
-	 * Deletes a anchor in the database.
-	 * 
-	 * @param anchorId - id of anchor to delete
-	 * 
-	 * Returns a successful service response if:
-	 *  - the anchor no longer exists in the database, even if already it didn't exist before
-	 * 
-	 * Returns a failure service response if:
-	 *  - the database fails to delete the anchor
-	 */
 	async deleteAnchor(anchorId: string): Promise<IServiceResponse<{}>> {
 		return await this.dbConnection.deleteAnchor(anchorId)
 	}
 
-	/**
-	 * Deletes all anchors with the given node ID in the database.
-	 * 
-	 * @param anchorId - id of anchor to delete
-	 * 
-	 * Returns a successful service response if:
-	 *  - the anchor no longer exists in the database, even if already it didn't exist before
-	 * 
-	 * Returns a failure service response if:
-	 *  - no anchors with the given nodeId are found
-	 *  - the database fails to delete an anchor
-	 */
 	async deleteNodeAnchors(nodeId: string): Promise<IServiceResponse<{}>> {
 		return await this.dbConnection.deleteAnchorsByNode(nodeId)
 	}
