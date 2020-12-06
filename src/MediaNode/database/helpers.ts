@@ -7,6 +7,16 @@ export interface IMongoIMediaNode {
 	createdAt?: Date
 }
 
+function isURL(url: string) {
+	var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
+		'((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|' + // domain name
+		'((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+		'(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+		'(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+		'(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
+	return pattern.test(url);
+}
+
 export function getMongoNode(node: IMediaNode): IServiceResponse<IMongoIMediaNode> {
 	try {
 		let mongonode: IMongoIMediaNode = {
@@ -21,7 +31,8 @@ export function getMongoNode(node: IMediaNode): IServiceResponse<IMongoIMediaNod
 }
 
 export function tryGetNode(mongoNode: IMongoIMediaNode): IServiceResponse<IMediaNode> {
-    if (mongoNode.mediaUrl !== undefined && typeof mongoNode.mediaUrl === 'string') {
+	if (mongoNode._id !== undefined && typeof mongoNode._id === 'string' && mongoNode._id != ""
+	&& mongoNode.mediaUrl !== undefined && typeof mongoNode.mediaUrl === 'string' && isURL(mongoNode.mediaUrl)) {
 		return successfulServiceResponse({
             nodeId: mongoNode._id,
             mediaUrl: mongoNode.mediaUrl
