@@ -20,6 +20,7 @@ interface NewMenuProps {
   onCreateImmutableNode: () => void
 }
 
+// TODO: NOT BEING USED I GUESS
 export const NewMenu = (props: NewMenuProps) => (
   <Menu>
       <MenuItem text="Node" icon="document" onClick={() => props.onCreateNode()}/>

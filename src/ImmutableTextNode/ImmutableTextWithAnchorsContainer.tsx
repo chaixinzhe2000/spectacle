@@ -55,12 +55,15 @@ function ImmutableTextWithAnchorsContainer(props: ImmutableTextWithAnchorsContai
         isOpen={newAnchorModal}
         onClose={() => setNewAnchorModal(false)}
         onAdd={label => {
-            const anchorId = generateAnchorId()
+			const anchorId = generateAnchorId()
+			// TODO: hardcoded
             createAnchor({
                 anchor: {
                     nodeId: node.nodeId,
                     anchorId: anchorId,
-                    label: label,
+					contentList: ["change this in immutabletextwithanchorscontainer"],
+					authorList: ['chaixhcixcshjdsfsd'],
+					createdAt: new Date(),
                     type: 'immutable-text'
                 },
                 immutableTextAnchor: {
