@@ -10,34 +10,38 @@ describe('Unit Test: Get Node Anchors', () => {
     expect(response.success).toBeTruthy()
 
     const createResponse = await DatabaseConnection.initAnchors([
-      {
-        anchorId: 'a',
-        nodeId: 'node.a',
-        content: "I like this a lot1!",
-		type: "media",
-		createdAt: new Date()
-      },
-      {
-        anchorId: 'b',
-        nodeId: 'node.b',
-        content: "I like this a lot2!",
-		type: "media",
-		createdAt: new Date()
-      },
-      {
-        anchorId: 'c',
-        nodeId: 'node.b',
-        content: "I like this a lot3!",
-		type: "media",
-		createdAt: new Date()
-      },
-      {
-        anchorId: 'd',
-        nodeId: 'node.b',
-        content: "I like this a lot4!",
-		type: "media",
-		createdAt: new Date()
-      }
+        {
+            anchorId: 'a',
+            nodeId: 'node.a',
+            contentList: ["content A"],
+            authorList: ["author A"],
+            type: "media",
+            createdAt: new Date()
+        },
+        {
+            anchorId: 'b',
+            nodeId: 'node.b',
+            contentList: ["content B"],
+            authorList: ["author B"],
+            type: "media",
+            createdAt: new Date()
+        },
+        {
+            anchorId: 'c',
+            nodeId: 'node.b',
+            contentList: ["content C"],
+            authorList: ["author C"],
+            type: "media",
+            createdAt: new Date()
+        },
+        {
+            anchorId: 'd',
+            nodeId: 'node.b',
+            contentList: ["content D"],
+            authorList: ["author D"],
+            type: "media",
+            createdAt: new Date()
+        }
     ])
     expect(createResponse.success).toBeTruthy()
     done()
@@ -62,13 +66,16 @@ describe('Unit Test: Get Node Anchors', () => {
     expect(Object.keys(anchors).length).toBe(3)
     expect(anchors['b'].anchorId).toBe('b')
     expect(anchors['b'].nodeId).toBe('node.b')
-    expect(anchors['b'].content).toBe("I like this a lot2!")
+    expect(anchors['b'].contentList).toEqual(["content B"])
+    expect(anchors['b'].authorList).toEqual(["author B"])
     expect(anchors['c'].anchorId).toBe('c')
     expect(anchors['c'].nodeId).toBe('node.b')
-    expect(anchors['c'].content).toBe("I like this a lot3!")
+    expect(anchors['c'].contentList).toEqual(["content C"])
+    expect(anchors['c'].authorList).toEqual(["author C"])
     expect(anchors['d'].anchorId).toBe('d')
     expect(anchors['d'].nodeId).toBe('node.b')
-    expect(anchors['d'].content).toBe("I like this a lot4!")
+    expect(anchors['d'].contentList).toEqual(["content D"])
+    expect(anchors['d'].authorList).toEqual(["author D"])
     done()
   })
 
@@ -78,6 +85,8 @@ describe('Unit Test: Get Node Anchors', () => {
     expect(Object.keys(getResponse.payload).length).toBe(1)
     expect(getResponse.payload['a'].anchorId).toBe('a')
     expect(getResponse.payload['a'].nodeId).toBe('node.a')
+    expect(getResponse.payload['a'].contentList).toEqual(["content A"])
+    expect(getResponse.payload['a'].authorList).toEqual(["author A"])
     done()
   })
 })
