@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Dialog, Classes, Button, Colors, InputGroup, TextArea, Divider, H5 } from '@blueprintjs/core';
-import { IImmutableGridAnchor, IImmutableGridNode } from 'hypertext-interfaces';
+import { IImmutableGridAnchor, IImmutableGridNode } from 'spectacle-interfaces';
 import PreviewGridAnchor from './PreviewGridAnchor';
 
 interface AddAnchorModalProps {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Dialog, Classes, Button, Colors, InputGroup, TextArea, Divider, H4 } from '@blueprintjs/core';
-import { IImmutableTextAnchor } from 'hypertext-interfaces';
+import { IImmutableTextAnchor } from 'spectacle-interfaces';
 
 interface AddAnchorModalProps {
   isOpen: boolean

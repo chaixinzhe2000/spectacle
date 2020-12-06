@@ -1,7 +1,7 @@
 
 
 import { Spinner } from '@blueprintjs/core';
-import { INode } from 'hypertext-interfaces';
+import { INode } from 'spectacle-interfaces';
 import React from 'react';
 import { queryCache, useMutation, useQuery } from 'react-query';
 import ImmutableGridNodeGateway from '../Gateways/ImmutableGrid/ImmutableGridNodeGateway';

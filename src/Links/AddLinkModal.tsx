@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Dialog, Classes, Button, Divider, Colors, H3, Spinner, ButtonGroup } from '@blueprintjs/core';
-import { IAnchor, INode, IServiceResponse } from 'hypertext-interfaces'
+import { IAnchor, INode, IServiceResponse } from 'spectacle-interfaces'
 import AnchorView from '../Anchors/AnchorView';
 import { createTreeNodes } from '../NodeManager/helpers/treeNodeHelpers';
 import SelectFileLocation from '../NodeManager/components/SelectFileLocation';

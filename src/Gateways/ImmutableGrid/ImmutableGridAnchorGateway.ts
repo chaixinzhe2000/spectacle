@@ -1,4 +1,4 @@
-import { failureServiceResponse, IImmutableGridAnchor, IImmutableGridAnchorGateway, IServiceResponse } from "hypertext-interfaces";
+import { failureServiceResponse, IImmutableGridAnchor, IImmutableGridAnchorGateway, IServiceResponse } from "spectacle-interfaces";
 import { ImmutableGridGatewayEndpoint } from "../../GatewayConfig";
 import { get, post, remove } from "../request";
 

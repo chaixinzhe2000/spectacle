@@ -1,7 +1,7 @@
 
 
 import { H5 } from '@blueprintjs/core';
-import { IAnchor, ILink, INode, IServiceResponse } from 'hypertext-interfaces';
+import { IAnchor, ILink, INode, IServiceResponse } from 'spectacle-interfaces';
 import React from 'react';
 import { Link } from 'react-router-dom';
 

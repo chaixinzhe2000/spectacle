@@ -1,4 +1,4 @@
-import { IImmutableGridAnchor, IImmutableGridNode } from 'hypertext-interfaces';
+import { IImmutableGridAnchor, IImmutableGridNode } from 'spectacle-interfaces';
 import { generateAnchorId, generateNodeId } from '../../NodeManager/helpers/generateNodeId';
 import ImmutableGridAnchorGateway from '../ImmutableGrid/ImmutableGridAnchorGateway';
 import ImmutableGridNodeGateway from '../ImmutableGrid/ImmutableGridNodeGateway';

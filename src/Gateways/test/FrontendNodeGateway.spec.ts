@@ -1,5 +1,5 @@
 import NodeGateway from '../NodeGateway';
-import { INode, INodeGateway, newFilePath, IServiceResponse } from "hypertext-interfaces"
+import { INode, INodeGateway, newFilePath, IServiceResponse } from "spectacle-interfaces"
 import { generateNodeId } from '../../NodeManager/helpers/generateNodeId';
 
 const nodeGateway: INodeGateway = NodeGateway

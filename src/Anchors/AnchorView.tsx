@@ -1,7 +1,7 @@
 
 
 import { H5 } from '@blueprintjs/core';
-import { failureServiceResponse, IAnchor, ILink, INode, IServiceResponse } from 'hypertext-interfaces';
+import { failureServiceResponse, IAnchor, ILink, INode, IServiceResponse } from 'spectacle-interfaces';
 import React, { useState } from 'react';
 import { Collapse } from 'antd';
 import { Accordion, Icon } from 'semantic-ui-react'

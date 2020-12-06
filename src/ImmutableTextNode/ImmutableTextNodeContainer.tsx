@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { queryCache, useMutation, useQuery } from 'react-query';
-import { INode } from 'hypertext-interfaces';
+import { INode } from 'spectacle-interfaces';
 import ImmutableTextNodeGateway from '../Gateways/ImmutableText/ImmutableTextNodeGateway';
 import { Spinner } from '@blueprintjs/core';
 import ImmutableTextWithAnchorsContainer from './ImmutableTextWithAnchorsContainer';

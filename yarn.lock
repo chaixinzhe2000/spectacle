@@ -5733,14 +5733,6 @@ https-browserify@^1.0.0:
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-1.0.0.tgz#ec06c10e0a34c0f2faf199f7fd7fc78fffd03c73"
   integrity sha1-7AbBDgo0wPL68Zn3/X/Hj//QPHM=
 
-hypertext-interfaces@^1.2.93:
-  version "1.2.93"
-  resolved "https://registry.yarnpkg.com/hypertext-interfaces/-/hypertext-interfaces-1.2.93.tgz#02548abf1cc6e0b165768decfe6c67f7034ab2d7"
-  integrity sha512-nsFMmuPDcJHoxKRf5xcHpRHF3yVqLVun+tXU2YhzB0wdlq9baZ6YeOZCNEi3Ku3SG1zMI4qzCBGFKRPaSL1z2w==
-  dependencies:
-    ts-jest "^26.4.0"
-    tsc "^1.8.10"
-
 iconv-lite@0.4.24, iconv-lite@^0.4.24:
   version "0.4.24"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.24.tgz#2022b4b25fbddc21d2f524974a474aafe733908b"
@@ -10869,6 +10861,14 @@ spdy@^4.0.2:
     http-deceiver "^1.2.7"
     select-hose "^2.0.0"
     spdy-transport "^3.0.0"
+
+spectacle-interfaces@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/spectacle-interfaces/-/spectacle-interfaces-1.1.4.tgz#3a89e7c056edaf6ab5ae5608794b3d4fa113ac6e"
+  integrity sha512-5+q7mOXeEqy8ZgSrqgQR4u9kF/PpW7NAUXGoz9fVcSkEuKYafif02MVxbJgxQOzVFWAgM4w5os9p+I4QBm10VA==
+  dependencies:
+    ts-jest "^26.4.0"
+    tsc "^1.8.10"
 
 split-string@^3.0.1, split-string@^3.0.2:
   version "3.1.0"

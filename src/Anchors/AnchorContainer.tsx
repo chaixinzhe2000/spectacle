@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Button, ButtonGroup, Divider, H5 } from '@blueprintjs/core';
 import AnchorView from './AnchorView';
-import { IAnchor, ILink, INode, IServiceResponse, newFilePath, ROOT_ID, successfulServiceResponse } from 'hypertext-interfaces';
+import { IAnchor, ILink, INode, IServiceResponse, newFilePath, ROOT_ID, successfulServiceResponse } from 'spectacle-interfaces';
 import { queryCache, useMutation, useQuery } from 'react-query';
 import HypertextSdk from '../HypertextSdk';
 import AnchorGateway from '../Gateways/AnchorGateway';

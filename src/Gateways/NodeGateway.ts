@@ -1,5 +1,5 @@
 import Axios, { AxiosResponse } from "axios"
-import { INodeGateway, IFilePath, IServiceResponse, INode, failureServiceResponse } from "hypertext-interfaces"
+import { INodeGateway, IFilePath, IServiceResponse, INode, failureServiceResponse } from "spectacle-interfaces"
 import { NodeGatewayEndpoint } from "../GatewayConfig"
 import { get, post, put, remove } from "./request"
 

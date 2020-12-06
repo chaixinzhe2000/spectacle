@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import FileExplorer from './FileSystem';
 import { selectNode } from '../helpers/treeNodeHelpers';
 import { ITreeNode } from '@blueprintjs/core';
-import {INode, IServiceResponse} from 'hypertext-interfaces';
+import {INode, IServiceResponse} from 'spectacle-interfaces';
 import FileLocation from './FileLocation';
 
 interface SelectFileLocationProps {

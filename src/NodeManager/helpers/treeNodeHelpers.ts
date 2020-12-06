@@ -1,5 +1,5 @@
 import { ITreeNode } from '@blueprintjs/core'
-import { INode } from 'hypertext-interfaces'
+import { INode } from 'spectacle-interfaces'
 
 export const selectNode = (nodes: ITreeNode[], id: string): ITreeNode[] => {
   if (nodes.length > 0) {

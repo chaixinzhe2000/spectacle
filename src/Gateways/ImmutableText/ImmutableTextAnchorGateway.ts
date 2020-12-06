@@ -1,4 +1,4 @@
-import { failureServiceResponse, IImmutableTextAnchor, IImmutableTextAnchorGateway, IServiceResponse } from "hypertext-interfaces";
+import { failureServiceResponse, IImmutableTextAnchor, IImmutableTextAnchorGateway, IServiceResponse } from "spectacle-interfaces";
 import { get, post, remove } from "../request";
 
 let base_endpoint = "https://stormy-hamlet-90499.herokuapp.com"

@@ -8,7 +8,7 @@ import HypertextSdk from '../HypertextSdk';
 import { generateAnchorId } from '../NodeManager/helpers/generateNodeId';
 import ImmutableTextView from './ImmutableTextView';
 import AddAnchorModal from './AddAnchorModal';
-import { IImmutableTextAnchor, IImmutableTextNode } from 'hypertext-interfaces';
+import { IImmutableTextAnchor, IImmutableTextNode } from 'spectacle-interfaces';
 
 interface ImmutableTextWithAnchorsContainerProps {
     node: IImmutableTextNode

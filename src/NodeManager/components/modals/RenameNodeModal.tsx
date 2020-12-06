@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Dialog, Classes, Button, Colors, InputGroup } from '@blueprintjs/core';
-import { INode } from 'hypertext-interfaces'
+import { INode } from 'spectacle-interfaces'
 
 interface MoveNodeModalProps {
   isOpen: boolean

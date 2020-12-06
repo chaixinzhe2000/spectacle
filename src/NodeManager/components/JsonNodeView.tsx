@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import {INode} from 'hypertext-interfaces'
+import {INode} from 'spectacle-interfaces'
 import ReactJson, { CollapsedFieldProps } from 'react-json-view'
 
 interface NodeProps {

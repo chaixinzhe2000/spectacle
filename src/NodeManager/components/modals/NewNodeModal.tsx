@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Dialog, Classes, Button, InputGroup, Divider, Colors } from '@blueprintjs/core';
 import SelectFileLocation from '../SelectFileLocation';
 import { createTreeNodes } from '../../helpers/treeNodeHelpers';
-import { INode, IServiceResponse, NodeType } from 'hypertext-interfaces'
+import { INode, IServiceResponse, NodeType } from 'spectacle-interfaces'
 
 interface NewNodeModalProps {
   isOpen: boolean

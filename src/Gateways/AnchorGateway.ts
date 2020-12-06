@@ -1,4 +1,4 @@
-import { failureServiceResponse, IAnchor, IAnchorGateway, IServiceResponse } from "hypertext-interfaces";
+import { failureServiceResponse, IAnchor, IAnchorGateway, IServiceResponse } from "spectacle-interfaces";
 import { get, post, remove } from "./request";
 import { AnchorGatewayEndpoint } from "../GatewayConfig";
 

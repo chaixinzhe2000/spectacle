@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Highlightable from 'highlightable'
 import { Button, Divider, NonIdealState, TextArea } from '@blueprintjs/core';
-import { IImmutableTextAnchor, IImmutableTextNode } from 'hypertext-interfaces';
+import { IImmutableTextAnchor, IImmutableTextNode } from 'spectacle-interfaces';
 
 interface NodeProps {
   node: IImmutableTextNode

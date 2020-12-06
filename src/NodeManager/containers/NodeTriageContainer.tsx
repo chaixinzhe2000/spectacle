@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {IAnchor, INode} from 'hypertext-interfaces'
+import {IAnchor, INode} from 'spectacle-interfaces'
 import JsonNodeView from '../components/JsonNodeView';
 import ImmutableTextContainer from '../../ImmutableTextNode/ImmutableTextNodeContainer';
 import ImmutableGridContainer from '../../ImmutableGridNode/ImmutableGridNodeContainer';

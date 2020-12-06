@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { queryCache, useMutation, useQuery } from 'react-query';
-import { IAnchor, IImmutableGridAnchor, IImmutableGridNode, IImmutableTextAnchor, INode, IServiceResponse, successfulServiceResponse } from 'hypertext-interfaces';
+import { IAnchor, IImmutableGridAnchor, IImmutableGridNode, IImmutableTextAnchor, INode, IServiceResponse, successfulServiceResponse } from 'spectacle-interfaces';
 import ImmutableTextNodeGateway from '../Gateways/ImmutableText/ImmutableTextNodeGateway';
 import AnchorGateway from '../Gateways/AnchorGateway';
 import ImmutableTextAnchorGateway from '../Gateways/ImmutableText/ImmutableTextAnchorGateway';

@@ -1,5 +1,5 @@
 import { NonIdealState } from '@blueprintjs/core';
-import { IImmutableGridAnchor, IImmutableGridNode } from 'hypertext-interfaces';
+import { IImmutableGridAnchor, IImmutableGridNode } from 'spectacle-interfaces';
 import React, { useRef, useState } from 'react';
 import NewImmutableGridNode from './NewImmutableGridNode';
 import { Cell, Column, Table } from "@blueprintjs/table";

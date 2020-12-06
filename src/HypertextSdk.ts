@@ -1,4 +1,4 @@
-import { failureServiceResponse, IAnchor, IImmutableGridAnchor, IImmutableTextAnchor, INode, IServiceResponse, successfulServiceResponse } from "hypertext-interfaces";
+import { failureServiceResponse, IAnchor, IImmutableGridAnchor, IImmutableTextAnchor, INode, IServiceResponse, successfulServiceResponse } from "spectacle-interfaces";
 import AnchorGateway from "./Gateways/AnchorGateway";
 import ImmutableGridAnchorGateway from "./Gateways/ImmutableGrid/ImmutableGridAnchorGateway";
 import ImmutableTextAnchorGateway from "./Gateways/ImmutableText/ImmutableTextAnchorGateway";

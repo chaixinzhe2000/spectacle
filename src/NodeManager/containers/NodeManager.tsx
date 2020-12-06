@@ -3,7 +3,7 @@ import FileSystem from '../components/FileSystem'
 import { ITreeNode, Divider, Button, ButtonGroup } from '@blueprintjs/core';
 import NewNodeModal from '../components/modals/NewNodeModal';
 import MoveNodeModal from '../components/modals/MoveNodeModal';
-import { INode, IFilePath, newFilePath, ALL_NODE_TYPES, NodeType, IServiceResponse, ROOT_ID } from 'hypertext-interfaces'
+import { INode, IFilePath, newFilePath, ALL_NODE_TYPES, NodeType, IServiceResponse, ROOT_ID } from 'spectacle-interfaces'
 import FileLocation from '../components/FileLocation';
 import RenameNodeModal from '../components/modals/RenameNodeModal';
 import { createTreeNodes, setNodeExpand } from '../helpers/treeNodeHelpers';
@@ -73,7 +73,7 @@ function NodeManager(props: NodeManagerProps) {
 					}}
 				/>
 			</div>
-			
+
 			{/* NodeTriage */}
 			<NodeTriageComponent node={selectedNode} anchorId={anchorId} />
 
