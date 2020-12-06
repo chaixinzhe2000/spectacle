@@ -88,8 +88,6 @@ describe('Insert Anchor', () => {
     const response6 = await DatabaseConnection.insertAnchor(invalid6)
 	expect(response6.success).toBeFalsy()
 	
-
-	
 	let invalid9: IAnchor = {
         anchorId: "anchor",
         nodeId: "hello",
@@ -123,6 +121,28 @@ describe('Insert Anchor', () => {
     const response7 = await DatabaseConnection.insertAnchor(invalid7)
 	expect(response7.success).toBeFalsy()
 
+	let invalid11: IAnchor = {
+        anchorId: "anchor",
+        nodeId: "hello",
+		contentList: [],
+		authorList: [],
+		type: "media",
+		createdAt: new Date()
+    }
+    const response11 = await DatabaseConnection.insertAnchor(invalid11)
+	expect(response11.success).toBeFalsy()
+
+	let invalid12: IAnchor = {
+        anchorId: "anchor",
+        nodeId: "hello",
+		contentList: [''],
+		authorList: [''],
+		type: "media",
+		createdAt: new Date()
+    }
+    const response12 = await DatabaseConnection.insertAnchor(invalid12)
+	expect(response12.success).toBeFalsy()
+
 	let valid: IAnchor = {
         anchorId: "anchor",
         nodeId: "hello",
@@ -133,6 +153,18 @@ describe('Insert Anchor', () => {
     }
     const response8 = await DatabaseConnection.insertAnchor(valid)
 	expect(response8.success).toBeTruthy()
+
+	let valid1: IAnchor = {
+        anchorId: "anchor1",
+        nodeId: "hello",
+		contentList: ['1'],
+		authorList: ['1'],
+		type: "media",
+		// createdAt is auto-generated
+		createdAt: null
+    }
+    const response13 = await DatabaseConnection.insertAnchor(valid1)
+	expect(response13.success).toBeTruthy()
     done()
     })
 

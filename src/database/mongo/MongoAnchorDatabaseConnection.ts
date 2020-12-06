@@ -87,7 +87,6 @@ const MongoDatabaseConnection: ITestAnchorDatabaseConnection = {
 	async insertAnchor(anchor: IAnchor): Promise<IServiceResponse<IAnchor>> {
 
 		const mongoAnchorResp = getMongoAnchor(anchor)
-		console.log(mongoAnchorResp)
 		if (!mongoAnchorResp.success) {
 			return failureServiceResponse(mongoAnchorResp.message)
 		}
