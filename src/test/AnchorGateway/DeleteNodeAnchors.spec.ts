@@ -59,32 +59,32 @@ describe('Unit Test: Delete Anchors by Node', () => {
     done()
   })
 
-  test("successfully deletes anchor", async done => {
-    const getRespoonse = await DatabaseConnection.findAnchorsByNode('node.b')
+  test("successfully deletes anchors related to node", async done => {
+    const getRespoonse = await anchorGateway.getNodeAnchors('node.b')
     expect(getRespoonse.success).toBeTruthy()
 
     const deleteResponse = await anchorGateway.deleteNodeAnchors('node.b')
     expect(deleteResponse.success).toBeTruthy()
 
-    const getRespoonse2 = await DatabaseConnection.findAnchorsByNode('node.b')
+    const getRespoonse2 = await anchorGateway.getNodeAnchors('node.b')
     expect(getRespoonse2.success).toBeFalsy()
     done()
   })
 
   test("successfully deletes anchor and children", async done => {
-    const getRespoonse = await DatabaseConnection.findAnchorsByNode('node.a')
+    const getRespoonse = await anchorGateway.getNodeAnchors('node.a')
     expect(getRespoonse.success).toBeTruthy()
 
-    const getRespoonse2 = await DatabaseConnection.findAnchor('a')
+    const getRespoonse2 = await anchorGateway.getAnchor('a')
     expect(getRespoonse2.success).toBeTruthy()
 
     const deleteResponse = await anchorGateway.deleteNodeAnchors('node.a')
     expect(deleteResponse.success).toBeTruthy()
 
-    const getRespoonse3 = await DatabaseConnection.findAnchorsByNode('node.a')
+    const getRespoonse3 = await anchorGateway.getNodeAnchors('node.a')
     expect(getRespoonse3.success).toBeFalsy()
 
-    const getRespoonse4 = await DatabaseConnection.findAnchor('a')
+    const getRespoonse4 = await anchorGateway.getAnchor('a')
     expect(getRespoonse4.success).toBeFalsy()
     done()
   })

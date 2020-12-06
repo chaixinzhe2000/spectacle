@@ -45,13 +45,13 @@ describe('Unit Test: Delete anchor', () => {
 
   test("successfully deletes existing anchor", async done => {
     
-    const findResponse = await DatabaseConnection.findAnchor('a')
+    const findResponse = await anchorGateway.getAnchor('a')
     expect(findResponse.success).toBeTruthy()
 
     const deleteResponse = await anchorGateway.deleteAnchor('a')
     expect(deleteResponse.success).toBeTruthy()
     
-    const findResponse2 = await DatabaseConnection.findAnchor('a')
+    const findResponse2 = await anchorGateway.getAnchor('a')
     expect(findResponse2.success).toBeFalsy()
     done()
   })
