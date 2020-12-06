@@ -110,7 +110,43 @@ const MongoDatabaseConnection: ITestMediaNodeDatabaseConnection = {
       return successfulServiceResponse({})
     }
     return failureServiceResponse('Failed to update nodes')
+  }, 
+
+  async updateMediaURL(nodeId: string, newUrl: string): Promise<IServiceResponse<IMediaNode>> {
+    const collection = await getNodeCollection(MongoDbConnection);
+    const findResponse = await collection.findOne({ _id: nodeId })
+    if (findResponse && findResponse._id === nodeId) {
+        const tryCreateNodeResp = tryGetNode(findResponse)
+			if (tryCreateNodeResp.success === true) {
+                let node: IMediaNode = tryCreateNodeResp.payload
+                // TODO: check that this URL is correct (note, we should probably check URL correctness when we create url in the beginning)
+                node.mediaUrl = newUrl
+				// convert to mongoNode and push it back
+				const mongoMediaResp = getMongoNode(node)
+				if (!mongoMediaResp.success) {
+					return failureServiceResponse(mongoMediaResp.message)
+				}
+				const mongoNode = mongoMediaResp.payload
+				try {
+					// first delete, then add it back to the collection
+					await collection.deleteOne({ _id: nodeId })
+                    const insertResponse = await collection.insertOne(mongoNode)
+					if (insertResponse.result.ok) {
+						return successfulServiceResponse(node)
+                    } else {
+                        return failureServiceResponse("Failed to insert new media node")
+                    }
+				} catch (e) {
+					return failureServiceResponse(`Failed to create new mediaNode, it's possible that a mediaNode with nodeId: ${node.nodeId} already exists.`)
+				}
+			}
+			return failureServiceResponse("Found mediaNode, but failed to create IMediaNode object")
+      }
+      return failureServiceResponse("Failed to find node")
   }
+
 };
+
+
 
 export default MongoDatabaseConnection;
