@@ -24,14 +24,16 @@ describe('Find Anchors', () => {
 			{
 				nodeId: 'node.a',
 				anchorId: 'anchor.a',
-				content: "I like this a lot!",
+				contentList: ["I like this a lot!", "great job"],
+				authorList: ["Xinzhe Chai", "Jinoo"],
 				type: "media",
 				createdAt: new Date()
 			},
 			{
 				nodeId: 'node.b',
 				anchorId: 'anchor.b',
-				content: "I don't like this at all!",
+				contentList: ["I don't like this a lot!", "great job"],
+				authorList: ["Xinzhe Chai", "Jinoo"],
 				type: "node",
 				createdAt: new Date()
 			}
@@ -44,11 +46,12 @@ describe('Find Anchors', () => {
 		const anchors = response.payload
 		expect(anchors['anchor.a'].anchorId).toBe('anchor.a')
 		expect(anchors['anchor.a'].nodeId).toBe('node.a')
-		expect(anchors['anchor.a'].content).toBe("I like this a lot!")
+		expect(anchors['anchor.a'].contentList).toEqual(["I like this a lot!", "great job"])
+		expect(anchors['anchor.a'].authorList).toEqual(["Xinzhe Chai", "Jinoo"])
 		expect(anchors['anchor.a'].type).toBe("media")
 		expect(anchors['anchor.b'].anchorId).toBe('anchor.b')
 		expect(anchors['anchor.b'].nodeId).toBe('node.b')
-		expect(anchors['anchor.b'].content).toBe("I don't like this at all!")
+		expect(anchors['anchor.b'].contentList).toEqual(["I don't like this a lot!", "great job"])
 		expect(anchors['anchor.b'].type).toBe("node")
 
 		const response2 = await DatabaseConnection.findAnchors(['anchor.a'])
@@ -57,7 +60,7 @@ describe('Find Anchors', () => {
 		const anchors2 = response.payload
 		expect(anchors2['anchor.a'].anchorId).toBe('anchor.a')
 		expect(anchors2['anchor.a'].nodeId).toBe('node.a')
-		expect(anchors['anchor.a'].content).toBe("I like this a lot!")
+		expect(anchors['anchor.a'].contentList).toEqual(["I like this a lot!", "great job"])
 		expect(anchors['anchor.a'].type).toBe("media")
 		done()
 	})

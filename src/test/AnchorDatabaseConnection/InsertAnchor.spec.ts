@@ -4,7 +4,8 @@ import DatabaseConnection from '../../dbConfig';
 const testAnchor: IAnchor = {
     anchorId: "test.anchor",
     nodeId: "test.node",
-    content: "I like this a lot!",
+    contentList: ["I like this a lot2!", "great job"],
+	authorList: ["Xinzhe Chai", "Jinoo"],
 	type: "media",
 	createdAt: new Date()
 }
@@ -35,7 +36,8 @@ describe('Insert Anchor', () => {
     let invalid2: IAnchor = {
         anchorId: "",
         nodeId: "",
-        content: "I like this a lot!",
+        contentList: ["I like this a lot2!", "great job"],
+		authorList: ["Xinzhe Chai", "Jinoo"],
 		type: "media",
 		createdAt: new Date()
     }
@@ -45,7 +47,8 @@ describe('Insert Anchor', () => {
     let invalid3: IAnchor = {
         anchorId: null,
         nodeId: "",
-        content: "I like this a lot!",
+        contentList: ["I like this a lot2!", "great job"],
+		authorList: ["Xinzhe Chai", "Jinoo"],
 		type: "media",
 		createdAt: new Date()
     }
@@ -55,7 +58,8 @@ describe('Insert Anchor', () => {
     let invalid4: IAnchor = {
         anchorId: "anchor",
         nodeId: null,
-        content: "I like this a lot!",
+        contentList: ["I like this a lot2!", "great job"],
+		authorList: ["Xinzhe Chai", "Jinoo"],
 		type: "media",
 		createdAt: new Date()
     }
@@ -65,7 +69,8 @@ describe('Insert Anchor', () => {
 	let invalid5: IAnchor = {
         anchorId: "anchor",
         nodeId: "hello",
-        content: null,
+        contentList: null,
+		authorList: ["Xinzhe Chai", "Jinoo"],
 		type: "media",
 		createdAt: new Date()
     }
@@ -75,32 +80,59 @@ describe('Insert Anchor', () => {
 	let invalid6: IAnchor = {
         anchorId: "anchor",
         nodeId: "hello",
-        content: "null",
+		contentList: ["I like this a lot2!", "great job"],
+		authorList: ["Xinzhe Chai", "Jinoo"],
 		type: null,
 		createdAt: new Date()
     }
     const response6 = await DatabaseConnection.insertAnchor(invalid6)
 	expect(response6.success).toBeFalsy()
 	
+
+	
+	let invalid9: IAnchor = {
+        anchorId: "anchor",
+        nodeId: "hello",
+        contentList: ["I like this a lot2!", "great job"],
+		authorList: null,
+		type: "media",
+		createdAt: new Date()
+    }
+    const response9 = await DatabaseConnection.insertAnchor(invalid9)
+	expect(response9.success).toBeFalsy()
+
+	let invalid10: IAnchor = {
+        anchorId: "anchor",
+        nodeId: "hello",
+        contentList: ["I like this a lot2!", "great job"],
+		authorList: ["Xinzhe Chai", "Jinoo", 'hjasd'],
+		type: "media",
+		createdAt: new Date()
+    }
+    const response10 = await DatabaseConnection.insertAnchor(invalid10)
+	expect(response10.success).toBeFalsy()
+
 	let invalid7: IAnchor = {
         anchorId: "anchor",
         nodeId: "hello",
-        content: "",
+		contentList: ['hello', ""],
+		authorList: ["Xinzhe Chai", "Jinoo"],
 		type: "media",
 		createdAt: new Date()
     }
     const response7 = await DatabaseConnection.insertAnchor(invalid7)
 	expect(response7.success).toBeFalsy()
-	
+
 	let valid: IAnchor = {
         anchorId: "anchor",
         nodeId: "hello",
-        content: "null",
+		contentList: ['hello', "dsssd"],
+		authorList: ["Xinzhe Chai", "Jinoo"],
 		type: "media",
 		createdAt: new Date()
     }
     const response8 = await DatabaseConnection.insertAnchor(valid)
-    expect(response8.success).toBeTruthy()
+	expect(response8.success).toBeTruthy()
     done()
     })
 

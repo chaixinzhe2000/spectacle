@@ -24,21 +24,24 @@ describe('Find Anchors by Node', () => {
       {
         nodeId: 'node.a',
         anchorId: 'anchor.a',
-		content: "I like this a lot!",
+		contentList: ["I like this a lot1!", "great job"],
+		authorList: ["Xinzhe Chai", "Jinoo"],
 		type: "media",
 		createdAt: new Date()
       },
       {
         nodeId: 'node.b',
         anchorId: 'anchor.b',
-		content: "I like this a lot 1!",
+		contentList: ["I like this a lot2!", "great job"],
+		authorList: ["Xinzhe Chai", "Jinoo"],
 		type: "media",
 		createdAt: new Date()
       },
       {
         nodeId: 'node.b',
         anchorId: 'anchor.c',
-		content: "I like this a lot 2!",
+		contentList: ["I like this a lot3!", "great job"],
+		authorList: ["Xinzhe Chai", "Jinoo"],
 		type: "media",
 		createdAt: new Date()
       }
@@ -51,7 +54,7 @@ describe('Find Anchors by Node', () => {
     expect(Object.keys(anchors).length).toBe(1)
     expect(anchors['anchor.a'].anchorId).toBe('anchor.a')
     expect(anchors['anchor.a'].nodeId).toBe('node.a')
-    expect(anchors['anchor.a'].content).toBe("I like this a lot!")
+    expect(anchors['anchor.a'].contentList).toEqual(["I like this a lot1!", "great job"])
 
     const response2 = await DatabaseConnection.findAnchorsByNode('node.b')
     expect(response2.success).toBeTruthy()
@@ -59,10 +62,10 @@ describe('Find Anchors by Node', () => {
     const anchors2 = response2.payload
     expect(anchors2['anchor.b'].anchorId).toBe('anchor.b')
     expect(anchors2['anchor.b'].nodeId).toBe('node.b')
-    expect(anchors2['anchor.b'].content).toBe("I like this a lot 1!")
+    expect(anchors2['anchor.b'].contentList).toEqual(["I like this a lot2!", "great job"])
     expect(anchors2['anchor.c'].anchorId).toBe('anchor.c')
     expect(anchors2['anchor.c'].nodeId).toBe('node.b')
-    expect(anchors2['anchor.c'].content).toBe('I like this a lot 2!')
+    expect(anchors2['anchor.c'].contentList).toEqual(["I like this a lot3!", "great job"])
 
     const response3 = await DatabaseConnection.findAnchorsByNode('node.c')
     expect(response3.success).toBeFalsy()
