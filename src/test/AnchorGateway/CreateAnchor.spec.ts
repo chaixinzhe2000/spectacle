@@ -152,7 +152,8 @@ describe('Gateway Test: Create Anchor', () => {
 		const invalidanchor: any = {
 			nodeId: 'id4',
 			anchorId: 5,
-			content: "I like this a lot!",
+            contentList: ["content a"],
+            authorList: ["author a"],
 			type: "media",
 			createdAt: new Date()
 		}
@@ -166,7 +167,8 @@ describe('Gateway Test: Create Anchor', () => {
 		const invalidanchor: any = {
 			nodeId: 'id4',
 			anchorId: '',
-			content: ["I like this a lot!"],
+            contentList: ["content a"],
+            authorList: ["author a"],
 			type: "media",
 			createdAt: new Date()
 		}
@@ -176,17 +178,13 @@ describe('Gateway Test: Create Anchor', () => {
     })
     
 
-    // KIRA START HERE TO TEST TY (STUFF BELOW HERE IS WRONG)
-    // if type is ''
-    // if type is null
-    // if type is not a NodeType
     test("fails to create anchor when type is wrong", async done => {
 		const invalidanchor: any = {
 			nodeId: "hi",
 			anchorId: 'a',
             contentList: ["content a"],
             authorList: ["author a"],
-			type: "media",
+			type: "watermelon",
 			createdAt: new Date()
 		}
 		const response = await anchorGateway.createAnchor(invalidanchor)
@@ -197,7 +195,7 @@ describe('Gateway Test: Create Anchor', () => {
 			anchorId: 'a',
             contentList: ["content a"],
             authorList: ["author a"],
-			type: "media",
+			type: null,
 			createdAt: new Date()
 		}
 		const response2 = await anchorGateway.createAnchor(invalidanchor2)
@@ -208,17 +206,63 @@ describe('Gateway Test: Create Anchor', () => {
 			anchorId: 'a',
             contentList: ["content a"],
             authorList: ["author a"],
-			type: "media",
+			type: '',
 			createdAt: new Date()
 		}
 		const response3 = await anchorGateway.createAnchor(invalidanchor3)
 		expect(response3.success).toBeFalsy()
 		done()
-    })
+	})
+	
+	test("fails to create anchor when contentList is wrong", async done => {
+		const invalidanchor: IAnchor = {
+			nodeId: 'node.id',
+			anchorId: 'anchor.id',
+            contentList: [],
+            authorList: ["K"],
+			type: "node",
+			createdAt: new Date()
+		}
+		const response = await anchorGateway.createAnchor(invalidanchor)
+        expect(response.success).toBeFalsy()
 
-    // for the next four, just enter a string (for "not a list") and empty list (for "not an empty list") and ensure createAnchor gives falsy
-    // if contentList is not a list
-    // if contentList is an empty list
-    // if authorList is not a list
-    // if authorList is an empty list
+        const invalidanchor2: any = {
+			nodeId: 'node.id',
+			anchorId: 'anchor.id',
+            contentList: "oop",
+            authorList: ["K"],
+			type: "node",
+			createdAt: new Date()
+		}
+		const response2 = await anchorGateway.createAnchor(invalidanchor2)
+        expect(response2.success).toBeFalsy()
+		done()
+
+	})
+	
+	test("fails to create anchor when authorList is wrong", async done => {
+		const invalidanchor: any = {
+				nodeId: 'node.id',
+				anchorId: 'anchor.id',
+				contentList: ["oop"],
+				authorList: [],
+				type: "node",
+				createdAt: new Date()
+		}
+		const response = await anchorGateway.createAnchor(invalidanchor)
+        expect(response.success).toBeFalsy()
+
+        const invalidanchor2: any = {
+			nodeId: 'node.id',
+			anchorId: 'anchor.id',
+			contentList: ["oop"],
+			authorList: "oh",
+			type: "node",
+			createdAt: new Date()
+		}
+		const response2 = await anchorGateway.createAnchor(invalidanchor2)
+		expect(response2.success).toBeFalsy()  
+		done()
+
+    })
 })
