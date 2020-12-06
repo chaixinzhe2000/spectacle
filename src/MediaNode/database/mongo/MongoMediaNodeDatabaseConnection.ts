@@ -12,14 +12,14 @@ import { getNodeCollection } from "./getCollection";
 
 // TODO: completed by Chai
 
-function isURL(url: string) {
-	var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
-		'((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|' + // domain name
-		'((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-		'(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-		'(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-		'(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
-	return pattern.test(url);
+function isValidHttpUrl(urlString: string) {
+	let url;
+	try {
+		url = new URL(urlString);
+	} catch (_) {
+		return false;
+	}
+	return url.protocol === "http:" || url.protocol === "https:";
 }
 
 const MongoDatabaseConnection: ITestMediaNodeDatabaseConnection = {
@@ -124,7 +124,7 @@ const MongoDatabaseConnection: ITestMediaNodeDatabaseConnection = {
 	},
 
 	async updateMediaURL(nodeId: string, newUrl: string): Promise<IServiceResponse<IMediaNode>> {
-		if (!isURL(newUrl)) {
+		if (!isValidHttpUrl(newUrl)) {
 			return failureServiceResponse("URL is invalid")
 		}
 		const collection = await getNodeCollection(MongoDbConnection);
