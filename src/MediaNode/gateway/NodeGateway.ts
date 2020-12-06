@@ -37,5 +37,9 @@ export default class MediaNodeGateway implements IMediaNodeGateway {
 
 	async deleteNodes(nodeIds: string[]): Promise<IServiceResponse<{}>> {
 		return await this.dbConnection.deleteNodes(nodeIds);
-	}
+    }
+    
+    async updateNode(nodeId: string, newUrl: string): Promise<IServiceResponse<IMediaNode>> {
+        return await this.dbConnection.updateMediaURL(nodeId, newUrl);
+    }
 }
