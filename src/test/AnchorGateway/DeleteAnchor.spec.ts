@@ -13,14 +13,16 @@ describe('Unit Test: Delete anchor', () => {
       {
         anchorId: 'a',
         nodeId: 'node.a',
-        content: "I like this a lot!",
+        contentList: ["content A"],
+        authorList: ["author A"],
 		type: "media",
 		createdAt: new Date()
       },
       {
         anchorId: 'b',
         nodeId: 'node.a',
-        content: "I like this a lot!",
+        contentList: ["content B"],
+        authorList: ["content B"],
 		type: "media",
 		createdAt: new Date()
       }

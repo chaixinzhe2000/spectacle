@@ -13,14 +13,16 @@ describe('Unit Test: Get Anchor', () => {
       {
         anchorId: 'a',
         nodeId: 'node.a',
-        content: "I like this a lot!",
+        contentList: ["content A"],
+        authorList: ["author A"],
 		type: "media",
 		createdAt: new Date()
       },
       {
         anchorId: 'b',
         nodeId: 'node.b',
-        content: "I like this a lot!",
+        contentList: ["content B"],
+        authorList: ["author B"],
 		type: "media",
 		createdAt: new Date()
       }
@@ -46,14 +48,8 @@ describe('Unit Test: Get Anchor', () => {
     expect(getResponse.success).toBeTruthy()
     expect(getResponse.payload.anchorId).toBe('a')
     expect(getResponse.payload.nodeId).toBe('node.a')
-    done()
-  })
-
-  test("successfully gets anchor and children", async done => {
-    const getResponse = await anchorGateway.getAnchor('b')
-    expect(getResponse.success).toBeTruthy()
-    expect(getResponse.payload.anchorId).toBe('b')
-    expect(getResponse.payload.nodeId).toBe('node.b')
+    expect(getResponse.payload.contentList).toEqual(["content A"])
+    expect(getResponse.payload.authorList).toEqual(["author A"])
     done()
   })
 })

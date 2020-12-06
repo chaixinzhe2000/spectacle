@@ -28,7 +28,8 @@ describe('Gateway Test: Create Anchor', () => {
 		const validanchor: IAnchor = {
 			nodeId: 'node.id',
 			anchorId: 'anchor.id',
-			content: "Hello Chai Hello Chai",
+            contentList: ["Hello Chai Hello Chai"],
+            authorList: ["Chai"],
 			type: "node",
 			createdAt: new Date()
 		}
@@ -41,7 +42,8 @@ describe('Gateway Test: Create Anchor', () => {
 
 		const getResponse2 = await DatabaseConnection.findAnchor(validanchor.anchorId)
 		expect(getResponse2.success).toBeTruthy()
-		expect(getResponse2.payload.content).toBe("Hello Chai Hello Chai")
+        expect(getResponse2.payload.contentList).toEqual(["Hello Chai Hello Chai"])
+        expect(getResponse2.payload.authorList).toEqual(["Chai"])
 		expect(getResponse2.payload.type).toBe("node")
 		done()
 	})
@@ -51,7 +53,8 @@ describe('Gateway Test: Create Anchor', () => {
 		const validanchor: IAnchor = {
 			nodeId: 'node.id',
 			anchorId: 'anchor.id2',
-			content: "I like this a lot mmm!",
+            contentList: ["I like this a lot mmm!"],
+            authorList: ["Jinoo"],
 			type: "media",
 			createdAt: new Date()
 		}
@@ -64,13 +67,15 @@ describe('Gateway Test: Create Anchor', () => {
 
 		const getResponse2 = await DatabaseConnection.findAnchor(validanchor.anchorId)
 		expect(getResponse2.success).toBeTruthy()
-		expect(getResponse2.payload.content).toBe("I like this a lot mmm!")
+        expect(getResponse2.payload.contentList).toEqual(["I like this a lot mmm!"])
+        expect(getResponse2.payload.authorList).toEqual(["Jinoo"])
 		expect(getResponse2.payload.type).toBe("media")
 
 		const validanchor2: IAnchor = {
 			nodeId: 'id2',
 			anchorId: 'anchor.id2',
-			content: "I like this a lot hmmm!",
+			contentList: ["I like this a lot mmm!"],
+            authorList: ["Jinoo"],
 			type: "media",
 			createdAt: new Date()
 		}
@@ -80,7 +85,8 @@ describe('Gateway Test: Create Anchor', () => {
 
 		const getResponse3 = await DatabaseConnection.findAnchor(validanchor.anchorId)
 		expect(getResponse3.success).toBeTruthy()
-		expect(getResponse2.payload.content).toBe("I like this a lot mmm!")
+        expect(getResponse2.payload.contentList).toEqual(["I like this a lot mmm!"])
+        expect(getResponse2.payload.authorList).toEqual(["Jinoo"])
 		expect(getResponse2.payload.type).toBe("media")
 		done()
 	})
@@ -89,7 +95,8 @@ describe('Gateway Test: Create Anchor', () => {
 		const invalidanchor: any = {
 			nodeId: 'id4',
 			anchorId: null,
-			content: "I like this a lot!",
+            contentList: ["I like this a lot mmm!"],
+            authorList: ["Jinoo"],
 			type: "media",
 			createdAt: new Date()
 		}
