@@ -21,8 +21,7 @@ function App() {
         <Routes>
           <Route element={<Navigate to="nodes" />} />
           <Route path="/nodes" element={<NodeManagerContainer setLoading={setLoading} />}/>
-          {/* <Route path="/nodes/:nodeId" element={<NodeManagerContainer setLoading={setLoading} />}/>
-          <Route path="/nodes/:nodeId/anchor/:anchorId" element={<NodeManagerContainer setLoading={setLoading} />}/> */}
+          <Route path="/nodes/:nodeId" element={<NodeManagerContainer setLoading={setLoading} />}/>
         </Routes>
       </BrowserRouter>
 

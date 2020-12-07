@@ -37,7 +37,6 @@ function MediaView(props: NodeProps): JSX.Element {
 		setAnchors()
 	}, [previewAnchor, anchor, anchors])
 
-
 	if (node) {
 		console.log(node)
 		return (

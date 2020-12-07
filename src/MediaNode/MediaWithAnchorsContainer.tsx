@@ -36,7 +36,7 @@ function MediaWithAnchorsContainer(props: MediaWithAnchorsContainerProps): JSX.E
 		
 			<div>
 				<ButtonGroup>
-					<Button text="Create Anchor" onClick={() => setNewAnchorModal(true)} />
+					<Button text="Add Annotation" onClick={() => setNewAnchorModal(true)} />
 				</ButtonGroup>
 				<Divider />
 			</div>

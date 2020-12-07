@@ -76,7 +76,7 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 	
     return (
         <div style={{margin: 'auto', marginTop: '39px', width: '100%', padding: '10px', border: '1px solid lightgrey'}}>
-            <H5> Anchors </H5>
+            <H5> Annotations </H5>
             {selectedAnchor && <> <ButtonGroup>
                 <Button intent="danger" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
                     deleteAnchor(selectedAnchor.anchorId)
