@@ -1,5 +1,5 @@
 import { H5, Button, Card, Elevation, Divider } from '@blueprintjs/core';
-import { failureServiceResponse, IAnchor, ILink, IMediaAnchor, INode, IServiceResponse } from 'spectacle-interfaces';
+import { failureServiceResponse, IAnchor, IImmutableTextAnchor, IImmutableTextNode, ILink, IMediaAnchor, INode, IServiceResponse } from 'spectacle-interfaces';
 import React, { useState } from 'react';
 import { Collapse } from 'antd';
 import { Accordion, Icon } from 'semantic-ui-react'
@@ -17,20 +17,22 @@ interface AnchorViewProps {
 	setPreviewAnchor: (anchor: IAnchor) => void
 	linkMap: { [anchorId: string]: ILink[] }
 	canManageLinks: boolean
-	mediaAnchorTimeStamps?: IMediaAnchor[]
+	mediaAnchors?: IMediaAnchor[]
+	immutableTextAnchors?: IImmutableTextAnchor[]
+	immutableTextNode?: IImmutableTextNode
 }
 
 function AnchorView(props: AnchorViewProps): JSX.Element {
-	const { anchors, anchor, setAnchor, getNode, setPreviewAnchor, linkMap, canManageLinks, mediaAnchorTimeStamps } = props
+	const { anchors, anchor, setAnchor, getNode, setPreviewAnchor, linkMap, canManageLinks, mediaAnchors, immutableTextAnchors, immutableTextNode } = props
 	if (anchors.length) {
 		// media annotations
-		if (anchors[0].type === "media" && mediaAnchorTimeStamps.length > 0) {
+		if (anchors[0].type === "media" && mediaAnchors.length > 0) {
 			return (
 				<div>
 					{anchors.map((a, index) =>
 						<div key={a.anchorId}>
 							<Card className="AnnotationCard" interactive={true} elevation={Elevation.ZERO}>
-								<h5><a href="#">At {mediaAnchorTimeStamps[index].mediaTimeStamp} seconds</a></h5>
+								<h5><a href="#">At {mediaAnchors[index].mediaTimeStamp} seconds</a></h5>
 								{anchors[index].contentList.map((c, cIndex) =>
 									<div key={cIndex}>
 										<p><b>{anchors[index].authorList[cIndex]}</b>: {c}</p>
@@ -45,18 +47,30 @@ function AnchorView(props: AnchorViewProps): JSX.Element {
 		}
 		// Non-media annotations
 		else {
-			return (
-				<div>
-					{anchors.map((a, index) =>
-						<div key={a.anchorId}>
-							<Card interactive={true} elevation={Elevation.TWO}>
-								<h5><a href="#">this is non-media annotation</a></h5>
-								<p>Card content</p>
-							</Card>
-						</div>
-					)}
-				</div>
-			)
+			if (immutableTextAnchors.length > 0) {
+				return (
+					<div>
+						{anchors.map((a, index) =>
+							<div key={a.anchorId}>
+								<Card className="AnnotationCard" interactive={true} elevation={Elevation.ZERO}>
+									<h5><a href="#">At "
+									{immutableTextNode && immutableTextAnchors[index] ?
+											immutableTextNode.text.substring(immutableTextAnchors[index].start, Math.min((immutableTextAnchors[index].end + 1), immutableTextAnchors[index].start + 20)) : ''} "
+									</a></h5>
+									{anchors[index].contentList.map((c, cIndex) =>
+										<div key={cIndex}>
+											<p><b>{anchors[index].authorList[cIndex]}</b>: {c}</p>
+											{(cIndex !== anchors[index].contentList.length - 1) && <div className="AnnotationDivider"><Divider /></div>}
+										</div>
+									)}
+								</Card>
+							</div>
+						)}
+					</div>
+				)
+			} else {
+				return null
+			}
 		}
 
 	} else {

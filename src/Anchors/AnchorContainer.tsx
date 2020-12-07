@@ -9,6 +9,8 @@ import AnchorGateway from '../Gateways/AnchorGateway';
 import { getNode } from '../NodeManager/containers/NodeManagerContainer';
 import LinkGateway from '../Gateways/LinkGateway';
 import MediaAnchorGateway from '../Gateways/Media/MediaAnchorGateway';
+import ImmutableTextAnchorGateway from '../Gateways/ImmutableText/ImmutableTextAnchorGateway';
+import ImmutableTextNodeGateway from '../Gateways/ImmutableText/ImmutableTextNodeGateway';
 
 
 interface AnchorContainerProps {
@@ -73,7 +75,20 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
         },
         enabled: node
 	}).data?.payload
-	
+
+	const immutableTextAnchorMap = useQuery([anchorIds, 'immutable-text-anchors'], ImmutableTextAnchorGateway.getAnchors, {
+        onSuccess: (data) => {
+            if (data.success) {
+                const anchors = data.payload
+                setAnchorIds(Object.keys(anchors))
+                Object.keys(anchors).forEach(aid => queryCache.setQueryData(aid, successfulServiceResponse(anchors[aid])))
+            }
+        },
+        enabled: node
+	}).data?.payload
+
+	const immutableTextNode = useQuery([node.nodeId, 'immutable-text'], ImmutableTextNodeGateway.getNode).data?.payload
+
     return (
         <div style={{margin: 'auto', marginTop: '39px', width: '100%', padding: '10px', border: '1px solid lightgrey'}}>
             <H5> Annotations </H5>
@@ -98,7 +113,9 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
             setAnchor={anc => setSelectedAnchor(anc)}
             linkMap={linkAnchorMap}
             getNode={nid => getNode(nid)}
-            mediaAnchorTimeStamps = {mediaAnchorMap ? Object.values(mediaAnchorMap) : []}
+			mediaAnchors = {mediaAnchorMap ? Object.values(mediaAnchorMap) : []}
+			immutableTextAnchors = {immutableTextAnchorMap ? Object.values(immutableTextAnchorMap) : []}
+			immutableTextNode = {immutableTextNode ? immutableTextNode : null}
         />
     </div>)
 
