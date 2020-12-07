@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from 'react';
 import { queryCache, useMutation, useQuery } from 'react-query';
 import ImmutableTextAnchorGateway from '../Gateways/ImmutableText/ImmutableTextAnchorGateway';

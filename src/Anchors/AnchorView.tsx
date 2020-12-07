@@ -36,7 +36,7 @@ function AnchorView(props: AnchorViewProps): JSX.Element {
                             onMouseEnter={() => setPreviewAnchor(a)}
                         >
                         <Icon name='dropdown' />
-                        {a.label} ({linkMap[a.anchorId] ? linkMap[a.anchorId].length : 0} {linkMap[a.anchorId] ? linkMap[a.anchorId].length === 1 ? 'Link' : 'Links' : 'Links' })
+                        {"CHANGE THIS LATER IN ANCHORVIEW"} ({linkMap[a.anchorId] ? linkMap[a.anchorId].length : 0} {linkMap[a.anchorId] ? linkMap[a.anchorId].length === 1 ? 'Link' : 'Links' : 'Links' })
                     </Accordion.Title>
                     {
                         canManageLinks && <Accordion.Content active={activeIndex === index}>
