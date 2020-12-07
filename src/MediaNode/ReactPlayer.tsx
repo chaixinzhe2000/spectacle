@@ -1,43 +1,32 @@
 import ReactPlayer from 'react-player'
-import { Component } from "react"
+import { RouteProps } from 'react-router';
 import React from 'react'
+import { Component } from 'react'
+import Duration from './Duration'
 
-class Player extends Component {
-	player: React.RefObject<unknown>;
-	constructor(props) {
-		super(props);
-		this.player = React.createRef();
-	}
-	state = {
-		duration: null,
-		secondsElapsed: null
-	}
-	onDuration = (duration) => {
-		this.setState({ duration })
-	}
-	onProgress = (progress) => {
-		if (!this.state.duration) {
-			// Sadly we don't have the duration yet so we can't do anything
-			return
-		}
+interface PlayerWrapperProps {
+    url: string;
+  }
 
-		// progress.played is the fraction of the video that has been played
-		// so multiply with duration to get number of seconds elapsed
-		const secondsElapsed = progress.played * this.state.duration
+class PlayerWrapperClass extends Component<PlayerWrapperProps> {
+    player: any;
+    ref = player => {
+        this.player = player
+    }
 
-		if (secondsElapsed !== this.state.secondsElapsed) {
-			this.setState({ secondsElapsed })
-		}
-	}
-	render() {
+    render() {
 		return (
-			<ReactPlayer
-				url='http://example.com/file.mp4'
-				onDuration={this.onDuration}
-				onProgress={this.onProgress}
-			/>
+            <div className='player-wrapper'>
+                <ReactPlayer
+                    className='react-player'
+                    ref={this.ref}
+                    url={this.props.url}
+                    width='100%'
+                    height='100%'
+                />
+            </div>
 		)
 	}
 }
 
-export default Player
+export default PlayerWrapperClass
