@@ -56,7 +56,7 @@ export default function AddLinkModal(props: AddLinkModalProps) {
 			<H3> Create New Link </H3>
 			<SelectFileLocation getNode={getNode} treeNodes={treeNodes} onSelectLocation={(node: INode) => { setLocationNode(node); selectNode(node) }} />
 			<Divider />
-			<AnchorView canManageLinks={false} anchors={anchors} anchor={locationAnchor} getNode={getNode} setAnchor={setLocationAnchor} setPreviewAnchor={console.log} linkMap={{}} />
+			<AnchorView canManageLinks={false} anchors={anchors} anchor={locationAnchor} getNode={getNode} setAnchor={setLocationAnchor} setPreviewAnchor={console.log} linkMap={{}} mediaAnchorTimeStamps={[0,1]} />
 		</div>
 		<div className={Classes.DIALOG_FOOTER}>
 			<div style={{ color: Colors.RED3 }}>{error}</div>

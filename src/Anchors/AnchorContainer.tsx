@@ -85,6 +85,7 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
             setAnchor={anc => setSelectedAnchor(anc)}
             linkMap={linkAnchorMap}
             getNode={nid => getNode(nid)}
+            mediaAnchorTimeStamps = {[0,1,2,3,4,5,6,7,8,9]}
         />
     </div>)
 

@@ -52,9 +52,8 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
 		}
 
 		return <div>
-
+            <div className="NodeTriageContainer">
 			{nodeComponent}
-
 			<AnchorContainer
 				selectedAnchor={selectedAnchor}
 				setSelectedAnchor={setSelectedAnchor}
@@ -66,6 +65,7 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
 					setPreviewAnchor(null)
 				}}
 			/>
+            </div>
 		</div>
 	}
 	else
