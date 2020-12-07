@@ -34,7 +34,7 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
 	if (node) {
 		switch (node.nodeType) {
 			case 'node':
-				return null
+				return <JsonNodeView node={node} />
 			case 'immutable-text':
 				nodeComponent = <ImmutableTextContainer
 					node={node}
@@ -52,20 +52,20 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
 		}
 
 		return <div>
-            <div className="NodeTriageContainer">
-			{nodeComponent}
-			<AnchorContainer
-				selectedAnchor={selectedAnchor}
-				setSelectedAnchor={setSelectedAnchor}
-				setPreviewAnchor={setPreviewAnchor}
-				setAnchorIds={setAnchorIds}
-				node={node}
-				clearSelection={() => {
-					setSelectedAnchor(null)
-					setPreviewAnchor(null)
-				}}
-			/>
-            </div>
+			<div className="NodeTriageContainer">
+				{nodeComponent}
+				<AnchorContainer
+					selectedAnchor={selectedAnchor}
+					setSelectedAnchor={setSelectedAnchor}
+					setPreviewAnchor={setPreviewAnchor}
+					setAnchorIds={setAnchorIds}
+					node={node}
+					clearSelection={() => {
+						setSelectedAnchor(null)
+						setPreviewAnchor(null)
+					}}
+				/>
+			</div>
 		</div>
 	}
 	else

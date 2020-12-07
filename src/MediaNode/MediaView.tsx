@@ -18,7 +18,8 @@ function MediaView(props: NodeProps): JSX.Element {
 	const [mediaUrl, setMediaUrl]: [string, any] = useState('')
 	const [description, setDescription]: [string, any] = useState('You are one step away from creating a video node...')
 	const [highlightedAnchors, setHighlightedAnchors]: [IMediaAnchor[], any] = useState([])
-
+	const [played, setPlayed] = useState(0)
+	
 	useEffect(() => {
 		async function setAnchors() {
 			await setHighlightedAnchors([])

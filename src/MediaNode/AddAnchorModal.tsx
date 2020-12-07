@@ -51,6 +51,7 @@ export default function AddAnchorModal(props: AddAnchorModalProps) {
 				value={author}
 				onChange={(e: any) => setAuthor(e.target.value)}
 			/>
+			<div className="DialogGap"></div>
 			<InputGroup
 				large={true}
 				placeholder="Annotation"
