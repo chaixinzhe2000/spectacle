@@ -52,8 +52,8 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
         }
 		return <div>
 			<div className="NodeTriageContainer">
-                // testing commit and push again
-                // TODO: here we need to create a state (mediatimestamp) and give the state to the anchors and pass the setState function to the nodeComponent (media). I guess make it optional so immutable text doesn't need it.
+                {/* // testing commit and push again
+                // TODO: here we need to create a state (mediatimestamp) and give the state to the anchors and pass the setState function to the nodeComponent (media). I guess make it optional so immutable text doesn't need it. */}
 				{nodeComponent}
 				<AnchorContainer
 					selectedAnchor={selectedAnchor}
@@ -67,22 +67,6 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
 					}}
 				/>
 			</div>
-            {/* <div className="NodeTriageContainer">
-                // testing commit and push again
-                // TODO: here we need to create a state (mediatimestamp) and give the state to the anchors and pass the setState function to the nodeComponent (media). I guess make it optional so immutable text doesn't need it.
-				{nodeComponent}
-				<AnchorContainer
-					selectedAnchor={selectedAnchor}
-					setSelectedAnchor={setSelectedAnchor}
-					setPreviewAnchor={setPreviewAnchor}
-					setAnchorIds={setAnchorIds}
-					node={node}
-					clearSelection={() => {
-						setSelectedAnchor(null)
-						setPreviewAnchor(null)
-					}}
-				/>
-			</div> */}
 		</div>
 	}
 	else
