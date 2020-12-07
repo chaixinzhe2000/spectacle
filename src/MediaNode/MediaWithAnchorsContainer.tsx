@@ -32,7 +32,7 @@ function MediaWithAnchorsContainer(props: MediaWithAnchorsContainerProps): JSX.E
 
 	if (isLoading) return <Spinner />
 
-	return (<div style={{ margin: 'auto', marginTop: '10px', width: '50%', padding: '10px', border: '1px dashed black' }}>
+	return (<div style={{ margin: '0', marginTop: '39px', width: '100%', padding: '10px', border: '1px solid lightgrey' }}>
 		
 			<div>
 				<ButtonGroup>

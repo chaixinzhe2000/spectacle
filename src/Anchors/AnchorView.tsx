@@ -1,5 +1,5 @@
 import { H5, Button, Card, Elevation, Divider } from '@blueprintjs/core';
-import { failureServiceResponse, IAnchor, ILink, INode, IServiceResponse } from 'spectacle-interfaces';
+import { failureServiceResponse, IAnchor, ILink, IMediaAnchor, INode, IServiceResponse } from 'spectacle-interfaces';
 import React, { useState } from 'react';
 import { Collapse } from 'antd';
 import { Accordion, Icon } from 'semantic-ui-react'
@@ -18,20 +18,20 @@ interface AnchorViewProps {
     setPreviewAnchor: (anchor: IAnchor) => void
     linkMap: { [anchorId: string]: ILink[] }
     canManageLinks: boolean
-    mediaAnchorTimeStamps: number[]
+    mediaAnchorTimeStamps?: IMediaAnchor[]
 }
 
 function AnchorView(props: AnchorViewProps): JSX.Element {
     const { anchors, anchor, setAnchor, getNode, setPreviewAnchor, linkMap, canManageLinks, mediaAnchorTimeStamps } = props
     if (anchors.length) {
         // media annotations
-        if (anchors[0].type === "media"){
+        if (anchors[0].type === "media" && mediaAnchorTimeStamps.length > 0){
             return (
                 <div>
                     {anchors.map((a, index) =>
                     <div key={a.anchorId}>
-                        <Card interactive={true} elevation={Elevation.TWO}>
-                            <h5><a href="#">{mediaAnchorTimeStamps[index]}</a></h5>
+                        <Card className="AnnotationCard" interactive={true} elevation={Elevation.TWO}>
+                            <h5><a href="#">Annotation at: {mediaAnchorTimeStamps[index].mediaTimeStamp} seconds</a></h5>
                             {anchors[index].contentList.map((c, cIndex) =>
                                 <div key={cIndex}>
                                     <p>{c}</p>

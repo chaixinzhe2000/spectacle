@@ -40,9 +40,16 @@ function MediaView(props: NodeProps): JSX.Element {
 
 	if (node) {
 		console.log(node)
-		return (<div>
-			<ReactPlayer url={node.mediaUrl} />
-		</div>)
+		return (
+			<div className='player-wrapper'>
+				<ReactPlayer
+					className='react-player'
+					url={node.mediaUrl}
+					width='100%'
+					height='100%'
+				/>
+			</div>
+		)
 	} else {
 		return <NonIdealState
 			icon="video"

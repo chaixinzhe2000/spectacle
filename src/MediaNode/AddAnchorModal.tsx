@@ -16,7 +16,7 @@ export default function AddAnchorModal(props: AddAnchorModalProps) {
 	const [error, setError]: [string, any] = useState('')
 	const [content, setContent]: [string, any] = useState('')
 	const [author, setAuthor]: [string, any] = useState('')
-	const [timeStamp, setTimeStamp]: [number, any] = useState(0)
+	const [timeStamp, setTimeStamp]: [number, any] = useState(5)
 
 	const onSubmit = () => {
 		if (content === '') {

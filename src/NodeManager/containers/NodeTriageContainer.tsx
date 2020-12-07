@@ -34,7 +34,7 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
 	if (node) {
 		switch (node.nodeType) {
 			case 'node':
-				return <JsonNodeView node={node} />
+				return null
 			case 'immutable-text':
 				nodeComponent = <ImmutableTextContainer
 					node={node}

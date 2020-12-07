@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Button, ButtonGroup, Divider, H5 } from '@blueprintjs/core';
@@ -10,6 +8,7 @@ import HypertextSdk from '../HypertextSdk';
 import AnchorGateway from '../Gateways/AnchorGateway';
 import { getNode } from '../NodeManager/containers/NodeManagerContainer';
 import LinkGateway from '../Gateways/LinkGateway';
+import MediaAnchorGateway from '../Gateways/Media/MediaAnchorGateway';
 
 
 interface AnchorContainerProps {
@@ -38,7 +37,9 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
             }
         },
         enabled: node
-    }).data?.payload
+	}).data?.payload
+	console.log(anchorMap)
+
 
     const linkNodeMap = useQuery([node.nodeId, 'links'], LinkGateway.getNodeLinks).data?.payload
 
@@ -59,10 +60,22 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
         })
     }
 
-    const anchors = anchorMap ? Object.values(anchorMap) : []
+	const anchors = anchorMap ? Object.values(anchorMap) : []
+	const anchorIds = anchorMap ? Object.keys(anchorMap) : []
 
+    const mediaAnchorMap = useQuery([anchorIds, 'media-anchors'], MediaAnchorGateway.getAnchors, {
+        onSuccess: (data) => {
+            if (data.success) {
+                const anchors = data.payload
+                setAnchorIds(Object.keys(anchors))
+                Object.keys(anchors).forEach(aid => queryCache.setQueryData(aid, successfulServiceResponse(anchors[aid])))
+            }
+        },
+        enabled: node
+	}).data?.payload
+	
     return (
-        <div style={{margin: 'auto', marginTop: '10px', width: '50%', padding: '10px', border: '1px dashed black'}}>
+        <div style={{margin: 'auto', marginTop: '39px', width: '100%', padding: '10px', border: '1px solid lightgrey'}}>
             <H5> Anchors </H5>
             {selectedAnchor && <> <ButtonGroup>
                 <Button intent="danger" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
@@ -85,7 +98,7 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
             setAnchor={anc => setSelectedAnchor(anc)}
             linkMap={linkAnchorMap}
             getNode={nid => getNode(nid)}
-            mediaAnchorTimeStamps = {[0,1,2,3,4,5,6,7,8,9]}
+            mediaAnchorTimeStamps = {mediaAnchorMap ? Object.values(mediaAnchorMap) : []}
         />
     </div>)
 
