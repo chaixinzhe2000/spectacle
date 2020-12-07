@@ -4,8 +4,6 @@ import ActionBar from './ActionBar';
 import NodeManagerContainer from './NodeManager/containers/NodeManagerContainer';
 import { ReactQueryDevtools } from 'react-query-devtools'
 import './styles/main.css'
-import ReactPlayerWrapper from './NodeDisplay/ReactPlayer'
-import NodeComments from './NodeComments/NodeComments';
 
 function App() {
 
