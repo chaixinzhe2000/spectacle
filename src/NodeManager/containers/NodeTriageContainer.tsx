@@ -53,6 +53,7 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
 
 		return <div>
 			<div className="NodeTriageContainer">
+                // here we need to create a state (mediatimestamp) and give the state to the anchors and pass the setState function to the nodeComponent (media). I guess make it optional so immutable text doesn't need it.
 				{nodeComponent}
 				<AnchorContainer
 					selectedAnchor={selectedAnchor}
