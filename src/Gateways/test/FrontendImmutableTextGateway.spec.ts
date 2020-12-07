@@ -1,4 +1,4 @@
-import { IImmutableTextAnchor, IImmutableTextNode } from 'hypertext-interfaces';
+import { IImmutableTextAnchor, IImmutableTextNode } from 'spectacle-interfaces';
 import { generateAnchorId, generateNodeId } from '../../NodeManager/helpers/generateNodeId';
 import ImmutableTextAnchorGateway from '../ImmutableText/ImmutableTextAnchorGateway';
 import ImmutableTextNodeGateway from '../ImmutableText/ImmutableTextNodeGateway';

@@ -1,9 +1,7 @@
-
-
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Button, ButtonGroup, Divider } from '@blueprintjs/core';
-import { failureServiceResponse, IAnchor, ILink, INode, IServiceResponse, newFilePath, ROOT_ID } from 'hypertext-interfaces';
+import { failureServiceResponse, IAnchor, ILink, INode, IServiceResponse, newFilePath, ROOT_ID } from 'spectacle-interfaces';
 import { queryCache, useMutation, useQuery } from 'react-query';
 import LinkGateway from '../Gateways/LinkGateway';
 import AddLinkModal from './AddLinkModal';

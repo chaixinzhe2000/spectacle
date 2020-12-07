@@ -1,7 +1,5 @@
-
-
 import { H5 } from '@blueprintjs/core';
-import { IAnchor, ILink, INode, IServiceResponse } from 'hypertext-interfaces';
+import { IAnchor, ILink, INode, IServiceResponse } from 'spectacle-interfaces';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -36,9 +34,9 @@ function LinkView(props: LinkViewProps): JSX.Element {
                                 return (<tr onClick={e => setLink(a)} key={a.linkId}>
                                     <td>{a.linkId}</td>
                                     <td><Link to={getNodeLink(a.srcNodeId)}>{getNode(a.srcNodeId).success ? getNode(a.srcNodeId).payload.label : ''} ({a.srcNodeId})</Link></td>
-                                    <td><Link to={getAnchorLink(a.srcNodeId, a.srcAnchorId)}>{getAnchor(a.srcAnchorId).success ? getAnchor(a.srcAnchorId).payload.label : ''} ({a.srcAnchorId})</Link></td>
+                                    <td><Link to={getAnchorLink(a.srcNodeId, a.srcAnchorId)}>{getAnchor(a.srcAnchorId).success ? getAnchor(a.srcAnchorId).payload.contentList[0] : ''} ({a.srcAnchorId})</Link></td>
                                     <td><Link to={getNodeLink(a.destNodeId)}>{getNode(a.destNodeId).success ? getNode(a.destNodeId).payload.label : ''} ({a.destNodeId})</Link></td>
-                                    <td><Link to={getAnchorLink(a.destNodeId, a.destAnchorId)}>{getAnchor(a.destAnchorId).success ? getAnchor(a.destAnchorId).payload.label : ''} ({a.destAnchorId})</Link></td>
+                                    <td><Link to={getAnchorLink(a.destNodeId, a.destAnchorId)}>{getAnchor(a.destAnchorId).success ? getAnchor(a.destAnchorId).payload.contentList[0] : ''} ({a.destAnchorId})</Link></td>
                                 </tr>)
                             })}
                         </tbody>

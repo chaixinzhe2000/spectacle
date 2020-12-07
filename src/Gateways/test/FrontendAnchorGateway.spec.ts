@@ -1,4 +1,4 @@
-import { IAnchor, IAnchorGateway } from 'hypertext-interfaces';
+import { IAnchor, IAnchorGateway } from 'spectacle-interfaces';
 import { generateAnchorId, generateNodeId } from '../../NodeManager/helpers/generateNodeId';
 import AnchorGateway from '../AnchorGateway';
 const anchorGateway: IAnchorGateway = AnchorGateway

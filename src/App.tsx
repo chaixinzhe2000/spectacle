@@ -4,8 +4,6 @@ import ActionBar from './ActionBar';
 import NodeManagerContainer from './NodeManager/containers/NodeManagerContainer';
 import { ReactQueryDevtools } from 'react-query-devtools'
 import './styles/main.css'
-import ReactPlayerWrapper from './NodeDisplay/ReactPlayer'
-import NodeComments from './NodeComments/NodeComments';
 
 function App() {
 
@@ -20,13 +18,8 @@ function App() {
         />
         <Routes>
           <Route element={<Navigate to="nodes" />} />
-          <Route path="/nodes" element={<div className="TrialMegaContainer">
-                                        <div><NodeManagerContainer setLoading={setLoading} /></div>
-                                        <div><ReactPlayerWrapper /></div>
-										<div><NodeComments /></div>
-                                        </div>}/>
+          <Route path="/nodes" element={<NodeManagerContainer setLoading={setLoading} />}/>
           <Route path="/nodes/:nodeId" element={<NodeManagerContainer setLoading={setLoading} />}/>
-          <Route path="/nodes/:nodeId/anchor/:anchorId" element={<NodeManagerContainer setLoading={setLoading} />}/>
         </Routes>
       </BrowserRouter>
 

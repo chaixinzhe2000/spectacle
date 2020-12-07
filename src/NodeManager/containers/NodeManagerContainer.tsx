@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import {  useNavigate, useParams } from 'react-router';
-import { failureServiceResponse, IFilePath, INode, IServiceResponse, newFilePath, successfulServiceResponse } from 'hypertext-interfaces'
+import { failureServiceResponse, IFilePath, INode, IServiceResponse, newFilePath, successfulServiceResponse } from 'spectacle-interfaces'
 import { useQuery, useMutation, queryCache } from 'react-query'
 import NodeGateway from '../../Gateways/NodeGateway';
 import NodeManagerExplorer from './NodeManager';
 import HypertextSdk from '../../HypertextSdk';
-import { ROOT_ID } from 'hypertext-interfaces/dist/INode';
+import { ROOT_ID } from 'spectacle-interfaces/dist/INode';
 
 async function fetchNode(nodeId: string) {
   if (nodeId === ROOT_ID) {
@@ -116,7 +116,7 @@ export default function NodeManagerContainer(props: NodeManagerContainerProps) {
 
   return (
     <>
-	<div className="comment-title">Your Library</div>
+	{/* <div className="comment-title">Your Library</div> */}
 
       <NodeManagerExplorer 
         selectedNode={selectedNode}

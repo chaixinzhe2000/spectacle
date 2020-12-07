@@ -1,4 +1,4 @@
-import { failureServiceResponse, ILink, ILinkGateway, IServiceResponse } from "hypertext-interfaces";
+import { failureServiceResponse, ILink, ILinkGateway, IServiceResponse } from "spectacle-interfaces";
 import { get, post, remove } from "./request";
 import { LinkGatewayEndpoint } from "../GatewayConfig";
 

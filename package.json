@@ -12,7 +12,7 @@
     "axios": "^0.20.0",
     "highlightable": "^1.0.7",
     "history": "^5.0.0",
-    "hypertext-interfaces": "^1.2.93",
+    "spectacle-interfaces": "^1.1.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-json-view": "^1.19.1",

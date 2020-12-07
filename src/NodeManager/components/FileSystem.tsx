@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Classes, Menu, MenuItem, ITreeNode, Tree } from "@blueprintjs/core";
 import {ContextMenuTarget} from '@blueprintjs/core/lib/esnext/components/context-menu/contextMenuTarget.js';
-import { INode } from 'hypertext-interfaces'
+import { INode } from 'spectacle-interfaces'
 
 interface FileExplorerProps {
     onNodeClick: (node: ITreeNode<INode>, nodePath: number[]) => void

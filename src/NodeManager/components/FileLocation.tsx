@@ -1,7 +1,7 @@
 import React from 'react';
-import {  Breadcrumbs, IBreadcrumbProps, Breadcrumb } from '@blueprintjs/core';
-import {IFilePath, IServiceResponse} from 'hypertext-interfaces';
-import INode, { ROOT_ID, ROOT_LABEL } from 'hypertext-interfaces/dist/INode';
+import { Breadcrumbs, IBreadcrumbProps, Breadcrumb } from '@blueprintjs/core';
+import {IFilePath, IServiceResponse} from 'spectacle-interfaces';
+import INode, { ROOT_ID, ROOT_LABEL } from 'spectacle-interfaces/dist/INode';
 
 
 interface FileLocationProps {

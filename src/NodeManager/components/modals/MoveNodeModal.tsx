@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Dialog, Classes, Button, Colors } from '@blueprintjs/core';
 import SelectFileLocation from '../SelectFileLocation';
-import { INode, IFilePath, newFilePath, NodeType, IServiceResponse } from 'hypertext-interfaces'
+import { INode, IFilePath, newFilePath, IServiceResponse } from 'spectacle-interfaces'
 import { createTreeNodes } from '../../helpers/treeNodeHelpers';
 
 interface MoveNodeModalProps {

@@ -1,8 +1,6 @@
-
-
 import React, { useEffect, useState } from 'react';
 import { Button, ButtonGroup, Divider, Spinner } from '@blueprintjs/core';
-import { failureServiceResponse, IAnchor, ILink, IServiceResponse, newFilePath } from 'hypertext-interfaces';
+import { failureServiceResponse, IAnchor, ILink, IServiceResponse, newFilePath } from 'spectacle-interfaces';
 import { queryCache, useMutation, useQuery } from 'react-query';
 import LinkGateway from '../Gateways/LinkGateway';
 import NodeGateway from '../Gateways/NodeGateway';

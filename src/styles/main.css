@@ -1,19 +1,25 @@
-.TrialMegaContainer{
+.MegaContainer {
 	display: grid;
-	grid-template-columns: 0.5fr 0.8fr 0.5fr;
+	grid-template-columns: 1fr 4fr;
 	column-gap: 2rem;
 	margin: 2rem;
 	padding: 1rem;
+}
+
+.NodeTriageContainer {
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	column-gap: 2rem;
 }
 
 .wrapper {
 	display: flex;
 }
 
-.comment { 
+.comment {
 	width: 100%;
 	height: max-content;
-	background-color: #D1E7E5;
+	background-color: #d1e7e5;
 	border-radius: 2px;
 	margin-bottom: 15px;
 	padding: 5px 10px;
@@ -25,4 +31,37 @@
 	margin-top: 10px;
 	margin-bottom: 30px;
 }
-/* testing commit again */
+
+.player-wrapper {
+	position: relative;
+	padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+}
+
+.react-player {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.AnnotationCard {
+	margin-top: 10px;
+	margin-bottom: 1px;
+}
+
+.AnnotationDivider {
+	margin-bottom: 12px;
+}
+
+.DialogGap {
+	padding: 10px;
+}
+
+.NodeBoxGap {
+	margin-top: 10px;
+}
+
+.NodeBox {
+	width: 40vw;
+	margin: 0;
+	margin-top: 39px;
+}

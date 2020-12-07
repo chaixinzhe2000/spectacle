@@ -1,4 +1,4 @@
-import { ILink } from 'hypertext-interfaces';
+import { ILink } from 'spectacle-interfaces';
 import { generateAnchorId, generateLinkId, generateNodeId } from '../../NodeManager/helpers/generateNodeId';
 import LinkGateway from '../LinkGateway';
 
