@@ -1,6 +1,14 @@
 .MegaContainer{
 	display: grid;
-	grid-template-columns: 0.5fr 0.8fr 0.5fr;
+	grid-template-columns: 1fr 4fr;
+	column-gap: 2rem;
+	margin: 2rem;
+	padding: 1rem;
+}
+
+.NodeTriageContainer{
+    display: grid;
+	grid-template-columns: 1fr 1fr;
 	column-gap: 2rem;
 	margin: 2rem;
 	padding: 1rem;
