@@ -3,36 +3,35 @@ import { Dialog, Classes, Button, Colors, InputGroup, TextArea, Divider, H4 } fr
 import { IImmutableTextAnchor, IMediaAnchor } from 'spectacle-interfaces';
 import { time } from 'console';
 
+
 interface AddAnchorModalProps {
 	isOpen: boolean
 	onClose: () => void
 	onAdd: (content: string, author: string, timeStamp: number) => void
 	anchor: IMediaAnchor,
+	newMediaTime: number
 }
 
 export default function AddAnchorModal(props: AddAnchorModalProps) {
 
-	const { isOpen, onClose, onAdd } = props
+	const { isOpen, onClose, onAdd, anchor, newMediaTime } = props
 	const [error, setError]: [string, any] = useState('')
 	const [content, setContent]: [string, any] = useState('')
 	const [author, setAuthor]: [string, any] = useState('')
-	const [timeStamp, setTimeStamp]: [number, any] = useState(5)
 
 	const onSubmit = () => {
 		if (content === '') {
 			setError('Please enter a non-empty annotation.')
-		} else if (typeof timeStamp !== "number") {
+		} else if (typeof newMediaTime !== "number") {
 			setError("Please enter a valid time stamp.")
 		} else {
 			if (author == '') {
-				onAdd(content, 'Anonymous', timeStamp);
+				onAdd(content, 'Anonymous', newMediaTime);
 			} else {
-				onAdd(content, author, timeStamp);
+				onAdd(content, author, newMediaTime);
 			}
 			setError('')
 			setContent('')
-			// author is not reset here
-			setTimeStamp(0)
 		}
 	}
 

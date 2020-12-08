@@ -20,6 +20,7 @@ function MediaWithAnchorsContainer(props: MediaWithAnchorsContainerProps): JSX.E
 	const { node, anchorId, anchorIds, createNode } = props
 	const [newAnchor, setNewAnchor]: [IMediaAnchor, any] = useState(null)
 	const [newAnchorModal, setNewAnchorModal]: [boolean, any] = useState(false)
+	const [newMediaTime, setNewMediaTime]: [number, any] = useState(0)
 
 	// TODO: call on this one!!!!!!!! hypertextsdk stufff
 	const [createAnchor] = useMutation(HypertextSdk.createMediaAnchor, {
@@ -51,7 +52,9 @@ function MediaWithAnchorsContainer(props: MediaWithAnchorsContainerProps): JSX.E
 			setAnchor={anc => {
 				setNewAnchor(null)
 				setNewAnchor(anc)
-			}} />
+			}} 
+			setNewMediaTime={setNewMediaTime}
+		/>
 
 		<AddAnchorModal
 			isOpen={newAnchorModal}
@@ -75,6 +78,7 @@ function MediaWithAnchorsContainer(props: MediaWithAnchorsContainerProps): JSX.E
 				setNewAnchor(null)
 				setNewAnchorModal(false)
 			}}
+			newMediaTime={newMediaTime}
 			anchor={newAnchor}
 		/>
 	</div>

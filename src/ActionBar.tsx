@@ -52,14 +52,18 @@ export default function ActionBar(props: ActionBarProps) {
                       <NavbarDivider />
                       {props.loading ? <Spinner size={20} /> : null }
                   </NavbarGroup>
-          {Object.keys(props.actionMap).length > 0 && <NavbarGroup align={Alignment.RIGHT}>
-            <Popover content={<ActionMenu {...props}/>}>
+				  
+          {<NavbarGroup align={Alignment.RIGHT}>
+            {/* <Popover content={<ActionMenu {...props}/>}>
               <Button
                 className={Classes.MINIMAL}
                 icon="add" text="New" intent="success"
                 rightIcon="caret-down"
               />
-            </Popover>
+            </Popover> */}
+			{/* <InputGroup>
+			
+			</InputGroup> */}
             
           </NavbarGroup>}
           
