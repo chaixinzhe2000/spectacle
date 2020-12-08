@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Divider, NonIdealState, TextArea, Intent } from '@blueprintjs/core';
 import { IMediaAnchor, IMediaNode } from 'spectacle-interfaces';
-import PlayerWrapperClass from './ReactPlayer'
 
 interface NodeProps {
 	node: IMediaNode
@@ -47,15 +46,8 @@ function MediaView(props: NodeProps): JSX.Element {
 	if (node) {
 		console.log(node)
 		return (
-			<PlayerWrapperClass
-				url={node.mediaUrl}
-                setNewMediaTime={setNewMediaTime}
-                mediaPlayed={mediaPlayed}
-                setMediaPlayed={setMediaPlayed}
-                setMediaDuration={setMediaDuration}
-                mediaPlaying={mediaPlaying}
-                setMediaPlaying={setMediaPlaying}
-			/>
+			<>
+			</>
 		)
 	} else {
 		return <NonIdealState

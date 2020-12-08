@@ -71,6 +71,7 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 		},
 		enabled: node
 	}).data?.payload
+	
 	console.log(anchorMap)
 
 

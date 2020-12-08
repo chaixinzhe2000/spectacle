@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Dialog, Classes, Button, Colors, InputGroup, TextArea, Divider, H4 } from '@blueprintjs/core';
-import { IImmutableTextAnchor, IMediaAnchor } from 'spectacle-interfaces';
+import { IImmutableTextAnchor, IMediaAnchor, IPDFNode } from 'spectacle-interfaces';
 import { time } from 'console';
 
 
