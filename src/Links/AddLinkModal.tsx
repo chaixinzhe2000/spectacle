@@ -8,7 +8,7 @@ import SelectFileLocation from '../NodeManager/components/SelectFileLocation';
 interface AddLinkModalProps {
 	isOpen: boolean
 	onClose: () => void
-	onCreate: (destAnchor: IAnchor) => void
+	onCreate: (destNode: INode) => void
 	anchors: IAnchor[]
 	selectNode: (node: INode) => void
 	node: INode
@@ -26,18 +26,16 @@ export default function AddLinkModal(props: AddLinkModalProps) {
 	const [error, setError]: [string, any] = useState('')
 	const treeNodes = createTreeNodes(node, locationNode?.nodeId)
 
-	useEffect(() => {
-		setLocationAnchor(null)
-	}, [anchors])
+	// useEffect(() => {
+	// 	setLocationAnchor(null)
+	// }, [anchors])
 
 	const onCreate = () => {
-		if (locationAnchor === null) {
-			setError('Please select a location anchor')
-		} else if (locationAnchor.anchorId === anchor.anchorId) {
-			setError("Cannot create a link to the same anchor")
+		if (locationNode === null) {
+			setError('Please select a location node')
 		} else {
-			props.onCreate(locationAnchor);
-			setLocationAnchor(null)
+			props.onCreate(locationNode);
+			setLocationNode(null)
 		}
 	}
 
@@ -56,7 +54,7 @@ export default function AddLinkModal(props: AddLinkModalProps) {
 			<H3> Create New Link </H3>
 			<SelectFileLocation getNode={getNode} treeNodes={treeNodes} onSelectLocation={(node: INode) => { setLocationNode(node); selectNode(node) }} />
 			<Divider />
-			<AnchorView canManageLinks={false} anchors={anchors} anchor={locationAnchor} getNode={getNode} setAnchor={setLocationAnchor} setPreviewAnchor={console.log} linkMap={{}} />
+			{/* <AnchorView canManageLinks={false} anchors={anchors} anchor={locationAnchor} getNode={getNode} setAnchor={setLocationAnchor} setPreviewAnchor={console.log} linkMap={{}} /> */}
 		</div>
 		<div className={Classes.DIALOG_FOOTER}>
 			<div style={{ color: Colors.RED3 }}>{error}</div>

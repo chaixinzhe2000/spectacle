@@ -154,10 +154,6 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 				<ButtonGroup>
 					<Button intent="warning" icon="new-link" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
                         setNewLinkModalIsOpen(true)
-                        // if (node.nodeType === 'immutable-text') {
-                            
-						// }
-						clearSelection()
 					}}> Link Annotation </Button>
 				</ButtonGroup>
 				<Divider />
