@@ -107,7 +107,8 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 	return (
 		<div style={{ margin: 'auto', marginTop: '39px', width: '100%', padding: '10px', border: '1px solid lightgrey' }}>
 			<H5> Annotations </H5>
-			{<div> <ButtonGroup>
+			{<div> 
+				<ButtonGroup>
 				<Button intent="primary" icon="add-to-artifact" minimal
 					disabled={((node.nodeType === 'immutable-text' && newImmutableTextAnchor) || node.nodeType === 'media') ? false : true}
 					onClick={(e) => {
@@ -132,6 +133,12 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 					}
 					clearSelection()
 				}}> Clear </Button>
+				<Button intent="warning" icon="clean" minimal disabled={(newImmutableTextAnchor || selectedAnchor) ? false : true} onClick={(e) => {
+					// if (node.nodeType === 'immutable-text') {
+					// 	setNewImmutableTextAnchor(null)
+					// }
+					// clearSelection()
+				}}> Create Annotation Link </Button>
 			</ButtonGroup>
 				<Divider />
 			</div>
