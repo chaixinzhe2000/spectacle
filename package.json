@@ -25,7 +25,7 @@
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.0.1",
     "serve": "^11.3.2",
-    "spectacle-interfaces": "^1.2.1",
+    "spectacle-interfaces": "^1.2.2",
     "typescript": "^3.9.7",
     "uniqid": "^5.2.0"
   },

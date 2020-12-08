@@ -56,7 +56,18 @@ const AnchorGateway: IAnchorGateway = {
 		} catch (e) {
 			return failureServiceResponse('Failed to call getAnchor endpoint.')
 		}
-	},
+    },
+    
+    getAnchors: async (anchorIds: string[]) :Promise<IServiceResponse<{ [anchorId: string]: IAnchor }>> => {
+
+		try {
+			const fullUrl = `${base_endpoint}${servicePath}/list/${anchorIds}`
+			const response: IServiceResponse<{[anchorId: string]: IAnchor}> = await get<IServiceResponse<{[anchorId: string]: IAnchor}>>(fullUrl);
+			return response
+		} catch (e) {
+			return failureServiceResponse('Failed to call getAnchor endpoint.')
+		}
+    },
 
 	getNodeAnchors: async (nodeId: string): Promise<IServiceResponse<{ [anchorId: string]: IAnchor }>> => {
 

@@ -47,7 +47,8 @@ function MediaView(props: NodeProps): JSX.Element {
 	if (node) {
 		console.log(node)
 		return (
-			<PlayerWrapperClass
+			<div>
+            <PlayerWrapperClass
 				url={node.mediaUrl}
                 setNewMediaTime={setNewMediaTime}
                 mediaPlayed={mediaPlayed}
@@ -56,6 +57,8 @@ function MediaView(props: NodeProps): JSX.Element {
                 mediaPlaying={mediaPlaying}
                 setMediaPlaying={setMediaPlaying}
 			/>
+            
+            </div>
 		)
 	} else {
 		return <NonIdealState

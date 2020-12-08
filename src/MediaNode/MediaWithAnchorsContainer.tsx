@@ -11,6 +11,7 @@ import UpdateAnchorModal from '../Anchors/UpdateAnchorModal';
 import { Anchor } from 'antd';
 import AnchorGateway from '../Gateways/AnchorGateway';
 import AddLinkModal from '../Links/AddLinkModal';
+import PlayerWrapperClass from './ReactPlayer';
 
 interface MediaWithAnchorsContainerProps {
 	node: IMediaNode
@@ -71,7 +72,7 @@ function MediaWithAnchorsContainer(props: MediaWithAnchorsContainerProps): JSX.E
 			setMediaPlayed={setMediaPlayed}
 			setMediaDuration={setMediaDuration}
 			mediaPlaying={mediaPlaying}
-			setMediaPlaying={setMediaPlaying}
+            setMediaPlaying={setMediaPlaying}
 		/>
 
 		<AddAnchorModal
