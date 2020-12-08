@@ -55,7 +55,8 @@ export default function AddAnchorModal(props: AddAnchorModalProps) {
 				large={true}
 				placeholder="Annotation"
 				value={content}
-				onChange={(e: any) => setContent(e.target.value)}
+                onChange={(e: any) => setContent(e.target.value)}
+                autoFocus
 			/>
 		</div>
 		<div className={Classes.DIALOG_FOOTER}>
