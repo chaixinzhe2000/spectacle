@@ -7,6 +7,7 @@ import { generateAnchorId } from '../NodeManager/helpers/generateNodeId';
 import MediaView from './MediaView';
 import AddAnchorModal from './AddAnchorModal';
 import { IMediaAnchor, IMediaNode } from 'spectacle-interfaces';
+import AddLinkModal from '../Links/AddLinkModal';
 
 interface MediaWithAnchorsContainerProps {
 	node: IMediaNode
@@ -19,13 +20,15 @@ interface MediaWithAnchorsContainerProps {
 	mediaPlaying: boolean
 	setMediaPlaying: any
 	newMediaAnchorModal: boolean
-	setNewMediaAnchorModal: any
+    setNewMediaAnchorModal: any
+    newLinkModalIsOpen: boolean
+    setNewLinkModalIsOpen: any
 }
 
 function MediaWithAnchorsContainer(props: MediaWithAnchorsContainerProps): JSX.Element {
 
 	const { node, anchorId, anchorIds, createNode, mediaPlayed, setMediaPlayed, setMediaDuration,
-		mediaPlaying, setMediaPlaying, newMediaAnchorModal, setNewMediaAnchorModal } = props
+		mediaPlaying, setMediaPlaying, newMediaAnchorModal, setNewMediaAnchorModal, newLinkModalIsOpen, setNewLinkModalIsOpen } = props
 	const [newAnchor, setNewAnchor]: [IMediaAnchor, any] = useState(null)
 	// const [newAnchorModal, setNewAnchorModal]: [boolean, any] = useState(false)
 	const [newMediaTime, setNewMediaTime]: [number, any] = useState(0)
@@ -94,6 +97,7 @@ function MediaWithAnchorsContainer(props: MediaWithAnchorsContainerProps): JSX.E
 			newMediaTime={newMediaTime}
 			anchor={newAnchor}
 		/>
+
 	</div>
 	)
 }

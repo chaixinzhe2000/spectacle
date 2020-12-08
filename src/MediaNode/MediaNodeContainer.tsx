@@ -17,12 +17,15 @@ interface MediaContainerProps {
 	mediaPlaying: boolean
 	setMediaPlaying: any
 	newMediaAnchorModal: boolean
-	setNewMediaAnchorModal: any
+    setNewMediaAnchorModal: any
+    newLinkModalIsOpen: boolean
+    setNewLinkModalIsOpen: any
+    
 }
 
 function MediaContainer(props: MediaContainerProps): JSX.Element {
 	const { node, anchorId, anchorIds, mediaPlayed, setMediaPlayed, setMediaDuration, mediaPlaying, setMediaPlaying,
-		newMediaAnchorModal, setNewMediaAnchorModal } = props
+		newMediaAnchorModal, setNewMediaAnchorModal, newLinkModalIsOpen, setNewLinkModalIsOpen } = props
 	const { isLoading, data, error } = useQuery([node.nodeId, node.nodeType], MediaNodeGateway.getNode)
 
 	const [createNode] = useMutation(MediaNodeGateway.createNode, {
@@ -48,7 +51,9 @@ function MediaContainer(props: MediaContainerProps): JSX.Element {
 			mediaPlaying={mediaPlaying}
 			setMediaPlaying={setMediaPlaying}
 			newMediaAnchorModal={newMediaAnchorModal}
-			setNewMediaAnchorModal={setNewMediaAnchorModal}
+            setNewMediaAnchorModal={setNewMediaAnchorModal}
+            newLinkModalIsOpen={newLinkModalIsOpen}
+            setNewLinkModalIsOpen={setNewLinkModalIsOpen}
 		/>
 	</div>
 	)

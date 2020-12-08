@@ -11,6 +11,9 @@ import LinkGateway from '../Gateways/LinkGateway';
 import MediaAnchorGateway from '../Gateways/Media/MediaAnchorGateway';
 import ImmutableTextAnchorGateway from '../Gateways/ImmutableText/ImmutableTextAnchorGateway';
 import ImmutableTextNodeGateway from '../Gateways/ImmutableText/ImmutableTextNodeGateway';
+import LinkContainer from '../Links/LinkContainer';
+import AddLinkModal from '../Links/AddLinkModal';
+import AddLinkModalContainer from '../Links/AddLinkModalContainer';
 
 
 interface AnchorContainerProps {
@@ -28,13 +31,15 @@ interface AnchorContainerProps {
 	newImmutableTextAnchorModal: boolean
 	setImmutableTextNewAnchorModal: any
 	newImmutableTextAnchor: IImmutableTextAnchor
-	setNewImmutableTextAnchor: any
+    setNewImmutableTextAnchor: any
+    newLinkModalIsOpen: boolean
+    setNewLinkModalIsOpen: any
 }
 
 function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 	const { node, selectedAnchor, setSelectedAnchor, setPreviewAnchor, clearSelection,
 		setAnchorIds, mediaDuration, setMediaPlayed, mediaPlaying, setMediaPlaying, setNewMediaAnchorModal,
-		newImmutableTextAnchorModal, setImmutableTextNewAnchorModal, newImmutableTextAnchor, setNewImmutableTextAnchor } = props
+		newImmutableTextAnchorModal, setImmutableTextNewAnchorModal, newImmutableTextAnchor, setNewImmutableTextAnchor, newLinkModalIsOpen, setNewLinkModalIsOpen } = props
 
 	const [deleteAnchor] = useMutation(HypertextSdk.deleteAnchor, {
 		onSuccess: () => {
@@ -136,10 +141,11 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 				</ButtonGroup>
 				<ButtonGroup>
 					<Button intent="warning" icon="new-link" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
-						// if (node.nodeType === 'immutable-text') {
-						// 	setNewImmutableTextAnchor(null)
+                        setNewLinkModalIsOpen(true)
+                        // if (node.nodeType === 'immutable-text') {
+                            
 						// }
-						// clearSelection()
+						clearSelection()
 					}}> Link Annotation </Button>
 				</ButtonGroup>
 				<Divider />
@@ -160,8 +166,15 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 				setMediaPlayed={setMediaPlayed}
 				mediaDuration={mediaDuration}
 				mediaPlaying={mediaPlaying}
-				setMediaPlaying={setMediaPlaying}
+                setMediaPlaying={setMediaPlaying}
 			/>
+
+            <AddLinkModalContainer 
+                isOpen={newLinkModalIsOpen}
+                setIsOpen={setNewLinkModalIsOpen}
+                anchor={selectedAnchor}
+            />
+
 		</div>)
 
 }
