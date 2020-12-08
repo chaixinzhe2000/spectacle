@@ -136,9 +136,8 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 							}
 						}}> Add New </Button>
 					<Button intent="success" icon="paperclip" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
-						// deleteAnchor(selectedAnchor.anchorId)
-						// setSelectedAnchor(null)
 						setNewFollowUpModal(true)
+						setMediaPlaying(false)
 					}}> Follow Up </Button>
 					<Button intent="danger" icon="graph-remove" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
 						deleteAnchor(selectedAnchor.anchorId)

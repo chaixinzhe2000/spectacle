@@ -34,13 +34,11 @@ export default function UpdateAnchorModal(props: UpdateAnchorModalProps) {
 
 	// TODO: change dialog to something that's only on the right column
 	return (<Dialog
-		icon='edit'
+		icon='annotation'
 		onClose={onClose}
-		title="Add New Annotation"
+		title="Add Follow Up"
 		isOpen={isOpen}>
 		<div className={Classes.DIALOG_BODY}>
-			{/* <H4> Selected Text: </H4>
-			<TextArea disabled value={text} style={{ width: '100%' }} rows={20} /> */}
 			<InputGroup
 				large={true}
 				placeholder="Author (leave blank to stay ananymous)"
@@ -59,7 +57,7 @@ export default function UpdateAnchorModal(props: UpdateAnchorModalProps) {
 		<div className={Classes.DIALOG_FOOTER}>
 			<div style={{ color: Colors.RED3 }}>{error}</div>
 			<div className={Classes.DIALOG_FOOTER_ACTIONS}>
-				<Button onClick={() => onSubmit()} intent="primary"> Add Annotation </Button>
+				<Button onClick={() => onSubmit()} intent="primary"> Add Follow Up </Button>
 			</div>
 		</div>
 	</Dialog>)

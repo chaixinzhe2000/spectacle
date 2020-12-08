@@ -19,11 +19,11 @@ interface AnchorViewProps {
 	canManageLinks: boolean
 	mediaAnchors?: IMediaAnchor[]
 	immutableTextAnchors?: IImmutableTextAnchor[]
-    immutableTextNode?: IImmutableTextNode
-    setMediaPlayed?: any
-    mediaDuration?: number
-    mediaPlaying?: boolean
-    setMediaPlaying?: any
+	immutableTextNode?: IImmutableTextNode
+	setMediaPlayed?: any
+	mediaDuration?: number
+	mediaPlaying?: boolean
+	setMediaPlaying?: any
 }
 
 function convertTime(sec_num) {
@@ -58,17 +58,17 @@ function convertTime(sec_num) {
 
 function AnchorView(props: AnchorViewProps): JSX.Element {
 	const { anchors, anchor, setAnchor, getNode, setPreviewAnchor, linkMap, canManageLinks, mediaAnchors, immutableTextAnchors, immutableTextNode, setMediaPlayed, mediaDuration, mediaPlaying, setMediaPlaying } = props
-    
-    const seekTo = (seconds: number, duration: number) => {
-        const played = seconds/duration
-        console.log(played)
-        setMediaPlayed(played)
-        if (mediaPlaying === true){
-            setMediaPlaying(false)
-        } else{
-            setMediaPlaying(true)
-        }        
-    }
+
+	const seekTo = (seconds: number, duration: number) => {
+		const played = seconds / duration
+		console.log(played)
+		setMediaPlayed(played)
+		if (mediaPlaying === true) {
+			setMediaPlaying(false)
+		} else {
+			setMediaPlaying(true)
+		}
+	}
 
 	const activeIndex = anchor ? anchors.findIndex(anc => anc.anchorId === anchor.anchorId) : -1
 
@@ -79,10 +79,10 @@ function AnchorView(props: AnchorViewProps): JSX.Element {
 				<div>
 					{anchors.map((a, index) =>
 						<div key={a.anchorId}>
-							<Card className={activeIndex === index ? "SelectedAnnotationCard" : "AnnotationCard"} interactive={true} 
-							elevation={activeIndex === index ? Elevation.TWO : Elevation.ZERO} onClick={e => setAnchor(a)} 
-							onDoubleClick={() => seekTo(mediaAnchors[index].mediaTimeStamp, mediaDuration)}>
-								<h5 className="h5Title">{convertTime(mediaAnchors[index].mediaTimeStamp)}</h5>
+							<Card className={activeIndex === index ? "SelectedAnnotationCard" : "AnnotationCard"} interactive={true}
+								elevation={activeIndex === index ? Elevation.TWO : Elevation.ZERO} onClick={e => setAnchor(a)}
+								onDoubleClick={() => seekTo(mediaAnchors[index].mediaTimeStamp, mediaDuration)}>
+								<h5 className="h5Title">{mediaAnchors[index] ? convertTime(mediaAnchors[index].mediaTimeStamp) : "00:00"}</h5>
 								{anchors[index].contentList.map((c, cIndex) =>
 									<div key={cIndex}>
 										<p><b>{anchors[index].authorList[cIndex]}</b>: {c}</p>
@@ -103,8 +103,8 @@ function AnchorView(props: AnchorViewProps): JSX.Element {
 					<div>
 						{anchors.map((a, index) =>
 							<div key={a.anchorId}>
-								<Card className={activeIndex === index ? "SelectedAnnotationCard" : "AnnotationCard"} interactive={true} 
-								elevation={activeIndex === index ? Elevation.TWO : Elevation.ZERO} onClick={e => setAnchor(a)} >
+								<Card className={activeIndex === index ? "SelectedAnnotationCard" : "AnnotationCard"} interactive={true}
+									elevation={activeIndex === index ? Elevation.TWO : Elevation.ZERO} onClick={e => setAnchor(a)} >
 									<h5 className="h5Title"> "
 									{immutableTextNode && immutableTextAnchors[index] ?
 											immutableTextNode.text.substring(immutableTextAnchors[index].start, Math.min((immutableTextAnchors[index].end + 1), immutableTextAnchors[index].start + 20)) : ''} "
@@ -124,7 +124,6 @@ function AnchorView(props: AnchorViewProps): JSX.Element {
 				return null
 			}
 		}
-
 	} else {
 		return null
 	}
