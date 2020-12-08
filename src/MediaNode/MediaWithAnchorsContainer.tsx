@@ -40,10 +40,6 @@ function MediaWithAnchorsContainer(props: MediaWithAnchorsContainerProps): JSX.E
 		onSuccess: () => queryCache.invalidateQueries([node.nodeId, 'anchors'])
 	})
 
-	const [updateAnchor] = useMutation(HypertextSdk.addAnchorFollowUp, {
-		onSuccess: () => queryCache.invalidateQueries([node.nodeId, 'anchors'])
-	})
-
 	const { isLoading, data, error } = useQuery([anchorIds, 'media'], MediaAnchorGateway.getAnchors)
 	const MediaAnchorMap = data && data.success ? data.payload : {}
 	const MediaAnchors = data && data.success ? Object.values(data.payload) : []
