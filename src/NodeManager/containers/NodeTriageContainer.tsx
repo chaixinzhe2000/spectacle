@@ -21,7 +21,9 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
 	const [selectedAnchor, setSelectedAnchor]: [IAnchor, any] = useState(null)
 	const [previewAnchor, setPreviewAnchor]: [IAnchor, any] = useState(null)
 	const [anchorIds, setAnchorIds]: [string[], any] = useState([])
-	const [mediaPlayed, setMediaPlayed]: [number, any] = useState(0)
+    const [mediaPlayed, setMediaPlayed]: [number, any] = useState(0)
+    const [mediaDuration, setMediaDuration]: [number, any] = useState(Infinity)
+    const [mediaPlaying, setMediaPlaying]: [boolean, any] = useState(false)
 
 	useEffect(() => {
 		console.log("node has changed")
@@ -46,7 +48,12 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
 				nodeComponent = <MediaContainer
 					node={node}
 					anchorId={previewAnchor ? previewAnchor.anchorId : selectedAnchor ? selectedAnchor.anchorId : anchorId}
-					anchorIds={anchorIds} />
+					anchorIds={anchorIds} 
+                    mediaPlayed={mediaPlayed}
+                    setMediaPlayed={setMediaPlayed}
+                    setMediaDuration={setMediaDuration}
+                    mediaPlaying={mediaPlaying}
+                    />
 				break
 			default:
 				return <div> Hmmm, don't recognize node type {node.nodeType}... </div>
@@ -66,7 +73,9 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
 						setSelectedAnchor(null)
 						setPreviewAnchor(null)
 					}}
-					setMediaPlayed={setMediaPlayed}
+                    setMediaPlayed={setMediaPlayed}
+                    mediaDuration={mediaDuration}
+                    setMediaPlaying={setMediaPlaying}
 				/>
 			</div>
 		</div>

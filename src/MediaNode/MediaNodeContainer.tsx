@@ -10,11 +10,15 @@ import MediaWithAnchorsContainer from './MediaWithAnchorsContainer';
 interface MediaContainerProps {
 	node: INode
 	anchorId: string
-	anchorIds: string[]
+    anchorIds: string[]
+    mediaPlayed: number
+    setMediaPlayed: any
+    setMediaDuration: any
+    mediaPlaying: boolean
 }
 
 function MediaContainer(props: MediaContainerProps): JSX.Element {
-	const { node, anchorId, anchorIds } = props
+	const { node, anchorId, anchorIds, mediaPlayed, setMediaPlayed, setMediaDuration, mediaPlaying } = props
 	const { isLoading, data, error } = useQuery([node.nodeId, node.nodeType], MediaNodeGateway.getNode)
 
 	const [createNode] = useMutation(MediaNodeGateway.createNode, {
@@ -33,7 +37,11 @@ function MediaContainer(props: MediaContainerProps): JSX.Element {
 			createNode={mediaUrl => createNode({
 				nodeId: node.nodeId,
 				mediaUrl: mediaUrl
-			})}
+            })}
+            mediaPlayed={mediaPlayed}
+            setMediaPlayed={setMediaPlayed}
+            setMediaDuration={setMediaDuration}
+            mediaPlaying={mediaPlaying}
 		/>
 	</div>
 	)

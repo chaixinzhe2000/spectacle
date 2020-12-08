@@ -12,12 +12,16 @@ interface MediaWithAnchorsContainerProps {
 	node: IMediaNode
 	anchorId: string
 	anchorIds: string[]
-	createNode: (mediaUrl: string) => void
+    createNode: (mediaUrl: string) => void
+    mediaPlayed: number
+    setMediaPlayed: any
+    setMediaDuration: any
+    mediaPlaying: boolean
 }
 
 function MediaWithAnchorsContainer(props: MediaWithAnchorsContainerProps): JSX.Element {
 
-	const { node, anchorId, anchorIds, createNode } = props
+	const { node, anchorId, anchorIds, createNode, mediaPlayed, setMediaPlayed, setMediaDuration, mediaPlaying } = props
 	const [newAnchor, setNewAnchor]: [IMediaAnchor, any] = useState(null)
 	const [newAnchorModal, setNewAnchorModal]: [boolean, any] = useState(false)
 	const [newMediaTime, setNewMediaTime]: [number, any] = useState(0)
@@ -53,7 +57,11 @@ function MediaWithAnchorsContainer(props: MediaWithAnchorsContainerProps): JSX.E
 				setNewAnchor(null)
 				setNewAnchor(anc)
 			}} 
-			setNewMediaTime={setNewMediaTime}
+            setNewMediaTime={setNewMediaTime}
+            mediaPlayed={mediaPlayed}
+            setMediaPlayed={setMediaPlayed}
+            setMediaDuration={setMediaDuration}
+            mediaPlaying={mediaPlaying}
 		/>
 
 		<AddAnchorModal
