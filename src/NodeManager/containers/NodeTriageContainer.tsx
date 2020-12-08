@@ -7,6 +7,7 @@ import { Button, Divider } from '@blueprintjs/core';
 import { useNavigate } from 'react-router';
 import MediaNodeGateway from '../../Gateways/Media/MediaNodeGateway';
 import MediaContainer from '../../MediaNode/MediaNodeContainer';
+import RelatedLinksContainer from '../../Links/RelatedLinksContainer'
 
 interface NodeTriageProps {
 	node: INode
@@ -78,7 +79,13 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
 			<div className="NodeTriageContainer">
 				{/* // testing commit and push again
                 // TODO: here we need to create a state (mediatimestamp) and give the state to the anchors and pass the setState function to the nodeComponent (media). I guess make it optional so immutable text doesn't need it. */}
-				{nodeComponent}
+				<div>
+                    {nodeComponent}
+                    <RelatedLinksContainer 
+                        currentNodeId={node.nodeId}
+                    />
+                </div>
+                
 				<AnchorContainer
 					selectedAnchor={selectedAnchor}
 					setSelectedAnchor={setSelectedAnchor}

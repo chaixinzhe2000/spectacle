@@ -1,6 +1,6 @@
 import { Anchor } from "antd";
 import { NodeTracing } from "inspector";
-import { failureServiceResponse, IAnchor, IImmutableGridAnchor, IImmutableTextAnchor, IMediaAnchor, INode, IServiceResponse, NodeType, successfulServiceResponse } from "spectacle-interfaces";
+import { failureServiceResponse, IAnchor, IImmutableTextAnchor, IMediaAnchor, INode, IServiceResponse, NodeType, successfulServiceResponse } from "spectacle-interfaces";
 import AnchorGateway from "./Gateways/AnchorGateway";
 import ImmutableTextAnchorGateway from "./Gateways/ImmutableText/ImmutableTextAnchorGateway";
 import ImmutableTextNodeGateway from "./Gateways/ImmutableText/ImmutableTextNodeGateway";
