@@ -19,11 +19,11 @@ interface AnchorViewProps {
 	canManageLinks: boolean
 	mediaAnchors?: IMediaAnchor[]
 	immutableTextAnchors?: IImmutableTextAnchor[]
-	immutableTextNode?: IImmutableTextNode
-	setMediaPlayed?: any
-	mediaDuration?: number
-	setMediaPlaying?: any
-	selectedAnchor?: IAnchor
+    immutableTextNode?: IImmutableTextNode
+    setMediaPlayed?: any
+    mediaDuration?: number
+    mediaPlaying?: boolean
+    setMediaPlaying?: any
 }
 
 function convertTime(sec_num) {
@@ -57,16 +57,20 @@ function convertTime(sec_num) {
 
 
 function AnchorView(props: AnchorViewProps): JSX.Element {
-	const { anchors, anchor, setAnchor, getNode, setPreviewAnchor, linkMap, canManageLinks, mediaAnchors, immutableTextAnchors, immutableTextNode, setMediaPlayed, mediaDuration, setMediaPlaying, selectedAnchor } = props
+	const { anchors, anchor, setAnchor, getNode, setPreviewAnchor, linkMap, canManageLinks, mediaAnchors, immutableTextAnchors, immutableTextNode, setMediaPlayed, mediaDuration, mediaPlaying, setMediaPlaying } = props
+    
+    const seekTo = (seconds: number, duration: number) => {
+        const played = seconds/duration
+        console.log(played)
+        setMediaPlayed(played)
+        if (mediaPlaying === true){
+            setMediaPlaying(false)
+        } else{
+            setMediaPlaying(true)
+        }        
+    }
 
 	const activeIndex = anchor ? anchors.findIndex(anc => anc.anchorId === anchor.anchorId) : -1
-
-	const seekTo = (seconds: number, duration: number) => {
-		const played = seconds / duration
-		console.log(played)
-		setMediaPlayed(played)
-		setMediaPlaying(true)
-	}
 
 	if (anchors.length) {
 		// media annotations

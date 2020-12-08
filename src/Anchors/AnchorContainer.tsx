@@ -22,11 +22,12 @@ interface AnchorContainerProps {
     clearSelection: () => void
     mediaDuration: number
     setMediaPlayed: any
+    mediaPlaying: boolean
     setMediaPlaying: any
 }
 
 function AnchorContainer(props: AnchorContainerProps): JSX.Element {
-	const { node, selectedAnchor, setSelectedAnchor, setPreviewAnchor, clearSelection, setAnchorIds, mediaDuration, setMediaPlayed, setMediaPlaying } = props
+	const { node, selectedAnchor, setSelectedAnchor, setPreviewAnchor, clearSelection, setAnchorIds, mediaDuration, setMediaPlayed, mediaPlaying, setMediaPlaying } = props
 
 	const [deleteAnchor] = useMutation(HypertextSdk.deleteAnchor, {
 		onSuccess: (data) => queryCache.invalidateQueries([data, 'anchors'])
@@ -121,8 +122,8 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
                 immutableTextNode={immutableTextNode ? immutableTextNode : null}
                 setMediaPlayed = {setMediaPlayed}
                 mediaDuration = {mediaDuration}
-				setMediaPlaying = {setMediaPlaying}
-				selectedAnchor = {selectedAnchor}
+                mediaPlaying = {mediaPlaying}
+                setMediaPlaying = {setMediaPlaying}
 			/>
 		</div>)
 

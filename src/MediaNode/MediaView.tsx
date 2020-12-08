@@ -16,10 +16,11 @@ interface NodeProps {
     setMediaPlayed: any
     setMediaDuration: any
     mediaPlaying: boolean
+    setMediaPlaying: any
 }
 
 function MediaView(props: NodeProps): JSX.Element {
-	const { node, anchor, anchors, setAnchor, addNode, previewAnchor, selectedAnchorId, setNewMediaTime, mediaPlayed, setMediaPlayed, setMediaDuration, mediaPlaying } = props
+	const { node, anchor, anchors, setAnchor, addNode, previewAnchor, selectedAnchorId, setNewMediaTime, mediaPlayed, setMediaPlayed, setMediaDuration, mediaPlaying, setMediaPlaying } = props
 	const [mediaUrl, setMediaUrl]: [string, any] = useState('')
 	const [description, setDescription]: [string, any] = useState('You are one step away from creating a video node...')
 	const [highlightedAnchors, setHighlightedAnchors]: [IMediaAnchor[], any] = useState([])
@@ -52,6 +53,7 @@ function MediaView(props: NodeProps): JSX.Element {
                 setMediaPlayed={setMediaPlayed}
                 setMediaDuration={setMediaDuration}
                 mediaPlaying={mediaPlaying}
+                setMediaPlaying={setMediaPlaying}
 			/>
 		)
 	} else {
