@@ -10,16 +10,19 @@ import MediaWithAnchorsContainer from './MediaWithAnchorsContainer';
 interface MediaContainerProps {
 	node: INode
 	anchorId: string
-    anchorIds: string[]
-    mediaPlayed: number
-    setMediaPlayed: any
-    setMediaDuration: any
-    mediaPlaying: boolean
-    setMediaPlaying: any
+	anchorIds: string[]
+	mediaPlayed: number
+	setMediaPlayed: any
+	setMediaDuration: any
+	mediaPlaying: boolean
+	setMediaPlaying: any
+	newMediaAnchorModal: boolean
+	setNewMediaAnchorModal: any
 }
 
 function MediaContainer(props: MediaContainerProps): JSX.Element {
-	const { node, anchorId, anchorIds, mediaPlayed, setMediaPlayed, setMediaDuration, mediaPlaying, setMediaPlaying } = props
+	const { node, anchorId, anchorIds, mediaPlayed, setMediaPlayed, setMediaDuration, mediaPlaying, setMediaPlaying,
+		newMediaAnchorModal, setNewMediaAnchorModal } = props
 	const { isLoading, data, error } = useQuery([node.nodeId, node.nodeType], MediaNodeGateway.getNode)
 
 	const [createNode] = useMutation(MediaNodeGateway.createNode, {
@@ -38,12 +41,14 @@ function MediaContainer(props: MediaContainerProps): JSX.Element {
 			createNode={mediaUrl => createNode({
 				nodeId: node.nodeId,
 				mediaUrl: mediaUrl
-            })}
-            mediaPlayed={mediaPlayed}
-            setMediaPlayed={setMediaPlayed}
-            setMediaDuration={setMediaDuration}
-            mediaPlaying={mediaPlaying}
-            setMediaPlaying={setMediaPlaying}
+			})}
+			mediaPlayed={mediaPlayed}
+			setMediaPlayed={setMediaPlayed}
+			setMediaDuration={setMediaDuration}
+			mediaPlaying={mediaPlaying}
+			setMediaPlaying={setMediaPlaying}
+			newMediaAnchorModal={newMediaAnchorModal}
+			setNewMediaAnchorModal={setNewMediaAnchorModal}
 		/>
 	</div>
 	)

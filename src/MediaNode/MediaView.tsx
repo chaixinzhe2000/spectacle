@@ -16,7 +16,8 @@ interface NodeProps {
     setMediaPlayed: any
     setMediaDuration: any
     mediaPlaying: boolean
-    setMediaPlaying: any
+	setMediaPlaying: any
+
 }
 
 function MediaView(props: NodeProps): JSX.Element {

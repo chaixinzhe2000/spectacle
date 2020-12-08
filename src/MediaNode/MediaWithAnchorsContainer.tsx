@@ -12,19 +12,22 @@ interface MediaWithAnchorsContainerProps {
 	node: IMediaNode
 	anchorId: string
 	anchorIds: string[]
-    createNode: (mediaUrl: string) => void
-    mediaPlayed: number
-    setMediaPlayed: any
-    setMediaDuration: any
-    mediaPlaying: boolean
-    setMediaPlaying: any
+	createNode: (mediaUrl: string) => void
+	mediaPlayed: number
+	setMediaPlayed: any
+	setMediaDuration: any
+	mediaPlaying: boolean
+	setMediaPlaying: any
+	newMediaAnchorModal: boolean
+	setNewMediaAnchorModal: any
 }
 
 function MediaWithAnchorsContainer(props: MediaWithAnchorsContainerProps): JSX.Element {
 
-	const { node, anchorId, anchorIds, createNode, mediaPlayed, setMediaPlayed, setMediaDuration, mediaPlaying, setMediaPlaying } = props
+	const { node, anchorId, anchorIds, createNode, mediaPlayed, setMediaPlayed, setMediaDuration,
+		mediaPlaying, setMediaPlaying, newMediaAnchorModal, setNewMediaAnchorModal } = props
 	const [newAnchor, setNewAnchor]: [IMediaAnchor, any] = useState(null)
-	const [newAnchorModal, setNewAnchorModal]: [boolean, any] = useState(false)
+	// const [newAnchorModal, setNewAnchorModal]: [boolean, any] = useState(false)
 	const [newMediaTime, setNewMediaTime]: [number, any] = useState(0)
 
 	// TODO: call on this one!!!!!!!! hypertextsdk stufff
@@ -39,13 +42,13 @@ function MediaWithAnchorsContainer(props: MediaWithAnchorsContainerProps): JSX.E
 	if (isLoading) return <Spinner />
 
 	return (<div style={{ margin: '0', marginTop: '39px', width: '100%', padding: '10px', border: '1px solid lightgrey' }}>
-		
-			<div>
-				<ButtonGroup>
-					<Button text="Add Annotation" onClick={() => setNewAnchorModal(true)} />
-				</ButtonGroup>
-				<Divider />
-			</div>
+
+		{/* <div>
+			<ButtonGroup>
+				<Button text="Add Annotation" onClick={() => setNewMediaAnchorModal(true)} />
+			</ButtonGroup>
+			<Divider />
+		</div> */}
 
 		<MediaView
 			previewAnchor={MediaAnchorMap[anchorId]}
@@ -57,18 +60,18 @@ function MediaWithAnchorsContainer(props: MediaWithAnchorsContainerProps): JSX.E
 			setAnchor={anc => {
 				setNewAnchor(null)
 				setNewAnchor(anc)
-			}} 
-            setNewMediaTime={setNewMediaTime}
-            mediaPlayed={mediaPlayed}
-            setMediaPlayed={setMediaPlayed}
-            setMediaDuration={setMediaDuration}
-            mediaPlaying={mediaPlaying}
-            setMediaPlaying={setMediaPlaying}
+			}}
+			setNewMediaTime={setNewMediaTime}
+			mediaPlayed={mediaPlayed}
+			setMediaPlayed={setMediaPlayed}
+			setMediaDuration={setMediaDuration}
+			mediaPlaying={mediaPlaying}
+			setMediaPlaying={setMediaPlaying}
 		/>
 
 		<AddAnchorModal
-			isOpen={newAnchorModal}
-			onClose={() => setNewAnchorModal(false)}
+			isOpen={newMediaAnchorModal}
+			onClose={() => setNewMediaAnchorModal(false)}
 			onAdd={(content, author, timeStamp) => {
 				const anchorId = generateAnchorId()
 				createAnchor({
@@ -86,7 +89,7 @@ function MediaWithAnchorsContainer(props: MediaWithAnchorsContainerProps): JSX.E
 					}
 				})
 				setNewAnchor(null)
-				setNewAnchorModal(false)
+				setNewMediaAnchorModal(false)
 			}}
 			newMediaTime={newMediaTime}
 			anchor={newAnchor}

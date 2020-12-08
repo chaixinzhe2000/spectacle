@@ -23,7 +23,10 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
 	const [anchorIds, setAnchorIds]: [string[], any] = useState([])
     const [mediaPlayed, setMediaPlayed]: [number, any] = useState(-1)
     const [mediaDuration, setMediaDuration]: [number, any] = useState(Infinity)
-    const [mediaPlaying, setMediaPlaying]: [boolean, any] = useState(false)
+	const [mediaPlaying, setMediaPlaying]: [boolean, any] = useState(false)
+	
+	const [newMediaAnchorModal, setNewMediaAnchorModal]: [boolean, any] = useState(false)
+
 
 	useEffect(() => {
 		console.log("node has changed")
@@ -53,7 +56,9 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
                     setMediaPlayed={setMediaPlayed}
                     setMediaDuration={setMediaDuration}
                     mediaPlaying={mediaPlaying}
-                    setMediaPlaying={setMediaPlaying}
+					setMediaPlaying={setMediaPlaying}
+					newMediaAnchorModal={newMediaAnchorModal}
+					setNewMediaAnchorModal={setNewMediaAnchorModal}
                     />
 				break
 			default:
@@ -77,7 +82,8 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
                     setMediaPlayed={setMediaPlayed}
                     mediaDuration={mediaDuration}
                     mediaPlaying={mediaPlaying}
-                    setMediaPlaying={setMediaPlaying}
+					setMediaPlaying={setMediaPlaying}
+					setNewMediaAnchorModal={setNewMediaAnchorModal}
 				/>
 			</div>
 		</div>

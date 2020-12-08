@@ -24,10 +24,12 @@ interface AnchorContainerProps {
 	setMediaPlayed: any
 	mediaPlaying: boolean
 	setMediaPlaying: any
+	setNewMediaAnchorModal: any
 }
 
 function AnchorContainer(props: AnchorContainerProps): JSX.Element {
-	const { node, selectedAnchor, setSelectedAnchor, setPreviewAnchor, clearSelection, setAnchorIds, mediaDuration, setMediaPlayed, mediaPlaying, setMediaPlaying } = props
+	const { node, selectedAnchor, setSelectedAnchor, setPreviewAnchor, clearSelection,
+		setAnchorIds, mediaDuration, setMediaPlayed, mediaPlaying, setMediaPlaying, setNewMediaAnchorModal } = props
 
 	const [deleteAnchor] = useMutation(HypertextSdk.deleteAnchor, {
 		onSuccess: () => {
@@ -102,9 +104,12 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 			<H5> Annotations </H5>
 			{<div> <ButtonGroup>
 				<Button intent="primary" icon="add-to-artifact" minimal disabled={false} onClick={(e) => {
+					setNewMediaAnchorModal(true)
+				}}> Add New </Button>
+				<Button intent="success" icon="paperclip" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
 					deleteAnchor(selectedAnchor.anchorId)
 					setSelectedAnchor(null)
-				}}> Add New </Button>
+				}}> Follow Up </Button>
 				<Button intent="danger" icon="graph-remove" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
 					deleteAnchor(selectedAnchor.anchorId)
 					setSelectedAnchor(null)
