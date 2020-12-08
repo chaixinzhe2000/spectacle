@@ -46,6 +46,17 @@
 .AnnotationCard {
 	margin-top: 10px;
 	margin-bottom: 1px;
+	transition: transform 10ms cubic-bezier(0.4, 1, 0.75, 0.9), box-shadow 200ms cubic-bezier(0.4, 1, 0.75, 0.9);
+	padding: 13px!important;
+}
+
+
+.SelectedAnnotationCard {
+	margin-top: 10px;
+	margin-bottom: 1px;
+	background-color: #DCEBF5 !important;
+	transition: transform 10ms cubic-bezier(0.4, 1, 0.75, 0.9), box-shadow 200ms cubic-bezier(0.4, 1, 0.75, 0.9);
+	padding: 13px!important;
 }
 
 .AnnotationDivider {
@@ -64,4 +75,9 @@
 	width: 40vw;
 	margin: 0;
 	margin-top: 39px;
+}
+
+.h5Title {
+	color: #106BA3;
+	margin: 0;
 }

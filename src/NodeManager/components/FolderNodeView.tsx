@@ -15,7 +15,7 @@ function JsonNodeView(props: NodeProps): JSX.Element {
 			<div className="NodeBox">
 				<Callout icon={"inbox"} title={node.label} intent={"primary"}>
 					<div className="NodeBoxGap">
-						This field can be used to display a description of the Folder node. For example, you can include your syllabus or requirement for assignments here. Below is a list of it's sub-nodes and their respective types.
+						This field can be used to display a description of the Folder node. For example, you can include your syllabus or requirement for assignments here. Below is a list of its sub-nodes and their respective types.
 					</div>
 					<div className="NodeBoxGap">
 					{node.children.map((n, index) =>
