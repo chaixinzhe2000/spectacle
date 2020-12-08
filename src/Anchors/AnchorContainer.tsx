@@ -20,6 +20,7 @@ interface AnchorContainerProps {
 	setPreviewAnchor: (anchor: IAnchor) => void
 	setAnchorIds: (anchorIds: string[]) => void
 	clearSelection: () => void
+	setMediaPlayed: any
 }
 
 function AnchorContainer(props: AnchorContainerProps): JSX.Element {

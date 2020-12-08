@@ -51,6 +51,10 @@ function convertTime(sec_num) {
 	return hoursStr + ':' + minStr + ':' + secStr;
 }
 
+function mediaSeekTo(time: number) {
+	
+}
+
 function AnchorView(props: AnchorViewProps): JSX.Element {
 	const { anchors, anchor, setAnchor, getNode, setPreviewAnchor, linkMap, canManageLinks, mediaAnchors, immutableTextAnchors, immutableTextNode } = props
 	if (anchors.length) {
@@ -61,7 +65,7 @@ function AnchorView(props: AnchorViewProps): JSX.Element {
 					{anchors.map((a, index) =>
 						<div key={a.anchorId}>
 							<Card className="AnnotationCard" interactive={true} elevation={Elevation.ZERO}>
-								<h5><a href="#">{convertTime(mediaAnchors[index].mediaTimeStamp)}</a></h5>
+								<h5><a onDoubleClick={e => {mediaSeekTo(mediaAnchors[index].mediaTimeStamp)}}>{convertTime(mediaAnchors[index].mediaTimeStamp)}</a></h5>
 								{anchors[index].contentList.map((c, cIndex) =>
 									<div key={cIndex}>
 										<p><b>{anchors[index].authorList[cIndex]}</b>: {c}</p>

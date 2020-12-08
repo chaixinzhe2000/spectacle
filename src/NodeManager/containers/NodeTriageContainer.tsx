@@ -21,6 +21,7 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
 	const [selectedAnchor, setSelectedAnchor]: [IAnchor, any] = useState(null)
 	const [previewAnchor, setPreviewAnchor]: [IAnchor, any] = useState(null)
 	const [anchorIds, setAnchorIds]: [string[], any] = useState([])
+	const [mediaPlayed, setMediaPlayed]: [number, any] = useState(0)
 
 	useEffect(() => {
 		console.log("node has changed")
@@ -65,6 +66,7 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
 						setSelectedAnchor(null)
 						setPreviewAnchor(null)
 					}}
+					setMediaPlayed={setMediaPlayed}
 				/>
 			</div>
 		</div>

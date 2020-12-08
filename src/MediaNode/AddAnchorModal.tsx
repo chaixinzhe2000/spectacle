@@ -8,7 +8,7 @@ interface AddAnchorModalProps {
 	isOpen: boolean
 	onClose: () => void
 	onAdd: (content: string, author: string, timeStamp: number) => void
-	anchor: IMediaAnchor,
+	anchor: IMediaAnchor
 	newMediaTime: number
 }
 
