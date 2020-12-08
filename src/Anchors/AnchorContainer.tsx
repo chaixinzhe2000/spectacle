@@ -19,18 +19,22 @@ interface AnchorContainerProps {
 	setSelectedAnchor: (anchor: IAnchor) => void
 	setPreviewAnchor: (anchor: IAnchor) => void
 	setAnchorIds: (anchorIds: string[]) => void
-    clearSelection: () => void
-    mediaDuration: number
-    setMediaPlayed: any
-    mediaPlaying: boolean
-    setMediaPlaying: any
+	clearSelection: () => void
+	mediaDuration: number
+	setMediaPlayed: any
+	mediaPlaying: boolean
+	setMediaPlaying: any
 }
 
 function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 	const { node, selectedAnchor, setSelectedAnchor, setPreviewAnchor, clearSelection, setAnchorIds, mediaDuration, setMediaPlayed, mediaPlaying, setMediaPlaying } = props
 
 	const [deleteAnchor] = useMutation(HypertextSdk.deleteAnchor, {
-		onSuccess: (data) => queryCache.invalidateQueries([data, 'anchors'])
+		onSuccess: () => {
+			queryCache.invalidateQueries([node.nodeId, 'anchors']);
+			queryCache.invalidateQueries([anchorIds, 'media-anchors']);
+			queryCache.invalidateQueries([anchorIds, 'immutable-text-anchors'])
+		}
 	})
 
 	// Get Node Anchors, On Success Cache Anchors by Anchor ID
@@ -96,17 +100,21 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 	return (
 		<div style={{ margin: 'auto', marginTop: '39px', width: '100%', padding: '10px', border: '1px solid lightgrey' }}>
 			<H5> Annotations </H5>
-			{selectedAnchor && <> <ButtonGroup>
-				<Button intent="danger" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
+			{<div> <ButtonGroup>
+				<Button intent="primary" icon="add-to-artifact" minimal disabled={false} onClick={(e) => {
 					deleteAnchor(selectedAnchor.anchorId)
 					setSelectedAnchor(null)
-				}}> Delete Anchor </Button>
-				<Button intent="warning" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
+				}}> Add New </Button>
+				<Button intent="danger" icon="graph-remove" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
+					deleteAnchor(selectedAnchor.anchorId)
+					setSelectedAnchor(null)
+				}}> Delete </Button>
+				<Button intent="warning" icon="clean" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
 					clearSelection()
-				}}> Clear Selection </Button>
+				}}> Clear </Button>
 			</ButtonGroup>
 				<Divider />
-			</>
+			</div>
 			}
 
 			<AnchorView
@@ -119,11 +127,11 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 				getNode={nid => getNode(nid)}
 				mediaAnchors={mediaAnchorMap ? Object.values(mediaAnchorMap) : []}
 				immutableTextAnchors={immutableTextAnchorMap ? Object.values(immutableTextAnchorMap) : []}
-                immutableTextNode={immutableTextNode ? immutableTextNode : null}
-                setMediaPlayed = {setMediaPlayed}
-                mediaDuration = {mediaDuration}
-                mediaPlaying = {mediaPlaying}
-                setMediaPlaying = {setMediaPlaying}
+				immutableTextNode={immutableTextNode ? immutableTextNode : null}
+				setMediaPlayed={setMediaPlayed}
+				mediaDuration={mediaDuration}
+				mediaPlaying={mediaPlaying}
+				setMediaPlaying={setMediaPlaying}
 			/>
 		</div>)
 

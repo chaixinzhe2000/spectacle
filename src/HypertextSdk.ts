@@ -1,5 +1,6 @@
 import { Anchor } from "antd";
-import { failureServiceResponse, IAnchor, IImmutableGridAnchor, IImmutableTextAnchor, IMediaAnchor, INode, IServiceResponse, successfulServiceResponse } from "spectacle-interfaces";
+import { NodeTracing } from "inspector";
+import { failureServiceResponse, IAnchor, IImmutableGridAnchor, IImmutableTextAnchor, IMediaAnchor, INode, IServiceResponse, NodeType, successfulServiceResponse } from "spectacle-interfaces";
 import AnchorGateway from "./Gateways/AnchorGateway";
 import ImmutableTextAnchorGateway from "./Gateways/ImmutableText/ImmutableTextAnchorGateway";
 import ImmutableTextNodeGateway from "./Gateways/ImmutableText/ImmutableTextNodeGateway";
@@ -43,15 +44,23 @@ const HypertextSdk: IHypertextSdk = {
 	},
 	
     deleteAnchor: async (anchorId: string): Promise<IServiceResponse<{}>> => {
-        let errMsg = ''
+		let errMsg = ''
+		const nodeType: NodeType = await (await AnchorGateway.getAnchor(anchorId)).payload.type
         const deleteAnchorsResponse = await AnchorGateway.deleteAnchor(anchorId)
         if (!deleteAnchorsResponse.success) {
             errMsg += deleteAnchorsResponse.message
-        }
-        const deleteImmutableAnchorsResponse = await ImmutableTextAnchorGateway.deleteAnchor(anchorId)
-        if (!deleteImmutableAnchorsResponse.success) {
-            errMsg += deleteImmutableAnchorsResponse.message
-        }
+		}
+		if (nodeType === 'immutable-text') {
+			const deleteImmutableAnchorsResponse = await ImmutableTextAnchorGateway.deleteAnchor(anchorId)
+			if (!deleteImmutableAnchorsResponse.success) {
+				errMsg += deleteImmutableAnchorsResponse.message
+			}
+		} else if (nodeType === 'media') {
+			const deleteMediaAnchorsResponse = await MediaAnchorGateway.deleteAnchor(anchorId)
+			if (!deleteMediaAnchorsResponse.success) {
+				errMsg += deleteMediaAnchorsResponse.message
+			}
+		}
         const deleteLinkResponse = await LinkGateway.deleteAnchorLinks(anchorId)
         if (!deleteLinkResponse.success) {
             errMsg += deleteLinkResponse.message
