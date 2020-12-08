@@ -38,7 +38,7 @@ describe('Updates Nodes pdf URL', () => {
 	})
 
 	test("fails to update invalid url", async done => {
-		const response = await docDbConnection.updatePDFURL('b', "idontwantodo1951v.pdf")
+		const response = await docDbConnection.updatePDFURL('b', "idontwantodo1951v.pf")
 		expect(response.success).toBeFalsy()
 		const response2 = await docDbConnection.findNodes(['b'])
 		expect(response2.success).toBeTruthy()

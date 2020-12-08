@@ -7,14 +7,13 @@ export interface IMongoIPDFNode {
 	createdAt?: Date
 }
 
-function isValidHttpUrl(urlString: string) {
-	let url;
-	try {
-		url = new URL(urlString);
-	} catch (_) {
-		return false;
-	}
-	return url.protocol === "http:" || url.protocol === "https:";
+function isValidPDFUrl(pdfUrl: string) {
+    var targetString = /\.pdf/gi;  
+    if (pdfUrl.search(targetString) == -1 ) {  
+        return false
+    } else {  
+        return true
+    } 
 }
 
 export function getMongoNode(node: IPDFNode): IServiceResponse<IMongoIPDFNode> {
@@ -24,7 +23,11 @@ export function getMongoNode(node: IPDFNode): IServiceResponse<IMongoIPDFNode> {
 			pdfUrl: node.pdfUrl,
 			createdAt: new Date()
 		}
-		return successfulServiceResponse(mongonode)
+		if (tryGetNode(mongonode).success) {
+			return successfulServiceResponse(mongonode)
+		} else {
+			return failureServiceResponse("Invalid PDF url")
+		}
 	} catch {
 		return failureServiceResponse("Failed to parse INode into IMongoNode, verify that the INode passed in is valid.")
 	}
@@ -32,7 +35,7 @@ export function getMongoNode(node: IPDFNode): IServiceResponse<IMongoIPDFNode> {
 
 export function tryGetNode(mongoNode: IMongoIPDFNode): IServiceResponse<IPDFNode> {
 	if (mongoNode._id !== undefined && typeof mongoNode._id === 'string' && mongoNode._id != ""
-		&& mongoNode.pdfUrl !== undefined && typeof mongoNode.pdfUrl === 'string' && isValidHttpUrl(mongoNode.pdfUrl)) {
+		&& mongoNode.pdfUrl !== undefined && typeof mongoNode.pdfUrl === 'string' && isValidPDFUrl(mongoNode.pdfUrl)) {
 		return successfulServiceResponse({
 			nodeId: mongoNode._id,
 			pdfUrl: mongoNode.pdfUrl

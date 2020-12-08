@@ -32,7 +32,7 @@ describe('Unit Test: updatePDFUrl', () => {
   })
 
   test("fails to update with url with invalid format", async done => {
-    const updateResponse = await nodeGateway.updateNode('a', 'www.michigan.gov/documents/leo/Teaching_Through_Memes_PowerPoint_693511_7.pdf')
+    const updateResponse = await nodeGateway.updateNode('a', 'www.michigan.gov/documents/leo/Teaching_Through_Memes_PowerPoint_693511_7.pf')
     expect(updateResponse.success).toBeFalsy()
     done()
   })
