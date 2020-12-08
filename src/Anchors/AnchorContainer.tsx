@@ -121,7 +121,8 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
                 immutableTextNode={immutableTextNode ? immutableTextNode : null}
                 setMediaPlayed = {setMediaPlayed}
                 mediaDuration = {mediaDuration}
-                setMediaPlaying = {setMediaPlaying}
+				setMediaPlaying = {setMediaPlaying}
+				selectedAnchor = {selectedAnchor}
 			/>
 		</div>)
 

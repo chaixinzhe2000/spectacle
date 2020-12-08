@@ -19,10 +19,11 @@ interface AnchorViewProps {
 	canManageLinks: boolean
 	mediaAnchors?: IMediaAnchor[]
 	immutableTextAnchors?: IImmutableTextAnchor[]
-    immutableTextNode?: IImmutableTextNode
-    setMediaPlayed?: any
-    mediaDuration?: number
-    setMediaPlaying?: any
+	immutableTextNode?: IImmutableTextNode
+	setMediaPlayed?: any
+	mediaDuration?: number
+	setMediaPlaying?: any
+	selectedAnchor?: IAnchor
 }
 
 function convertTime(sec_num) {
@@ -33,17 +34,17 @@ function convertTime(sec_num) {
 	let hoursStr: string
 	let minStr: string
 	let secStr: string
-	if (hours < 10) { 
+	if (hours < 10) {
 		hoursStr = "0" + hours
 	} else {
 		hoursStr = hours.toString()
 	}
-	if (minutes < 10) { 
+	if (minutes < 10) {
 		minStr = "0" + minutes
 	} else {
 		minStr = minutes.toString()
 	}
-	if (seconds < 10) { 
+	if (seconds < 10) {
 		secStr = "0" + seconds
 	} else {
 		secStr = seconds.toString()
@@ -56,24 +57,28 @@ function convertTime(sec_num) {
 
 
 function AnchorView(props: AnchorViewProps): JSX.Element {
-	const { anchors, anchor, setAnchor, getNode, setPreviewAnchor, linkMap, canManageLinks, mediaAnchors, immutableTextAnchors, immutableTextNode, setMediaPlayed, mediaDuration, setMediaPlaying } = props
-    
-    const seekTo = (seconds: number, duration: number) => {
-        const played = seconds/duration
-        console.log(played)
-        setMediaPlayed(played)
-        setMediaPlaying(true)
-    }
+	const { anchors, anchor, setAnchor, getNode, setPreviewAnchor, linkMap, canManageLinks, mediaAnchors, immutableTextAnchors, immutableTextNode, setMediaPlayed, mediaDuration, setMediaPlaying, selectedAnchor } = props
 
-    if (anchors.length) {
+	const activeIndex = anchor ? anchors.findIndex(anc => anc.anchorId === anchor.anchorId) : -1
+
+	const seekTo = (seconds: number, duration: number) => {
+		const played = seconds / duration
+		console.log(played)
+		setMediaPlayed(played)
+		setMediaPlaying(true)
+	}
+
+	if (anchors.length) {
 		// media annotations
 		if (anchors[0].type === "media" && mediaAnchors.length > 0) {
 			return (
 				<div>
 					{anchors.map((a, index) =>
 						<div key={a.anchorId}>
-							<Card className="AnnotationCard" interactive={true} elevation={Elevation.ZERO} onDoubleClick={() => seekTo((mediaAnchors[index].mediaTimeStamp),mediaDuration)}>
-								<h5><a>{convertTime(mediaAnchors[index].mediaTimeStamp)}</a></h5>
+							<Card className={activeIndex === index ? "SelectedAnnotationCard" : "AnnotationCard"} interactive={true} 
+							elevation={activeIndex === index ? Elevation.TWO : Elevation.ZERO} onClick={e => setAnchor(a)} 
+							onDoubleClick={() => seekTo(mediaAnchors[index].mediaTimeStamp, mediaDuration)}>
+								<h5 className="h5Title">{convertTime(mediaAnchors[index].mediaTimeStamp)}</h5>
 								{anchors[index].contentList.map((c, cIndex) =>
 									<div key={cIndex}>
 										<p><b>{anchors[index].authorList[cIndex]}</b>: {c}</p>
@@ -82,8 +87,9 @@ function AnchorView(props: AnchorViewProps): JSX.Element {
 								)}
 							</Card>
 						</div>
-					)}
-				</div>
+					)
+					}
+				</div >
 			)
 		}
 		// Non-media annotations
@@ -93,11 +99,12 @@ function AnchorView(props: AnchorViewProps): JSX.Element {
 					<div>
 						{anchors.map((a, index) =>
 							<div key={a.anchorId}>
-								<Card className="AnnotationCard" interactive={true} elevation={Elevation.ZERO}>
-									<h5><a href="#">"
+								<Card className={activeIndex === index ? "SelectedAnnotationCard" : "AnnotationCard"} interactive={true} 
+								elevation={activeIndex === index ? Elevation.TWO : Elevation.ZERO} onClick={e => setAnchor(a)} >
+									<h5 className="h5Title"> "
 									{immutableTextNode && immutableTextAnchors[index] ?
 											immutableTextNode.text.substring(immutableTextAnchors[index].start, Math.min((immutableTextAnchors[index].end + 1), immutableTextAnchors[index].start + 20)) : ''} "
-									</a></h5>
+									</h5>
 									{anchors[index].contentList.map((c, cIndex) =>
 										<div key={cIndex}>
 											<p><b>{anchors[index].authorList[cIndex]}</b>: {c}</p>
@@ -118,6 +125,33 @@ function AnchorView(props: AnchorViewProps): JSX.Element {
 		return null
 	}
 }
+
+// const activeIndex = anchor ? anchors.findIndex(anc => anc.anchorId === anchor.anchorId) : -1
+
+//     if (anchors.length)
+//         return (
+//             <Accordion onMouseLeave={() => setPreviewAnchor(null)} styled fluid>
+//                 {anchors.map((a, index) => <div key={a.anchorId}>
+//                         <Accordion.Title
+//                             active={activeIndex === index}
+//                             index={index}
+//                             onClick={e => setAnchor(a)}
+//                             onMouseEnter={() => setPreviewAnchor(a)}
+//                         >
+//                         <Icon name='dropdown' />
+//                         {a.label} ({linkMap[a.anchorId] ? linkMap[a.anchorId].length : 0} {linkMap[a.anchorId] ? linkMap[a.anchorId].length === 1 ? 'Link' : 'Links' : 'Links' })
+//                     </Accordion.Title>
+//                     {
+//                         canManageLinks && <Accordion.Content active={activeIndex === index}>
+//                             <LinkContainer anchor={a} />
+//                         </Accordion.Content>
+//                     }
+//                     </div>
+//                 )}
+//         </Accordion>
+//     )
+//     else
+// 		return null
 
 export default AnchorView;
 
