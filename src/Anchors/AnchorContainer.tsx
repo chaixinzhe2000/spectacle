@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Button, ButtonGroup, Divider, H5 } from '@blueprintjs/core';
 import AnchorView from './AnchorView';
-import { IAnchor, ILink, INode, IServiceResponse, newFilePath, ROOT_ID, successfulServiceResponse } from 'spectacle-interfaces';
+import { IAnchor, IImmutableTextAnchor, ILink, INode, IServiceResponse, newFilePath, ROOT_ID, successfulServiceResponse } from 'spectacle-interfaces';
 import { queryCache, useMutation, useQuery } from 'react-query';
 import HypertextSdk from '../HypertextSdk';
 import AnchorGateway from '../Gateways/AnchorGateway';
@@ -25,11 +25,16 @@ interface AnchorContainerProps {
 	mediaPlaying: boolean
 	setMediaPlaying: any
 	setNewMediaAnchorModal: any
+	newImmutableTextAnchorModal: boolean
+	setImmutableTextNewAnchorModal: any
+	newImmutableTextAnchor: IImmutableTextAnchor
+	setNewImmutableTextAnchor: any
 }
 
 function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 	const { node, selectedAnchor, setSelectedAnchor, setPreviewAnchor, clearSelection,
-		setAnchorIds, mediaDuration, setMediaPlayed, mediaPlaying, setMediaPlaying, setNewMediaAnchorModal } = props
+		setAnchorIds, mediaDuration, setMediaPlayed, mediaPlaying, setMediaPlaying, setNewMediaAnchorModal,
+		newImmutableTextAnchorModal, setImmutableTextNewAnchorModal, newImmutableTextAnchor, setNewImmutableTextAnchor } = props
 
 	const [deleteAnchor] = useMutation(HypertextSdk.deleteAnchor, {
 		onSuccess: () => {
@@ -103,18 +108,28 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 		<div style={{ margin: 'auto', marginTop: '39px', width: '100%', padding: '10px', border: '1px solid lightgrey' }}>
 			<H5> Annotations </H5>
 			{<div> <ButtonGroup>
-				<Button intent="primary" icon="add-to-artifact" minimal disabled={false} onClick={(e) => {
-					setNewMediaAnchorModal(true)
-				}}> Add New </Button>
+				<Button intent="primary" icon="add-to-artifact" minimal
+					disabled={((node.nodeType === 'immutable-text' && newImmutableTextAnchor) || node.nodeType === 'media') ? false : true}
+					onClick={(e) => {
+						if (node.nodeType === 'media') {
+							setNewMediaAnchorModal(true)
+							setMediaPlaying(false)
+						} else if (node.nodeType === 'immutable-text') {
+							setImmutableTextNewAnchorModal(true)
+						}
+					}}> Add New </Button>
 				<Button intent="success" icon="paperclip" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
-					deleteAnchor(selectedAnchor.anchorId)
-					setSelectedAnchor(null)
+					// deleteAnchor(selectedAnchor.anchorId)
+					// setSelectedAnchor(null)
 				}}> Follow Up </Button>
 				<Button intent="danger" icon="graph-remove" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
 					deleteAnchor(selectedAnchor.anchorId)
 					setSelectedAnchor(null)
 				}}> Delete </Button>
-				<Button intent="warning" icon="clean" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
+				<Button intent="warning" icon="clean" minimal disabled={(newImmutableTextAnchor || selectedAnchor) ? false : true} onClick={(e) => {
+					if (node.nodeType === 'immutable-text') {
+						setNewImmutableTextAnchor(null)
+					}
 					clearSelection()
 				}}> Clear </Button>
 			</ButtonGroup>

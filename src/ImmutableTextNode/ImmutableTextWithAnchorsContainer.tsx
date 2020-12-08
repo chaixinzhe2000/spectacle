@@ -13,13 +13,18 @@ interface ImmutableTextWithAnchorsContainerProps {
 	anchorId: string
 	anchorIds: string[]
 	createNode: (text: string) => void
+	newImmutableTextAnchorModal: boolean
+	setImmutableTextNewAnchorModal: any
+	newImmutableTextAnchor: IImmutableTextAnchor
+	setNewImmutableTextAnchor: any
 }
 
 function ImmutableTextWithAnchorsContainer(props: ImmutableTextWithAnchorsContainerProps): JSX.Element {
 
-	const { node, anchorId, anchorIds, createNode } = props
-	const [newAnchor, setNewAnchor]: [IImmutableTextAnchor, any] = useState(null)
-	const [newAnchorModal, setNewAnchorModal]: [boolean, any] = useState(false)
+	const { node, anchorId, anchorIds, createNode, newImmutableTextAnchorModal, setImmutableTextNewAnchorModal,
+		newImmutableTextAnchor, setNewImmutableTextAnchor } = props
+	// const [newAnchor, setNewAnchor]: [IImmutableTextAnchor, any] = useState(null)
+	// const [newAnchorModal, setNewAnchorModal]: [boolean, any] = useState(false)
 
 	const [createAnchor] = useMutation(HypertextSdk.createImmutableTextAnchor, {
 		onSuccess: () => queryCache.invalidateQueries([node.nodeId, 'anchors'])
@@ -32,26 +37,26 @@ function ImmutableTextWithAnchorsContainer(props: ImmutableTextWithAnchorsContai
 	if (isLoading) return <Spinner />
 
 	return (<div style={{ margin: '0', marginTop: '39px', width: '100%', padding: '10px', border: '1px solid lightgrey' }}>
-		{newAnchor && <> <ButtonGroup>
-			<Button text="Create Anchor" onClick={() => setNewAnchorModal(true)} />
-			<Button text="Clear Selection" onClick={() => setNewAnchor(null)} />
+		{newImmutableTextAnchor && <> <ButtonGroup>
+			<Button text="Create Anchor" onClick={() => setImmutableTextNewAnchorModal(true)} />
+			<Button text="Clear Selection" onClick={() => setNewImmutableTextAnchor(null)} />
 		</ButtonGroup> <Divider /> </>}
 
 		<ImmutableTextView
 			previewAnchor={immutableTextAnchorMap[anchorId]}
 			node={node}
-			anchor={newAnchor}
+			anchor={newImmutableTextAnchor}
 			selectedAnchorId={anchorId}
 			anchors={immutableTextAnchors}
 			addNode={createNode}
 			setAnchor={anc => {
-				setNewAnchor(null)
-				setNewAnchor(anc)
+				setNewImmutableTextAnchor(null)
+				setNewImmutableTextAnchor(anc)
 			}} />
 
 		<AddAnchorModal
-			isOpen={newAnchorModal}
-			onClose={() => setNewAnchorModal(false)}
+			isOpen={newImmutableTextAnchorModal}
+			onClose={() => setImmutableTextNewAnchorModal(false)}
 			onAdd={(annotation, author) => {
 				const anchorId = generateAnchorId()
 				// TODO: hardcoded
@@ -66,15 +71,15 @@ function ImmutableTextWithAnchorsContainer(props: ImmutableTextWithAnchorsContai
 					},
 					immutableTextAnchor: {
 						anchorId: anchorId,
-						start: newAnchor.start,
-						end: newAnchor.end
+						start: newImmutableTextAnchor.start,
+						end: newImmutableTextAnchor.end
 					}
 				})
-				setNewAnchor(null)
-				setNewAnchorModal(false)
+				setNewImmutableTextAnchor(null)
+				setImmutableTextNewAnchorModal(false)
 			}}
-			text={node && newAnchor ? node.text.substring(newAnchor.start, newAnchor.end + 1) : ''}
-			anchor={newAnchor}
+			text={node && newImmutableTextAnchor ? node.text.substring(newImmutableTextAnchor.start, newImmutableTextAnchor.end + 1) : ''}
+			anchor={newImmutableTextAnchor}
 		/>
 	</div>
 	)

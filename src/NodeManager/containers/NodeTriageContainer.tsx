@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { IAnchor, INode } from 'spectacle-interfaces'
+import { IAnchor, IImmutableTextAnchor, INode } from 'spectacle-interfaces'
 import JsonNodeView from '../components/FolderNodeView';
 import ImmutableTextContainer from '../../ImmutableTextNode/ImmutableTextNodeContainer';
 import AnchorContainer from '../../Anchors/AnchorContainer';
@@ -26,6 +26,10 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
 	const [mediaPlaying, setMediaPlaying]: [boolean, any] = useState(false)
 	
 	const [newMediaAnchorModal, setNewMediaAnchorModal]: [boolean, any] = useState(false)
+	const [newImmutableTextAnchorModal, setImmutableTextNewAnchorModal]: [boolean, any] = useState(false)
+	const [newImmutableTextAnchor, setNewImmutableTextAnchor]: [IImmutableTextAnchor, any] = useState(null)
+
+
 
 
 	useEffect(() => {
@@ -45,7 +49,12 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
 				nodeComponent = <ImmutableTextContainer
 					node={node}
 					anchorId={previewAnchor ? previewAnchor.anchorId : selectedAnchor ? selectedAnchor.anchorId : anchorId}
-					anchorIds={anchorIds} />
+					anchorIds={anchorIds} 
+					newImmutableTextAnchorModal={newImmutableTextAnchorModal}
+					setImmutableTextNewAnchorModal={setImmutableTextNewAnchorModal}
+					newImmutableTextAnchor={newImmutableTextAnchor}
+					setNewImmutableTextAnchor={setNewImmutableTextAnchor}
+					/>
 				break
 			case 'media':
 				nodeComponent = <MediaContainer
@@ -84,6 +93,10 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
                     mediaPlaying={mediaPlaying}
 					setMediaPlaying={setMediaPlaying}
 					setNewMediaAnchorModal={setNewMediaAnchorModal}
+					newImmutableTextAnchorModal={newImmutableTextAnchorModal}
+					setImmutableTextNewAnchorModal={setImmutableTextNewAnchorModal}
+					newImmutableTextAnchor={newImmutableTextAnchor}
+					setNewImmutableTextAnchor={setNewImmutableTextAnchor}
 				/>
 			</div>
 		</div>
