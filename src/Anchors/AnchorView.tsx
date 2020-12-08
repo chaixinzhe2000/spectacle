@@ -22,6 +22,7 @@ interface AnchorViewProps {
     immutableTextNode?: IImmutableTextNode
     setMediaPlayed?: any
     mediaDuration?: number
+    mediaPlaying?: boolean
     setMediaPlaying?: any
 }
 
@@ -56,13 +57,17 @@ function convertTime(sec_num) {
 
 
 function AnchorView(props: AnchorViewProps): JSX.Element {
-	const { anchors, anchor, setAnchor, getNode, setPreviewAnchor, linkMap, canManageLinks, mediaAnchors, immutableTextAnchors, immutableTextNode, setMediaPlayed, mediaDuration, setMediaPlaying } = props
+	const { anchors, anchor, setAnchor, getNode, setPreviewAnchor, linkMap, canManageLinks, mediaAnchors, immutableTextAnchors, immutableTextNode, setMediaPlayed, mediaDuration, mediaPlaying, setMediaPlaying } = props
     
     const seekTo = (seconds: number, duration: number) => {
         const played = seconds/duration
         console.log(played)
         setMediaPlayed(played)
-        setMediaPlaying(true)
+        if (mediaPlaying === true){
+            setMediaPlaying(false)
+        } else{
+            setMediaPlaying(true)
+        }        
     }
 
     if (anchors.length) {

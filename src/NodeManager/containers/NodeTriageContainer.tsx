@@ -21,7 +21,7 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
 	const [selectedAnchor, setSelectedAnchor]: [IAnchor, any] = useState(null)
 	const [previewAnchor, setPreviewAnchor]: [IAnchor, any] = useState(null)
 	const [anchorIds, setAnchorIds]: [string[], any] = useState([])
-    const [mediaPlayed, setMediaPlayed]: [number, any] = useState(0)
+    const [mediaPlayed, setMediaPlayed]: [number, any] = useState(-1)
     const [mediaDuration, setMediaDuration]: [number, any] = useState(Infinity)
     const [mediaPlaying, setMediaPlaying]: [boolean, any] = useState(false)
 
@@ -53,6 +53,7 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
                     setMediaPlayed={setMediaPlayed}
                     setMediaDuration={setMediaDuration}
                     mediaPlaying={mediaPlaying}
+                    setMediaPlaying={setMediaPlaying}
                     />
 				break
 			default:
@@ -75,6 +76,7 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
 					}}
                     setMediaPlayed={setMediaPlayed}
                     mediaDuration={mediaDuration}
+                    mediaPlaying={mediaPlaying}
                     setMediaPlaying={setMediaPlaying}
 				/>
 			</div>

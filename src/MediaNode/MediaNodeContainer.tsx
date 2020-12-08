@@ -15,10 +15,11 @@ interface MediaContainerProps {
     setMediaPlayed: any
     setMediaDuration: any
     mediaPlaying: boolean
+    setMediaPlaying: any
 }
 
 function MediaContainer(props: MediaContainerProps): JSX.Element {
-	const { node, anchorId, anchorIds, mediaPlayed, setMediaPlayed, setMediaDuration, mediaPlaying } = props
+	const { node, anchorId, anchorIds, mediaPlayed, setMediaPlayed, setMediaDuration, mediaPlaying, setMediaPlaying } = props
 	const { isLoading, data, error } = useQuery([node.nodeId, node.nodeType], MediaNodeGateway.getNode)
 
 	const [createNode] = useMutation(MediaNodeGateway.createNode, {
@@ -42,6 +43,7 @@ function MediaContainer(props: MediaContainerProps): JSX.Element {
             setMediaPlayed={setMediaPlayed}
             setMediaDuration={setMediaDuration}
             mediaPlaying={mediaPlaying}
+            setMediaPlaying={setMediaPlaying}
 		/>
 	</div>
 	)

@@ -10,6 +10,7 @@ interface PlayerWrapperProps {
     setMediaPlayed: any
     setMediaDuration: any
     mediaPlaying: boolean
+    setMediaPlaying: any
 }
 
 class PlayerWrapperClass extends Component<PlayerWrapperProps> {
@@ -28,7 +29,7 @@ class PlayerWrapperClass extends Component<PlayerWrapperProps> {
 		light: false,
 		volume: 0.8,
 		muted: false,
-		played: 0,
+		played: this.props.setMediaPlayed,
 		loaded: 0,
 		duration: 0,
 		playbackRate: 1.0,
@@ -37,27 +38,22 @@ class PlayerWrapperClass extends Component<PlayerWrapperProps> {
 
     
 	handlePause = () => {
-		console.log('onPause')
-		this.setState({ playing: false })
+        console.log('onPause')
+        this.props.setMediaPlaying(false)
         this.props.setNewMediaTime(this.state.played * this.state.duration)
-        if(this.props.mediaPlayed !== 0){
+        if (this.props.mediaPlayed !== -1){
             this.handleSeek()
-            this.props.setMediaPlayed(0)
+            this.props.setMediaPlayed(-1)
         }
 	}
 
-    handleSeek = () => {
-        console.log("seeking")
-        // this.setState({seeking: true})
-        this.setState({played: this.props.mediaPlayed})
-        this.setState({seeking: false})
-        this.player.seekTo(this.props.mediaPlayed)
-        this.setState({playing: true})
-    }
-
 	handlePlay = () => {
 		console.log('onPlay')
-		this.setState({ playing: this.props.mediaPlaying })
+        if (this.props.mediaPlayed !== -1){
+            this.handleSeek()
+            this.props.setMediaPlayed(-1)
+        }
+        this.props.setMediaPlaying(true)
 	}
 
 	handleEnded = () => {
@@ -69,9 +65,9 @@ class PlayerWrapperClass extends Component<PlayerWrapperProps> {
 		console.log('onProgress', state)
 		// We only want to update time slider if we are not currently seeking
         this.setState(state)
-        if (this.props.mediaPlayed !== 0){
+        if (this.props.mediaPlayed !== -1){
             this.handleSeek()
-            this.props.setMediaPlayed(0)
+            this.props.setMediaPlayed(-1)
         }
 	}
 
@@ -80,6 +76,17 @@ class PlayerWrapperClass extends Component<PlayerWrapperProps> {
         this.setState({ duration })
         this.props.setMediaDuration(duration)
 	}
+
+    handleSeek = () => {
+        console.log("seeking")
+        // this.setState({seeking: true})
+        this.setState({seeking: true})
+        this.setState({played: this.props.mediaPlayed})
+        this.setState({seeking: false})
+        this.player.seekTo(this.props.mediaPlayed)
+        this.props.setMediaPlaying(true)
+        // this.setState({playing: this.props.mediaPlaying})
+    }
 
 	render() {
 		return (
