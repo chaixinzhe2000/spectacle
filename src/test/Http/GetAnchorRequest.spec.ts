@@ -67,6 +67,40 @@ describe('Unit Test: Get Anchor Request', () => {
 		done()
 	})
 
+	test("get anchors by anchorIds", async done => {
+		const clearResponse = await DatabaseConnection.clearAnchorCollection()
+		expect(clearResponse.success).toBeTruthy()
+
+		const initResponse = await DatabaseConnection.initAnchors([
+			testAnchor,
+			testAnchor2,
+			testAnchor3
+		])
+		expect(initResponse.success).toBeTruthy()
+
+
+		const getResponse = await request(app).get(`${service}/list/${[testAnchor.anchorId, testAnchor2.anchorId, testAnchor3.anchorId]}`).expect(200).expect('Content-Type', /json/)
+		expect(isServiceResponse(getResponse.body)).toBeTruthy()
+		const sr: IServiceResponse<{ [anchorId: string]: IAnchor }> = getResponse.body
+		expect(sr.success).toBeTruthy()
+		expect(sr.payload).toBeDefined()
+		expect(sr.payload[testAnchor.anchorId].contentList).toEqual(testAnchor.contentList)
+		expect(sr.payload[testAnchor2.anchorId].contentList).toStrictEqual(testAnchor2.contentList)
+		expect(sr.payload[testAnchor3.anchorId].contentList).toStrictEqual(testAnchor3.contentList)
+
+		const deleteResponse = await DatabaseConnection.deleteAnchor(testAnchor.anchorId)
+		expect(deleteResponse.success).toBeTruthy()
+
+		const getResponse2 = await request(app).get(`${service}/${testAnchor.anchorId}`).expect(200).expect('Content-Type', /json/)
+		expect(isServiceResponse(getResponse2.body)).toBeTruthy()
+		const sr2: IServiceResponse<IAnchor> = getResponse2.body
+		expect(sr2.success).toBeFalsy()
+
+		const clearResponse2 = await DatabaseConnection.clearAnchorCollection()
+		expect(clearResponse2.success).toBeTruthy()
+		done()
+	})
+
 	test("get anchor by node id", async done => {
 		const clearResponse = await DatabaseConnection.clearAnchorCollection()
 		expect(clearResponse.success).toBeTruthy()

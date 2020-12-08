@@ -26,6 +26,10 @@ export default class AnchorGateway implements IAnchorGateway {
 		return await this.dbConnection.findAnchor(anchorId)
 	}
 
+	async getAnchors(anchorIds: string[]): Promise<IServiceResponse<{ [anchorId: string]: IAnchor }>>{
+		return await this.dbConnection.findAnchors(anchorIds)
+	}
+
 	async getNodeAnchors(nodeId: string): Promise<IServiceResponse<{ [anchorId: string]: IAnchor }>> {
 		return await this.dbConnection.findAnchorsByNode(nodeId)
 	}

@@ -94,3 +94,15 @@ anchorRouter.put("/:anchorId/update/", bodyJsonParser, async (req: Request, res:
 		res.status(400).send(e.message);
 	}
 });
+
+anchorRouter.get("/list/:anchorIdList", async (req: Request, res: Response) => {
+	try {
+	  const response: IServiceResponse<{
+		[anchorId: string]: IAnchor;
+	  }> = await AnchorService.getAnchors(req.params.anchorIdList.split(","));
+  
+	  res.status(200).send(response);
+	} catch (e) {
+	  res.status(400).send(e.message);
+	}
+  });
