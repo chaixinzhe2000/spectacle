@@ -7,6 +7,9 @@ import { generateAnchorId } from '../NodeManager/helpers/generateNodeId';
 import MediaView from './MediaView';
 import AddAnchorModal from './AddAnchorModal';
 import { IMediaAnchor, IMediaNode } from 'spectacle-interfaces';
+import UpdateAnchorModal from '../Anchors/UpdateAnchorModal';
+import { Anchor } from 'antd';
+import AnchorGateway from '../Gateways/AnchorGateway';
 
 interface MediaWithAnchorsContainerProps {
 	node: IMediaNode
@@ -27,11 +30,14 @@ function MediaWithAnchorsContainer(props: MediaWithAnchorsContainerProps): JSX.E
 	const { node, anchorId, anchorIds, createNode, mediaPlayed, setMediaPlayed, setMediaDuration,
 		mediaPlaying, setMediaPlaying, newMediaAnchorModal, setNewMediaAnchorModal } = props
 	const [newAnchor, setNewAnchor]: [IMediaAnchor, any] = useState(null)
-	// const [newAnchorModal, setNewAnchorModal]: [boolean, any] = useState(false)
 	const [newMediaTime, setNewMediaTime]: [number, any] = useState(0)
 
 	// TODO: call on this one!!!!!!!! hypertextsdk stufff
 	const [createAnchor] = useMutation(HypertextSdk.createMediaAnchor, {
+		onSuccess: () => queryCache.invalidateQueries([node.nodeId, 'anchors'])
+	})
+
+	const [updateAnchor] = useMutation(HypertextSdk.addAnchorFollowUp, {
 		onSuccess: () => queryCache.invalidateQueries([node.nodeId, 'anchors'])
 	})
 
@@ -94,6 +100,8 @@ function MediaWithAnchorsContainer(props: MediaWithAnchorsContainerProps): JSX.E
 			newMediaTime={newMediaTime}
 			anchor={newAnchor}
 		/>
+
+		
 	</div>
 	)
 }

@@ -29,9 +29,6 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
 	const [newImmutableTextAnchorModal, setImmutableTextNewAnchorModal]: [boolean, any] = useState(false)
 	const [newImmutableTextAnchor, setNewImmutableTextAnchor]: [IImmutableTextAnchor, any] = useState(null)
 
-
-
-
 	useEffect(() => {
 		console.log("node has changed")
 		setSelectedAnchor(null)

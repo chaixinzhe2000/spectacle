@@ -11,6 +11,7 @@ import LinkGateway from '../Gateways/LinkGateway';
 import MediaAnchorGateway from '../Gateways/Media/MediaAnchorGateway';
 import ImmutableTextAnchorGateway from '../Gateways/ImmutableText/ImmutableTextAnchorGateway';
 import ImmutableTextNodeGateway from '../Gateways/ImmutableText/ImmutableTextNodeGateway';
+import UpdateAnchorModal from './UpdateAnchorModal';
 
 
 interface AnchorContainerProps {
@@ -36,7 +37,17 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 		setAnchorIds, mediaDuration, setMediaPlayed, mediaPlaying, setMediaPlaying, setNewMediaAnchorModal,
 		newImmutableTextAnchorModal, setImmutableTextNewAnchorModal, newImmutableTextAnchor, setNewImmutableTextAnchor } = props
 
+	const [newFollowUpModal, setNewFollowUpModal]: [boolean, any] = useState(false)
+
 	const [deleteAnchor] = useMutation(HypertextSdk.deleteAnchor, {
+		onSuccess: () => {
+			queryCache.invalidateQueries([node.nodeId, 'anchors']);
+			queryCache.invalidateQueries([anchorIds, 'media-anchors']);
+			queryCache.invalidateQueries([anchorIds, 'immutable-text-anchors'])
+		}
+	})
+
+	const [createFollowUp] = useMutation(HypertextSdk.addAnchorFollowUp, {
 		onSuccess: () => {
 			queryCache.invalidateQueries([node.nodeId, 'anchors']);
 			queryCache.invalidateQueries([anchorIds, 'media-anchors']);
@@ -122,6 +133,7 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 					<Button intent="success" icon="paperclip" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
 						// deleteAnchor(selectedAnchor.anchorId)
 						// setSelectedAnchor(null)
+						setNewFollowUpModal(true)
 					}}> Follow Up </Button>
 					<Button intent="danger" icon="graph-remove" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
 						deleteAnchor(selectedAnchor.anchorId)
@@ -161,6 +173,16 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 				mediaDuration={mediaDuration}
 				mediaPlaying={mediaPlaying}
 				setMediaPlaying={setMediaPlaying}
+			/>
+
+			<UpdateAnchorModal
+				isOpen={newFollowUpModal}
+				onClose={() => setNewFollowUpModal(false)}
+				onUpdate={(anchorId, content, author) => {
+					createFollowUp({ anchorId, content, author })
+					setNewFollowUpModal(false)
+				}}
+				anchor={selectedAnchor}
 			/>
 		</div>)
 

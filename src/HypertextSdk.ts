@@ -20,7 +20,9 @@ interface IHypertextSdk {
         mediaAnchor: IMediaAnchor
     })
     deleteNode: (node: INode) => Promise<IServiceResponse<{}>>
-    deleteAnchor: (anchorId: string) => Promise<IServiceResponse<{}>>
+	deleteAnchor: (anchorId: string) => Promise<IServiceResponse<{}>>
+	addAnchorFollowUp: (data: {
+		anchorId: string, content: string, author: string }) => Promise<IServiceResponse<{}>>
 }
 
 // TODO: define the type to be IHypertextSdk later
@@ -105,6 +107,14 @@ const HypertextSdk: IHypertextSdk = {
 		} else {
 			return failureServiceResponse(createAnchor.message)
 		}
+	},
+
+	addAnchorFollowUp: async (data: {anchorId: string, content: string, author: string}): Promise<IServiceResponse<{}>> => {
+		const addFollowUp = await AnchorGateway.addNewAnnotation(data.anchorId, data.content, data.author)
+		if (addFollowUp.success) {
+			return successfulServiceResponse({})
+		}
+		return failureServiceResponse("Failed to add follow up annotation")
 	}
 }
 
