@@ -82,8 +82,9 @@ class PlayerWrapperClass extends Component<PlayerWrapperProps> {
         // this.setState({seeking: true})
         this.setState({seeking: true})
         this.setState({played: this.props.mediaPlayed})
-        this.setState({seeking: false})
+        
         this.player.seekTo(this.props.mediaPlayed)
+        this.setState({seeking: false})
         this.props.setMediaPlaying(true)
         // this.setState({playing: this.props.mediaPlaying})
     }
