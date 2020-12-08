@@ -135,7 +135,7 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 					}}> Clear </Button>
 				</ButtonGroup>
 				<ButtonGroup>
-					<Button intent="warning" icon="clean" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
+					<Button intent="warning" icon="new-link" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
 						// if (node.nodeType === 'immutable-text') {
 						// 	setNewImmutableTextAnchor(null)
 						// }
