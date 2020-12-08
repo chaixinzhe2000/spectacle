@@ -50,7 +50,6 @@
 	padding: 13px!important;
 }
 
-
 .SelectedAnnotationCard {
 	margin-top: 10px;
 	margin-bottom: 1px;
@@ -80,4 +79,8 @@
 .h5Title {
 	color: #106BA3;
 	margin: 0;
+}
+
+.AnnotationButtonGroup {
+	width: 70%;
 }

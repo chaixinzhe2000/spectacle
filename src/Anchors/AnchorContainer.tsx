@@ -107,39 +107,41 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 	return (
 		<div style={{ margin: 'auto', marginTop: '39px', width: '100%', padding: '10px', border: '1px solid lightgrey' }}>
 			<H5> Annotations </H5>
-			{<div> 
+			{<div>
 				<ButtonGroup>
-				<Button intent="primary" icon="add-to-artifact" minimal
-					disabled={((node.nodeType === 'immutable-text' && newImmutableTextAnchor) || node.nodeType === 'media') ? false : true}
-					onClick={(e) => {
-						if (node.nodeType === 'media') {
-							setNewMediaAnchorModal(true)
-							setMediaPlaying(false)
-						} else if (node.nodeType === 'immutable-text') {
-							setImmutableTextNewAnchorModal(true)
+					<Button intent="primary" icon="add-to-artifact" minimal
+						disabled={((node.nodeType === 'immutable-text' && newImmutableTextAnchor) || node.nodeType === 'media') ? false : true}
+						onClick={(e) => {
+							if (node.nodeType === 'media') {
+								setNewMediaAnchorModal(true)
+								setMediaPlaying(false)
+							} else if (node.nodeType === 'immutable-text') {
+								setImmutableTextNewAnchorModal(true)
+							}
+						}}> Add New </Button>
+					<Button intent="success" icon="paperclip" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
+						// deleteAnchor(selectedAnchor.anchorId)
+						// setSelectedAnchor(null)
+					}}> Follow Up </Button>
+					<Button intent="danger" icon="graph-remove" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
+						deleteAnchor(selectedAnchor.anchorId)
+						setSelectedAnchor(null)
+					}}> Delete </Button>
+					<Button intent="warning" icon="clean" minimal disabled={(newImmutableTextAnchor || selectedAnchor) ? false : true} onClick={(e) => {
+						if (node.nodeType === 'immutable-text') {
+							setNewImmutableTextAnchor(null)
 						}
-					}}> Add New </Button>
-				<Button intent="success" icon="paperclip" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
-					// deleteAnchor(selectedAnchor.anchorId)
-					// setSelectedAnchor(null)
-				}}> Follow Up </Button>
-				<Button intent="danger" icon="graph-remove" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
-					deleteAnchor(selectedAnchor.anchorId)
-					setSelectedAnchor(null)
-				}}> Delete </Button>
-				<Button intent="warning" icon="clean" minimal disabled={(newImmutableTextAnchor || selectedAnchor) ? false : true} onClick={(e) => {
-					if (node.nodeType === 'immutable-text') {
-						setNewImmutableTextAnchor(null)
-					}
-					clearSelection()
-				}}> Clear </Button>
-				<Button intent="warning" icon="clean" minimal disabled={(newImmutableTextAnchor || selectedAnchor) ? false : true} onClick={(e) => {
-					// if (node.nodeType === 'immutable-text') {
-					// 	setNewImmutableTextAnchor(null)
-					// }
-					// clearSelection()
-				}}> Create Annotation Link </Button>
-			</ButtonGroup>
+						clearSelection()
+					}}> Clear </Button>
+				</ButtonGroup>
+				<ButtonGroup>
+					<Button intent="warning" icon="clean" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
+						// if (node.nodeType === 'immutable-text') {
+						// 	setNewImmutableTextAnchor(null)
+						// }
+						// clearSelection()
+					}}> Link Annotation </Button>
+				</ButtonGroup>
 				<Divider />
 			</div>
 			}
