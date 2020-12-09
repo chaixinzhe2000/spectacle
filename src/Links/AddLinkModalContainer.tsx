@@ -22,13 +22,14 @@ export const getAnchor = (anchorId: string): IServiceResponse<IAnchor> => {
 }
 
 interface LinkContainerProps {
+    node: INode
     anchor: IAnchor
     isOpen: boolean
     setIsOpen: (isOpen: boolean) => void
 }
 
 function AddLinkModalContainer(props: LinkContainerProps): JSX.Element {
-    const { anchor, isOpen, setIsOpen } = props
+    const { node, anchor, isOpen, setIsOpen } = props
     const [destNodeId, setDestinationNodeId]: [string, any] = useState('')
 
     const rootResponse = useQuery(ROOT_ID, fetchRoot).data
@@ -38,7 +39,8 @@ function AddLinkModalContainer(props: LinkContainerProps): JSX.Element {
     })
 
     const [createLink] = useMutation(LinkGateway.createLink, {
-        onSuccess: () => queryCache.invalidateQueries([anchor.anchorId, 'links'])
+        onSuccess: () => {queryCache.invalidateQueries([anchor.anchorId, 'links'])}
+
     })
 
     function linkGenerator(source: IAnchor, destination: any):ILink {
@@ -69,6 +71,7 @@ function AddLinkModalContainer(props: LinkContainerProps): JSX.Element {
                 onCreate={destination => {
                     createLink(linkGenerator(anchor, destination))
                     queryCache.invalidateQueries([anchor?.anchorId, 'links'])
+                    queryCache.invalidateQueries([node.nodeId, 'outward-node-anchors'])
                     setIsOpen(false)
                 }}
                 isLoading={isLoading}

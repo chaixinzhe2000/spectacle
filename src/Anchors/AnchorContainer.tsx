@@ -65,10 +65,10 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 
 	const [deleteAnchor] = useMutation(HypertextSdk.deleteAnchor, {
 		onSuccess: () => {
-			queryCache.invalidateQueries([node.nodeId, 'anchors']);
+            queryCache.invalidateQueries([node.nodeId, 'anchors']);
 			queryCache.invalidateQueries([anchorIds, 'generic-anchors']);
 			queryCache.invalidateQueries([anchorIds, 'media-anchors']);
-			queryCache.invalidateQueries([anchorIds, 'immutable-text-anchors'])
+            queryCache.invalidateQueries([anchorIds, 'immutable-text-anchors'])
 		}
 	})
 
@@ -77,7 +77,7 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 			queryCache.invalidateQueries([node.nodeId, 'anchors']);
 			queryCache.invalidateQueries([anchorIds, 'generic-anchors']);
 			queryCache.invalidateQueries([anchorIds, 'media-anchors']);
-			queryCache.invalidateQueries([anchorIds, 'immutable-text-anchors'])
+            queryCache.invalidateQueries([anchorIds, 'immutable-text-anchors'])
 		}
 	})
 
@@ -86,7 +86,7 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 			queryCache.invalidateQueries([node.nodeId, 'anchors']);
 			queryCache.invalidateQueries([anchorIds, 'generic-anchors']);
 			queryCache.invalidateQueries([anchorIds, 'media-anchors']);
-			queryCache.invalidateQueries([anchorIds, 'immutable-text-anchors'])
+            queryCache.invalidateQueries([anchorIds, 'immutable-text-anchors'])
 		}
 	})
 
@@ -183,6 +183,7 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 			/>
 
 			<AddLinkModalContainer
+                node={node}
 				isOpen={newLinkModalIsOpen}
 				setIsOpen={setNewLinkModalIsOpen}
 				anchor={selectedAnchor}

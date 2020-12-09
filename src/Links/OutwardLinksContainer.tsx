@@ -1,6 +1,6 @@
 import { H5, Button, Card, Elevation, Divider } from '@blueprintjs/core';
 import { failureServiceResponse, IAnchor, IImmutableTextAnchor, IImmutableTextNode, ILink, IMediaAnchor, INode, IServiceResponse } from 'spectacle-interfaces';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { queryCache, useMutation, useQuery } from 'react-query';
 import { Collapse } from 'antd';
 import { Accordion, Icon } from 'semantic-ui-react'
@@ -15,19 +15,21 @@ import HypertextSdk from '../HypertextSdk';
 const { Panel } = Collapse;
 
 interface OutwardLinksContainerProps {
-	currentNodeId: string
+	node: INode
 }
 
 function OutwardLinksContainer(props: OutwardLinksContainerProps): JSX.Element {
-	const { currentNodeId } = props
+	const { node } = props
 
 	const getOppositeNodeIds = (anchorIds: string[], validLinks: ILink[]) => {
 		let oppositeNodeIds: string[] = []
 		if (anchorIds.length === validLinks.length) {
 			for (let i = 0; i < anchorIds.length; i++) {
-				if (validLinks[i].srcNodeId !== undefined) {
+                console.log("VALIDLINKS ", i)
+                console.log(validLinks[i])
+				if (validLinks[i].srcNodeId !== null) {
 					oppositeNodeIds.push(validLinks[i].srcNodeId)
-				} else if (validLinks[i].destNodeId !== undefined) {
+				} else if (validLinks[i].destNodeId !== null) {
 					oppositeNodeIds.push(validLinks[i].destNodeId)
 				}
 			}
@@ -37,7 +39,13 @@ function OutwardLinksContainer(props: OutwardLinksContainerProps): JSX.Element {
 		}
 	}
 
-	const nodeAnchorsMap = useQuery([currentNodeId, 'node-anchors'], AnchorGateway.getNodeAnchors).data?.payload
+    useEffect(() => {
+        queryCache.invalidateQueries([node.nodeId, 'outward-node-anchors']);
+    })
+
+    const nodeAnchorsMap = useQuery([node.nodeId, 'outward-node-anchors'], AnchorGateway.getNodeAnchors).data?.payload
+    console.log("NODE ANCHORS MAP")
+    console.log(nodeAnchorsMap)
 	const bulkQuery = useQuery([nodeAnchorsMap ? Object.values(nodeAnchorsMap): [], 'node-anchor-links'], HypertextSdk.getOutwardAnchors).data
 	console.log("BULK")
 	console.log(bulkQuery)
@@ -66,7 +74,7 @@ function OutwardLinksContainer(props: OutwardLinksContainerProps): JSX.Element {
 					<div key={a.anchorId}>
 						<Card className={activeIndex === index ? "SelectedAnnotationCard" : "AnnotationCard"} interactive={true}
 							elevation={activeIndex === index ? Elevation.TWO : Elevation.ZERO} onClick={e => setSelectedRelatedAnchor(a)}
-							onDoubleClick={(e) => navigate(`/nodes/${destinationNodeIds[index]}`)}>
+							onDoubleClick={(e) => {navigate(`/nodes/${destinationNodeIds[index]}`)}}>
 							<h5 className="h5Title">{destinationNodeIds[index]}</h5>
 							{anchors[index].contentList.map((c, cIndex) =>
 								<div key={cIndex}>
