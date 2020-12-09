@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Divider, NonIdealState, TextArea, Intent } from '@blueprintjs/core';
-import { IMediaAnchor, IMediaNode } from 'spectacle-interfaces';
+import { Button, Divider, NonIdealState, TextArea, Intent, Callout } from '@blueprintjs/core';
+
+import { IMediaAnchor, IMediaNode, INode } from 'spectacle-interfaces';
 import PlayerWrapperClass from './ReactPlayer'
 import { Icon } from 'semantic-ui-react';
 import { useQuery } from 'react-query';
 import NodeGateway from '../Gateways/NodeGateway';
+
 
 interface NodeProps {
 	node: IMediaNode
@@ -24,13 +26,15 @@ function MediaView(props: NodeProps): JSX.Element {
 	const [mediaUrl, setMediaUrl]: [string, any] = useState('')
 	const [description, setDescription]: [string, any] = useState('You are one step away from creating a video node...')
 
-	const nodeTitle: string = useQuery([node.nodeId, 'node-title'], NodeGateway.getNode).data?.payload.label
+	const nodeQueryId = node ? node.nodeId : ""
+	const mediaINode: INode = useQuery([nodeQueryId, 'node-title'], NodeGateway.getNode).data?.payload
+	const nodeTitle = mediaINode ? mediaINode.label : ""
 
 	if (node) {
 		return (
 			<div>
-				<Icon icon="camera" iconSize={20} />
-				<div className="nodeTitle" >  {nodeTitle} </div>
+				<Callout className="nodeTitle" icon={"presentation"} title={nodeTitle} intent={"warning"}></Callout>
+				<Divider />
 				<PlayerWrapperClass
 					url={node.mediaUrl}
 					setNewMediaTime={setNewMediaTime}
@@ -42,7 +46,6 @@ function MediaView(props: NodeProps): JSX.Element {
 					mediaSkipUsingAnnotation={mediaSkipUsingAnnotation}
 					setMediaSkipUsingAnnotation={setMediaSkipUsingAnnotation}
 				/>
-
 			</div>
 		)
 	} else {
@@ -57,7 +60,6 @@ function MediaView(props: NodeProps): JSX.Element {
 					<Button onClick={() => {
 						if (mediaUrl) {
 							addNode(mediaUrl)
-							// setMediaUrl("")
 							setDescription("You are one step away from creating a video node...")
 						}
 						else

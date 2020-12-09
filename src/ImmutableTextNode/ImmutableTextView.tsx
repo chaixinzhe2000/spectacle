@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Highlightable from 'highlightable'
-import { Button, Divider, NonIdealState, TextArea } from '@blueprintjs/core';
-import { IImmutableTextAnchor, IImmutableTextNode } from 'spectacle-interfaces';
+import { Button, Callout, Divider, NonIdealState, TextArea } from '@blueprintjs/core';
+import { IImmutableTextAnchor, IImmutableTextNode, INode } from 'spectacle-interfaces';
 import { Icon } from 'semantic-ui-react';
+import { useQuery } from 'react-query';
+import NodeGateway from '../Gateways/NodeGateway';
 
 
 interface NodeProps {
@@ -21,30 +23,14 @@ function ImmutableTextView(props: NodeProps): JSX.Element {
 	const [description, setDescription]: [string, any] = useState('You can still add one...')
 	const [highlightedAnchors, setHighlightedAnchors]: [IImmutableTextAnchor[], any] = useState([])
 
-	useEffect(() => {
-		async function setAnchors() {
-			await setHighlightedAnchors([])
-			if (previewAnchor)
-				setHighlightedAnchors([previewAnchor])
-			else if (anchor)
-				setHighlightedAnchors([anchor])
-			else {
-				const selectedAnchor = anchors.find(anc => anc.anchorId === selectedAnchorId)
-				if (selectedAnchor)
-					setHighlightedAnchors([selectedAnchor])
-				else
-					setHighlightedAnchors(anchors)
-			}
-		}
-
-		setAnchors()
-
-	}, [previewAnchor, anchor, anchors])
-
+	const nodeQueryId = node ? node.nodeId : ""
+	const mediaINode: INode = useQuery([nodeQueryId, 'node-title'], NodeGateway.getNode).data?.payload
+	const nodeTitle = mediaINode ? mediaINode.label : ""
 
 	if (node) {
 		return (<div>
-	{ <div className="nodeTitle" >  <Icon name = "text cursor"></Icon> node.label </div> }
+			<Callout className="nodeTitle" icon={"highlight"} title={nodeTitle} intent={"warning"}></Callout>
+				<Divider />
 			<Highlightable
 				ranges={highlightedAnchors}
 				enabled={true}

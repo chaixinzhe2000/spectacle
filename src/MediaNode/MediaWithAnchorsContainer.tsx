@@ -42,7 +42,7 @@ function MediaWithAnchorsContainer(props: MediaWithAnchorsContainerProps): JSX.E
 
     // const [previouslyPaused, setPreviouslyPaused]: [boolean, any] = useState(true)
 
-	return (<div style={{ margin: '0', marginTop: '39px', width: '100%', padding: '10px', border: '1px solid lightgrey' }}>
+	return (<div style={{ margin: '0', width: '100%', padding: '10px', border: '1px solid lightgrey' }}>
 
 		<MediaView
 			node={node}

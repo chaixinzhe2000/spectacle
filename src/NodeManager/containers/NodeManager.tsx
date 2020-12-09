@@ -41,20 +41,24 @@ function NodeManager(props: NodeManagerProps) {
 
 	return (
 		<div className="MegaContainer">
-			<div className="NodeTree">
+			<div className="NodeTree" style={{ margin: '0', width: '100%', padding: '10px', border: '1px solid lightgrey' }}>
+				<div className="yellowBox">
+					<ButtonGroup minimal={true} >
+						{/* Add New Node */}
+						<Button icon="add" intent="primary" text="Add New" onClick={() => setNewNodeModal(true)} />
 
-				<ButtonGroup minimal={true} style={{ padding: '5px' }}>
-					{/* Add New Node */}
-					<Button icon="add" intent="primary" text="Add New" onClick={() => setNewNodeModal(true)} />
+						<Divider />
 
-					<Divider />
+						{/* File Location */}
+						<div style={{ marginTop: "4.5px", marginLeft: "6px" }}>
+							<FileLocation filePath={rootNode?.filePath} onClick={onNodeDoubleClick} appendRoot getNode={getNode} />
+						</div>
 
-					{/* File Location */}
-					<FileLocation filePath={rootNode?.filePath} onClick={onNodeDoubleClick} appendRoot getNode={getNode} />
-				</ButtonGroup>
-
+					</ButtonGroup>
+				</div>
 				{/* File Tree */}
-				
+				<Divider />
+
 				<FileSystem
 					nodes={treeNodes}
 					contextMenu

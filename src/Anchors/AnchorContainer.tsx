@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Button, ButtonGroup, Divider, H5 } from '@blueprintjs/core';
+import { Button, ButtonGroup, Callout, Divider, H5 } from '@blueprintjs/core';
 import AnchorView from './AnchorView';
 import { IAnchor, IImmutableTextAnchor, ILink, INode, IServiceResponse, newFilePath, ROOT_ID, successfulServiceResponse } from 'spectacle-interfaces';
 import { queryCache, useMutation, useQuery } from 'react-query';
@@ -84,8 +84,9 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 	})
 
 	return (
-		<div style={{ margin: 'auto', marginTop: '39px', width: '100%', padding: '10px', border: '1px solid lightgrey' }}>
-			<div className="nodeTitle"> Annotations </div>
+		<div style={{ margin: '0', width: '100%', padding: '10px', border: '1px solid lightgrey' }}>
+			<Callout className="nodeTitle" icon={"book"} title={"Annotations"} intent={"success"}></Callout>
+			<Divider />
 			{<div>
 				<Button intent="primary" icon="add-to-artifact" minimal
 					disabled={((node.nodeType === 'immutable-text' && newImmutableTextAnchor) || node.nodeType === 'media') ? false : true}
