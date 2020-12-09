@@ -10,6 +10,7 @@ import { createTreeNodes, setNodeExpand } from '../helpers/treeNodeHelpers';
 import { generateNodeId } from '../helpers/generateNodeId';
 import NodeTriageComponent from './NodeTriageContainer';
 import { Icon } from 'semantic-ui-react';
+import { queryCache } from 'react-query';
 
 interface NodeManagerProps {
 	selectedNode: INode
@@ -44,10 +45,7 @@ function NodeManager(props: NodeManagerProps) {
 
 				<ButtonGroup minimal={true} style={{ padding: '5px' }}>
 					{/* Add New Node */}
-					<Button icon="add" intent="primary" text="Add Node" onClick={() => setNewNodeModal(true)} />
-
-					{/* Navigate Away From Anchor */}
-					{anchorId && <Button intent="warning" text="See All Anchors" onClick={() => onNodeDoubleClick(rootNode.nodeId)} />}
+					<Button icon="add" intent="primary" text="Add New" onClick={() => setNewNodeModal(true)} />
 
 					<Divider />
 
@@ -66,6 +64,7 @@ function NodeManager(props: NodeManagerProps) {
 					onRename={(node: INode) => {
 						setContextNode(node)
 						setRenameModal(true)
+						queryCache.invalidateQueries([node.nodeId, 'node-title'])
 					}}
 					onMove={(node: INode) => {
 						setContextNode(node)
@@ -99,7 +98,6 @@ function NodeManager(props: NodeManagerProps) {
 						filePath: newFp,
 						children: []
 					}
-
 					onCreateNode(node)
 				}} />
 
