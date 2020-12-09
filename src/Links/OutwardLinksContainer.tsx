@@ -25,9 +25,11 @@ function OutwardLinksContainer(props: OutwardLinksContainerProps): JSX.Element {
 		let oppositeNodeIds: string[] = []
 		if (anchorIds.length === validLinks.length) {
 			for (let i = 0; i < anchorIds.length; i++) {
-				if (validLinks[i].srcNodeId !== undefined) {
+                console.log("VALIDLINKS ", i)
+                console.log(validLinks[i])
+				if (validLinks[i].srcNodeId !== null) {
 					oppositeNodeIds.push(validLinks[i].srcNodeId)
-				} else if (validLinks[i].destNodeId !== undefined) {
+				} else if (validLinks[i].destNodeId !== null) {
 					oppositeNodeIds.push(validLinks[i].destNodeId)
 				}
 			}
@@ -37,7 +39,15 @@ function OutwardLinksContainer(props: OutwardLinksContainerProps): JSX.Element {
 		}
 	}
 
-	const nodeAnchorsMap = useQuery([currentNodeId, 'node-anchors'], AnchorGateway.getNodeAnchors).data?.payload
+    // const invalidateAllQueries = () => {
+    //     queryCache.invalidateQueries([currentNodeId, 'node-anchors']);
+    //     queryCache.invalidateQueries([nodeAnchorsMap ? Object.values(nodeAnchorsMap): [], 'node-anchor-links']);
+    //     queryCache.invalidateQueries([destinationNodeIds ? destinationNodeIds : [], 'opposite-node']);
+    // }
+
+    const nodeAnchorsMap = useQuery([currentNodeId, 'node-anchors'], AnchorGateway.getNodeAnchors).data?.payload
+    console.log("NODE ANCHORS MAP")
+    console.log(nodeAnchorsMap)
 	const bulkQuery = useQuery([nodeAnchorsMap ? Object.values(nodeAnchorsMap): [], 'node-anchor-links'], HypertextSdk.getOutwardAnchors).data
 	console.log("BULK")
 	console.log(bulkQuery)
@@ -66,7 +76,7 @@ function OutwardLinksContainer(props: OutwardLinksContainerProps): JSX.Element {
 					<div key={a.anchorId}>
 						<Card className={activeIndex === index ? "SelectedAnnotationCard" : "AnnotationCard"} interactive={true}
 							elevation={activeIndex === index ? Elevation.TWO : Elevation.ZERO} onClick={e => setSelectedRelatedAnchor(a)}
-							onDoubleClick={(e) => navigate(`/nodes/${destinationNodeIds[index]}`)}>
+							onDoubleClick={(e) => {navigate(`/nodes/${destinationNodeIds[index]}`)}}>
 							<h5 className="h5Title">{destinationNodeIds[index]}</h5>
 							{anchors[index].contentList.map((c, cIndex) =>
 								<div key={cIndex}>
