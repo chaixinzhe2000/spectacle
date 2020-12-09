@@ -71,7 +71,7 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 		},
 		enabled: node
 	}).data?.payload
-	
+
 	console.log(anchorMap)
 
 
@@ -153,7 +153,8 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 				</ButtonGroup>
 				<ButtonGroup>
 					<Button intent="warning" icon="new-link" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
-                        setNewLinkModalIsOpen(true)
+						setNewLinkModalIsOpen(true)
+						setMediaPlaying(false)
 					}}> Link Annotation </Button>
 				</ButtonGroup>
 				<Divider />
@@ -186,6 +187,7 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 				}}
 				anchor={selectedAnchor}
 			/>
+
             <AddLinkModalContainer 
                 isOpen={newLinkModalIsOpen}
                 setIsOpen={setNewLinkModalIsOpen}
