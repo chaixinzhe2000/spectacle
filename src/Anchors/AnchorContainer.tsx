@@ -11,10 +11,9 @@ import LinkGateway from '../Gateways/LinkGateway';
 import MediaAnchorGateway from '../Gateways/Media/MediaAnchorGateway';
 import ImmutableTextAnchorGateway from '../Gateways/ImmutableText/ImmutableTextAnchorGateway';
 import ImmutableTextNodeGateway from '../Gateways/ImmutableText/ImmutableTextNodeGateway';
-import LinkContainer from '../Links/LinkContainer';
-import AddLinkModal from '../Links/AddLinkModal';
 import AddLinkModalContainer from '../Links/AddLinkModalContainer';
-import UpdateAnchorModal from './UpdateAnchorModal';
+import AddFollowUpModal from './AddFollowUpModal';
+import UpdateAnnotationModal from './UpdateAnnotationModal';
 
 
 interface AnchorContainerProps {
@@ -43,6 +42,7 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 		newImmutableTextAnchorModal, setImmutableTextNewAnchorModal, newImmutableTextAnchor, setNewImmutableTextAnchor, newLinkModalIsOpen, setNewLinkModalIsOpen } = props
 
 	const [newFollowUpModal, setNewFollowUpModal]: [boolean, any] = useState(false)
+	const [newUpdateAnnotationModal, setNewUpdateAnnotationModal]: [boolean, any] = useState(false)
 
 	const [deleteAnchor] = useMutation(HypertextSdk.deleteAnchor, {
 		onSuccess: () => {
@@ -53,6 +53,14 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 	})
 
 	const [createFollowUp] = useMutation(HypertextSdk.addAnchorFollowUp, {
+		onSuccess: () => {
+			queryCache.invalidateQueries([node.nodeId, 'anchors']);
+			queryCache.invalidateQueries([anchorIds, 'media-anchors']);
+			queryCache.invalidateQueries([anchorIds, 'immutable-text-anchors'])
+		}
+	})
+
+	const [updateLastAnnotation] = useMutation(HypertextSdk.updateLastAnnotation, {
 		onSuccess: () => {
 			queryCache.invalidateQueries([node.nodeId, 'anchors']);
 			queryCache.invalidateQueries([anchorIds, 'media-anchors']);
@@ -73,26 +81,6 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 	}).data?.payload
 
 	console.log(anchorMap)
-
-
-	const linkNodeMap = useQuery([node.nodeId, 'links'], LinkGateway.getNodeLinks).data?.payload
-
-	const linkAnchorMap: { [anchorId: string]: ILink[] } = {}
-	if (linkNodeMap) {
-		Object.values(linkNodeMap).forEach(link => {
-			if (linkAnchorMap[link.srcAnchorId]) {
-				linkAnchorMap[link.srcAnchorId].push(link)
-			} else {
-				linkAnchorMap[link.srcAnchorId] = [link]
-			}
-
-			if (linkAnchorMap[link.destAnchorId]) {
-				linkAnchorMap[link.destAnchorId].push(link)
-			} else {
-				linkAnchorMap[link.destAnchorId] = [link]
-			}
-		})
-	}
 
 	const anchors = anchorMap ? Object.values(anchorMap) : []
 	const anchorIds = anchorMap ? Object.keys(anchorMap) : []
@@ -125,7 +113,6 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 		<div style={{ margin: 'auto', marginTop: '39px', width: '100%', padding: '10px', border: '1px solid lightgrey' }}>
 			<H5> Annotations </H5>
 			{<div>
-
 				<Button intent="primary" icon="add-to-artifact" minimal
 					disabled={((node.nodeType === 'immutable-text' && newImmutableTextAnchor) || node.nodeType === 'media') ? false : true}
 					onClick={(e) => {
@@ -136,44 +123,37 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 							setImmutableTextNewAnchorModal(true)
 						}
 					}}> Add New </Button>
+				<Button intent="warning" icon="paperclip" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
+					setNewFollowUpModal(true)
+					setMediaPlaying(false)
+				}}> Follow Up </Button>
 				<Button intent="success" icon="new-link" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
 					setNewLinkModalIsOpen(true)
 					setMediaPlaying(false)
 				}}> Link </Button>
-
-				<Button intent="danger" icon="graph-remove" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
-					deleteAnchor(selectedAnchor.anchorId)
-					setSelectedAnchor(null)
-				}}> Delete </Button>
-
-				<Button intent="warning" icon="clean" minimal disabled={(newImmutableTextAnchor || selectedAnchor) ? false : true} onClick={(e) => {
+				<Divider />
+				<Button intent="success" icon="updated" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
+					setNewUpdateAnnotationModal(true)
+					setMediaPlaying(false)
+				}}> Edit </Button>
+				<Button intent="none" icon="clean" minimal disabled={(newImmutableTextAnchor || selectedAnchor) ? false : true} onClick={(e) => {
 					if (node.nodeType === 'immutable-text') {
 						setNewImmutableTextAnchor(null)
 					}
 					clearSelection()
-				}}> Clear </Button>
-				<Button intent="none" icon="updated" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
-					setNewLinkModalIsOpen(true)
-					setMediaPlaying(false)
-				}}> Update </Button>
-				<Button intent="none" icon="paperclip" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
-					setNewFollowUpModal(true)
-					setMediaPlaying(false)
-				}}> Follow Up </Button>
-				
-
+				}}> Clear Selection </Button>
+				<Button intent="danger" icon="graph-remove" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
+					deleteAnchor(selectedAnchor.anchorId)
+					setSelectedAnchor(null)
+				}}> Delete </Button>
 				<Divider />
 			</div>
 			}
 
 			<AnchorView
-				canManageLinks={true}
 				anchors={anchors}
 				anchor={selectedAnchor}
-				setPreviewAnchor={anc => setPreviewAnchor(anc)}
 				setAnchor={anc => setSelectedAnchor(anc)}
-				linkMap={linkAnchorMap}
-				getNode={nid => getNode(nid)}
 				mediaAnchors={mediaAnchorMap ? Object.values(mediaAnchorMap) : []}
 				immutableTextAnchors={immutableTextAnchorMap ? Object.values(immutableTextAnchorMap) : []}
 				immutableTextNode={immutableTextNode ? immutableTextNode : null}
@@ -183,7 +163,7 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 				setMediaPlaying={setMediaPlaying}
 			/>
 
-			<UpdateAnchorModal
+			<AddFollowUpModal
 				isOpen={newFollowUpModal}
 				onClose={() => setNewFollowUpModal(false)}
 				onUpdate={(anchorId, content, author) => {
@@ -193,12 +173,21 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 				anchor={selectedAnchor}
 			/>
 
+			<UpdateAnnotationModal
+				isOpen={newUpdateAnnotationModal}
+				onClose={() => setNewUpdateAnnotationModal(false)}
+				onUpdate={(anchorId, content, author) => {
+					updateLastAnnotation({ anchorId, content, author })
+					setNewUpdateAnnotationModal(false)
+				}}
+				anchor={selectedAnchor}
+			/>
+
 			<AddLinkModalContainer
 				isOpen={newLinkModalIsOpen}
 				setIsOpen={setNewLinkModalIsOpen}
 				anchor={selectedAnchor}
 			/>
-
 		</div>)
 
 }

@@ -29,7 +29,8 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
 	const [newMediaAnchorModal, setNewMediaAnchorModal]: [boolean, any] = useState(false)
 	const [newImmutableTextAnchorModal, setImmutableTextNewAnchorModal]: [boolean, any] = useState(false)
 	const [newImmutableTextAnchor, setNewImmutableTextAnchor]: [IImmutableTextAnchor, any] = useState(null)
-    const [newLinkModalIsOpen, setNewLinkModalIsOpen]: [boolean, any] = useState(false)
+	const [newLinkModalIsOpen, setNewLinkModalIsOpen]: [boolean, any] = useState(false)
+	const [updateLinkModalIsOpen, setUpdateLinkModalIsOpen]: [boolean, any] = useState(false)
 
 
 	useEffect(() => {
@@ -102,7 +103,7 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
 					newImmutableTextAnchor={newImmutableTextAnchor}
                     setNewImmutableTextAnchor={setNewImmutableTextAnchor}
                     newLinkModalIsOpen={newLinkModalIsOpen}
-                    setNewLinkModalIsOpen={setNewLinkModalIsOpen}
+					setNewLinkModalIsOpen={setNewLinkModalIsOpen}
 				/>
 			</div>
 		</div>

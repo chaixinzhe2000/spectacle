@@ -11,12 +11,8 @@ const { Panel } = Collapse;
 
 interface AnchorViewProps {
 	anchors: IAnchor[]
-	getNode: (nodeId: string) => IServiceResponse<INode>
 	anchor?: IAnchor
 	setAnchor: (anchor: IAnchor) => void
-	setPreviewAnchor: (anchor: IAnchor) => void
-	linkMap: { [anchorId: string]: ILink[] }
-	canManageLinks: boolean
 	mediaAnchors?: IMediaAnchor[]
 	immutableTextAnchors?: IImmutableTextAnchor[]
 	immutableTextNode?: IImmutableTextNode
@@ -55,9 +51,8 @@ function convertTime(sec_num) {
 	return hoursStr + ':' + minStr + ':' + secStr;
 }
 
-
 function AnchorView(props: AnchorViewProps): JSX.Element {
-	const { anchors, anchor, setAnchor, getNode, setPreviewAnchor, linkMap, canManageLinks, mediaAnchors, immutableTextAnchors, immutableTextNode, setMediaPlayed, mediaDuration, mediaPlaying, setMediaPlaying } = props
+	const { anchors, anchor, setAnchor, mediaAnchors, immutableTextAnchors, immutableTextNode, setMediaPlayed, mediaDuration, mediaPlaying, setMediaPlaying } = props
 
 	const seekTo = (seconds: number, duration: number) => {
 		const played = seconds / duration

@@ -7,7 +7,7 @@ import { generateAnchorId } from '../NodeManager/helpers/generateNodeId';
 import MediaView from './MediaView';
 import AddAnchorModal from './AddAnchorModal';
 import { IMediaAnchor, IMediaNode } from 'spectacle-interfaces';
-import UpdateAnchorModal from '../Anchors/UpdateAnchorModal';
+import UpdateAnchorModal from '../Anchors/AddFollowUpModal';
 import { Anchor } from 'antd';
 import AnchorGateway from '../Gateways/AnchorGateway';
 import AddLinkModal from '../Links/AddLinkModal';
@@ -45,13 +45,6 @@ function MediaWithAnchorsContainer(props: MediaWithAnchorsContainerProps): JSX.E
 	// if (isLoading) return <Spinner />
 
 	return (<div style={{ margin: '0', marginTop: '39px', width: '100%', padding: '10px', border: '1px solid lightgrey' }}>
-
-		{/* <div>
-			<ButtonGroup>
-				<Button text="Add Annotation" onClick={() => setNewMediaAnchorModal(true)} />
-			</ButtonGroup>
-			<Divider />
-		</div> */}
 
 		<MediaView
 			node={node}

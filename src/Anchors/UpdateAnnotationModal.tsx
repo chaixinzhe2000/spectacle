@@ -4,14 +4,14 @@ import { IAnchor, IImmutableTextAnchor, IMediaAnchor } from 'spectacle-interface
 import { time } from 'console';
 
 
-interface UpdateAnchorModalProps {
+interface UpdateAnnotationModalProps {
 	isOpen: boolean
 	onClose: () => void
 	onUpdate: (anchorId: string, content: string, author: string) => void
 	anchor: IAnchor
 }
 
-export default function UpdateAnchorModal(props: UpdateAnchorModalProps) {
+export default function UpdateAnnotationModal(props: UpdateAnnotationModalProps) {
 
 	const { isOpen, onClose, onUpdate, anchor } = props
 	const [error, setError]: [string, any] = useState('')
