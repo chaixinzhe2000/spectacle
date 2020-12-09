@@ -16,13 +16,14 @@ interface MediaContainerProps {
 	setMediaPlaying: any
 	newMediaAnchorModal: boolean
     setNewMediaAnchorModal: any
+    previouslyPaused:boolean
 }
 
 function MediaContainer(props: MediaContainerProps): JSX.Element {
 	// const { node, anchorId, anchorIds, mediaPlayed, setMediaPlayed, setMediaDuration, mediaPlaying, setMediaPlaying,
     // 	newMediaAnchorModal, setNewMediaAnchorModal, newLinkModalIsOpen, setNewLinkModalIsOpen } = props
     const { node, mediaPlayed, setMediaPlayed, setMediaDuration, mediaPlaying, setMediaPlaying,
-    	newMediaAnchorModal, setNewMediaAnchorModal } = props
+    	newMediaAnchorModal, setNewMediaAnchorModal, previouslyPaused } = props
     
         const { isLoading, data, error } = useQuery([node.nodeId, node.nodeType], MediaNodeGateway.getNode)
     
@@ -48,6 +49,7 @@ function MediaContainer(props: MediaContainerProps): JSX.Element {
 			setMediaPlaying={setMediaPlaying}
 			newMediaAnchorModal={newMediaAnchorModal}
             setNewMediaAnchorModal={setNewMediaAnchorModal}
+            previouslyPaused={previouslyPaused}
 		/>
 	</div>
 	)

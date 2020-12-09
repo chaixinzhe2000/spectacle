@@ -31,6 +31,7 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
 	const [newImmutableTextAnchor, setNewImmutableTextAnchor]: [IImmutableTextAnchor, any] = useState(null)
     const [newLinkModalIsOpen, setNewLinkModalIsOpen]: [boolean, any] = useState(false)
 
+    const [previouslyPaused, setPreviouslyPaused]: [boolean, any] = useState(true)
 
 	useEffect(() => {
 		console.log("node has changed")
@@ -66,6 +67,7 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
 					setMediaPlaying={setMediaPlaying}
 					newMediaAnchorModal={newMediaAnchorModal}
                     setNewMediaAnchorModal={setNewMediaAnchorModal}
+                    previouslyPaused={previouslyPaused}
                     />
 				break
 			default:
@@ -103,6 +105,7 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
                     setNewImmutableTextAnchor={setNewImmutableTextAnchor}
                     newLinkModalIsOpen={newLinkModalIsOpen}
                     setNewLinkModalIsOpen={setNewLinkModalIsOpen}
+                    setPreviouslyPaused={setPreviouslyPaused}
 				/>
 			</div>
 		</div>

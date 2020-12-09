@@ -11,6 +11,7 @@ interface PlayerWrapperProps {
     setMediaDuration: any
     mediaPlaying: boolean
     setMediaPlaying: any
+    // setPreviouslyPaused: any
 }
 
 class PlayerWrapperClass extends Component<PlayerWrapperProps> {
@@ -42,16 +43,17 @@ class PlayerWrapperClass extends Component<PlayerWrapperProps> {
         this.props.setMediaPlaying(false)
         this.props.setNewMediaTime(this.state.played * this.state.duration)
         if (this.props.mediaPlayed !== -1){
-            this.handleSeek()
             this.props.setMediaPlayed(-1)
+            this.handleSeek()
         }
 	}
 
 	handlePlay = () => {
 		console.log('onPlay')
         if (this.props.mediaPlayed !== -1){
+            this.props.setMediaPlayed(-1)  
             this.handleSeek()
-            this.props.setMediaPlayed(-1)
+            
         }
         this.props.setMediaPlaying(true)
 	}

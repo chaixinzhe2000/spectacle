@@ -23,6 +23,7 @@ interface MediaWithAnchorsContainerProps {
 	setMediaPlaying: any
 	newMediaAnchorModal: boolean
     setNewMediaAnchorModal: any
+    previouslyPaused: boolean
 }
 
 function MediaWithAnchorsContainer(props: MediaWithAnchorsContainerProps): JSX.Element {
@@ -30,7 +31,7 @@ function MediaWithAnchorsContainer(props: MediaWithAnchorsContainerProps): JSX.E
 	// const { node,  anchorIds, createNode, mediaPlayed, setMediaPlayed, setMediaDuration,
     // 	mediaPlaying, setMediaPlaying, newMediaAnchorModal, setNewMediaAnchorModal } = props
     const { node, createNode, mediaPlayed, setMediaPlayed, setMediaDuration,
-    	mediaPlaying, setMediaPlaying, newMediaAnchorModal, setNewMediaAnchorModal } = props
+    	mediaPlaying, setMediaPlaying, newMediaAnchorModal, setNewMediaAnchorModal, previouslyPaused } = props
 	const [newAnchor, setNewAnchor]: [IMediaAnchor, any] = useState(null)
 	const [newMediaTime, setNewMediaTime]: [number, any] = useState(0)
 
@@ -39,19 +40,9 @@ function MediaWithAnchorsContainer(props: MediaWithAnchorsContainerProps): JSX.E
 		onSuccess: () => queryCache.invalidateQueries([node.nodeId, 'anchors'])
 	})
 
-	// const { isLoading, data, error } = useQuery([anchorIds, 'media'], MediaAnchorGateway.getAnchors)
-	// const MediaAnchorMap = data && data.success ? data.payload : {}
-	// const MediaAnchors = data && data.success ? Object.values(data.payload) : []
-	// if (isLoading) return <Spinner />
+    // const [previouslyPaused, setPreviouslyPaused]: [boolean, any] = useState(true)
 
 	return (<div style={{ margin: '0', marginTop: '39px', width: '100%', padding: '10px', border: '1px solid lightgrey' }}>
-
-		{/* <div>
-			<ButtonGroup>
-				<Button text="Add Annotation" onClick={() => setNewMediaAnchorModal(true)} />
-			</ButtonGroup>
-			<Divider />
-		</div> */}
 
 		<MediaView
 			node={node}
@@ -62,11 +53,15 @@ function MediaWithAnchorsContainer(props: MediaWithAnchorsContainerProps): JSX.E
 			setMediaDuration={setMediaDuration}
 			mediaPlaying={mediaPlaying}
             setMediaPlaying={setMediaPlaying}
+            // setPreviouslyPaused={setPreviouslyPaused}
 		/>
 
 		<AddAnchorModal
 			isOpen={newMediaAnchorModal}
-			onClose={() => setNewMediaAnchorModal(false)}
+            onClose={() => {
+                setNewMediaAnchorModal(false);
+                setMediaPlaying(!previouslyPaused);
+            }}
 			onAdd={(content, author, timeStamp) => {
 				const anchorId = generateAnchorId()
 				createAnchor({
@@ -85,10 +80,10 @@ function MediaWithAnchorsContainer(props: MediaWithAnchorsContainerProps): JSX.E
 				})
 				setNewAnchor(null)
                 setNewMediaAnchorModal(false)
-                setMediaPlaying(true)
 			}}
-			newMediaTime={newMediaTime}
-			anchor={newAnchor}
+            newMediaTime={newMediaTime}
+            setMediaPlaying={setMediaPlaying}
+            previouslyPaused={previouslyPaused}
 		/>
 	</div>
 	)

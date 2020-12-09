@@ -34,13 +34,14 @@ interface AnchorContainerProps {
 	newImmutableTextAnchor: IImmutableTextAnchor
 	setNewImmutableTextAnchor: any
 	newLinkModalIsOpen: boolean
-	setNewLinkModalIsOpen: any
+    setNewLinkModalIsOpen: any
+    setPreviouslyPaused: any
 }
 
 function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 	const { node, selectedAnchor, setSelectedAnchor, setPreviewAnchor, clearSelection,
 		setAnchorIds, mediaDuration, setMediaPlayed, mediaPlaying, setMediaPlaying, setNewMediaAnchorModal,
-		newImmutableTextAnchorModal, setImmutableTextNewAnchorModal, newImmutableTextAnchor, setNewImmutableTextAnchor, newLinkModalIsOpen, setNewLinkModalIsOpen } = props
+		newImmutableTextAnchorModal, setImmutableTextNewAnchorModal, newImmutableTextAnchor, setNewImmutableTextAnchor, newLinkModalIsOpen, setNewLinkModalIsOpen, setPreviouslyPaused } = props
 
 	const [newFollowUpModal, setNewFollowUpModal]: [boolean, any] = useState(false)
 
@@ -130,7 +131,12 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 					disabled={((node.nodeType === 'immutable-text' && newImmutableTextAnchor) || node.nodeType === 'media') ? false : true}
 					onClick={(e) => {
 						if (node.nodeType === 'media') {
-							setNewMediaAnchorModal(true)
+                            setNewMediaAnchorModal(true)
+                            if (mediaPlaying){
+                                setPreviouslyPaused(false)
+                            } else {
+                                setPreviouslyPaused(true)
+                            }
 							setMediaPlaying(false)
 						} else if (node.nodeType === 'immutable-text') {
 							setImmutableTextNewAnchorModal(true)
