@@ -32,9 +32,9 @@ interface AnchorContainerProps {
 	newImmutableTextAnchorModal: boolean
 	setImmutableTextNewAnchorModal: any
 	newImmutableTextAnchor: IImmutableTextAnchor
-    setNewImmutableTextAnchor: any
-    newLinkModalIsOpen: boolean
-    setNewLinkModalIsOpen: any
+	setNewImmutableTextAnchor: any
+	newLinkModalIsOpen: boolean
+	setNewLinkModalIsOpen: any
 }
 
 function AnchorContainer(props: AnchorContainerProps): JSX.Element {
@@ -125,38 +125,43 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 		<div style={{ margin: 'auto', marginTop: '39px', width: '100%', padding: '10px', border: '1px solid lightgrey' }}>
 			<H5> Annotations </H5>
 			{<div>
-				<ButtonGroup>
-					<Button intent="primary" icon="add-to-artifact" minimal
-						disabled={((node.nodeType === 'immutable-text' && newImmutableTextAnchor) || node.nodeType === 'media') ? false : true}
-						onClick={(e) => {
-							if (node.nodeType === 'media') {
-								setNewMediaAnchorModal(true)
-								setMediaPlaying(false)
-							} else if (node.nodeType === 'immutable-text') {
-								setImmutableTextNewAnchorModal(true)
-							}
-						}}> Add New </Button>
-					<Button intent="success" icon="paperclip" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
-						setNewFollowUpModal(true)
-						setMediaPlaying(false)
-					}}> Follow Up </Button>
-					<Button intent="danger" icon="graph-remove" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
-						deleteAnchor(selectedAnchor.anchorId)
-						setSelectedAnchor(null)
-					}}> Delete </Button>
-					<Button intent="warning" icon="clean" minimal disabled={(newImmutableTextAnchor || selectedAnchor) ? false : true} onClick={(e) => {
-						if (node.nodeType === 'immutable-text') {
-							setNewImmutableTextAnchor(null)
+
+				<Button intent="primary" icon="add-to-artifact" minimal
+					disabled={((node.nodeType === 'immutable-text' && newImmutableTextAnchor) || node.nodeType === 'media') ? false : true}
+					onClick={(e) => {
+						if (node.nodeType === 'media') {
+							setNewMediaAnchorModal(true)
+							setMediaPlaying(false)
+						} else if (node.nodeType === 'immutable-text') {
+							setImmutableTextNewAnchorModal(true)
 						}
-						clearSelection()
-					}}> Clear </Button>
-				</ButtonGroup>
-				<ButtonGroup>
-					<Button intent="warning" icon="new-link" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
-						setNewLinkModalIsOpen(true)
-						setMediaPlaying(false)
-					}}> Link Annotation </Button>
-				</ButtonGroup>
+					}}> Add New </Button>
+				<Button intent="success" icon="new-link" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
+					setNewLinkModalIsOpen(true)
+					setMediaPlaying(false)
+				}}> Link </Button>
+
+				<Button intent="danger" icon="graph-remove" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
+					deleteAnchor(selectedAnchor.anchorId)
+					setSelectedAnchor(null)
+				}}> Delete </Button>
+
+				<Button intent="warning" icon="clean" minimal disabled={(newImmutableTextAnchor || selectedAnchor) ? false : true} onClick={(e) => {
+					if (node.nodeType === 'immutable-text') {
+						setNewImmutableTextAnchor(null)
+					}
+					clearSelection()
+				}}> Clear </Button>
+				<Button intent="none" icon="updated" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
+					setNewLinkModalIsOpen(true)
+					setMediaPlaying(false)
+				}}> Update </Button>
+				<Button intent="none" icon="paperclip" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
+					setNewFollowUpModal(true)
+					setMediaPlaying(false)
+				}}> Follow Up </Button>
+				
+
 				<Divider />
 			</div>
 			}
@@ -175,7 +180,7 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 				setMediaPlayed={setMediaPlayed}
 				mediaDuration={mediaDuration}
 				mediaPlaying={mediaPlaying}
-                setMediaPlaying={setMediaPlaying}
+				setMediaPlaying={setMediaPlaying}
 			/>
 
 			<UpdateAnchorModal
@@ -188,11 +193,11 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 				anchor={selectedAnchor}
 			/>
 
-            <AddLinkModalContainer 
-                isOpen={newLinkModalIsOpen}
-                setIsOpen={setNewLinkModalIsOpen}
-                anchor={selectedAnchor}
-            />
+			<AddLinkModalContainer
+				isOpen={newLinkModalIsOpen}
+				setIsOpen={setNewLinkModalIsOpen}
+				anchor={selectedAnchor}
+			/>
 
 		</div>)
 
