@@ -35,12 +35,13 @@ interface AnchorContainerProps {
 	newLinkModalIsOpen: boolean
     setNewLinkModalIsOpen: any
     setPreviouslyPaused: any
+    setMediaSkipUsingAnnotation: any
 }
 
 function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 	const { node, selectedAnchor, setSelectedAnchor, setPreviewAnchor, clearSelection,
 		setAnchorIds, mediaDuration, setMediaPlayed, mediaPlaying, setMediaPlaying, setNewMediaAnchorModal,
-		newImmutableTextAnchorModal, setImmutableTextNewAnchorModal, newImmutableTextAnchor, setNewImmutableTextAnchor, newLinkModalIsOpen, setNewLinkModalIsOpen, setPreviouslyPaused } = props
+		newImmutableTextAnchorModal, setImmutableTextNewAnchorModal, newImmutableTextAnchor, setNewImmutableTextAnchor, newLinkModalIsOpen, setNewLinkModalIsOpen, setPreviouslyPaused, setMediaSkipUsingAnnotation } = props
 
 	const [newFollowUpModal, setNewFollowUpModal]: [boolean, any] = useState(false)
 	const [newUpdateAnnotationModal, setNewUpdateAnnotationModal]: [boolean, any] = useState(false)
@@ -167,6 +168,7 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 				mediaDuration={mediaDuration}
                 mediaPlaying={mediaPlaying}
                 setMediaPlaying={setMediaPlaying}
+                setMediaSkipUsingAnnotation={setMediaSkipUsingAnnotation}
 			/>
 
 			<AddFollowUpModal

@@ -11,7 +11,6 @@ interface PlayerWrapperProps {
     setMediaDuration: any
     mediaPlaying: boolean
     setMediaPlaying: any
-    // setPreviouslyPaused: any
     mediaSkipUsingAnnotation: boolean
     setMediaSkipUsingAnnotation: any
 }
@@ -41,20 +40,19 @@ class PlayerWrapperClass extends Component<PlayerWrapperProps> {
 
 	handlePause = () => {
         console.log('onPause')
-        // this.props.setMediaPlayed()
         this.props.setMediaPlaying(false)
         this.props.setNewMediaTime(this.state.played * this.state.duration)
-        if (this.props.mediaPlayed !== -1){
+        if (this.props.mediaSkipUsingAnnotation){
+            this.props.setMediaSkipUsingAnnotation(false)
             this.handleSeek()
-            this.props.setMediaPlayed(-1)
         }
 	}
 
 	handlePlay = () => {
 		console.log('onPlay')
-        if (this.props.mediaPlayed !== -1){
+        if (this.props.mediaSkipUsingAnnotation){
+            this.props.setMediaSkipUsingAnnotation(false)
             this.handleSeek()
-            this.props.setMediaPlayed(-1)  
         }
         this.props.setMediaPlaying(true)
 	}
@@ -68,12 +66,7 @@ class PlayerWrapperClass extends Component<PlayerWrapperProps> {
 
 	handleProgress = state => {
 		console.log('onProgress', state)
-		// We only want to update time slider if we are not currently seeking
         this.setState(state)
-        if (this.props.mediaPlayed !== -1){
-            this.handleSeek()
-            this.props.setMediaPlayed(-1)
-        }
 	}
 
 	handleDuration = (duration) => {
@@ -85,10 +78,17 @@ class PlayerWrapperClass extends Component<PlayerWrapperProps> {
     handleSeek = () => {
         console.log("seeking")
         this.setState({seeking: true})
-        this.setState({played: this.props.mediaPlayed})
         this.player.seekTo(this.props.mediaPlayed)
         this.setState({seeking: false})
+        // this.setState({played: this.props.mediaPlayed})
         this.props.setMediaPlaying(true)
+    }
+
+    handleOnStart = () => {
+        if (this.props.mediaSkipUsingAnnotation){
+            this.props.setMediaSkipUsingAnnotation(false)
+            this.handleSeek()
+        }
     }
 
 	render() {
@@ -104,8 +104,8 @@ class PlayerWrapperClass extends Component<PlayerWrapperProps> {
 					playing={this.props.mediaPlaying}
 					controls={this.state.controls}
 					playbackRate={this.state.playbackRate}
-					onReady={() => console.log('onReady')}
-					onStart={() => console.log('onStart')}
+					onReady={() => {console.log('onReady');}}
+					onStart={() => {this.handleOnStart(); console.log('onStart');}}
 					onPlay={this.handlePlay}
 					onPause={this.handlePause}
 					onBuffer={() => console.log('onBuffer')}
