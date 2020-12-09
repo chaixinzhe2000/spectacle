@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router';
 import { failureServiceResponse, IFilePath, INode, IServiceResponse, newFilePath, successfulServiceResponse } from 'spectacle-interfaces'
 import { useQuery, useMutation, queryCache } from 'react-query'
 import NodeGateway from '../../Gateways/NodeGateway';
-import NodeManagerExplorer from './NodeManager';
+import NodeManager from './NodeManager';
 import HypertextSdk from '../../HypertextSdk';
 import { ROOT_ID } from 'spectacle-interfaces/dist/INode';
 
@@ -116,7 +116,7 @@ export default function NodeManagerContainer(props: NodeManagerContainerProps) {
 
 	return (
 		<>
-			<NodeManagerExplorer
+			<NodeManager
 				selectedNode={selectedNode}
 				loading={isLoading}
 				rootNode={data?.payload}

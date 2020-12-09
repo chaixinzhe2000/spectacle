@@ -3,6 +3,7 @@ import { IAnchor, IImmutableTextAnchor, INode } from 'spectacle-interfaces'
 import JsonNodeView from '../components/FolderNodeView';
 import ImmutableTextContainer from '../../ImmutableTextNode/ImmutableTextNodeContainer';
 import AnchorContainer from '../../Anchors/AnchorContainer';
+import PDFNodeContainer from '../../PDFNode/PDFNodeContainer';
 import { Button, Divider } from '@blueprintjs/core';
 import { useNavigate } from 'react-router';
 import MediaNodeGateway from '../../Gateways/Media/MediaNodeGateway';
@@ -26,7 +27,8 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
     const [mediaDuration, setMediaDuration]: [number, any] = useState(Infinity)
 	const [mediaPlaying, setMediaPlaying]: [boolean, any] = useState(false)
 	
-	const [newMediaAnchorModal, setNewMediaAnchorModal]: [boolean, any] = useState(false)
+    const [newMediaAnchorModal, setNewMediaAnchorModal]: [boolean, any] = useState(false)
+    const [newPDFAnchorModal, setNewPDFAnchorModal]: [boolean, any] = useState(false)
 	const [newImmutableTextAnchorModal, setImmutableTextNewAnchorModal]: [boolean, any] = useState(false)
 	const [newImmutableTextAnchor, setNewImmutableTextAnchor]: [IImmutableTextAnchor, any] = useState(null)
 	const [newLinkModalIsOpen, setNewLinkModalIsOpen]: [boolean, any] = useState(false)
@@ -73,7 +75,16 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
                     mediaSkipUsingAnnotation={mediaSkipUsingAnnotation}
                     setMediaSkipUsingAnnotation={setMediaSkipUsingAnnotation}
                     />
-				break
+                break
+            case 'PDF':
+                nodeComponent = <PDFNodeContainer 
+                    node={node}
+                    anchorId={anchorId}
+                    anchorIds={anchorIds}
+                    newPDFAnchorModal={newPDFAnchorModal}
+                    setNewPDFAnchorModal={setNewPDFAnchorModal}
+                    />
+                break
 			default:
 				return <div> Hmmm, don't recognize node type {node.nodeType}... </div>
 		}

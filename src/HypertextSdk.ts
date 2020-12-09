@@ -18,6 +18,9 @@ interface IHypertextSdk {
 	createMediaAnchor(data: {
 		anchor: IAnchor,
 		mediaAnchor: IMediaAnchor
+    })
+    createPDFAnchor(data: {
+		anchor: IAnchor
 	})
 	deleteNode: (node: INode) => Promise<IServiceResponse<{}>>
 	deleteAnchor: (anchorId: string) => Promise<IServiceResponse<{}>>
@@ -108,6 +111,17 @@ const HypertextSdk: IHypertextSdk = {
 			} else {
 				return failureServiceResponse(createMediaAnchor.message)
 			}
+		} else {
+			return failureServiceResponse(createAnchor.message)
+		}
+    },
+    
+    createPDFAnchor: async (data: { anchor: IAnchor }): Promise<IServiceResponse<{ anchor: IAnchor }>> => {
+		const createAnchor = await AnchorGateway.createAnchor(data.anchor)
+		if (createAnchor.success) {
+			return successfulServiceResponse({
+				anchor: createAnchor.payload,
+			})
 		} else {
 			return failureServiceResponse(createAnchor.message)
 		}
