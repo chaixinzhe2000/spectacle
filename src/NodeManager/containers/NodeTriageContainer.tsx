@@ -59,8 +59,6 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
 			case 'media':
 				nodeComponent = <MediaContainer
 					node={node}
-					anchorId={previewAnchor ? previewAnchor.anchorId : selectedAnchor ? selectedAnchor.anchorId : anchorId}
-					anchorIds={anchorIds} 
                     mediaPlayed={mediaPlayed}
                     setMediaPlayed={setMediaPlayed}
                     setMediaDuration={setMediaDuration}
@@ -68,8 +66,6 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
 					setMediaPlaying={setMediaPlaying}
 					newMediaAnchorModal={newMediaAnchorModal}
                     setNewMediaAnchorModal={setNewMediaAnchorModal}
-                    newLinkModalIsOpen={newLinkModalIsOpen}
-                    setNewLinkModalIsOpen={setNewLinkModalIsOpen}
                     />
 				break
 			default:

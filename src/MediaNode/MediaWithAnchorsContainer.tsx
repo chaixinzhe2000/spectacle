@@ -15,8 +15,6 @@ import PlayerWrapperClass from './ReactPlayer';
 
 interface MediaWithAnchorsContainerProps {
 	node: IMediaNode
-	anchorId: string
-	anchorIds: string[]
 	createNode: (mediaUrl: string) => void
 	mediaPlayed: number
 	setMediaPlayed: any
@@ -25,14 +23,14 @@ interface MediaWithAnchorsContainerProps {
 	setMediaPlaying: any
 	newMediaAnchorModal: boolean
     setNewMediaAnchorModal: any
-    newLinkModalIsOpen: boolean
-    setNewLinkModalIsOpen: any
 }
 
 function MediaWithAnchorsContainer(props: MediaWithAnchorsContainerProps): JSX.Element {
 
-	const { node, anchorId, anchorIds, createNode, mediaPlayed, setMediaPlayed, setMediaDuration,
-		mediaPlaying, setMediaPlaying, newMediaAnchorModal, setNewMediaAnchorModal, newLinkModalIsOpen, setNewLinkModalIsOpen } = props
+	// const { node,  anchorIds, createNode, mediaPlayed, setMediaPlayed, setMediaDuration,
+    // 	mediaPlaying, setMediaPlaying, newMediaAnchorModal, setNewMediaAnchorModal } = props
+    const { node, createNode, mediaPlayed, setMediaPlayed, setMediaDuration,
+    	mediaPlaying, setMediaPlaying, newMediaAnchorModal, setNewMediaAnchorModal } = props
 	const [newAnchor, setNewAnchor]: [IMediaAnchor, any] = useState(null)
 	const [newMediaTime, setNewMediaTime]: [number, any] = useState(0)
 
@@ -41,11 +39,10 @@ function MediaWithAnchorsContainer(props: MediaWithAnchorsContainerProps): JSX.E
 		onSuccess: () => queryCache.invalidateQueries([node.nodeId, 'anchors'])
 	})
 
-	const { isLoading, data, error } = useQuery([anchorIds, 'media'], MediaAnchorGateway.getAnchors)
-	const MediaAnchorMap = data && data.success ? data.payload : {}
-	const MediaAnchors = data && data.success ? Object.values(data.payload) : []
-
-	if (isLoading) return <Spinner />
+	// const { isLoading, data, error } = useQuery([anchorIds, 'media'], MediaAnchorGateway.getAnchors)
+	// const MediaAnchorMap = data && data.success ? data.payload : {}
+	// const MediaAnchors = data && data.success ? Object.values(data.payload) : []
+	// if (isLoading) return <Spinner />
 
 	return (<div style={{ margin: '0', marginTop: '39px', width: '100%', padding: '10px', border: '1px solid lightgrey' }}>
 
@@ -57,16 +54,8 @@ function MediaWithAnchorsContainer(props: MediaWithAnchorsContainerProps): JSX.E
 		</div> */}
 
 		<MediaView
-			previewAnchor={MediaAnchorMap[anchorId]}
 			node={node}
-			anchor={newAnchor}
-			selectedAnchorId={anchorId}
-			anchors={MediaAnchors}
 			addNode={createNode}
-			setAnchor={anc => {
-				setNewAnchor(null)
-				setNewAnchor(anc)
-			}}
 			setNewMediaTime={setNewMediaTime}
 			mediaPlayed={mediaPlayed}
 			setMediaPlayed={setMediaPlayed}
@@ -95,7 +84,8 @@ function MediaWithAnchorsContainer(props: MediaWithAnchorsContainerProps): JSX.E
 					}
 				})
 				setNewAnchor(null)
-				setNewMediaAnchorModal(false)
+                setNewMediaAnchorModal(false)
+                setMediaPlaying(true)
 			}}
 			newMediaTime={newMediaTime}
 			anchor={newAnchor}

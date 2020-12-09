@@ -31,7 +31,7 @@ export default function AddAnchorModal(props: AddAnchorModalProps) {
 				onAdd(content, author, newMediaTime);
 			}
 			setError('')
-			setContent('')
+            setContent('')
 		}
 	}
 
