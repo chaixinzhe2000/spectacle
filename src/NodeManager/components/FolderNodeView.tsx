@@ -18,6 +18,9 @@ function JsonNodeView(props: NodeProps): JSX.Element {
 						This field can be used to display a description of the Folder node. For example, you can include your syllabus or requirement for assignments here. Below is a list of its sub-nodes and their respective types.
 					</div>
 					<div className="NodeBoxGap">
+						<b>This folder contains the following nodes:</b>
+					</div>
+					<div className="NodeBoxGap">
 					{node.children.map((n, index) =>
 									<div key={index}>
 										<p><b>{n.label}</b>  ({n.nodeType.charAt(0).toUpperCase() + n.nodeType.substring(1)})</p>

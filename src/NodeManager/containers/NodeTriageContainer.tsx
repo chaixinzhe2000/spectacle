@@ -89,7 +89,7 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
                 // TODO: here we need to create a state (mediatimestamp) and give the state to the anchors and pass the setState function to the nodeComponent (media). I guess make it optional so immutable text doesn't need it. */}
 				<div>
                     {nodeComponent}
-					<div>
+					<div style={{display:"flex", marginTop:"15px"}}>
                     <RelatedLinksContainer 
                         currentNodeId={node.nodeId}
                     />

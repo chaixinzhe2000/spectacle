@@ -1,4 +1,4 @@
-import { H5, Button, Card, Elevation, Divider } from '@blueprintjs/core';
+import { H5, Button, Card, Elevation, Divider, Callout } from '@blueprintjs/core';
 import { failureServiceResponse, IAnchor, IImmutableTextAnchor, IImmutableTextNode, ILink, IMediaAnchor, INode, IServiceResponse } from 'spectacle-interfaces';
 import React, { useState } from 'react';
 import { queryCache, useMutation, useQuery } from 'react-query';
@@ -57,7 +57,8 @@ function RelatedLinksContainer(props: RelatedLinksContainerProps): JSX.Element {
 
 	if (relatedIAnchors.length) {
 		return (
-			<div>
+			<div style={{width:"100%", minHeight: "fitContent", border:"1px lightgrey solid", padding:"10px", marginRight:"5px"}}>
+				<Callout className="nodeTitle" icon={"link"} title={"Related Links"} intent={"success"}></Callout>
 				{relatedIAnchors.map((a, index) =>
 					<div key={a.anchorId}>
 						<Card className={activeIndex === index ? "SelectedAnnotationCard" : "AnnotationCard"} interactive={true}
@@ -77,7 +78,9 @@ function RelatedLinksContainer(props: RelatedLinksContainerProps): JSX.Element {
 			</div >
 		)
 	} else {
-		return null
+		return <div style={{width:"100%", minHeight: "fitContent", border:"1px lightgrey solid", padding:"10px", marginRight:"5px"}}>
+			<Callout className="nodeTitle" icon={"link"} title={"Related Links are Empty"} intent={"danger"}></Callout>
+		</div>
 	}
 }
 

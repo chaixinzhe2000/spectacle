@@ -49,7 +49,11 @@ function MediaView(props: NodeProps): JSX.Element {
 			</div>
 		)
 	} else {
-		return <NonIdealState
+		return (
+		<div>
+		<Callout className="nodeTitle" icon={"presentation"} title={"New Media Node"} intent={"warning"}></Callout>
+		<Divider />
+		<NonIdealState
 			icon="video"
 			title="Add a Video/Audio URL"
 			description={description}
@@ -70,7 +74,8 @@ function MediaView(props: NodeProps): JSX.Element {
 				</div>
 			}
 		/>
-	}
+		</div>
+	)}
 }
 
 export default MediaView

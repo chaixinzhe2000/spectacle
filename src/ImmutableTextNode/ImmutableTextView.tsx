@@ -30,7 +30,7 @@ function ImmutableTextView(props: NodeProps): JSX.Element {
 	if (node) {
 		return (<div>
 			<Callout className="nodeTitle" icon={"highlight"} title={nodeTitle} intent={"warning"}></Callout>
-				<Divider />
+			<Divider />
 			<Highlightable
 				ranges={highlightedAnchors}
 				enabled={true}
@@ -47,28 +47,33 @@ function ImmutableTextView(props: NodeProps): JSX.Element {
 				text={node.text} />
 		</div>)
 	} else {
-		return <NonIdealState
-			icon="new-text-box"
-			title="No Immutable Text Node found."
-			className="nonIdealState"
-			description={description}
-			action={       
-				<div style={{width:"100%"}}>
-					<TextArea style={{minHeight:"150px"}}fill={true} onChange={s => setText(s.target.value)} large={true} value={text} />
-					<Divider />
-					<Button onClick={() => {
-						if (text) {    
-							addNode(text)
-							setText("")
-							setDescription("You can still add one...")
-						}
-						else
-							setDescription("Cannot add an empty Immutable Text string.")
-					}}> Add Immutable Text + </Button>
-				</div>
-			}
-		/>
-	}
+		return(
+		<div>
+			<Callout className="nodeTitle" icon={"presentation"} title={"New Immutable Text Node"} intent={"warning"}></Callout>
+			<Divider />
+			<NonIdealState
+				icon="new-text-box"
+				title="No Immutable Text Node found."
+				className="nonIdealState"
+				description={description}
+				action={
+					<div style={{ width: "100%" }}>
+						<TextArea style={{ minHeight: "150px" }} fill={true} onChange={s => setText(s.target.value)} large={true} value={text} />
+						<Divider />
+						<Button onClick={() => {
+							if (text) {
+								addNode(text)
+								setText("")
+								setDescription("You can still add one...")
+							}
+							else
+								setDescription("Cannot add an empty Immutable Text string.")
+						}}> Add Immutable Text + </Button>
+					</div>
+				}
+			/>
+		</div>
+	)}
 }
 
 export default ImmutableTextView
