@@ -6,15 +6,9 @@ import { IAnchor, IImmutableTextAnchor, ILink, INode, IServiceResponse, newFileP
 import { queryCache, useMutation, useQuery } from 'react-query';
 import HypertextSdk from '../HypertextSdk';
 import AnchorGateway from '../Gateways/AnchorGateway';
-import { getNode } from '../NodeManager/containers/NodeManagerContainer';
-import LinkGateway from '../Gateways/LinkGateway';
-import MediaAnchorGateway from '../Gateways/Media/MediaAnchorGateway';
-import ImmutableTextAnchorGateway from '../Gateways/ImmutableText/ImmutableTextAnchorGateway';
-import ImmutableTextNodeGateway from '../Gateways/ImmutableText/ImmutableTextNodeGateway';
 import AddLinkModalContainer from '../Links/AddLinkModalContainer';
 import AddFollowUpModal from './AddFollowUpModal';
 import UpdateAnnotationModal from './UpdateAnnotationModal';
-
 
 interface AnchorContainerProps {
 	selectedAnchor: IAnchor
@@ -33,9 +27,9 @@ interface AnchorContainerProps {
 	newImmutableTextAnchor: IImmutableTextAnchor
 	setNewImmutableTextAnchor: any
 	newLinkModalIsOpen: boolean
-    setNewLinkModalIsOpen: any
-    setPreviouslyPaused: any
-    setMediaSkipUsingAnnotation: any
+	setNewLinkModalIsOpen: any
+	setPreviouslyPaused: any
+	setMediaSkipUsingAnnotation: any
 }
 
 function AnchorContainer(props: AnchorContainerProps): JSX.Element {
@@ -46,17 +40,26 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 	const [newFollowUpModal, setNewFollowUpModal]: [boolean, any] = useState(false)
 	const [newUpdateAnnotationModal, setNewUpdateAnnotationModal]: [boolean, any] = useState(false)
 
+	// Get Node Anchors, On Success Cache Anchors by Anchor ID
+	const anchorMap = useQuery([node.nodeId, 'anchors'], AnchorGateway.getNodeAnchors, {
+		onSuccess: (data) => {
+			if (data.success) {
+				if (Object.keys(data.payload).length !== anchorIds.length) {
+					const anchors = data.payload
+					setAnchorIds(Object.keys(anchors))
+					Object.keys(anchors).forEach(aid => queryCache.setQueryData(aid, successfulServiceResponse(anchors[aid])))
+				}
+			}
+		},
+		enabled: node
+	}).data?.payload
+
+	const anchorIds = anchorMap ? Object.keys(anchorMap) : []
+
 	const [deleteAnchor] = useMutation(HypertextSdk.deleteAnchor, {
 		onSuccess: () => {
 			queryCache.invalidateQueries([node.nodeId, 'anchors']);
-			queryCache.invalidateQueries([anchorIds, 'media-anchors']);
-			queryCache.invalidateQueries([anchorIds, 'immutable-text-anchors'])
-		}
-	})
-
-	const [createFollowUp] = useMutation(HypertextSdk.addAnchorFollowUp, {
-		onSuccess: () => {
-			queryCache.invalidateQueries([node.nodeId, 'anchors']);
+			queryCache.invalidateQueries([anchorIds, 'generic-anchors']);
 			queryCache.invalidateQueries([anchorIds, 'media-anchors']);
 			queryCache.invalidateQueries([anchorIds, 'immutable-text-anchors'])
 		}
@@ -65,51 +68,20 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 	const [updateLastAnnotation] = useMutation(HypertextSdk.updateLastAnnotation, {
 		onSuccess: () => {
 			queryCache.invalidateQueries([node.nodeId, 'anchors']);
+			queryCache.invalidateQueries([anchorIds, 'generic-anchors']);
 			queryCache.invalidateQueries([anchorIds, 'media-anchors']);
 			queryCache.invalidateQueries([anchorIds, 'immutable-text-anchors'])
 		}
 	})
 
-	// Get Node Anchors, On Success Cache Anchors by Anchor ID
-	const anchorMap = useQuery([node.nodeId, 'anchors'], AnchorGateway.getNodeAnchors, {
-		onSuccess: (data) => {
-			if (data.success) {
-				const anchors = data.payload
-				setAnchorIds(Object.keys(anchors))
-				Object.keys(anchors).forEach(aid => queryCache.setQueryData(aid, successfulServiceResponse(anchors[aid])))
-			}
-		},
-		enabled: node
-	}).data?.payload
-
-	console.log(anchorMap)
-
-	const anchors = anchorMap ? Object.values(anchorMap) : []
-	const anchorIds = anchorMap ? Object.keys(anchorMap) : []
-
-	const mediaAnchorMap = useQuery([anchorIds, 'media-anchors'], MediaAnchorGateway.getAnchors, {
-		onSuccess: (data) => {
-			if (data.success) {
-				const anchors = data.payload
-				setAnchorIds(Object.keys(anchors))
-				Object.keys(anchors).forEach(aid => queryCache.setQueryData(aid, successfulServiceResponse(anchors[aid])))
-			}
-		},
-		enabled: node
-	}).data?.payload
-
-	const immutableTextAnchorMap = useQuery([anchorIds, 'immutable-text-anchors'], ImmutableTextAnchorGateway.getAnchors, {
-		onSuccess: (data) => {
-			if (data.success) {
-				const anchors = data.payload
-				setAnchorIds(Object.keys(anchors))
-				Object.keys(anchors).forEach(aid => queryCache.setQueryData(aid, successfulServiceResponse(anchors[aid])))
-			}
-		},
-		enabled: node
-	}).data?.payload
-
-	const immutableTextNode = useQuery([node.nodeId, 'immutable-text'], ImmutableTextNodeGateway.getNode).data?.payload
+	const [createFollowUp] = useMutation(HypertextSdk.addAnchorFollowUp, {
+		onSuccess: () => {
+			queryCache.invalidateQueries([node.nodeId, 'anchors']);
+			queryCache.invalidateQueries([anchorIds, 'generic-anchors']);
+			queryCache.invalidateQueries([anchorIds, 'media-anchors']);
+			queryCache.invalidateQueries([anchorIds, 'immutable-text-anchors'])
+		}
+	})
 
 	return (
 		<div style={{ margin: 'auto', marginTop: '39px', width: '100%', padding: '10px', border: '1px solid lightgrey' }}>
@@ -119,12 +91,12 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 					disabled={((node.nodeType === 'immutable-text' && newImmutableTextAnchor) || node.nodeType === 'media') ? false : true}
 					onClick={(e) => {
 						if (node.nodeType === 'media') {
-                            setNewMediaAnchorModal(true)
-                            if (mediaPlaying){
-                                setPreviouslyPaused(false)
-                            } else {
-                                setPreviouslyPaused(true)
-                            }
+							setNewMediaAnchorModal(true)
+							if (mediaPlaying) {
+								setPreviouslyPaused(false)
+							} else {
+								setPreviouslyPaused(true)
+							}
 							setMediaPlaying(false)
 						} else if (node.nodeType === 'immutable-text') {
 							setImmutableTextNewAnchorModal(true)
@@ -138,7 +110,9 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 					setNewLinkModalIsOpen(true)
 					setMediaPlaying(false)
 				}}> Link </Button>
+
 				<Divider />
+				
 				<Button intent="success" icon="updated" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
 					setNewUpdateAnnotationModal(true)
 					setMediaPlaying(false)
@@ -158,17 +132,15 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 			}
 
 			<AnchorView
-				anchors={anchors}
 				anchor={selectedAnchor}
+				anchorIds={anchorIds}
+				node={node}
 				setAnchor={anc => setSelectedAnchor(anc)}
-				mediaAnchors={mediaAnchorMap ? Object.values(mediaAnchorMap) : []}
-				immutableTextAnchors={immutableTextAnchorMap ? Object.values(immutableTextAnchorMap) : []}
-				immutableTextNode={immutableTextNode ? immutableTextNode : null}
 				setMediaPlayed={setMediaPlayed}
 				mediaDuration={mediaDuration}
-                mediaPlaying={mediaPlaying}
-                setMediaPlaying={setMediaPlaying}
-                setMediaSkipUsingAnnotation={setMediaSkipUsingAnnotation}
+				mediaPlaying={mediaPlaying}
+				setMediaPlaying={setMediaPlaying}
+				setMediaSkipUsingAnnotation={setMediaSkipUsingAnnotation}
 			/>
 
 			<AddFollowUpModal
