@@ -9,6 +9,7 @@ import RenameNodeModal from '../components/modals/RenameNodeModal';
 import { createTreeNodes, setNodeExpand } from '../helpers/treeNodeHelpers';
 import { generateNodeId } from '../helpers/generateNodeId';
 import NodeTriageComponent from './NodeTriageContainer';
+import { Icon } from 'semantic-ui-react';
 
 interface NodeManagerProps {
 	selectedNode: INode
@@ -40,6 +41,7 @@ function NodeManager(props: NodeManagerProps) {
 	return (
 		<div className="MegaContainer">
 			<div className="NodeTree">
+
 				<ButtonGroup minimal={true} style={{ padding: '5px' }}>
 					{/* Add New Node */}
 					<Button icon="add" intent="primary" text="Add Node" onClick={() => setNewNodeModal(true)} />
@@ -54,6 +56,7 @@ function NodeManager(props: NodeManagerProps) {
 				</ButtonGroup>
 
 				{/* File Tree */}
+				
 				<FileSystem
 					nodes={treeNodes}
 					contextMenu

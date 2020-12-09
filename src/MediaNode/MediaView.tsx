@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Divider, NonIdealState, TextArea, Intent } from '@blueprintjs/core';
 import { IMediaAnchor, IMediaNode } from 'spectacle-interfaces';
 import PlayerWrapperClass from './ReactPlayer'
+import { Icon } from 'semantic-ui-react';
 
 interface NodeProps {
 	node: IMediaNode
@@ -25,7 +26,7 @@ function MediaView(props: NodeProps): JSX.Element {
 		console.log(node)
 		return (
 			<div>
-			<div className="title">Hello</div>
+	{ <div className="nodeTitle" >  <Icon name = "play"></Icon> node.label </div> }
             <PlayerWrapperClass
 				url={node.mediaUrl}
                 setNewMediaTime={setNewMediaTime}

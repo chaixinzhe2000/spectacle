@@ -85,7 +85,7 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 
 	return (
 		<div style={{ margin: 'auto', marginTop: '39px', width: '100%', padding: '10px', border: '1px solid lightgrey' }}>
-			<H5> Annotations </H5>
+			<div className="nodeTitle"> Annotations </div>
 			{<div>
 				<Button intent="primary" icon="add-to-artifact" minimal
 					disabled={((node.nodeType === 'immutable-text' && newImmutableTextAnchor) || node.nodeType === 'media') ? false : true}
