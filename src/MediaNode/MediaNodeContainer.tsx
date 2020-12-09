@@ -9,8 +9,6 @@ import MediaWithAnchorsContainer from './MediaWithAnchorsContainer';
 
 interface MediaContainerProps {
 	node: INode
-	anchorId: string
-	anchorIds: string[]
 	mediaPlayed: number
 	setMediaPlayed: any
 	setMediaDuration: any
@@ -18,17 +16,17 @@ interface MediaContainerProps {
 	setMediaPlaying: any
 	newMediaAnchorModal: boolean
     setNewMediaAnchorModal: any
-    newLinkModalIsOpen: boolean
-    setNewLinkModalIsOpen: any
-    
 }
 
 function MediaContainer(props: MediaContainerProps): JSX.Element {
-	const { node, anchorId, anchorIds, mediaPlayed, setMediaPlayed, setMediaDuration, mediaPlaying, setMediaPlaying,
-		newMediaAnchorModal, setNewMediaAnchorModal, newLinkModalIsOpen, setNewLinkModalIsOpen } = props
-	const { isLoading, data, error } = useQuery([node.nodeId, node.nodeType], MediaNodeGateway.getNode)
-
-	const [createNode] = useMutation(MediaNodeGateway.createNode, {
+	// const { node, anchorId, anchorIds, mediaPlayed, setMediaPlayed, setMediaDuration, mediaPlaying, setMediaPlaying,
+    // 	newMediaAnchorModal, setNewMediaAnchorModal, newLinkModalIsOpen, setNewLinkModalIsOpen } = props
+    const { node, mediaPlayed, setMediaPlayed, setMediaDuration, mediaPlaying, setMediaPlaying,
+    	newMediaAnchorModal, setNewMediaAnchorModal } = props
+    
+        const { isLoading, data, error } = useQuery([node.nodeId, node.nodeType], MediaNodeGateway.getNode)
+    
+        const [createNode] = useMutation(MediaNodeGateway.createNode, {
 		onSuccess: () => queryCache.invalidateQueries([node.nodeId, node.nodeType])
 	})
 
@@ -39,8 +37,6 @@ function MediaContainer(props: MediaContainerProps): JSX.Element {
 	return (<div>
 		<MediaWithAnchorsContainer
 			node={data?.payload}
-			anchorIds={anchorIds}
-			anchorId={anchorId}
 			createNode={mediaUrl => createNode({
 				nodeId: node.nodeId,
 				mediaUrl: mediaUrl
@@ -52,8 +48,6 @@ function MediaContainer(props: MediaContainerProps): JSX.Element {
 			setMediaPlaying={setMediaPlaying}
 			newMediaAnchorModal={newMediaAnchorModal}
             setNewMediaAnchorModal={setNewMediaAnchorModal}
-            newLinkModalIsOpen={newLinkModalIsOpen}
-            setNewLinkModalIsOpen={setNewLinkModalIsOpen}
 		/>
 	</div>
 	)

@@ -35,11 +35,14 @@ interface RelatedLinksContainerProps {
 function RelatedLinksContainer(props: RelatedLinksContainerProps): JSX.Element {
     const { currentNodeId } = props
     
+    let relatedAnchorIds = []
+    let relatedIAnchors = []
+    let destinationNodeIds = []
     const { data: relatedLinksData, isLoading: relatedLinksLoading } = useQuery([currentNodeId, "relatedLinks"], LinkGateway.getNodeLinks, {
         onSuccess: (data) => {if (data.success){
             let nodeLinks = Object.values(data.payload); 
             console.log("Success!")
-            let relatedAnchorIds = getRelatedAnchorIds(nodeLinks);
+            relatedAnchorIds = getRelatedAnchorIds(nodeLinks);
         }}
     })
     // console.log(relatedLinksData)
@@ -61,8 +64,8 @@ function RelatedLinksContainer(props: RelatedLinksContainerProps): JSX.Element {
     
     const { data: relatedAnchorsData, isLoading: relatedAnchorsLoading } = useQuery([relatedAnchorIds, "relatedAnchors"], AnchorGateway.getAnchors, {
         onSuccess: (data) => {if (data.success){
-            let relatedIAnchors= Object.values(data.payload); 
-            let destinationNodeIds = getDestinationNodeIds(relatedIAnchors)
+            relatedIAnchors= Object.values(data.payload); 
+            destinationNodeIds = getDestinationNodeIds(relatedIAnchors)
         }}
     })
     
@@ -103,7 +106,7 @@ function RelatedLinksContainer(props: RelatedLinksContainerProps): JSX.Element {
             </div >
         )
     } else {
-        return null
+        return (<div>hihi!</div>)
     }
 }
 	// if (anchors.length) {

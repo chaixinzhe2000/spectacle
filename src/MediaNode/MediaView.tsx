@@ -5,44 +5,38 @@ import PlayerWrapperClass from './ReactPlayer'
 
 interface NodeProps {
 	node: IMediaNode
-	anchor: IMediaAnchor
-	previewAnchor: IMediaAnchor
-	setAnchor: (anchor: IMediaAnchor) => void
 	addNode: (mediaUrl: string) => void
-	anchors: IMediaAnchor[]
-	selectedAnchorId: string
     setNewMediaTime: any
     mediaPlayed: number
     setMediaPlayed: any
     setMediaDuration: any
     mediaPlaying: boolean
 	setMediaPlaying: any
-
 }
 
 function MediaView(props: NodeProps): JSX.Element {
-	const { node, anchor, anchors, setAnchor, addNode, previewAnchor, selectedAnchorId, setNewMediaTime, mediaPlayed, setMediaPlayed, setMediaDuration, mediaPlaying, setMediaPlaying } = props
-	const [mediaUrl, setMediaUrl]: [string, any] = useState('')
+	// const { node, anchor, anchors, setAnchor, addNode, previewAnchor, selectedAnchorId, setNewMediaTime, mediaPlayed, setMediaPlayed, setMediaDuration, mediaPlaying, setMediaPlaying } = props
+    const { node, addNode, setNewMediaTime, mediaPlayed, setMediaPlayed, setMediaDuration, mediaPlaying, setMediaPlaying } = props
+    const [mediaUrl, setMediaUrl]: [string, any] = useState('')
 	const [description, setDescription]: [string, any] = useState('You are one step away from creating a video node...')
-	const [highlightedAnchors, setHighlightedAnchors]: [IMediaAnchor[], any] = useState([])
 
-	useEffect(() => {
-		async function setAnchors() {
-			await setHighlightedAnchors([])
-			if (previewAnchor)
-				setHighlightedAnchors([previewAnchor])
-			else if (anchor)
-				setHighlightedAnchors([anchor])
-			else {
-				const selectedAnchor = anchors.find(anc => anc.anchorId === selectedAnchorId)
-				if (selectedAnchor)
-					setHighlightedAnchors([selectedAnchor])
-				else
-					setHighlightedAnchors(anchors)
-			}
-		}
-		setAnchors()
-	}, [previewAnchor, anchor, anchors])
+	// useEffect(() => {
+	// 	async function setAnchors() {
+	// 		await setHighlightedAnchors([])
+	// 		if (previewAnchor)
+	// 			setHighlightedAnchors([previewAnchor])
+	// 		else if (anchor)
+	// 			setHighlightedAnchors([anchor])
+	// 		else {
+	// 			const selectedAnchor = anchors.find(anc => anc.anchorId === selectedAnchorId)
+	// 			if (selectedAnchor)
+	// 				setHighlightedAnchors([selectedAnchor])
+	// 			else
+	// 				setHighlightedAnchors(anchors)
+	// 		}
+	// 	}
+	// 	setAnchors()
+	// }, [previewAnchor, anchor, anchors])
 
 	if (node) {
 		console.log(node)
