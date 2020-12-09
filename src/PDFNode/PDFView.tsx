@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Divider, NonIdealState, TextArea } from '@blueprintjs/core';
-import { IImmutableTextAnchor, IImmutableTextNode, IPDFNode } from 'spectacle-interfaces';
-import { Icon } from 'semantic-ui-react';
-import { Document, Page } from 'react-pdf';
+import { IImmutableTextAnchor, IImmutableTextNode, INode, IPDFNode } from 'spectacle-interfaces';
 import { useQuery } from 'react-query';
 import NodeGateway from '../Gateways/NodeGateway';
+
 
 interface PDFViewProps {
 	node: IPDFNode
@@ -14,28 +13,19 @@ interface PDFViewProps {
 function PDFView(props: PDFViewProps): JSX.Element {
 	const { node, addNode } = props
 
-	const [mediaUrl, setMediaUrl]: [string, any] = useState('')
-	const [description, setDescription]: [string, any] = useState('You are one step away from creating a video node...')
+	const [PDFUrl, setPDFUrl]: [string, any] = useState('')
+	const [description, setDescription]: [string, any] = useState('You are one step away from creating a PDF node...')
 
-	const nodeTitle: string = useQuery([node.nodeId, 'node-title'], NodeGateway.getNode).data?.payload.label
+	const nodeQueryId = node ? node.nodeId : ""
+	const pdfINode: INode = useQuery([nodeQueryId, 'node-title'], NodeGateway.getNode).data?.payload
+	const nodeTitle = pdfINode ? pdfINode.label : ""
 
-	const [numPages, setNumPages] = useState(null);
-	const [pageNumber, setPageNumber] = useState(1);
-
-	function onDocumentLoadSuccess({ numPages }) {
-		setNumPages(numPages);
-	}
 
 	if (node) {
 		return (<div>
-			<Document
-				file={node.pdfUrl}
-				onLoadSuccess={onDocumentLoadSuccess}
-			>
-				<Page pageNumber={pageNumber} />
-			</Document>
-			<p>Page {pageNumber} of {numPages}</p>
-		</div>)
+            {nodeTitle}
+           <iframe src={node.pdfUrl} > </iframe>
+          </div>)
 	} else {
 		return <NonIdealState
 			icon="video"
@@ -43,17 +33,17 @@ function PDFView(props: PDFViewProps): JSX.Element {
 			description={description}
 			action={
 				<div>
-					<TextArea fill={true} onChange={s => setMediaUrl(s.target.value)} value={mediaUrl} />
+					<TextArea fill={true} onChange={s => setPDFUrl(s.target.value)} value={PDFUrl} />
 					<Divider />
 					<Button onClick={() => {
-						if (mediaUrl) {
-							addNode(mediaUrl)
+						if (PDFUrl) {
+							addNode(PDFUrl)
 							// setMediaUrl("")
-							setDescription("You are one step away from creating a video node...")
+							setDescription("You are one step away from creating a PDF node...")
 						}
 						else
-							setDescription("Media URL cannot be empty.")
-					}}> Add Media + </Button>
+							setDescription("PDF URL cannot be empty.")
+					}}> Add PDF + </Button>
 				</div>
 			}
 		/>

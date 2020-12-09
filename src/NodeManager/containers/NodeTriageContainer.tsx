@@ -4,9 +4,6 @@ import JsonNodeView from '../components/FolderNodeView';
 import ImmutableTextContainer from '../../ImmutableTextNode/ImmutableTextNodeContainer';
 import AnchorContainer from '../../Anchors/AnchorContainer';
 import PDFNodeContainer from '../../PDFNode/PDFNodeContainer';
-import { Button, Divider } from '@blueprintjs/core';
-import { useNavigate } from 'react-router';
-import MediaNodeGateway from '../../Gateways/Media/MediaNodeGateway';
 import MediaContainer from '../../MediaNode/MediaNodeContainer';
 import RelatedLinksContainer from '../../Links/RelatedLinksContainer'
 import OutwardLinksContainer from '../../Links/OutwardLinksContainer';
@@ -79,8 +76,6 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
             case 'PDF':
                 nodeComponent = <PDFNodeContainer 
                     node={node}
-                    anchorId={anchorId}
-                    anchorIds={anchorIds}
                     newPDFAnchorModal={newPDFAnchorModal}
                     setNewPDFAnchorModal={setNewPDFAnchorModal}
                     />
