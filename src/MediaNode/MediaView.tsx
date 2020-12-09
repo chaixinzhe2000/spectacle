@@ -25,6 +25,7 @@ function MediaView(props: NodeProps): JSX.Element {
 		console.log(node)
 		return (
 			<div>
+			<div className="title">Hello</div>
             <PlayerWrapperClass
 				url={node.mediaUrl}
                 setNewMediaTime={setNewMediaTime}

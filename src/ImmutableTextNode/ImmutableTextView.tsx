@@ -42,6 +42,7 @@ function ImmutableTextView(props: NodeProps): JSX.Element {
 
 	if (node) {
 		return (<div>
+			jhfkjshfksf
 			<Highlightable
 				ranges={highlightedAnchors}
 				enabled={true}
