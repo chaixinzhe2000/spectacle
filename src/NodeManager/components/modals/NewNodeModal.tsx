@@ -48,7 +48,7 @@ export default function NewNodeModal(props: NewNodeModalProps) {
 
 			<Divider />
 			<div className="bp3-select bp3-fill">
-				<select defaultValue={nodeType} onChange={e => setNodeType(e.currentTarget.value)}>
+				<select defaultValue={nodeType} onChange={e => {setNodeType(e.currentTarget.value); console.log(nodeType)}}>
 					{props.nodeTypes.map(val => <option key={val} value={val}>{val}</option>)}
 				</select>
 			</div>
