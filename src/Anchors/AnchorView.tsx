@@ -3,8 +3,6 @@ import { failureServiceResponse, IAnchor, IImmutableTextAnchor, IImmutableTextNo
 import React, { useState } from 'react';
 import { Collapse } from 'antd';
 import { Accordion, Icon } from 'semantic-ui-react'
-import LinkView from '../Links/LinkView';
-import LinkContainer from '../Links/LinkContainer';
 import MediaAnchorGateway from '../Gateways/Media/MediaAnchorGateway';
 
 const { Panel } = Collapse;
