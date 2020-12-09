@@ -20,7 +20,7 @@ function JsonNodeView(props: NodeProps): JSX.Element {
 					<div className="NodeBoxGap">
 					{node.children.map((n, index) =>
 									<div key={index}>
-										<p><b>{n.label}</b>: {n.nodeType.charAt(0).toUpperCase() + n.nodeType.substring(1)}</p>
+										<p><b>{n.label}</b>  ({n.nodeType.charAt(0).toUpperCase() + n.nodeType.substring(1)})</p>
 									</div>
 								)}
 					</div>

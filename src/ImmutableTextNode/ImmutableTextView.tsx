@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Highlightable from 'highlightable'
 import { Button, Divider, NonIdealState, TextArea } from '@blueprintjs/core';
 import { IImmutableTextAnchor, IImmutableTextNode } from 'spectacle-interfaces';
+import { Icon } from 'semantic-ui-react';
+
 
 interface NodeProps {
 	node: IImmutableTextNode
@@ -42,7 +44,7 @@ function ImmutableTextView(props: NodeProps): JSX.Element {
 
 	if (node) {
 		return (<div>
-			jhfkjshfksf
+	{ <div className="nodeTitle" >  <Icon name = "text cursor"></Icon> node.label </div> }
 			<Highlightable
 				ranges={highlightedAnchors}
 				enabled={true}

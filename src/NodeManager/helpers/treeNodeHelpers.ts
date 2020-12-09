@@ -35,7 +35,7 @@ export function createTreeNodes(node: INode, currentNodeId: string, removeRoot?:
 		const nodes: ITreeNode<INode>[] = createTreeNodes(childDoc, currentNodeId)
 		const node: ITreeNode<INode> = {
 			id: childDoc.nodeId,
-			label: childDoc.label + ` (${childDoc.nodeId})`,
+			label: childDoc.label,
 			isSelected: childDoc.nodeId === currentNodeId,
 			nodeData: childDoc
 		}
@@ -52,7 +52,7 @@ export function createTreeNodes(node: INode, currentNodeId: string, removeRoot?:
 
 	return [{
 		id: node.nodeId,
-		label: node.label + ` (${node.nodeId})`,
+		label: node.label,
 		childNodes: childNodes,
 		nodeData: node,
 		hasCaret: childNodes.length > 0,
