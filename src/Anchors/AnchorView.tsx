@@ -18,8 +18,8 @@ interface AnchorViewProps {
 	immutableTextNode?: IImmutableTextNode
 	setMediaPlayed?: any
 	mediaDuration?: number
-	mediaPlaying?: boolean
-	setMediaPlaying?: any
+    mediaPlaying?: boolean
+    setMediaPlaying?: any
 }
 
 function convertTime(sec_num) {
@@ -76,7 +76,7 @@ function AnchorView(props: AnchorViewProps): JSX.Element {
 						<div key={a.anchorId}>
 							<Card className={activeIndex === index ? "SelectedAnnotationCard" : "AnnotationCard"} interactive={true}
 								elevation={activeIndex === index ? Elevation.TWO : Elevation.ZERO} onClick={e => setAnchor(a)}
-								onDoubleClick={() => seekTo(mediaAnchors[index].mediaTimeStamp, mediaDuration)}>
+								onDoubleClick={() => {seekTo(mediaAnchors[index].mediaTimeStamp, mediaDuration)}}>
 								<h5 className="h5Title">{mediaAnchors[index] ? convertTime(mediaAnchors[index].mediaTimeStamp) : "00:00"}</h5>
 								{anchors[index].contentList.map((c, cIndex) =>
 									<div key={cIndex}>

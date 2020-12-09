@@ -8,13 +8,14 @@ interface AddAnchorModalProps {
 	isOpen: boolean
 	onClose: () => void
 	onAdd: (content: string, author: string, timeStamp: number) => void
-	anchor: IMediaAnchor
-	newMediaTime: number
+    newMediaTime: number
+    setMediaPlaying: any
+    previouslyPaused: boolean
 }
 
 export default function AddAnchorModal(props: AddAnchorModalProps) {
 
-	const { isOpen, onClose, onAdd, anchor, newMediaTime } = props
+	const { isOpen, onClose, onAdd, newMediaTime, setMediaPlaying, previouslyPaused } = props
 	const [error, setError]: [string, any] = useState('')
 	const [content, setContent]: [string, any] = useState('')
 	const [author, setAuthor]: [string, any] = useState('')
@@ -62,7 +63,7 @@ export default function AddAnchorModal(props: AddAnchorModalProps) {
 		<div className={Classes.DIALOG_FOOTER}>
 			<div style={{ color: Colors.RED3 }}>{error}</div>
 			<div className={Classes.DIALOG_FOOTER_ACTIONS}>
-				<Button onClick={() => onSubmit()} intent="primary"> Add Annotation </Button>
+				<Button onClick={() => {setMediaPlaying(!previouslyPaused);onSubmit()}} intent="primary"> Add Annotation </Button>
 			</div>
 		</div>
 	</Dialog>)
