@@ -36,7 +36,7 @@ export default function UpdateAnnotationModal(props: UpdateAnnotationModalProps)
 	return (<Dialog
 		icon='annotation'
 		onClose={onClose}
-		title="Add Follow Up"
+		title="Edit Annotation"
 		isOpen={isOpen}>
 		<div className={Classes.DIALOG_BODY}>
 			<InputGroup
@@ -57,7 +57,7 @@ export default function UpdateAnnotationModal(props: UpdateAnnotationModalProps)
 		<div className={Classes.DIALOG_FOOTER}>
 			<div style={{ color: Colors.RED3 }}>{error}</div>
 			<div className={Classes.DIALOG_FOOTER_ACTIONS}>
-				<Button onClick={() => onSubmit()} intent="primary"> Add Follow Up </Button>
+				<Button onClick={() => onSubmit()} intent="primary"> Commit Changes </Button>
 			</div>
 		</div>
 	</Dialog>)
