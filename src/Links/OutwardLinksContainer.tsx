@@ -15,11 +15,11 @@ import HypertextSdk from '../HypertextSdk';
 const { Panel } = Collapse;
 
 interface OutwardLinksContainerProps {
-	currentNodeId: string
+	node: INode
 }
 
 function OutwardLinksContainer(props: OutwardLinksContainerProps): JSX.Element {
-	const { currentNodeId } = props
+	const { node } = props
 
 	const getOppositeNodeIds = (anchorIds: string[], validLinks: ILink[]) => {
 		let oppositeNodeIds: string[] = []
@@ -45,7 +45,7 @@ function OutwardLinksContainer(props: OutwardLinksContainerProps): JSX.Element {
     //     queryCache.invalidateQueries([destinationNodeIds ? destinationNodeIds : [], 'opposite-node']);
     // }
 
-    const nodeAnchorsMap = useQuery([currentNodeId, 'node-anchors'], AnchorGateway.getNodeAnchors).data?.payload
+    const nodeAnchorsMap = useQuery([node.nodeId, 'outward-node-anchors'], AnchorGateway.getNodeAnchors).data?.payload
     console.log("NODE ANCHORS MAP")
     console.log(nodeAnchorsMap)
 	const bulkQuery = useQuery([nodeAnchorsMap ? Object.values(nodeAnchorsMap): [], 'node-anchor-links'], HypertextSdk.getOutwardAnchors).data

@@ -23,9 +23,9 @@ function RelatedLinksContainer(props: RelatedLinksContainerProps): JSX.Element {
 		let anchorIds = []
 		console.log(nodeLinks)
 		for (let link of nodeLinks) {
-			if (link.srcAnchorId !== undefined) {
+			if (link.srcAnchorId !== null) {
 				anchorIds.push(link.srcAnchorId)
-			} else if (link.destAnchorId !== undefined) {
+			} else if (link.destAnchorId !== null) {
 				anchorIds.push(link.destAnchorId)
 			}
 		}

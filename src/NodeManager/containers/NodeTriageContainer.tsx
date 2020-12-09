@@ -39,7 +39,7 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
 		console.log("node has changed")
 		setSelectedAnchor(null)
 		setPreviewAnchor(null)
-		setAnchorIds([])
+        setAnchorIds([])
 	}, [node?.nodeId, anchorId])
 
 	let nodeComponent = null
@@ -94,7 +94,7 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
                         currentNodeId={node.nodeId}
                     />
 					<OutwardLinksContainer 
-                        currentNodeId={node.nodeId}
+                        node={node}
                     />
 					</div>
                 </div>
