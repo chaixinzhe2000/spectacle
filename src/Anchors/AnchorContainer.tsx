@@ -58,7 +58,6 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 
 	const [deleteAnchor] = useMutation(HypertextSdk.deleteAnchor, {
 		onSuccess: () => {
-            queryCache.invalidateQueries([node.nodeId, 'outward-node-anchors'])
             queryCache.invalidateQueries([node.nodeId, 'anchors']);
 			queryCache.invalidateQueries([anchorIds, 'generic-anchors']);
 			queryCache.invalidateQueries([anchorIds, 'media-anchors']);

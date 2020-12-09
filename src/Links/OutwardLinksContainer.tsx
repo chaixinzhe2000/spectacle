@@ -1,6 +1,6 @@
 import { H5, Button, Card, Elevation, Divider } from '@blueprintjs/core';
 import { failureServiceResponse, IAnchor, IImmutableTextAnchor, IImmutableTextNode, ILink, IMediaAnchor, INode, IServiceResponse } from 'spectacle-interfaces';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { queryCache, useMutation, useQuery } from 'react-query';
 import { Collapse } from 'antd';
 import { Accordion, Icon } from 'semantic-ui-react'
@@ -39,11 +39,9 @@ function OutwardLinksContainer(props: OutwardLinksContainerProps): JSX.Element {
 		}
 	}
 
-    // const invalidateAllQueries = () => {
-    //     queryCache.invalidateQueries([currentNodeId, 'node-anchors']);
-    //     queryCache.invalidateQueries([nodeAnchorsMap ? Object.values(nodeAnchorsMap): [], 'node-anchor-links']);
-    //     queryCache.invalidateQueries([destinationNodeIds ? destinationNodeIds : [], 'opposite-node']);
-    // }
+    useEffect(() => {
+        queryCache.invalidateQueries([node.nodeId, 'outward-node-anchors']);
+    })
 
     const nodeAnchorsMap = useQuery([node.nodeId, 'outward-node-anchors'], AnchorGateway.getNodeAnchors).data?.payload
     console.log("NODE ANCHORS MAP")
