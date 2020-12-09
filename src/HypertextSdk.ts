@@ -1,6 +1,6 @@
 import { Anchor } from "antd";
 import { NodeTracing } from "inspector";
-import { failureServiceResponse, IAnchor, IImmutableTextAnchor, IMediaAnchor, INode, IServiceResponse, NodeType, successfulServiceResponse } from "spectacle-interfaces";
+import { failureServiceResponse, IAnchor, IImmutableTextAnchor, ILink, IMediaAnchor, INode, IServiceResponse, NodeType, successfulServiceResponse } from "spectacle-interfaces";
 import AnchorGateway from "./Gateways/AnchorGateway";
 import ImmutableTextAnchorGateway from "./Gateways/ImmutableText/ImmutableTextAnchorGateway";
 import ImmutableTextNodeGateway from "./Gateways/ImmutableText/ImmutableTextNodeGateway";
@@ -30,6 +30,24 @@ interface IHypertextSdk {
 	updateLastAnnotation: (data: {
 		anchorId: string, content: string, author: string
 	}) => Promise<IServiceResponse<{}>>
+	getOutwardAnchors: (nodeAnchors: IAnchor[]) => {}
+	getNode: (nodeAnchors: string[]) => {}
+}
+
+const getOppositeNodeIds = (anchorIds: string[], validLinks: ILink[]) => {
+	let oppositeNodeIds: string[] = []
+	if (anchorIds.length === validLinks.length) {
+		for (let i = 0; i < anchorIds.length; i++) {
+			if (validLinks[i].srcNodeId !== undefined) {
+				oppositeNodeIds.push(validLinks[i].srcNodeId)
+			} else if (validLinks[i].destNodeId !== undefined) {
+				oppositeNodeIds.push(validLinks[i].destNodeId)
+			}
+		}
+		return oppositeNodeIds
+	} else {
+		return []
+	}
 }
 
 // TODO: define the type to be IHypertextSdk later
@@ -78,6 +96,34 @@ const HypertextSdk: IHypertextSdk = {
 			return failureServiceResponse(errMsg)
 		}
 		return successfulServiceResponse({})
+	},
+
+	getOutwardAnchors: async (nodeAnchors: IAnchor[]) => {
+		let validAnchorIds: string[] = []
+		let validAnchors: IAnchor[] = []
+ 		let validLinks: ILink[] = []
+		let destinationNodeIds: string[] = []
+		nodeAnchors.forEach(async (anchor) => {
+			let linkResp = await LinkGateway.getAnchorLinks(anchor.anchorId)
+			if (linkResp.success) {
+				validAnchorIds.push(anchor.anchorId)
+				validAnchors.push(anchor)
+				// we only take the first one
+				validLinks.push(Object.values(linkResp.payload)[0])
+			}
+		})
+		return {'data': {'anchors': validAnchors, 'anchorIds': validAnchorIds, 'links': validLinks}}
+	},
+
+	getNode: async (nodeIds: string[]) => {
+		let nodeList: INode[] = []
+		nodeIds.forEach(async (nodeId) => {
+			let nodeResp = await NodeGateway.getNode(nodeId)
+			if (nodeResp.success) {
+				nodeList.push(nodeResp.payload)
+			}
+		})
+		return {nodeList}
 	},
 
 	createImmutableTextAnchor: async (data: { anchor: IAnchor, immutableTextAnchor: IImmutableTextAnchor }):

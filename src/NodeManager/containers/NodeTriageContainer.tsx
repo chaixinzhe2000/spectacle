@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router';
 import MediaNodeGateway from '../../Gateways/Media/MediaNodeGateway';
 import MediaContainer from '../../MediaNode/MediaNodeContainer';
 import RelatedLinksContainer from '../../Links/RelatedLinksContainer'
+import OutwardLinksContainer from '../../Links/OutwardLinksContainer';
 
 interface NodeTriageProps {
 	node: INode
@@ -93,9 +94,14 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
                 // TODO: here we need to create a state (mediatimestamp) and give the state to the anchors and pass the setState function to the nodeComponent (media). I guess make it optional so immutable text doesn't need it. */}
 				<div>
                     {nodeComponent}
+					<div>
                     <RelatedLinksContainer 
                         currentNodeId={node.nodeId}
                     />
+					<OutwardLinksContainer 
+                        currentNodeId={node.nodeId}
+                    />
+					</div>
                 </div>
                 
 				<AnchorContainer
