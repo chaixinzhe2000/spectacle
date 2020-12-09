@@ -8,13 +8,11 @@ export const selectNode = (nodes: ITreeNode[], id: string): ITreeNode[] => {
 				node.isSelected = true
 			else
 				node.isSelected = false
-
 			if (node.childNodes)
 				node.childNodes = selectNode(node.childNodes, id)
 
 			return node
 		})
-
 		return newNodes
 	} else {
 		return []

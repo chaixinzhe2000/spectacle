@@ -7,35 +7,35 @@ import { useQuery } from 'react-query';
 import NodeGateway from '../Gateways/NodeGateway';
 
 interface PDFViewProps {
-    node: IPDFNode
-    addNode: (PDFUrl: string) => void
+	node: IPDFNode
+	addNode: (PDFUrl: string) => void
 }
 
 function PDFView(props: PDFViewProps): JSX.Element {
 	const { node, addNode } = props
 
-    const [mediaUrl, setMediaUrl]: [string, any] = useState('')
+	const [mediaUrl, setMediaUrl]: [string, any] = useState('')
 	const [description, setDescription]: [string, any] = useState('You are one step away from creating a video node...')
 
 	const nodeTitle: string = useQuery([node.nodeId, 'node-title'], NodeGateway.getNode).data?.payload.label
 
-    const [numPages, setNumPages] = useState(null);
-    const [pageNumber, setPageNumber] = useState(1);
+	const [numPages, setNumPages] = useState(null);
+	const [pageNumber, setPageNumber] = useState(1);
 
-    function onDocumentLoadSuccess({ numPages }) {
-        setNumPages(numPages);
-      }
-    
+	function onDocumentLoadSuccess({ numPages }) {
+		setNumPages(numPages);
+	}
+
 	if (node) {
 		return (<div>
-            <Document
-              file={node.pdfUrl}
-              onLoadSuccess={onDocumentLoadSuccess}
-            >
-              <Page pageNumber={pageNumber} />
-            </Document>
-            <p>Page {pageNumber} of {numPages}</p>
-          </div>)
+			<Document
+				file={node.pdfUrl}
+				onLoadSuccess={onDocumentLoadSuccess}
+			>
+				<Page pageNumber={pageNumber} />
+			</Document>
+			<p>Page {pageNumber} of {numPages}</p>
+		</div>)
 	} else {
 		return <NonIdealState
 			icon="video"

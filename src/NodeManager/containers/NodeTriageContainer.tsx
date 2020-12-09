@@ -45,7 +45,6 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
 	}, [node?.nodeId, anchorId])
 
 	let nodeComponent = null
-
 	if (node) {
 		switch (node.nodeType) {
 			case 'node':

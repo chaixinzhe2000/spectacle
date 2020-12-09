@@ -94,7 +94,6 @@ function NodeManager(props: NodeManagerProps) {
 					setNewNodeModal(false)
 					const nodeId = generateNodeId()
 					const newFp = newFilePath(locationNode.filePath.filePath.filter(val => val !== ROOT_ID).concat(nodeId))
-
 					let node: INode = {
 						nodeId: nodeId,
 						label: name,
