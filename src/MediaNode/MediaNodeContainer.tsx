@@ -17,13 +17,13 @@ interface MediaContainerProps {
 	newMediaAnchorModal: boolean
     setNewMediaAnchorModal: any
     previouslyPaused:boolean
+    mediaSkipUsingAnnotation: boolean
+    setMediaSkipUsingAnnotation: any
 }
 
 function MediaContainer(props: MediaContainerProps): JSX.Element {
-	// const { node, anchorId, anchorIds, mediaPlayed, setMediaPlayed, setMediaDuration, mediaPlaying, setMediaPlaying,
-    // 	newMediaAnchorModal, setNewMediaAnchorModal, newLinkModalIsOpen, setNewLinkModalIsOpen } = props
     const { node, mediaPlayed, setMediaPlayed, setMediaDuration, mediaPlaying, setMediaPlaying,
-    	newMediaAnchorModal, setNewMediaAnchorModal, previouslyPaused } = props
+    	newMediaAnchorModal, setNewMediaAnchorModal, previouslyPaused, mediaSkipUsingAnnotation, setMediaSkipUsingAnnotation } = props
     
         const { isLoading, data, error } = useQuery([node.nodeId, node.nodeType], MediaNodeGateway.getNode)
     
@@ -50,6 +50,8 @@ function MediaContainer(props: MediaContainerProps): JSX.Element {
 			newMediaAnchorModal={newMediaAnchorModal}
             setNewMediaAnchorModal={setNewMediaAnchorModal}
             previouslyPaused={previouslyPaused}
+            mediaSkipUsingAnnotation={mediaSkipUsingAnnotation}
+            setMediaSkipUsingAnnotation={setMediaSkipUsingAnnotation}
 		/>
 	</div>
 	)

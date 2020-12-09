@@ -185,8 +185,8 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 				immutableTextNode={immutableTextNode ? immutableTextNode : null}
 				setMediaPlayed={setMediaPlayed}
 				mediaDuration={mediaDuration}
-				mediaPlaying={mediaPlaying}
-				setMediaPlaying={setMediaPlaying}
+                mediaPlaying={mediaPlaying}
+                setMediaPlaying={setMediaPlaying}
 			/>
 
 			<UpdateAnchorModal

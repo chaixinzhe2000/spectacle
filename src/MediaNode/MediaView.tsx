@@ -12,12 +12,12 @@ interface NodeProps {
     setMediaDuration: any
     mediaPlaying: boolean
     setMediaPlaying: any
-    // setPreviouslyPaused: any
+    mediaSkipUsingAnnotation: boolean
+    setMediaSkipUsingAnnotation: any
 }
 
 function MediaView(props: NodeProps): JSX.Element {
-	// const { node, anchor, anchors, setAnchor, addNode, previewAnchor, selectedAnchorId, setNewMediaTime, mediaPlayed, setMediaPlayed, setMediaDuration, mediaPlaying, setMediaPlaying } = props
-    const { node, addNode, setNewMediaTime, mediaPlayed, setMediaPlayed, setMediaDuration, mediaPlaying, setMediaPlaying } = props
+    const { node, addNode, setNewMediaTime, mediaPlayed, setMediaPlayed, setMediaDuration, mediaPlaying, setMediaPlaying, mediaSkipUsingAnnotation, setMediaSkipUsingAnnotation } = props
     const [mediaUrl, setMediaUrl]: [string, any] = useState('')
 	const [description, setDescription]: [string, any] = useState('You are one step away from creating a video node...')
 
@@ -33,8 +33,9 @@ function MediaView(props: NodeProps): JSX.Element {
                 setMediaDuration={setMediaDuration}
                 mediaPlaying={mediaPlaying}
                 setMediaPlaying={setMediaPlaying}
-                // setPreviouslyPaused={setPreviouslyPaused}
-			/>
+                mediaSkipUsingAnnotation={mediaSkipUsingAnnotation}
+                setMediaSkipUsingAnnotation={setMediaSkipUsingAnnotation}
+            />
             
             </div>
 		)
