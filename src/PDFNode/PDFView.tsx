@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Divider, NonIdealState, TextArea, Callout } from '@blueprintjs/core';
+import { Button, Divider, NonIdealState, TextArea, Callout, InputGroup } from '@blueprintjs/core';
 import { IImmutableTextAnchor, IImmutableTextNode, INode, IPDFNode } from 'spectacle-interfaces';
 import { useQuery } from 'react-query';
 import NodeGateway from '../Gateways/NodeGateway';
@@ -22,33 +22,42 @@ function PDFView(props: PDFViewProps): JSX.Element {
 
 
 	if (node) {
-	return (<div>
-				<Callout className="nodeTitle" icon={"saved"} title={nodeTitle} intent={"warning"}></Callout>
-				<Divider />
-           <iframe className ="frameFormat" src={node.pdfUrl} > </iframe>
+		return (<div>
+			<Callout className="nodeTitle" icon={"saved"} title={nodeTitle} intent={"warning"}></Callout>
+			<Divider />
+			<iframe className="frameFormat" src={node.pdfUrl} > </iframe>
 
-			</div>)
+		</div>)
 	} else {
-		return <NonIdealState
-			icon="document"
-			title="Add a PDF URL"
-			description={description}
-			action={
-				<div>
-					<TextArea fill={true} onChange={s => setPDFUrl(s.target.value)} value={PDFUrl} />
-					<Divider />
-					<Button onClick={() => {
-						if (PDFUrl) {
-							addNode(PDFUrl)
-							setDescription("You are one step away from creating a PDF node...")
-						}
-						else
-						
-							setDescription("PDF URL cannot be empty.")
-					}}> Add PDF + </Button>
-				</div>
-			}
-		/>
+		return (
+			<div>
+				<Callout className="nodeTitle" icon={"saved"} title={"New PDF Node"} intent={"warning"}></Callout>
+				<Divider />
+				<NonIdealState
+					icon="document"
+					title="Add a PDF URL"
+					description={description}
+					className="nonIdealState"
+					action={
+						<div style={{width:"100%"}}>
+							<InputGroup fill={true} leftIcon={"link"} onChange={s => setPDFUrl(s.target.value)} value={PDFUrl} 
+							rightElement={<Button 
+								icon="add"
+								onClick={() => {
+								if (PDFUrl) {
+									addNode(PDFUrl)
+									setDescription("You are one step away from creating a PDF node...")
+								}
+								else
+									setDescription("PDF URL cannot be empty.")
+							}}> Add </Button>}/>
+							<Divider />
+							
+						</div>
+					}
+				/>
+			</div>
+		)
 	}
 }
 

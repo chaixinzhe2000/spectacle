@@ -26,7 +26,7 @@ function PDFWithAnchorsContainer(props: PDFWithAnchorsContainerProps): JSX.Eleme
         onSuccess: () => queryCache.invalidateQueries([node.nodeId, 'anchors'])
     })
 
-    return (<div style={{ margin: '0', marginTop: '39px', width: '100%', padding: '10px', border: '1px solid lightgrey' }}>
+    return (<div style={{ margin: '0', width: '100%', padding: '10px', border: '1px solid lightgrey' }}>
         <PDFView
             node={node}
             addNode={createNode}

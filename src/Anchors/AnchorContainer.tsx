@@ -9,6 +9,7 @@ import AnchorGateway from '../Gateways/AnchorGateway';
 import AddLinkModalContainer from '../Links/AddLinkModalContainer';
 import AddFollowUpModal from './AddFollowUpModal';
 import UpdateAnnotationModal from './UpdateAnnotationModal';
+import { generateAnchorId } from '../NodeManager/helpers/generateNodeId';
 
 interface AnchorContainerProps {
 	selectedAnchor: IAnchor
@@ -24,21 +25,27 @@ interface AnchorContainerProps {
 	setNewMediaAnchorModal: any
 	newImmutableTextAnchorModal: boolean
 	setImmutableTextNewAnchorModal: any
+	newPDFAnchorModal: boolean
+    setNewPDFAnchorModal: any
 	newImmutableTextAnchor: IImmutableTextAnchor
 	setNewImmutableTextAnchor: any
 	newLinkModalIsOpen: boolean
 	setNewLinkModalIsOpen: any
 	setPreviouslyPaused: any
 	setMediaSkipUsingAnnotation: any
+	
 }
 
 function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 	const { node, selectedAnchor, setSelectedAnchor, setPreviewAnchor, clearSelection,
 		setAnchorIds, mediaDuration, setMediaPlayed, mediaPlaying, setMediaPlaying, setNewMediaAnchorModal,
-		newImmutableTextAnchorModal, setImmutableTextNewAnchorModal, newImmutableTextAnchor, setNewImmutableTextAnchor, newLinkModalIsOpen, setNewLinkModalIsOpen, setPreviouslyPaused, setMediaSkipUsingAnnotation } = props
+		newImmutableTextAnchorModal, setImmutableTextNewAnchorModal, newImmutableTextAnchor, setNewImmutableTextAnchor, newLinkModalIsOpen, 
+		setNewLinkModalIsOpen, setPreviouslyPaused, setMediaSkipUsingAnnotation, newPDFAnchorModal, setNewPDFAnchorModal } = props
 
 	const [newFollowUpModal, setNewFollowUpModal]: [boolean, any] = useState(false)
 	const [newUpdateAnnotationModal, setNewUpdateAnnotationModal]: [boolean, any] = useState(false)
+	const [newGenericAnchorModal, setNewGenericAnchorModal]: [boolean, any] = useState(false)
+
 
 	// Get Node Anchors, On Success Cache Anchors by Anchor ID
 	const anchorMap = useQuery([node.nodeId, 'anchors'], AnchorGateway.getNodeAnchors, {
@@ -83,13 +90,22 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 		}
 	})
 
+	const [createGenericAnchor] = useMutation(AnchorGateway.createAnchor, {
+		onSuccess: () => {
+			queryCache.invalidateQueries([node.nodeId, 'anchors']);
+			queryCache.invalidateQueries([anchorIds, 'generic-anchors']);
+			queryCache.invalidateQueries([anchorIds, 'media-anchors']);
+			queryCache.invalidateQueries([anchorIds, 'immutable-text-anchors'])
+		}
+	})
+
 	return (
 		<div style={{ margin: '0', width: '100%', padding: '10px', border: '1px solid lightgrey' }}>
 			<Callout className="nodeTitle" icon={"book"} title={"Annotations"} intent={"success"}></Callout>
 			<Divider />
 			{<div>
 				<Button intent="primary" icon="add-to-artifact" minimal
-					disabled={((node.nodeType === 'immutable-text' && newImmutableTextAnchor) || node.nodeType === 'media') ? false : true}
+					disabled={((node.nodeType === 'immutable-text' && newImmutableTextAnchor) || node.nodeType === 'media' || node.nodeType === "PDF") ? false : true}
 					onClick={(e) => {
 						if (node.nodeType === 'media') {
 							setNewMediaAnchorModal(true)
@@ -101,6 +117,8 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 							setMediaPlaying(false)
 						} else if (node.nodeType === 'immutable-text') {
 							setImmutableTextNewAnchorModal(true)
+						} else if (node.nodeType === 'PDF') {
+							setNewPDFAnchorModal(true)
 						}
 					}}> Add New </Button>
 				<Button intent="warning" icon="paperclip" minimal disabled={selectedAnchor ? false : true} onClick={(e) => {
@@ -169,6 +187,8 @@ function AnchorContainer(props: AnchorContainerProps): JSX.Element {
 				setIsOpen={setNewLinkModalIsOpen}
 				anchor={selectedAnchor}
 			/>
+
+			
 		</div>)
 
 }

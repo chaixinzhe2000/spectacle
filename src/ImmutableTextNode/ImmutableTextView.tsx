@@ -50,10 +50,11 @@ function ImmutableTextView(props: NodeProps): JSX.Element {
 		return <NonIdealState
 			icon="new-text-box"
 			title="No Immutable Text Node found."
+			className="nonIdealState"
 			description={description}
 			action={       
-				<div>
-					<TextArea fill={true} onChange={s => setText(s.target.value)} value={text} />
+				<div style={{width:"100%"}}>
+					<TextArea style={{minHeight:"150px"}}fill={true} onChange={s => setText(s.target.value)} large={true} value={text} />
 					<Divider />
 					<Button onClick={() => {
 						if (text) {    

@@ -13,7 +13,7 @@ interface PDFContainerProps {
     setNewPDFAnchorModal: any
 }
 
-function ImmutableTextContainer(props: PDFContainerProps): JSX.Element {
+function PDFContainer(props: PDFContainerProps): JSX.Element {
 	const { node, newPDFAnchorModal, setNewPDFAnchorModal } = props
 
     const { isLoading, data, error } = useQuery([node.nodeId, node.nodeType], PDFNodeGateway.getNode)
@@ -41,4 +41,4 @@ function ImmutableTextContainer(props: PDFContainerProps): JSX.Element {
 	)
 }
 
-export default ImmutableTextContainer;
+export default PDFContainer;

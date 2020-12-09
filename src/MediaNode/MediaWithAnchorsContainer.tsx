@@ -35,7 +35,6 @@ function MediaWithAnchorsContainer(props: MediaWithAnchorsContainerProps): JSX.E
 	const [newAnchor, setNewAnchor]: [IMediaAnchor, any] = useState(null)
 	const [newMediaTime, setNewMediaTime]: [number, any] = useState(0)
 
-	// TODO: call on this one!!!!!!!! hypertextsdk stufff
 	const [createAnchor] = useMutation(HypertextSdk.createMediaAnchor, {
 		onSuccess: () => queryCache.invalidateQueries([node.nodeId, 'anchors'])
 	})

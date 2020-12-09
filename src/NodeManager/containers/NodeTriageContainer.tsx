@@ -121,7 +121,9 @@ function NodeTriage(props: NodeTriageProps): JSX.Element {
                     newLinkModalIsOpen={newLinkModalIsOpen}
                     setNewLinkModalIsOpen={setNewLinkModalIsOpen}
                     setPreviouslyPaused={setPreviouslyPaused}
-                    setMediaSkipUsingAnnotation={setMediaSkipUsingAnnotation}
+					setMediaSkipUsingAnnotation={setMediaSkipUsingAnnotation}
+					newPDFAnchorModal={newPDFAnchorModal}
+                    setNewPDFAnchorModal={setNewPDFAnchorModal}
     				/>
 			</div>
 		</div>

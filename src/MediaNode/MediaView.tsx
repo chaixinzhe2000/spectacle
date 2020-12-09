@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Divider, NonIdealState, TextArea, Intent, Callout } from '@blueprintjs/core';
+import { Button, Divider, NonIdealState, TextArea, Intent, Callout, InputGroup } from '@blueprintjs/core';
 
 import { IMediaAnchor, IMediaNode, INode } from 'spectacle-interfaces';
 import PlayerWrapperClass from './ReactPlayer'
@@ -53,18 +53,20 @@ function MediaView(props: NodeProps): JSX.Element {
 			icon="video"
 			title="Add a Video/Audio URL"
 			description={description}
+			className="nonIdealState"
 			action={
-				<div>
-					<TextArea fill={true} onChange={s => setMediaUrl(s.target.value)} value={mediaUrl} />
-					<Divider />
-					<Button onClick={() => {
+				<div style={{width:"100%"}}>
+					<InputGroup fill={true} leftIcon={"link"} onChange={s => setMediaUrl(s.target.value)} value={mediaUrl} 
+					rightElement={<Button onClick={() => {
 						if (mediaUrl) {
 							addNode(mediaUrl)
 							setDescription("You are one step away from creating a video node...")
 						}
 						else
 							setDescription("Media URL cannot be empty.")
-					}}> Add Media + </Button>
+					}}> Add Media </Button>}/>
+					<Divider />
+					
 				</div>
 			}
 		/>

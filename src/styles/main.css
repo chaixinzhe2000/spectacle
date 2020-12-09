@@ -11,6 +11,11 @@
 
 }
 
+.nonIdealState {
+	padding-top: 50px;
+	padding-bottom: 70px;
+}
+
 .NodeTriageContainer {
 	display: grid;
 	grid-template-columns: 2.7fr 1fr;
@@ -67,7 +72,8 @@
 }
 
 .AnnotationDivider {
-	margin-bottom: 12px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 .DialogGap {

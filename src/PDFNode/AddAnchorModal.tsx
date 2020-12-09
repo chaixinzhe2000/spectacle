@@ -35,8 +35,6 @@ export default function AddAnchorModal(props: AddAnchorModalProps) {
 		title="Add New Annotation"
 		isOpen={isOpen}>
 		<div className={Classes.DIALOG_BODY}>
-			{/* <H4> Selected Text: </H4>
-			<TextArea disabled value={text} style={{ width: '100%' }} rows={20} /> */}
 			<InputGroup
 				large={true}
 				placeholder="Author (leave blank to stay ananymous)"
