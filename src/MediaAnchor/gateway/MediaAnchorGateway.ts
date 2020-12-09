@@ -27,14 +27,6 @@ export default class MediaAnchorGateway implements IMediaAnchorGateway {
 		}
 	}
 
-	/**
-	 * Gets a Node (and it's children) from the database by node id.
-	 * 
-	 * @param nodeId - id of node to retrieve
-	 * 
-	 * Returns a failure service response if:
-	 *  - the id does not exist in the database
-	 */
 	async getAnchor(anchorId: string): Promise<IServiceResponse<IMediaAnchor>> {
 		return await this.dbConnection.findAnchor(anchorId)
 	}
@@ -43,17 +35,6 @@ export default class MediaAnchorGateway implements IMediaAnchorGateway {
 		return await this.dbConnection.findAnchors(anchorIds)
 	}
 
-	/**
-	 * Deletes a node in the database.
-	 * 
-	 * @param nodeId - id of node to delete
-	 * 
-	 * Returns a successful service response if:
-	 *  - the node no longer exists in the database, even if already it didn't exist before
-	 * 
-	 * Returns a failure service response if:
-	 *  - the database fails to delete the node
-	 */
 	async deleteAnchor(anchorId: string): Promise<IServiceResponse<{}>> {
 		return await this.dbConnection.deleteAnchor(anchorId)
 	}

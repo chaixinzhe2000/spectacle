@@ -48,7 +48,7 @@ anchorRouter.get("/list/:anchorIdList", async (req: Request, res: Response) => {
   }
 });
 
-// // Create Anchor
+// Create Anchor
 anchorRouter.post("", bodyJsonParser, async (req: Request, res: Response) => {
   try {
     let anchor: IMediaAnchor = req.body.data

@@ -4562,10 +4562,10 @@ spdx-license-ids@^3.0.0:
   resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-3.0.6.tgz#c80757383c28abf7296744998cbc106ae8b854ce"
   integrity sha512-+orQK83kyMva3WyPf59k1+Y525csj5JejicWut55zeTWANuN17qSiSLUXWtzHeNWORSvT7GLDJ/E/XiIWoXBTw==
 
-spectacle-interfaces@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/spectacle-interfaces/-/spectacle-interfaces-1.1.4.tgz#3a89e7c056edaf6ab5ae5608794b3d4fa113ac6e"
-  integrity sha512-5+q7mOXeEqy8ZgSrqgQR4u9kF/PpW7NAUXGoz9fVcSkEuKYafif02MVxbJgxQOzVFWAgM4w5os9p+I4QBm10VA==
+spectacle-interfaces@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/spectacle-interfaces/-/spectacle-interfaces-1.2.2.tgz#573d35737cd018fbe236a3eda83b991492e2bbc5"
+  integrity sha512-2HLbtNsqhFmNUGppMmc7rzgYa+rh/vjeVM9wO/0yp63/JrgOdxJTYqcyjKyPpJ9cR2MpyVwakvD+4o+ExDZ5pQ==
   dependencies:
     ts-jest "^26.4.0"
     tsc "^1.8.10"
