@@ -34,15 +34,9 @@ class PlayerWrapperClass extends Component<PlayerWrapperProps> {
 		duration: 0,
 		playbackRate: 1.0,
         loop: false,
-        // preventRerender:true
 	}
 
-    // shouldComponentUpdate(nextProps, nextState){
-    //     return nextState === this.state 
-    // }
-
 	handlePause = () => {
-        // this.setState({preventRerender : false})
         console.log('onPause')
         // this.props.setMediaPlayed()
         this.props.setMediaPlaying(false)
@@ -51,18 +45,15 @@ class PlayerWrapperClass extends Component<PlayerWrapperProps> {
             this.handleSeek()
             this.props.setMediaPlayed(-1)
         }
-        // this.setState({preventRerender : true})
 	}
 
 	handlePlay = () => {
-        // this.setState({preventRerender : false})
 		console.log('onPlay')
         if (this.props.mediaPlayed !== -1){
             this.handleSeek()
             this.props.setMediaPlayed(-1)
         }
         this.props.setMediaPlaying(true)
-        // this.setState({preventRerender : true})
 	}
 
 	handleEnded = () => {
@@ -73,7 +64,6 @@ class PlayerWrapperClass extends Component<PlayerWrapperProps> {
 	}
 
 	handleProgress = state => {
-        // this.setState({preventRerender : false})
 		console.log('onProgress', state)
 		// We only want to update time slider if we are not currently seeking
         this.setState(state)
@@ -81,27 +71,21 @@ class PlayerWrapperClass extends Component<PlayerWrapperProps> {
             this.handleSeek()
             this.props.setMediaPlayed(-1)
         }
-        // this.setState({preventRerender : true})
 	}
 
 	handleDuration = (duration) => {
-        // this.setState({preventRerender : false})
 		console.log('onDuration', duration)
         this.setState({ duration })
         this.props.setMediaDuration(duration)
-        // this.setState({preventRerender : true})
 	}
 
     handleSeek = () => {
-        // this.setState({preventRerender : false})
         console.log("seeking")
         this.setState({seeking: true})
         this.setState({played: this.props.mediaPlayed})
         this.player.seekTo(this.props.mediaPlayed)
         this.setState({seeking: false})
         this.props.setMediaPlaying(true)
-        // this.setState({preventRerender : true})
-        // this.setState({playing: this.props.mediaPlaying})
     }
 
 	render() {
