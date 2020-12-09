@@ -22,10 +22,10 @@ function PDFView(props: PDFViewProps): JSX.Element {
 
 
 	if (node) {
-		return (<div>
+	return (<div>
 				<Callout className="nodeTitle" icon={"saved"} title={nodeTitle} intent={"warning"}></Callout>
 				<Divider />
-           <iframe src={node.pdfUrl} > </iframe>
+           <iframe className ="frameFormat" src={node.pdfUrl} > </iframe>
 
 			</div>)
 	} else {

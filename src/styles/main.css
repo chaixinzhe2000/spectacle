@@ -8,7 +8,7 @@
 	column-gap: 2rem;
 	margin: 2rem;
 	padding: 1rem;
-	
+
 }
 
 .NodeTriageContainer {
@@ -126,8 +126,7 @@ h4.bp3-heading {
 	display: flex;
 }
 
-.iframe {
+.frameFormat {
 		width: 100%;
-		 height: 200px;
-		 padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+		 height: 600px;
 }
