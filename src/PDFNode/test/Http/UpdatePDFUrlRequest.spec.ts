@@ -54,7 +54,6 @@ describe("Unit Test: Update PDF URL", () => {
 			.expect("Content-Type", /json/);
 		expect(isServiceResponse(updateResponse.body)).toBeTruthy();
 		const sr: IServiceResponse<IPDFNode> = updateResponse.body;
-		console.log(sr)
 		expect(sr.success).toBeFalsy();
 		const getResponse2 = await DatabaseConnection.findNode("a");
 		expect(getResponse2.success).toBeTruthy();

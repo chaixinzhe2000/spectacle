@@ -2,7 +2,8 @@ import { IServiceResponse } from 'spectacle-interfaces'
 import request from 'supertest'
 import app from '../../../app'
 
-function isServiceResponse<T>(sr: any): sr is IServiceResponse<T> {
+
+export function isServiceResponse<T>(sr: any): sr is IServiceResponse<T> {
 	return sr.success !== undefined && typeof sr.success === 'boolean'
 		&& sr.message !== undefined && typeof sr.message === 'string'
 		&& sr.payload !== undefined
