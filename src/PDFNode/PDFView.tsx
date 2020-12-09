@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Divider, NonIdealState, TextArea } from '@blueprintjs/core';
+import { Button, Divider, NonIdealState, TextArea, Callout } from '@blueprintjs/core';
 import { IImmutableTextAnchor, IImmutableTextNode, INode, IPDFNode } from 'spectacle-interfaces';
 import { useQuery } from 'react-query';
 import NodeGateway from '../Gateways/NodeGateway';
@@ -23,12 +23,14 @@ function PDFView(props: PDFViewProps): JSX.Element {
 
 	if (node) {
 		return (<div>
-            {nodeTitle}
+				<Callout className="nodeTitle" icon={"saved"} title={nodeTitle} intent={"warning"}></Callout>
+				<Divider />
            <iframe src={node.pdfUrl} > </iframe>
-          </div>)
+
+			</div>)
 	} else {
 		return <NonIdealState
-			icon="video"
+			icon="document"
 			title="Add a PDF URL"
 			description={description}
 			action={
@@ -38,10 +40,10 @@ function PDFView(props: PDFViewProps): JSX.Element {
 					<Button onClick={() => {
 						if (PDFUrl) {
 							addNode(PDFUrl)
-							// setMediaUrl("")
 							setDescription("You are one step away from creating a PDF node...")
 						}
 						else
+						
 							setDescription("PDF URL cannot be empty.")
 					}}> Add PDF + </Button>
 				</div>

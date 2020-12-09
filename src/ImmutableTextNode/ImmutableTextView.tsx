@@ -48,15 +48,15 @@ function ImmutableTextView(props: NodeProps): JSX.Element {
 		</div>)
 	} else {
 		return <NonIdealState
-			icon="document"
+			icon="new-text-box"
 			title="No Immutable Text Node found."
 			description={description}
-			action={
+			action={       
 				<div>
 					<TextArea fill={true} onChange={s => setText(s.target.value)} value={text} />
 					<Divider />
 					<Button onClick={() => {
-						if (text) {
+						if (text) {    
 							addNode(text)
 							setText("")
 							setDescription("You can still add one...")
