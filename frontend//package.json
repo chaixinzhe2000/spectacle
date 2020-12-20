@@ -1,0 +1,60 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@blueprintjs/core": "3.28.2",
+    "@blueprintjs/table": "^3.8.17",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
+    "@types/uniqid": "^5.2.0",
+    "antd": "^4.7.3",
+    "axios": "^0.20.0",
+    "highlightable": "^1.0.7",
+    "history": "^5.0.0",
+    "mongoose-fuzzy-searching": "^2.0.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-json-view": "^1.19.1",
+    "react-player": "^2.7.0",
+    "react-query": "^2.25.2",
+    "react-query-devtools": "^2.6.0",
+    "react-router": "^6.0.0-alpha.5",
+    "react-router-dom": "^6.0.0-alpha.5",
+    "react-scripts": "3.4.3",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^2.0.1",
+    "serve": "^11.3.2",
+    "spectacle-interfaces": "^1.2.2",
+    "typescript": "^3.9.7",
+    "uniqid": "^5.2.0"
+  },
+  "scripts": {
+    "start": "REACT_APP_BACKEND_ENV=production serve -s build",
+    "build": "react-scripts build",
+    "test": "jest --runInBand --watchAll",
+    "eject": "react-scripts eject",
+    "dev-local": "REACT_APP_BACKEND_ENV=development react-scripts start",
+    "dev-prod": "REACT_APP_BACKEND_ENV=production react-scripts start",
+    "heroku-postbuild": "yarn run build"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "devDependencies": {
+    "@types/node": "^13.1.4",
+    "ts-node": "^8.6.2"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
